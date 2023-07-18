@@ -16,5 +16,9 @@
     <input type="text" th:field="*{region}" placeholder="Region">
     <input type="submit" value="Update Recipe">
 </form>
+<form action="/recipes/{id}" method="post">
+    <input type="hidden" name="_method" value="delete" />
+    <input type="submit" value="Delete Recipe" />
+</form>
 </body>
 </html>

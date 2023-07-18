@@ -1,4 +1,6 @@
 package controllers;
+//import org.springframework.security.core.context.SecurityContextHolder;
+//import org.springframework.security.core.userdetails.UserDetails;
 
 import models.Recipe;
 import models.User;
@@ -20,7 +22,20 @@ public class RecipeController {
         this.userRepository = userRepository;
     }
 
-    // other methods...
+    @GetMapping("/recipes/new")
+    public String showCreateForm(Model model) {
+        model.addAttribute("recipe", new Recipe());
+        return "createRecipe";
+    }
+    @PostMapping("/recipes/new")
+    public String createRecipe(@ModelAttribute Recipe recipe) {
+//        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        User currentUser = userRepository.findByUsername(userDetails.getUsername());
+//        recipe.setUser(currentUser);
+        recipeRepository.save(recipe);
+        return "redirect:/recipes/" + recipe.getId();
+    }
+
 
     @GetMapping("/recipes/edit/{id}")
     public String showEditForm(@PathVariable Long id, Model model) {
@@ -31,14 +46,29 @@ public class RecipeController {
 
     @PostMapping("/recipes/edit/{id}")
     public String updateRecipe(@PathVariable Long id, @ModelAttribute Recipe recipe) {
+//        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        User currentUser = userRepository.findByUsername(userDetails.getUsername());
+//
+//        if (!recipe.getUser().equals(currentUser)) {
+//            return "redirect:/error";
+//        }
+
+        recipeRepository.save(recipe);
+        return "redirect:/recipes/" + id;
+    }
+
+    @DeleteMapping("/recipes/{id}")
+    public String deleteRecipe(@PathVariable Long id) {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User currentUser = userRepository.findByUsername(userDetails.getUsername());
+        Recipe recipe = recipeRepository.findById(id).orElseThrow();
 
         if (!recipe.getUser().equals(currentUser)) {
             return "redirect:/error";
         }
 
-        recipeRepository.save(recipe);
-        return "redirect:/recipes/" + id;
+        recipeRepository.deleteById(id);
+        return "redirect:/recipes";
     }
+
 }
