@@ -1,6 +1,5 @@
 package com.codeup.bitebook.models;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,8 +9,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Post {
-    private String title;
-    private String body;
-
+public class Recipe {
+    String name;
 }

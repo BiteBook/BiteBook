@@ -1,5 +1,7 @@
 package com.codeup.bitebook.models;
 
+
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -37,4 +39,11 @@ public class UserWithRoles extends User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }
+

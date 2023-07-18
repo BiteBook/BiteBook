@@ -1,17 +1,23 @@
 package com.codeup.bitebook.models;
 
+
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-@ToString
+
 
 @Entity
-@Table(name = "blog_users")
+@Table(name = "bitebook_users")
+
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,8 +32,7 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "creator")
-    private List<Post> posts;
+
 
 
     public User(User copy) {
@@ -35,6 +40,12 @@ public class User {
         email = copy.email;
         username = copy.username;
         password = copy.password;
+    }
+
+
+    @Override
+    public String toString() {
+        return "User id " + id + " username: " + username;
     }
 
 }
