@@ -1,15 +1,15 @@
-package controllers;
-//import org.springframework.security.core.context.SecurityContextHolder;
-//import org.springframework.security.core.userdetails.UserDetails;
+package com.codeup.bitebook.controllers;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 
-import models.Recipe;
-import models.User;
+import com.codeup.bitebook.models.Recipe;
+import com.codeup.bitebook.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import repositories.RecipeRepository;
-import repositories.UserRepository;
+import com.codeup.bitebook.repositories.RecipeRepository;
+import com.codeup.bitebook.repositories.UserRepository;
 
 @Controller
 public class RecipeController {
