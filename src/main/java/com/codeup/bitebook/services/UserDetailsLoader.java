@@ -8,8 +8,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-
-
 @Service
 public class UserDetailsLoader implements UserDetailsService {
     private final UserRepository users;
@@ -28,4 +26,3 @@ public class UserDetailsLoader implements UserDetailsService {
         return new UserWithRoles(user);
     }
 }
-
