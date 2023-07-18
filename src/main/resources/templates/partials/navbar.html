@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="UTF-8">
+  <title>navbar</title>
+</head>
+<body>
+<div th:fragment="navbar">
+  <nav th:fragment="navbar" class="navbar navbar-expand-sm navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">PostMonster</a>
+      <!--        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">-->
+      <!--            <span class="navbar-toggler-icon"></span>-->
+      <!--        </button>-->
+      <div id="navbarNav" class="w-100">
+        <ul class="navbar-nav">
+          <li sec:authorize="!isAuthenticated()" class="nav-item">
+            <a th:classappend="${selectedPage == 'login'} ? active" class="nav-link" href="/login">Login</a>
+          </li>
+          <li sec:authorize="isAuthenticated()" class="nav-item">
+            <a id="logout-link" class="nav-link" href="#">Logout</a>
+          </li>
+          <li class="nav-item">
+            <a th:classappend="${selectedPage == 'posts'} ? active" class="nav-link" aria-current="page" href="/posts">Posts</a>
+          </li>
+          <li sec:authorize="isAuthenticated()" class="nav-item">
+            <a th:classappend="${selectedPage == 'posts-create'} ? active" class="nav-link" href="/posts/create">Create Post</a>
+          </li>
+<!--          Please remove this later-->
+          <li>
+          <form th:action="@{/logout}" th:method="post">
+            <button class="btn-link btn" style="margin-top: 8px">Logout</button>
+          </form>
+        </li>
+          <li class="ms-auto nav-item">
+            <span class="nav-link disabled" th:text="@{| ${userNameLabel == null ? 'Not logged in' : userNameLabel} |}">insert logged in user name here</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>
+</body>
+</html>
