@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Recipe</title>
+</head>
+<body>
+<form action="#" th:action="@{/recipes/edit/{id}(id=${recipe.id})}" th:object="${recipe}" method="post">
+    <input type="text" th:field="*{title}" placeholder="Title">
+    <textarea th:field="*{ingredients}" placeholder="Ingredients"></textarea>
+    <textarea th:field="*{instructions}" placeholder="Instructions"></textarea>
+    <input type="text" th:field="*{tools}" placeholder="Tools">
+    <input type="text" th:field="*{photo}" placeholder="Photo URL">
+    <input type="text" th:field="*{difficulty}" placeholder="Difficulty">
+    <input type="number" th:field="*{time}" placeholder="Time">
+    <input type="text" th:field="*{region}" placeholder="Region">
+    <input type="submit" value="Update Recipe">
+</form>
+<form action="/recipes/{id}" method="post">
+    <input type="hidden" name="_method" value="delete" />
+    <input type="submit" value="Delete Recipe" />
+</form>
+</body>
+</html>
