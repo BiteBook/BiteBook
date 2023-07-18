@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+  <header th:insert="partials/header :: head"></header>
+  <title>Show Single Post</title>
+</head>
+
+<body>
+<nav th:replace="partials/navbar :: navbar">
+</nav>
+
+<div class="container-fluid">
+
+  <h1 th:text="${post.title}">(insert post title here)</h1>
+
+  <h6 name="creator-email" id="creator-email" th:text="${post.creator.email}" class="mt-3">(insert creator email here)</h6>
+
+  <h5 name="body" id="body" th:text="${post.body}" class="mt-3">(insert body here)</h5>
+
+
+  <footer th:replace="partials/footer :: footer">
+  </footer>
+
+</div>
+
+</body>
+</html>
