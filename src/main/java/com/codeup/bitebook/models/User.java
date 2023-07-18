@@ -16,7 +16,7 @@ import java.util.List;
 
 
 @Entity
-@Table(name = "bitebook_users")
+@Table(name = "users")
 
 public class User {
     @Id
@@ -31,6 +31,9 @@ public class User {
 
     @Column(nullable = false)
     private String password;
+
+    @Column
+    private String dietaryPreferences;
 
 
 
