@@ -52,3 +52,21 @@ body {
     text-align: center;
 
 }
+/* Example CSS styles for the search bar */
+#searchInput {
+    padding: 5px;
+    width: 200px;
+    margin-right: 5px;
+}
+
+#searchButton {
+    padding: 5px 10px;
+    background-color: #ddd;
+    border: none;
+    cursor: pointer;
+}
+
+#searchResults {
+    margin-top: 10px;
+}
+
