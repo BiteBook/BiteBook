@@ -4,6 +4,10 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+
+
+keys.js
+
 ### STS ###
 .apt_generated
 .classpath
