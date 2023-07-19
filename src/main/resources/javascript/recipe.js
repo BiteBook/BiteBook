@@ -15,8 +15,6 @@ function performSearch() {
     const query = searchInput.value;
 
     // Perform your search logic here
-    // You can use AJAX requests to fetch data from a server or perform client-side filtering
-
     // Display search results
     const searchResultItem = document.createElement('div');
     searchResultItem.textContent = 'Search result for: ' + query;
