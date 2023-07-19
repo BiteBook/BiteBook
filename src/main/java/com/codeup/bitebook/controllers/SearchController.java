@@ -23,7 +23,7 @@ public class SearchController {
         model.addAttribute("listRecipes", listRecipes);
         model.addAttribute("keyword", keyword);
 
-        return "recipeIndex";
+        return "/recipesearch";
     }
 
 //    @RequestMapping("/newrecipe")

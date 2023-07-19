@@ -11,8 +11,8 @@ import org.springframework.stereotype.Repository;
 
 public interface RecipeRepository extends JpaRepository<Recipe, Long> {
 
-    @Query("SELECT r FROM Recipe r WHERE "
-            + "CONCAT (r.title, r.difficulty, r.region, r.dietary)"
+    @Query("SELECT p FROM Recipe p WHERE "
+            + "CONCAT (p.title, p.difficulty, p.region, p.dietary)"
             + " LIKE %?1%")
     List<Recipe> findAll(String keyword);
 }
