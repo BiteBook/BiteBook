@@ -5,6 +5,7 @@
   <title>Create Recipe</title>
 </head>
 <body>
+<div th:replace="partials/navbar :: navbar"></div>
 <form action="#" th:action="@{/recipes/new}" th:object="${recipe}" method="post">
   <input type="text" th:field="*{title}" placeholder="Title">
   <textarea th:field="*{ingredients}" placeholder="Ingredients"></textarea>
