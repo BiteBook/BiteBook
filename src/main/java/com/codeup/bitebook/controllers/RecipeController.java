@@ -29,7 +29,7 @@ public class RecipeController {
     @GetMapping("/recipes/{id}")
     public String showRecipeDetails(@PathVariable Long id, Model model) {
         Recipe recipe = recipeRepository.findById(id).orElseThrow();
-        model.addAttribute("recipe", recipe);
+        model.addAttribute("recipes", recipe);
         return "recipeDetails";
     }
 
@@ -44,7 +44,7 @@ public class RecipeController {
 //        User currentUser = userRepository.findByUsername(userDetails.getUsername());
 //        recipe.setUser(currentUser);
         recipeRepository.save(recipe);
-        return "redirect:/recipes/" + recipe.getId();
+        return "redirect:/recipes/" + recipe.getRecipeid();
     }
 
 
