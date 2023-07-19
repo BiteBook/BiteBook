@@ -16,14 +16,14 @@ public class SearchController {
 
     @Autowired
     private RecipeService service;
-    @RequestMapping("/recipes")
+    @RequestMapping("/recipesearch")
     public String viewRecipes(Model model,
                               @Param("keyword") String keyword){
         List<Recipe> listRecipes = service.listAll(keyword);
         model.addAttribute("listRecipes", listRecipes);
         model.addAttribute("keyword", keyword);
 
-        return "index";
+        return "recipeIndex";
     }
 
 //    @RequestMapping("/newrecipe")
