@@ -6,10 +6,12 @@
 </head>
 <body>
 <div th:replace="partials/navbar :: navbar"></div>
+
 <h1>Recipe Index</h1>
+
 <!-- loop through and display each recipe -->
 <ul>
-  <th:block th:each="recipe : ${recipes}">
+    <th:block th:each="recipe : ${recipes}">
     <li>
       <a th:href="@{/recipes/{id}(id=${recipe.recipeid})}" th:text="${recipe.title}"></a>
     </li>
