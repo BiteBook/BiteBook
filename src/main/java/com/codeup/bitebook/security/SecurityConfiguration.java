@@ -39,6 +39,7 @@ public class SecurityConfiguration {
                         /* Pages that require authentication
                          * only authenticated users can create and edit ads */
                         .requestMatchers("/posts/create", "/posts/*/edit").authenticated()
+                        .requestMatchers("/posts/create", "/posts/*/edit").authenticated()
 
                         /* Pages that do not require authentication
                          * anyone can visit the home page, register, login, and view ads */
