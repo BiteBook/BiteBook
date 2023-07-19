@@ -1,14 +1,6 @@
+"use strict";
 
-
-// let ingrediant = '2 cups milk';
-// let nutrition = edamamCall(ingrediant);
-// nutrition.then(function (result) {
-//     console.log(result);
-//     console.log(result.totalNutrients.PROCNT.quantity + result.totalNutrients.PROCNT.unit + ' ' + result.totalNutrients.PROCNT.label);
-//     console.log(result.calories + ' calories');
-// })
-
-let ingrediants = ['flour 1 cup', '1 sugar cup', 'cup 1 milk'];
+// let ingredients = ['flour 1 cup ', ' 1 sugar cup', 'cup 1 milk'];
 function calculateNutrition(ingrediants){
     let totalcals = 0;
     let totalfats = 0;
@@ -33,5 +25,16 @@ function calculateNutrition(ingrediants){
 async function edamamCall(ingr){
     return await fetch(`https://api.edamam.com/api/nutrition-data?app_id=${EDAMAM_APPID}&app_key=${EDAMAM_KEY}&ingr=${ingr}`).then(response => response.json()).then(data => data)
 }
+let ingredientList = "";
 
-calculateNutrition(ingrediants);
+
+const submit = document.querySelector('#submit');
+submit.addEventListener('click', (event) => {
+    event.preventDefault();
+    ingredientList =  document.querySelector('#ingredientList').value
+    let ingredients = ingredientList.split(',');
+    calculateNutrition(ingredients);
+})
+
+
+
