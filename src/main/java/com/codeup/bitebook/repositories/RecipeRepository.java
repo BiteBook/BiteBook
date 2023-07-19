@@ -8,9 +8,8 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface RecipeRepository extends JpaRepository<Recipe, Long> {
 
-    @Query("SELECT r FROM Recipe r WHERE r.title LIKE %?1%"
-    + " OR r.difficulty LIKE %?1%"
-//    + " OR r.time LIKE %?1%"
-    )
+    @Query("SELECT r FROM Recipe r WHERE "
+            + "CONCAT (r.title, r.difficulty, r.region)"
+            + " LIKE %?1%")
     List<Recipe> findAll(String keyword);
 }
