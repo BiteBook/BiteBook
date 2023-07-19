@@ -30,6 +30,7 @@ body {
 .rating-box .stars {
     display: flex;
     align-items: center;
+    justify-content: center; /* Added to center the stars horizontally */
     gap: 25px;
 }
 .stars i {
@@ -48,7 +49,9 @@ body {
 }
 
 .form-group {
-   flex: auto;
+    display: flex;
+    flex-direction: column; /* Added to stack the elements vertically */
+    align-items: center; /* Added to center the elements horizontally */
     text-align: center;
 
 }

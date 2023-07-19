@@ -14,10 +14,28 @@ function performSearch() {
     // Get the search query from the input field
     const query = searchInput.value;
 
-    // Perform your search logic here
+
+    // Get the selected difficulty level (easy, medium, hard)
+    const difficulty = getSelectedDifficulty();
+
+    // Perform the search logic based on the difficulty level
+    const searchResultsData = searchRecipes(query, difficulty);
+
     // Display search results
-    const searchResultItem = document.createElement('div');
-    searchResultItem.textContent = 'Search result for: ' + query;
-    searchResults.appendChild(searchResultItem);
+    displaySearchResults(searchResultsData);
+
     //easy, medium, difficult
+    function getSelectedDifficulty(){
+
+    }
+    function searchRecipes(query, difficulty){
+
+    }
+    function displaySearchResults(results){
+        results.forEach(result =>{
+            const resultElement = document.createElement('div');
+            resultElement.textContent = result.title;
+            searchResults.appendChild(resultElement)
+        })
+    }
 }

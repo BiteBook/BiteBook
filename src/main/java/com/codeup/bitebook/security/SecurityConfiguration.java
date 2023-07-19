@@ -61,8 +61,6 @@ public class SecurityConfiguration {
 public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     http.authorizeHttpRequests((requests) -> requests
                     .anyRequest().permitAll() //permit all requests TESTING ONLY
-                    .requestMatchers("/css/**", "/javascript/**", "/img/**").permitAll()
-
             )
 
             .formLogin((login) -> login.loginPage("/login").defaultSuccessUrl("/posts"))
