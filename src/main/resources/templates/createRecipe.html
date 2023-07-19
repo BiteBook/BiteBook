@@ -8,7 +8,7 @@
 <div th:replace="partials/navbar :: navbar"></div>
 <form action="#" th:action="@{/recipes/new}" th:object="${recipe}" method="post">
   <input type="text" th:field="*{title}" placeholder="Title">
-  <textarea th:field="*{ingredients}" placeholder="Ingredients"></textarea>
+  <textarea th:field="*{ingredients}" placeholder="Ingredients example: 2 eggs, 1 cup milk"></textarea>
   <textarea th:field="*{instructions}" placeholder="Instructions"></textarea>
   <input type="text" th:field="*{tools}" placeholder="Tools">
   <input type="text" th:field="*{photo}" placeholder="Photo URL">
