@@ -130,22 +130,23 @@
             <a th:classappend="${selectedPage == 'posts-create'} ? active" class="nav-link" href="/posts/create" style="padding-right: 0.5rem; padding-left: 0.5rem;">Create Post</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Home</a>
+            <a class="nav-link" th:href="@{/}">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
+            <a class="nav-link" th:href="@{/profile}">Profile</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Recipe Index</a>
+            <a class="nav-link" th:href="@{/recipes}">Recipe Index</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Blog</a>
+            <a class="nav-link" th:href="@{/posts}">Blog</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Our Developers</a>
+            <a class="nav-link" th:href="@{/developers}">Our Developers</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Contact</a>
+            <a class="nav-link" th:href="@{/contact}">Contact</a>
+          </li>
           </li>
           <li sec:authorize="!isAuthenticated()" class="nav-item">
             <a th:classappend="${selectedPage == 'login'} ? active" class="nav-link" href="/login" style="padding-right: 0.5rem; padding-left: 0.5rem;">Login</a>
