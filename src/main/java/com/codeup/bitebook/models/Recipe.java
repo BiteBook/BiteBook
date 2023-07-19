@@ -25,6 +25,7 @@ public class Recipe {
     private String difficulty;
     private Integer time;
     private String region;
+    private String dietary;
 
     @ManyToOne
     private User user;
