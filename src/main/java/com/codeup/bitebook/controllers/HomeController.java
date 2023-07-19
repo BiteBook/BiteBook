@@ -10,5 +10,11 @@ public class HomeController {
     public String landingPage() {
         return "home";
     }
+
+    @GetMapping("/developers")
+    public String showDevelopers() {
+        return "developers";
+    }
+
 }
 
