@@ -144,9 +144,6 @@
           <li class="nav-item">
             <a class="nav-link" th:href="@{/developers}">Our Developers</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" th:href="@{/contact}">Contact</a>
-          </li>
           </li>
           <li sec:authorize="!isAuthenticated()" class="nav-item">
             <a th:classappend="${selectedPage == 'login'} ? active" class="nav-link" href="/login" style="padding-right: 0.5rem; padding-left: 0.5rem;">Login</a>
