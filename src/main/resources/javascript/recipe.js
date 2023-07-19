@@ -21,4 +21,5 @@ function performSearch() {
     const searchResultItem = document.createElement('div');
     searchResultItem.textContent = 'Search result for: ' + query;
     searchResults.appendChild(searchResultItem);
+    //easy, medium, difficult
 }
