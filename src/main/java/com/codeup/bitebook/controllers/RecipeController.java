@@ -21,6 +21,17 @@ public class RecipeController {
         this.recipeRepository = recipeRepository;
         this.userRepository = userRepository;
     }
+    @GetMapping("/recipes")
+    public String showRecipes(Model model) {
+        model.addAttribute("recipes", recipeRepository.findAll());
+        return "recipeIndex";
+    }
+    @GetMapping("/recipes/{id}")
+    public String showRecipeDetails(@PathVariable Long id, Model model) {
+        Recipe recipe = recipeRepository.findById(id).orElseThrow();
+        model.addAttribute("recipe", recipe);
+        return "recipeDetails";
+    }
 
     @GetMapping("/recipes/new")
     public String showCreateForm(Model model) {
