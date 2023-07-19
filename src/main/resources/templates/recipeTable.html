@@ -7,10 +7,10 @@
 <body>
 <div th:replace="partials/navbar :: navbar"></div>
 
-<h1>Recipe Index</h1>
+<h1>Recipe Table</h1>
 
 <div>
-    <form th:action="@{/recipeTable}">
+    <form th:action="">
         Filter: <input type="text" name="keyword" th:value="${keyword}" required/>
         <input type="submit" value="search"/>
     </form>
@@ -27,13 +27,13 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="recipe : ${recipes}">
-            <td th:text="${recipe.title}">Name</td>
-            <td th:text="${recipe.difficulty}">Difficulty</td>
+        <th block th:each="recipe :   ${recipes}">
+            <a th:href="@{/recipes/{id}(id=${recipe.recipeid})}" th:text="${recipe.title}"></a>
+            <a th:text="${recipe.difficulty}">Difficulty</a>
             <td th:text="${recipe.region}">Area</td>
             <td th:text="${recipe.dietary}">Dietary</td>
             <td th:text="${recipe.time}">Time</td>
-        </tr>
+        </th>
         </tbody>
     </table>
 </div>
