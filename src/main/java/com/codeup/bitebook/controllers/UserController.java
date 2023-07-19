@@ -43,5 +43,12 @@ public class UserController {
         userDao.save(user);
         return "redirect:/login";
     }
+    @GetMapping("/profile")
+    public String showProfile(Model model) {
+        User loggedInUser = Authenticator.getLoggedInUser();
+        model.addAttribute("user", loggedInUser);
+        return "users/profile";
+    }
+
 }
 
