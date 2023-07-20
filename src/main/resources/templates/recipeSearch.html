@@ -11,7 +11,7 @@
 
 <div>
     <form th:action="">
-        Filter: <input type="text" name="keyword" th:value="${keyword}" required/>
+        Filter: <input type="text" name="keyword"/>
         <input type="submit" value="search"/>
     </form>
 </div>
@@ -28,8 +28,8 @@
         </thead>
         <tbody>
         <th block th:each="recipe :   ${recipes}">
-            <a th:href="@{/recipes/{id}(id=${recipe.recipeid})}" th:text="${recipe.title}"></a>
-            <a th:text="${recipe.difficulty}">Difficulty</a>
+            <td th:text="${recipe.title}">Title</td>
+            <td th:text="${recipe.difficulty}">Difficulty</td>
             <td th:text="${recipe.region}">Area</td>
             <td th:text="${recipe.dietary}">Dietary</td>
             <td th:text="${recipe.time}">Time</td>
