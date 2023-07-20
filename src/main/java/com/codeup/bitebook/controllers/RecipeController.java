@@ -1,13 +1,12 @@
 package com.codeup.bitebook.controllers;
+import com.codeup.bitebook.models.EdamamService;
+import com.codeup.bitebook.models.NutritionInfo;
 import com.codeup.bitebook.models.UserFavorite;
 import com.codeup.bitebook.repositories.UserFavoriteRepository;
 import com.codeup.bitebook.services.Authenticator;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.Authentication;
-
-
-
 import com.codeup.bitebook.models.Recipe;
 import com.codeup.bitebook.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,14 +23,16 @@ import java.util.Optional;
 public class RecipeController {
     private final RecipeRepository recipeRepository;
     private final UserRepository userRepository;
+    private final EdamamService edamamService;
     private final UserFavoriteRepository userFavoriteRepository;
 
     @Autowired
-    public RecipeController(RecipeRepository recipeRepository, UserRepository userRepository, UserFavoriteRepository userFavoriteRepository) {
+    public RecipeController(RecipeRepository recipeRepository, UserRepository userRepository, EdamamService edamamService) {
         this.recipeRepository = recipeRepository;
         this.userRepository = userRepository;
-        this.userFavoriteRepository = userFavoriteRepository; // Initialize the userFavoriteRepository field
-    }
+        this.edamamService = edamamService;
+        this.userFavoriteRepository = userFavoriteRepository;
+
     @GetMapping("/recipes")
     public String showRecipes(Model model) {
         model.addAttribute("recipes", recipeRepository.findAll());
@@ -49,6 +50,19 @@ public class RecipeController {
         model.addAttribute("recipe", new Recipe());
         return "createRecipe";
     }
+
+    @PostMapping("/recipes/new")
+    public String createRecipe(@ModelAttribute Recipe recipe) {
+//        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        User currentUser = userRepository.findByUsername(userDetails.getUsername());
+//        recipe.setUser(currentUser);
+        NutritionInfo nutritionInfo = edamamService.getNutritionInfo(recipe.getIngredients());
+        recipe.setCalories(nutritionInfo.getCalories());
+        recipe.setProtein(nutritionInfo.getProtein());
+        recipe.setFibre(nutritionInfo.getCarbohydrates());
+        recipeRepository.save(recipe);
+        return "redirect:/recipes/" + recipe.getRecipeid();
+
      @PostMapping("/recipes/new")
 
     public String createRecipe(@RequestParam Long recipeId) {
@@ -56,11 +70,11 @@ public class RecipeController {
         User currentUser = userRepository.findByUsername(userDetails.getUsername());
 
         Recipe recipe = recipeRepository.findById(recipeId).get();
-        // Set the user to the recipe before saving
+       
 //        newRecipe.setUser(currentUser);
 //        Recipe savedRecipe = recipeRepository.save(newRecipe);
 
-        // Save the recipe to the user's favorite list in the "user_favorite" table
+       
         System.out.println(recipe);
         UserFavorite userFavorite = new UserFavorite();
         userFavorite.setUser(currentUser);
@@ -68,8 +82,6 @@ public class RecipeController {
         userFavorite.setRecipeName(recipe.getTitle());
         userFavorite.setRecipeDescription(recipe.getDescription());
         userFavoriteRepository.save(userFavorite);
-
-        // Redirect to the profile page with the saved recipe's ID as a query parameter
         return "redirect:/profile?recipeId=" + recipe.getId();
 
     }
@@ -128,7 +140,6 @@ public class RecipeController {
         User loggedInUser = Authenticator.getLoggedInUser();
         model.addAttribute("user", loggedInUser);
 
-        // Find the saved recipe by its ID
         Optional<Recipe> savedRecipe = recipeRepository.findById(recipeId);
         model.addAttribute("savedRecipe", savedRecipe.orElse(null));
 
@@ -136,17 +147,15 @@ public class RecipeController {
     }
     @GetMapping("/favorites")
     public String showFavorites(Model model, Authentication authentication) {
-        // Get the currently authenticated user's details
+        
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         User currentUser = userRepository.findByUsername(userDetails.getUsername());
 
-        // Fetch the user's favorite recipes from the "user_favorite" table
         List<UserFavorite> favoriteRecipes = userFavoriteRepository.findByUser(currentUser);
 
-        // Pass the list of favorite recipes to the Thymeleaf template
         model.addAttribute("favoriteRecipes", favoriteRecipes);
 
-        return "users/savedFavorites"; // Adjust the template name with the relative path
+        return "users/savedFavorites"; 
     }
 
 }
