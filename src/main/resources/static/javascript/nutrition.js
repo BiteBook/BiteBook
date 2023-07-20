@@ -7,8 +7,16 @@ function calculateNutrition(ingrediants){
     let totalcarbs = 0;
     let totalprotein = 0;
 
-    ingrediants.forEach(ingrediant => {
-        let nutrition = edamamCall(ingrediant);
+
+let ingredient = '2 cups milk';
+let nutrition = edamamCall(ingredient);
+nutrition.then(function (result) {
+    console.log(result);
+    console.log(result.totalNutrients.PROCNT.quantity + result.totalNutrients.PROCNT.unit + ' ' + result.totalNutrients.PROCNT.label);
+    console.log(result.calories + ' calories');
+})
+    ingredients.forEach(ingredient => {
+        let nutrition = edamamCall(ingredient);
         nutrition.then(function (result) {
             console.log(result);
             totalcals += result.calories;
