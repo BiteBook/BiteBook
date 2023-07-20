@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 
 @Entity
 @Table(name = "recipes")
@@ -23,7 +25,8 @@ public class Recipe {
     private Integer time;
     private String region;
     private String dietary;
-
+    @OneToMany(mappedBy = "recipe")
+    private List<MealPlanner> mealPlanners;
     @ManyToOne
     private User user;
 }

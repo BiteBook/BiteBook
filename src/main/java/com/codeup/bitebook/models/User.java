@@ -35,7 +35,8 @@ public class User {
     @Column
     private String dietarypreferences;
 
-
+    @OneToMany(mappedBy = "user")
+    private List<MealPlanner> mealPlanners;
 
 
     public User(User copy) {
