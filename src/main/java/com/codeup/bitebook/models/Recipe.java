@@ -23,6 +23,9 @@ public class Recipe {
     private Integer time;
     private String region;
     private String dietary;
+    private String calories;
+    private String protein;
+    private String fibre;
 
     @ManyToOne
     private User user;
