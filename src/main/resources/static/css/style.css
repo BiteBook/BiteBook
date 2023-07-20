@@ -11,7 +11,9 @@ body {
     /*display: flex;*/
     /*align-items: center;*/
     /*justify-content: center;*/
-    background: linear-gradient(45deg, #ffd195, #ffb283);
+    /*
+    background: linear-gradient(45deg, #ffd195, #cc4e00);
+    */
 }
 /*.rating-box {*/
 /*    position: relative;*/
