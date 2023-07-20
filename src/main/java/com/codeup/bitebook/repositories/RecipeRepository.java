@@ -1,18 +1,18 @@
 package com.codeup.bitebook.repositories;
 
-import java.util.List;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import com.codeup.bitebook.models.Recipe;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import java.util.List;
 
 @Repository
 
 public interface RecipeRepository extends JpaRepository<Recipe, Long> {
+    List<Recipe> findAllByTitleOrDietaryOrRegionOrDifficultyOrTime(String title, String dietary, String region, String difficulty, Integer time);
+    List<Recipe> findByTitle(String title);
+    List<Recipe> findByDietary(String dietary);
+    List<Recipe> findByRegion(String region);
+    List<Recipe> findByTime(String time);
+    List<Recipe> findByDifficulty(String difficulty);
 
-    @Query("SELECT r FROM Recipe r WHERE "
-            + "CONCAT (r.title, r.difficulty, r.region, r.dietary)"
-            + " LIKE %?1%")
-    List<Recipe> findAll(String keyword);
 }

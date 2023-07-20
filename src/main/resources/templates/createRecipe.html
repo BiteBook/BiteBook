@@ -8,7 +8,7 @@
 <div th:replace="partials/navbar :: navbar"></div>
 <form action="#" th:action="@{/recipes/new}" th:object="${recipe}" method="post">
   <input type="text" th:field="*{title}" placeholder="Title">
-  <textarea th:field="*{ingredients}" placeholder="Ingredients"></textarea>
+  <textarea th:field="*{ingredients}" id="ingredientList" placeholder="Ingredients example: 2 eggs, 1 cup milk"></textarea>
   <textarea th:field="*{instructions}" placeholder="Instructions"></textarea>
   <input type="text" th:field="*{tools}" placeholder="Tools">
   <input type="text" th:field="*{photo}" placeholder="Photo URL">
@@ -16,6 +16,11 @@
   <input type="number" th:field="*{time}" placeholder="Time">
   <input type="text" th:field="*{region}" placeholder="Region">
   <input type="submit" value="Create Recipe">
+  <div type="text/html" th:field="*{calories}" id="nutrition"></div>
 </form>
+<button id="submit">testing</button>
+<script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+<script src="/javascript/keys.js"></script>
+<script src="/javascript/nutrition.js"></script>
 </body>
 </html>

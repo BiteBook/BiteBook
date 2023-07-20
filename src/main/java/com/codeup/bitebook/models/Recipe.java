@@ -25,6 +25,9 @@ public class Recipe {
     private Integer time;
     private String region;
     private String dietary;
+    private String calories;
+    private String protein;
+    private String fibre;
     @OneToMany(mappedBy = "recipe")
     private List<MealPlanner> mealPlanners;
     @ManyToOne
