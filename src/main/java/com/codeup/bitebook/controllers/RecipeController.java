@@ -49,7 +49,8 @@ public class RecipeController {
         model.addAttribute("recipe", new Recipe());
         return "createRecipe";
     }
-    @PostMapping("/recipes/new")
+     @PostMapping("/recipes/new")
+
     public String createRecipe(@RequestParam Long recipeId) {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User currentUser = userRepository.findByUsername(userDetails.getUsername());
@@ -70,6 +71,18 @@ public class RecipeController {
 
         // Redirect to the profile page with the saved recipe's ID as a query parameter
         return "redirect:/profile?recipeId=" + recipe.getId();
+
+    }
+
+//     public String createRecipe(@ModelAttribute Recipe recipe) {
+// //        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+// //        User currentUser = userRepository.findByUsername(userDetails.getUsername());
+// //        recipe.setUser(currentUser);
+// //        NutritionInfo nutritionInfo = edamamCall.getNutritionInfo(recipe.getIngredients());
+// //        recipe.setCalories(nutritionInfo.getCalories());
+// //        recipeRepository.save(recipe);
+//         return "redirect:/recipes/" + recipe.getRecipeid();
+
     }
 
 
