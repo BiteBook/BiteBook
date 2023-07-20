@@ -2,7 +2,9 @@ package com.codeup.bitebook.controllers;
 
 import com.codeup.bitebook.models.Recipe;
 import com.codeup.bitebook.models.User;
+import com.codeup.bitebook.models.UserFavorite;
 import com.codeup.bitebook.repositories.RecipeRepository;
+import com.codeup.bitebook.repositories.UserFavoriteRepository;
 import com.codeup.bitebook.repositories.UserRepository;
 
 
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -24,11 +27,14 @@ public class UserController {
 
     private RecipeRepository recipeRepository;
 
+    private  UserFavoriteRepository userFavoriteRepository;
+
     @Autowired // Add this annotation
-    public UserController(UserRepository userDao, PasswordEncoder passwordEncoder, RecipeRepository recipeRepository) {
+    public UserController(UserRepository userDao, PasswordEncoder passwordEncoder, RecipeRepository recipeRepository,UserFavoriteRepository userFavoriteRepository) {
         this.userDao = userDao;
         this.passwordEncoder = passwordEncoder;
-        this.recipeRepository = recipeRepository; // Initialize the recipeRepository field
+        this.recipeRepository = recipeRepository;// Initialize the recipeRepository field
+        this.userFavoriteRepository = userFavoriteRepository;
     }
 
     @GetMapping("/sign-up")
@@ -53,6 +59,10 @@ public class UserController {
     public String showProfile(Model model, @RequestParam(name = "recipeId", required = false) Long recipeId) {
         User loggedInUser = Authenticator.getLoggedInUser();
         model.addAttribute("user", loggedInUser);
+
+        // Get the user's favorite recipes from the "user_favorite" table
+        List<UserFavorite> favoriteRecipes = userFavoriteRepository.findByUser(loggedInUser);
+        model.addAttribute("favoriteRecipes", favoriteRecipes);
 
         // Check if a recipe ID is provided in the query parameter
         if (recipeId != null) {

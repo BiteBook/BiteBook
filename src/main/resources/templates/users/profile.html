@@ -1,3 +1,42 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+
+<!--<head>-->
+<!--  <title>User Profile</title>-->
+<!--</head>-->
+
+<!--<body>-->
+<!--<div th:replace="partials/navbar :: navbar"></div>-->
+<!--<h1>User Profile</h1>-->
+<!--&lt;!&ndash; display details about the current user &ndash;&gt;-->
+<!--<a th:href="@{/recipes/new}" sec:authorize="isAuthenticated()">Create Recipe</a>-->
+
+<!--&lt;!&ndash; Display the saved recipe details, if available &ndash;&gt;-->
+<!--<div th:if="${savedRecipe}">-->
+<!--  <h2>Saved Recipe Details:</h2>-->
+<!--  <p>Title: <span th:text="${savedRecipe.title}"></span></p>-->
+<!--  &lt;!&ndash; Display other recipe details as needed &ndash;&gt;-->
+<!--</div>-->
+<!--</body>-->
+
+<!--</html>-->
+<!-- Display the saved recipe details, if available -->
+<!--<div th:if="${savedRecipe}">-->
+<!--  <h2>Saved Recipe Details:</h2>-->
+<!--  <p>Title: <span th:text="${savedRecipe.title}"></span></p>-->
+<!--  &lt;!&ndash; Display other recipe details as needed &ndash;&gt;-->
+<!--</div>-->
+
+<!--&lt;!&ndash; Display the user's favorite recipes, if available &ndash;&gt;-->
+<!--<div th:if="${userFavoriteRecipes}">-->
+<!--  <h2>Favorite Recipes:</h2>-->
+<!--  <ul>-->
+<!--    <li th:each="favoriteRecipe : ${userFavoriteRecipes}">-->
+<!--      <a th:href="@{/recipes/{id}(id=${favoriteRecipe.recipeId})}" th:text="${favoriteRecipe.recipeName}"></a>-->
+<!--      &lt;!&ndash; Display other favorite recipe details as needed &ndash;&gt;-->
+<!--    </li>-->
+<!--  </ul>-->
+<!--</div>-->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
@@ -8,8 +47,17 @@
 <body>
 <div th:replace="partials/navbar :: navbar"></div>
 <h1>User Profile</h1>
-<!-- display details about the current user -->
-<a th:href="@{/recipes/new}" sec:authorize="isAuthenticated()">Create Recipe</a>
+
+<!-- Display details about the current user -->
+
+<h2>Favorite Recipes:</h2>
+<ul>
+  <li th:each="favoriteRecipe : ${favoriteRecipes}">
+    <p>Title: <span th:text="${favoriteRecipe.recipeName}"></span></p>
+    <p>Description: <span th:text="${favoriteRecipe.recipeDescription}"></span></p>
+    <!-- Add more fields as needed -->
+  </li>
+</ul>
 
 <!-- Display the saved recipe details, if available -->
 <div th:if="${savedRecipe}">

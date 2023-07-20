@@ -1,4 +1,6 @@
 package com.codeup.bitebook.controllers;
+import com.codeup.bitebook.models.UserFavorite;
+import com.codeup.bitebook.repositories.UserFavoriteRepository;
 import com.codeup.bitebook.services.Authenticator;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,11 +20,13 @@ import java.util.Optional;
 public class RecipeController {
     private final RecipeRepository recipeRepository;
     private final UserRepository userRepository;
+    private final UserFavoriteRepository userFavoriteRepository;
 
     @Autowired
-    public RecipeController(RecipeRepository recipeRepository, UserRepository userRepository) {
+    public RecipeController(RecipeRepository recipeRepository, UserRepository userRepository, UserFavoriteRepository userFavoriteRepository) {
         this.recipeRepository = recipeRepository;
         this.userRepository = userRepository;
+        this.userFavoriteRepository = userFavoriteRepository; // Initialize the userFavoriteRepository field
     }
     @GetMapping("/recipes")
     public String showRecipes(Model model) {
@@ -49,6 +53,14 @@ public class RecipeController {
         // Set the user to the recipe before saving
         newRecipe.setUser(currentUser);
         Recipe savedRecipe = recipeRepository.save(newRecipe);
+
+        // Save the recipe to the user's favorite list in the "user_favorite" table
+        UserFavorite userFavorite = new UserFavorite();
+        userFavorite.setUser(currentUser);
+        userFavorite.setRecipeId(savedRecipe.getId());
+        userFavorite.setRecipeName(savedRecipe.getTitle());
+        userFavorite.setRecipeDescription(savedRecipe.getDescription());
+        userFavoriteRepository.save(userFavorite);
 
         // Redirect to the profile page with the saved recipe's ID as a query parameter
         return "redirect:/profile?recipeId=" + savedRecipe.getId();

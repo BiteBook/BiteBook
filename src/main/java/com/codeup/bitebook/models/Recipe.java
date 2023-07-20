@@ -30,4 +30,7 @@ public class Recipe {
     public Long getId() {
         return recipeid;
     }
+    public String getDescription() {
+        return instructions;
+    }
 }
