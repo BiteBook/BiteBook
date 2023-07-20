@@ -12,8 +12,10 @@ import java.util.List;
 @Table(name = "recipes")
 @Getter @Setter
 public class Recipe {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long recipeid;
 
     private String title;
@@ -32,4 +34,8 @@ public class Recipe {
     private List<MealPlanner> mealPlanners;
     @ManyToOne
     private User user;
+    @Override
+    public String toString() {
+        return title;
+    }
 }
