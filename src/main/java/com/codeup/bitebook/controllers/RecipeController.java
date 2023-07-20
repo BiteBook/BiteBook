@@ -1,4 +1,5 @@
 package com.codeup.bitebook.controllers;
+import com.codeup.bitebook.services.Authenticator;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -10,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import com.codeup.bitebook.repositories.RecipeRepository;
 import com.codeup.bitebook.repositories.UserRepository;
+
+import java.util.Optional;
 
 @Controller
 public class RecipeController {
@@ -53,6 +56,7 @@ public class RecipeController {
 
 
 
+
     @GetMapping("/recipes/edit/{id}")
     public String showEditForm(@PathVariable Long id, Model model) {
         Recipe recipe = recipeRepository.findById(id).orElseThrow();
@@ -88,5 +92,15 @@ public class RecipeController {
     }
 
 
+    @GetMapping("/profile/{recipeId}")
+    public String showProfile(Model model, @PathVariable Long recipeId) {
+        User loggedInUser = Authenticator.getLoggedInUser();
+        model.addAttribute("user", loggedInUser);
 
+        // Find the saved recipe by its ID
+        Optional<Recipe> savedRecipe = recipeRepository.findById(recipeId);
+        model.addAttribute("savedRecipe", savedRecipe.orElse(null));
+
+        return "users/profile";
+    }
 }
