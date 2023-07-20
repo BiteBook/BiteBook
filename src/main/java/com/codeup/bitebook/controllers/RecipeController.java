@@ -1,4 +1,6 @@
 package com.codeup.bitebook.controllers;
+import com.codeup.bitebook.models.EdamamService;
+import com.codeup.bitebook.models.NutritionInfo;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -15,12 +17,15 @@ import com.codeup.bitebook.repositories.UserRepository;
 public class RecipeController {
     private final RecipeRepository recipeRepository;
     private final UserRepository userRepository;
+    private final EdamamService edamamService;
 
     @Autowired
-    public RecipeController(RecipeRepository recipeRepository, UserRepository userRepository) {
+    public RecipeController(RecipeRepository recipeRepository, UserRepository userRepository, EdamamService edamamService) {
         this.recipeRepository = recipeRepository;
         this.userRepository = userRepository;
+        this.edamamService = edamamService;
     }
+
     @GetMapping("/recipes")
     public String showRecipes(Model model) {
         model.addAttribute("recipes", recipeRepository.findAll());
@@ -43,9 +48,11 @@ public class RecipeController {
 //        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 //        User currentUser = userRepository.findByUsername(userDetails.getUsername());
 //        recipe.setUser(currentUser);
-//        NutritionInfo nutritionInfo = edamamCall.getNutritionInfo(recipe.getIngredients());
-//        recipe.setCalories(nutritionInfo.getCalories());
-//        recipeRepository.save(recipe);
+        NutritionInfo nutritionInfo = edamamService.getNutritionInfo(recipe.getIngredients());
+        recipe.setCalories(nutritionInfo.getCalories());
+        recipe.setProtein(nutritionInfo.getProtein());
+        recipe.setFibre(nutritionInfo.getCarbohydrates());
+        recipeRepository.save(recipe);
         return "redirect:/recipes/" + recipe.getRecipeid();
     }
 
@@ -83,5 +90,6 @@ public class RecipeController {
         recipeRepository.deleteById(id);
         return "redirect:/recipes";
     }
+
 
 }
