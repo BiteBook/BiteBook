@@ -50,24 +50,26 @@ public class RecipeController {
         return "createRecipe";
     }
     @PostMapping("/recipes/new")
-    public String createRecipe(@ModelAttribute Recipe newRecipe) {
+    public String createRecipe(@RequestParam Long recipeId) {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User currentUser = userRepository.findByUsername(userDetails.getUsername());
 
+        Recipe recipe = recipeRepository.findById(recipeId).get();
         // Set the user to the recipe before saving
-        newRecipe.setUser(currentUser);
-        Recipe savedRecipe = recipeRepository.save(newRecipe);
+//        newRecipe.setUser(currentUser);
+//        Recipe savedRecipe = recipeRepository.save(newRecipe);
 
         // Save the recipe to the user's favorite list in the "user_favorite" table
+        System.out.println(recipe);
         UserFavorite userFavorite = new UserFavorite();
         userFavorite.setUser(currentUser);
-        userFavorite.setRecipeId(savedRecipe.getId());
-        userFavorite.setRecipeName(savedRecipe.getTitle());
-        userFavorite.setRecipeDescription(savedRecipe.getDescription());
+        userFavorite.setRecipeId(recipe.getId());
+        userFavorite.setRecipeName(recipe.getTitle());
+        userFavorite.setRecipeDescription(recipe.getDescription());
         userFavoriteRepository.save(userFavorite);
 
         // Redirect to the profile page with the saved recipe's ID as a query parameter
-        return "redirect:/profile?recipeId=" + savedRecipe.getId();
+        return "redirect:/profile?recipeId=" + recipe.getId();
     }
 
 

@@ -61,6 +61,7 @@ public class UserController {
         model.addAttribute("user", loggedInUser);
 
         // Get the user's favorite recipes from the "user_favorite" table
+//        System.out.println(loggedInUser);
         List<UserFavorite> favoriteRecipes = userFavoriteRepository.findByUser(loggedInUser);
         model.addAttribute("favoriteRecipes", favoriteRecipes);
 
