@@ -40,13 +40,13 @@ public class Recipe {
     @Override
     public String toString() {
         return title;
-
+    }
 
     public Long getId() {
         return recipeid;
     }
+
     public String getDescription() {
         return instructions;
-
     }
 }
