@@ -2,6 +2,7 @@ package com.codeup.bitebook.controllers;
 
 
 import com.codeup.bitebook.repositories.RecipeRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,8 +20,9 @@ public class SearchController {
 //        return "recipeIndex";
 //    }
     @GetMapping("/recipe/title")
-    public String searchByTitle(Model model) {
-        model.addAttribute("recipes", recipeRepository.findByTitle(""));
+    public String searchByTitle(Model model,
+        @Param("keyword") String keyword) {
+        model.addAttribute("recipes", recipeRepository.findByTitle(keyword));
         return "recipeIndex";
     }
     @GetMapping("/recipe/region")
