@@ -31,11 +31,4 @@ function performSearch() {
     function searchRecipes(query, difficulty){
 
     }
-    function displaySearchResults(results){
-        results.forEach(result =>{
-            const resultElement = document.createElement('div');
-            resultElement.textContent = result.title;
-            searchResults.appendChild(resultElement)
-        })
-    }
 }
