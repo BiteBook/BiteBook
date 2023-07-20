@@ -22,7 +22,7 @@ public class Recipe {
     private String tools;
     private String photo;
     private String difficulty;
-    private Integer time;
+    private String time;
     private String region;
     private String dietary;
     private String calories;

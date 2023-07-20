@@ -43,9 +43,9 @@ public class RecipeController {
 //        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 //        User currentUser = userRepository.findByUsername(userDetails.getUsername());
 //        recipe.setUser(currentUser);
-        NutritionInfo nutritionInfo = edamamCall.getNutritionInfo(recipe.getIngredients());
-        recipe.setCalories(nutritionInfo.getCalories());
-        recipeRepository.save(recipe);
+//        NutritionInfo nutritionInfo = edamamCall.getNutritionInfo(recipe.getIngredients());
+//        recipe.setCalories(nutritionInfo.getCalories());
+//        recipeRepository.save(recipe);
         return "redirect:/recipes/" + recipe.getRecipeid();
     }
 
