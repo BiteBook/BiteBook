@@ -10,6 +10,12 @@
 <h1>Recipe Index</h1>
 
 <!-- loop through and display each recipe -->
+<div>
+    Filter:
+    <input type="text" name="keyword"/>
+    &nbsp;
+</div>
+
 <ul>
     <th:block th:each="recipe : ${recipes}">
     <li>
