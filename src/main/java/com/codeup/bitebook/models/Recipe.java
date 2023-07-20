@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 
 @Entity
 @Table(name = "recipes")
@@ -26,7 +28,8 @@ public class Recipe {
     private String calories;
     private String protein;
     private String fibre;
-
+    @OneToMany(mappedBy = "recipe")
+    private List<MealPlanner> mealPlanners;
     @ManyToOne
     private User user;
 }
