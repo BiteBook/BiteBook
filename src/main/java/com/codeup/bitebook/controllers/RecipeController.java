@@ -39,13 +39,18 @@ public class RecipeController {
         return "createRecipe";
     }
     @PostMapping("/recipes/new")
-    public String createRecipe(@ModelAttribute Recipe recipe) {
-//        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        User currentUser = userRepository.findByUsername(userDetails.getUsername());
-//        recipe.setUser(currentUser);
-        recipeRepository.save(recipe);
-        return "redirect:/recipes/" + recipe.getRecipeid();
+    public String createRecipe(@ModelAttribute Recipe newRecipe) {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User currentUser = userRepository.findByUsername(userDetails.getUsername());
+
+        // Set the user to the recipe before saving
+        newRecipe.setUser(currentUser);
+        Recipe savedRecipe = recipeRepository.save(newRecipe);
+
+        // Redirect to the profile page with the saved recipe's ID as a query parameter
+        return "redirect:/profile?recipeId=" + savedRecipe.getId();
     }
+
 
 
     @GetMapping("/recipes/edit/{id}")
@@ -81,5 +86,7 @@ public class RecipeController {
         recipeRepository.deleteById(id);
         return "redirect:/recipes";
     }
+
+
 
 }

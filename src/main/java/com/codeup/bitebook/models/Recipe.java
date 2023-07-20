@@ -26,4 +26,8 @@ public class Recipe {
 
     @ManyToOne
     private User user;
+
+    public Long getId() {
+        return recipeid;
+    }
 }
