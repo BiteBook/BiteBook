@@ -4,6 +4,9 @@ import com.codeup.bitebook.repositories.UserFavoriteRepository;
 import com.codeup.bitebook.services.Authenticator;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.Authentication;
+
+
 
 import com.codeup.bitebook.models.Recipe;
 import com.codeup.bitebook.models.User;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import com.codeup.bitebook.repositories.RecipeRepository;
 import com.codeup.bitebook.repositories.UserRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -115,4 +119,19 @@ public class RecipeController {
 
         return "users/profile";
     }
+    @GetMapping("/favorites")
+    public String showFavorites(Model model, Authentication authentication) {
+        // Get the currently authenticated user's details
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        User currentUser = userRepository.findByUsername(userDetails.getUsername());
+
+        // Fetch the user's favorite recipes from the "user_favorite" table
+        List<UserFavorite> favoriteRecipes = userFavoriteRepository.findByUser(currentUser);
+
+        // Pass the list of favorite recipes to the Thymeleaf template
+        model.addAttribute("favoriteRecipes", favoriteRecipes);
+
+        return "users/savedFavorites"; // Adjust the template name with the relative path
+    }
+
 }
