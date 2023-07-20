@@ -1,17 +1,23 @@
 package com.codeup.bitebook.controllers;
 
+import com.codeup.bitebook.models.Recipe;
 import com.codeup.bitebook.models.User;
+import com.codeup.bitebook.models.UserFavorite;
+import com.codeup.bitebook.repositories.RecipeRepository;
+import com.codeup.bitebook.repositories.UserFavoriteRepository;
 import com.codeup.bitebook.repositories.UserRepository;
 
 
 import com.codeup.bitebook.services.Authenticator;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class UserController {
@@ -19,10 +25,16 @@ public class UserController {
     private UserRepository userDao;
     private PasswordEncoder passwordEncoder;
 
-    public UserController(UserRepository userDao, PasswordEncoder passwordEncoder) {
-        this.userDao = userDao;
+    private RecipeRepository recipeRepository;
 
+    private  UserFavoriteRepository userFavoriteRepository;
+
+    @Autowired // Add this annotation
+    public UserController(UserRepository userDao, PasswordEncoder passwordEncoder, RecipeRepository recipeRepository,UserFavoriteRepository userFavoriteRepository) {
+        this.userDao = userDao;
         this.passwordEncoder = passwordEncoder;
+        this.recipeRepository = recipeRepository;// Initialize the recipeRepository field
+        this.userFavoriteRepository = userFavoriteRepository;
     }
 
     @GetMapping("/sign-up")
@@ -43,5 +55,27 @@ public class UserController {
         userDao.save(user);
         return "redirect:/login";
     }
+    @GetMapping("/profile")
+    public String showProfile(Model model, @RequestParam(name = "recipeId", required = false) Long recipeId) {
+        User loggedInUser = Authenticator.getLoggedInUser();
+        model.addAttribute("user", loggedInUser);
+
+        // Get the user's favorite recipes from the "user_favorite" table
+//        System.out.println(loggedInUser);
+        List<UserFavorite> favoriteRecipes = userFavoriteRepository.findByUser(loggedInUser);
+        model.addAttribute("favoriteRecipes", favoriteRecipes);
+
+        // Check if a recipe ID is provided in the query parameter
+        if (recipeId != null) {
+            Recipe savedRecipe = recipeRepository.findById(recipeId).orElse(null);
+            model.addAttribute("savedRecipe", savedRecipe);
+        }
+
+        return "users/profile";
+    }
+
+
+
+
 }
 
