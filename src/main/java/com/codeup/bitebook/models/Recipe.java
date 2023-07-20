@@ -32,4 +32,11 @@ public class Recipe {
     private List<MealPlanner> mealPlanners;
     @ManyToOne
     private User user;
+
+    public Long getId() {
+        return recipeid;
+    }
+    public String getDescription() {
+        return instructions;
+    }
 }
