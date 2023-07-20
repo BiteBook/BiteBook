@@ -1,11 +1,30 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-  <title>Saved Favorites</title>
+  <title>Favorites</title>
 </head>
+
 <body>
 <div th:replace="partials/navbar :: navbar"></div>
-<h1>Saved Favorites</h1>
-<!-- display the current user's favorite recipes -->
+<h1>Favorites</h1>
+
+<!-- Check if the user has any favorite recipes -->
+<div th:if="${favoriteRecipes.size() == 0}">
+  <p>No favorite recipes saved yet.</p>
+</div>
+
+<!-- Display the user's favorite recipes, if available -->
+<ul th:if="${favoriteRecipes.size() > 0}">
+  <li th:each="favorite : ${favoriteRecipes}">
+    <!-- Display the favorite recipe details -->
+    <h2 th:text="${favorite.recipeName}"></h2>
+    <p th:text="${favorite.recipeDescription}"></p>
+    <!-- Add more fields as needed -->
+  </li>
+</ul>
+
+<div th:replace="partials/footer :: footer"></div>
 </body>
+
 </html>
