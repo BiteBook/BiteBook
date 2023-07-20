@@ -8,7 +8,7 @@
 <div th:replace="partials/navbar :: navbar"></div>
 
 <h1>Recipe Index</h1>
-<form th:action="@{/}">
+<form th:action="@{/recipes/search}">
     Filter: <input type="text" name="keyword" id="keyword" size="50" th:value="${keyword}" required />
     &nbsp;
     <input type="submit" value="Search" />
