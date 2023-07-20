@@ -1,7 +1,7 @@
 
 
-let ingrediant = '2 cups milk';
-let nutrition = edamamCall(ingrediant);
+let ingredient = '2 cups milk';
+let nutrition = edamamCall(ingredient);
 nutrition.then(function (result) {
     console.log(result);
     console.log(result.totalNutrients.PROCNT.quantity + result.totalNutrients.PROCNT.unit + ' ' + result.totalNutrients.PROCNT.label);
