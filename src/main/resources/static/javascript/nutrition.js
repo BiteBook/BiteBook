@@ -45,5 +45,3 @@ submit.addEventListener('click', (event) => {
     calculateNutrition(ingredients);
 })
 
-
-

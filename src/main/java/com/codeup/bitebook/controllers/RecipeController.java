@@ -75,15 +75,15 @@ public class RecipeController {
     }
 
 //     public String createRecipe(@ModelAttribute Recipe recipe) {
-// //        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-// //        User currentUser = userRepository.findByUsername(userDetails.getUsername());
-// //        recipe.setUser(currentUser);
-// //        NutritionInfo nutritionInfo = edamamCall.getNutritionInfo(recipe.getIngredients());
-// //        recipe.setCalories(nutritionInfo.getCalories());
-// //        recipeRepository.save(recipe);
+//         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//         User currentUser = userRepository.findByUsername(userDetails.getUsername());
+//         recipe.setUser(currentUser);
+//         NutritionInfo nutritionInfo = edamamCall.getNutritionInfo(recipe.getIngredients());
+//         recipe.setCalories(nutritionInfo.getCalories());
+//         recipeRepository.save(recipe);
 //         return "redirect:/recipes/" + recipe.getRecipeid();
 
-    }
+//    }
 
 
 
