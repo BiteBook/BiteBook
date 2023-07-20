@@ -10,7 +10,8 @@ import java.util.List;
 
 public interface RecipeRepository extends JpaRepository<Recipe, Long> {
     @Query("SELECT p FROM Recipe p WHERE CONCAT(p.title, ' ', p.dietary, ' ', p.region, ' ', p.difficulty, ' ', p.time) LIKE %?1%")
-    List<Recipe> findAllByTitleOrDietaryOrRegionOrDifficultyOrTime(String title, String dietary, String region, String difficulty, String time);
+    List<Recipe> search(String keyword);
+//    List<Recipe> findAllByTitleOrDietaryOrRegionOrDifficultyOrTime(String title, String dietary, String region, String difficulty, String time);
 
     List<Recipe> findByTitle(String title);
     List<Recipe> findByDietary(String dietary);
@@ -18,5 +19,5 @@ public interface RecipeRepository extends JpaRepository<Recipe, Long> {
     List<Recipe> findByTime(String time);
     List<Recipe> findByDifficulty(String difficulty);
 
-    List<Recipe> search(String keyword);
+
 }

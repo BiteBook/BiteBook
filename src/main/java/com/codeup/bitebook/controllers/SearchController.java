@@ -20,11 +20,11 @@ public class SearchController {
     public SearchController(RecipeRepository recipeRepository) {
         this.recipeRepository = recipeRepository;
     }
-    @GetMapping("/recipes/all")
-    public String findByAll(Model model) {
-        model.addAttribute("recipes", recipeRepository.findAllByTitleOrDietaryOrRegionOrDifficultyOrTime("","","","",""));
-        return "recipeIndex";
-    }
+//    @GetMapping("/recipes/all")
+//    public String findByAll(Model model) {
+//        model.addAttribute("recipes", recipeRepository.findAllByTitleOrDietaryOrRegionOrDifficultyOrTime("","","","",""));
+//        return "recipeIndex";
+//    }
     @GetMapping("/recipes/title")
     public String searchByTitle(Model model) {
         model.addAttribute("recipes", recipeRepository.findByTitle("Ham"));
@@ -55,10 +55,10 @@ public class SearchController {
     private RecipeServiceAgain service;
 
     @RequestMapping("/recipes/searchall")
-    public String viewHomePage(Model model, @Param("keyword") String keyword) {
+    public String viewHomePage(Model model, @Param("recipes/keyword") String keyword) {
         List<Recipe> listRecipes = service.listAll(keyword);
         model.addAttribute("listRecipes", listRecipes);
-        model.addAttribute("keyword", keyword);
+        model.addAttribute("recipes/keyword", keyword);
 
         return "recipeIndex";
     }
