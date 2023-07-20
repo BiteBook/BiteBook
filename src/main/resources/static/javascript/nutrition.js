@@ -3,20 +3,21 @@
 // let ingredients = ['flour 1 cup ', ' 1 sugar cup', 'cup 1 milk'];
 function calculateNutrition(ingrediants){
     let totalcals = 0;
-    let totalfats = 0;
+    let totalfibre = 0;
     let totalcarbs = 0;
     let totalprotein = 0;
 
     ingrediants.forEach(ingrediant => {
         let nutrition = edamamCall(ingrediant);
         nutrition.then(function (result) {
-            console.log(result.calories);
+            console.log(result);
             totalcals += result.calories;
-            console.log(result.totalNutrients.PROCNT.quantity)
             totalprotein += result.totalNutrients.PROCNT.quantity;
+            // totalfibre += result.totalNutrients.
             $('#nutrition').html(
-                `<h4>Calories: ${totalcals}</h4>
-<h4>Protein: ${totalprotein}</h4>`
+                `<h4 type="text/html" th:field="*{nutrition}">Calories: ${totalcals}</h4>
+<h4>Protein: ${totalprotein}</h4>
+<h4>Fibre: ${totalfibre}</h4>`
             )
         })
     })
