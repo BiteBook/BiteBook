@@ -2,6 +2,7 @@ package com.codeup.bitebook.models;
 
 import jakarta.persistence.*;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,10 +11,13 @@ import java.util.List;
 
 @Entity
 @Table(name = "recipes")
+@Data
 @Getter @Setter
 public class Recipe {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long recipeid;
 
     private String title;
@@ -32,4 +36,17 @@ public class Recipe {
     private List<MealPlanner> mealPlanners;
     @ManyToOne
     private User user;
+
+    @Override
+    public String toString() {
+        return title;
+    }
+
+    public Long getId() {
+        return recipeid;
+    }
+
+    public String getDescription() {
+        return instructions;
+    }
 }
