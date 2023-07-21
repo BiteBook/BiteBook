@@ -14,8 +14,6 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-
-
 @Entity
 @Table(name = "users")
 
@@ -32,12 +30,17 @@ public class User {
 
     @Column(nullable = false)
     private String password;
-
+    @ElementCollection
+    private List<String> dietaryPreferences;
+    @ElementCollection
+    private List<String> allergyList;
     @Column
-    private String dietarypreferences;
+    private String otherAllergies;
+
 
     @OneToMany(mappedBy = "user")
     private List<MealPlanner> mealPlanners;
+
 
 
     public User(User copy) {
@@ -45,6 +48,8 @@ public class User {
         email = copy.email;
         username = copy.username;
         password = copy.password;
+        dietaryPreferences = copy.dietaryPreferences;
+        allergyList = copy.allergyList;
     }
 
 

@@ -13,7 +13,11 @@
 <!-- display details about the current user -->
 <h3 th:text="${user.username} ?: 'No username'"></h3>
 <p th:text="${user.email} ?: 'No email'"></p>
-<p th:text="${user.dietarypreferences} ?: 'No dietary preferences'"></p>
+<p th:text="${user.dietaryPreferences} ?: 'No dietary preferences'"></p>
+<p th:text="${user.allergyList} ?: 'No allergies'"></p>
+<p th:text="${user.otherAllergies} ?: 'No other allergies'"></p>
+
+
 
 
 <!-- Link to create a new recipe -->
