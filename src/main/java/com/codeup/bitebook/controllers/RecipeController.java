@@ -91,4 +91,34 @@ public class RecipeController {
         recipeRepository.deleteById(id);
         return "redirect:/recipes";
     }
+
+    @GetMapping("/favorites")
+    public String showFavorites(Model model, Authentication authentication) {
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        User currentUser = userRepository.findByUsername(userDetails.getUsername());
+
+        List<UserFavorite> favoriteRecipes = userFavoriteRepository.findByUser(currentUser);
+
+        model.addAttribute("favoriteRecipes", favoriteRecipes);
+        return "users/savedFavorites";
+    }
+
+    @PostMapping("/recipes/{id}/favorite")
+    public String addToFavorites(@PathVariable Long id, Authentication authentication) {
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        User currentUser = userRepository.findByUsername(userDetails.getUsername());
+
+        Recipe recipe = recipeRepository.findById(id).orElse(null);
+
+        if (recipe != null) {
+            UserFavorite userFavorite = new UserFavorite();
+            userFavorite.setUser(currentUser);
+            userFavorite.setRecipeId(recipe.getRecipeid());
+            userFavorite.setRecipeName(recipe.getTitle());
+            userFavorite.setRecipeDescription(recipe.getInstructions());
+            userFavoriteRepository.save(userFavorite);
+        }
+
+        return "redirect:/recipes/" + id;
+    }
 }

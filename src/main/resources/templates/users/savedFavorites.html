@@ -1,11 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Saved Favorites</title>
+  <title>My Saved Favorites</title>
 </head>
 <body>
 <div th:replace="partials/navbar :: navbar"></div>
 <h1>Saved Favorites</h1>
-<!-- display the current user's favorite recipes -->
+<!-- Display the current user's favorite recipes -->
+<table>
+  <tr>
+    <th>Recipe ID</th>
+    <th>Recipe Name</th>
+    <th>Recipe Description</th>
+  </tr>
+  <tr th:each="favoriteRecipe : ${favoriteRecipes}">
+    <td th:text="${favoriteRecipe.recipeId}"></td>
+    <td th:text="${favoriteRecipe.recipeName}"></td>
+    <td th:text="${favoriteRecipe.recipeDescription}"></td>
+  </tr>
+</table>
 </body>
 </html>
