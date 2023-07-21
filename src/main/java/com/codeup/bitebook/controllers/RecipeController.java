@@ -1,31 +1,46 @@
 package com.codeup.bitebook.controllers;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 
+import com.codeup.bitebook.models.EdamamService;
+import com.codeup.bitebook.models.NutritionInfo;
 import com.codeup.bitebook.models.Recipe;
 import com.codeup.bitebook.models.User;
+import com.codeup.bitebook.models.UserFavorite;
+import com.codeup.bitebook.repositories.RecipeRepository;
+import com.codeup.bitebook.repositories.UserFavoriteRepository;
+import com.codeup.bitebook.repositories.UserRepository;
+import com.codeup.bitebook.services.Authenticator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import com.codeup.bitebook.repositories.RecipeRepository;
-import com.codeup.bitebook.repositories.UserRepository;
+
+import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class RecipeController {
     private final RecipeRepository recipeRepository;
     private final UserRepository userRepository;
+    private final EdamamService edamamService;
+    private final UserFavoriteRepository userFavoriteRepository;
 
     @Autowired
-    public RecipeController(RecipeRepository recipeRepository, UserRepository userRepository) {
+    public RecipeController(RecipeRepository recipeRepository, UserRepository userRepository, EdamamService edamamService, UserFavoriteRepository userFavoriteRepository) {
         this.recipeRepository = recipeRepository;
         this.userRepository = userRepository;
+        this.edamamService = edamamService;
+        this.userFavoriteRepository = userFavoriteRepository;
     }
+
     @GetMapping("/recipes")
     public String showRecipes(Model model) {
         model.addAttribute("recipes", recipeRepository.findAll());
         return "recipeIndex";
     }
+
     @GetMapping("/recipes/{id}")
     public String showRecipeDetails(@PathVariable Long id, Model model) {
         Recipe recipe = recipeRepository.findById(id).orElseThrow();
@@ -38,17 +53,19 @@ public class RecipeController {
         model.addAttribute("recipe", new Recipe());
         return "createRecipe";
     }
+
     @PostMapping("/recipes/new")
     public String createRecipe(@ModelAttribute Recipe recipe) {
-//        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        //        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 //        User currentUser = userRepository.findByUsername(userDetails.getUsername());
 //        recipe.setUser(currentUser);
-//        NutritionInfo nutritionInfo = edamamCall.getNutritionInfo(recipe.getIngredients());
-//        recipe.setCalories(nutritionInfo.getCalories());
-//        recipeRepository.save(recipe);
+        NutritionInfo nutritionInfo = edamamService.getNutritionInfo(recipe.getIngredients());
+        recipe.setCalories(String.valueOf(nutritionInfo.getCalories()));
+        recipe.setProtein(String.valueOf(nutritionInfo.getProtein()));
+        recipe.setFibre(String.valueOf(nutritionInfo.getCarbohydrates()));
+        recipeRepository.save(recipe);
         return "redirect:/recipes/" + recipe.getRecipeid();
     }
-
 
     @GetMapping("/recipes/edit/{id}")
     public String showEditForm(@PathVariable Long id, Model model) {
@@ -59,14 +76,13 @@ public class RecipeController {
 
     @PostMapping("/recipes/edit/{id}")
     public String updateRecipe(@PathVariable Long id, @ModelAttribute Recipe recipe) {
-//        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        recipeRepository.save(recipe);
+//            UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 //        User currentUser = userRepository.findByUsername(userDetails.getUsername());
 //
 //        if (!recipe.getUser().equals(currentUser)) {
 //            return "redirect:/error";
 //        }
-
-        recipeRepository.save(recipe);
         return "redirect:/recipes/" + id;
     }
 
@@ -84,4 +100,50 @@ public class RecipeController {
         return "redirect:/recipes";
     }
 
+//        @GetMapping("/profile/{recipeId}")
+//        public String showProfile(Model model, @PathVariable Long recipeId) {
+//            User loggedInUser = Authenticator.getLoggedInUser();
+//            model.addAttribute("user", loggedInUser);
+//
+//            Optional<Recipe> savedRecipe = recipeRepository.findById(recipeId);
+//            model.addAttribute("savedRecipe", savedRecipe.orElse(null));
+//
+//            return "users/profile";
+//        }
+
+    @GetMapping("/favorites")
+    public String showFavorites(Model model, Authentication authentication) {
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        User currentUser = userRepository.findByUsername(userDetails.getUsername());
+
+        List<UserFavorite> favoriteRecipes = userFavoriteRepository.findByUser(currentUser);
+
+        model.addAttribute("favoriteRecipes", favoriteRecipes);
+        return "users/savedFavorites";
+    }
+    @PostMapping("/recipes/{id}/favorite")
+    public String addToFavorites(@PathVariable Long id, Authentication authentication) {
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        User currentUser = userRepository.findByUsername(userDetails.getUsername());
+
+        Recipe recipe = recipeRepository.findById(id).orElse(null);
+
+        if (recipe != null) {
+            UserFavorite userFavorite = new UserFavorite();
+            userFavorite.setUser(currentUser);
+            userFavorite.setRecipeId(recipe.getRecipeid());
+            userFavorite.setRecipeName(recipe.getTitle());
+            userFavorite.setRecipeDescription(recipe.getInstructions());
+            userFavoriteRepository.save(userFavorite);
+        }
+
+        return "redirect:/recipes/" + id;
+    }
+
+
 }
+
+
+
+
+

@@ -9,13 +9,13 @@ import java.util.List;
 
 @Service
 public class RecipeServiceAgain {
-        @Autowired
-        private RecipeRepository repo;
+    @Autowired
+    private RecipeRepository repo;
 
-        public List<Recipe> listAll(String keyword) {
-            if (keyword != null) {
-                return repo.search(keyword);
-            }
-            return repo.findAll();
+    public List<Recipe> listAll(String keyword) {
+        if (keyword != null) {
+            return repo.search(keyword);
         }
+        return repo.findAll();
+    }
 }

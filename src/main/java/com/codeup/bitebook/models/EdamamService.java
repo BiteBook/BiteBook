@@ -16,7 +16,9 @@ public class EdamamService {
     }
 
     public NutritionInfo getNutritionInfo(String ingredients) {
-        String url = "https://api.edamam.com/api/nutrition-data?app_id=" + "46040ebe" + "&app_key=" + "d145f8770c0e24f240003773c6b6ea40" + "&ingr=" + ingredients;
+        String edamamAppId = System.getenv("EDAMAM_APPID");
+        String edamamKey = System.getenv("EDAMAM_KEY");
+        String url = "https://api.edamam.com/api/nutrition-data?app_id=" + edamamAppId + "&app_key=" + edamamKey + "&ingr=" + ingredients;
 
         ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
 
