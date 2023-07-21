@@ -32,15 +32,10 @@ public class UserController {
 
     private RecipeRepository recipeRepository;
 
-    private UserFavoriteRepository userFavoriteRepository;
+    private  UserFavoriteRepository userFavoriteRepository;
 
-<<<<<<< HEAD
-    @Autowired // Add this annotation
-    public UserController(UserRepository userDao, PasswordEncoder passwordEncoder, RecipeRepository recipeRepository, UserFavoriteRepository userFavoriteRepository, MealPlannerRepository mealPlannerRepository) {
-=======
     @Autowired
     public UserController(UserRepository userDao, PasswordEncoder passwordEncoder, RecipeRepository recipeRepository,UserFavoriteRepository userFavoriteRepository,MealPlannerRepository mealPlannerRepository) {
->>>>>>> e3b8c0b6ea89620e27c2013a317c0813e967be37
         this.userDao = userDao;
         this.passwordEncoder = passwordEncoder;
         this.recipeRepository = recipeRepository;
@@ -50,12 +45,7 @@ public class UserController {
     }
 
     @GetMapping("/sign-up")
-<<<<<<< HEAD
-
-    public String showSignupForm(Model model) {
-=======
     public String showSignupForm(Model model){
->>>>>>> e3b8c0b6ea89620e27c2013a317c0813e967be37
         User loggedInUser = Authenticator.getLoggedInUser();
         model.addAttribute("loggedInUser", loggedInUser);
 
@@ -66,13 +56,12 @@ public class UserController {
     }
 
     @PostMapping("/sign-up")
-    public String saveUser(@ModelAttribute User user) {
+    public String saveUser(@ModelAttribute User user){
         String hash = passwordEncoder.encode(user.getPassword());
         user.setPassword(hash);
         userDao.save(user);
         return "redirect:/login";
     }
-
     @GetMapping("/profile")
     public String showProfile(Model model, @RequestParam(name = "recipeId", required = false) Long recipeId, Principal principal) {
         if (principal == null) {
@@ -98,8 +87,6 @@ public class UserController {
 
         return "users/profile";
     }
-<<<<<<< HEAD
-=======
     @PostMapping("/profile/edit")
     public String editPreferences(@ModelAttribute User user, Principal principal) {
         User loggedInUser = userDao.findByUsername(principal.getName());
@@ -113,5 +100,4 @@ public class UserController {
         return "redirect:/profile";
     }
 
->>>>>>> e3b8c0b6ea89620e27c2013a317c0813e967be37
 }

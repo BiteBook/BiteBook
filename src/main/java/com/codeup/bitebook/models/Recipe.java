@@ -18,10 +18,8 @@ public class Recipe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-<<<<<<< HEAD
-=======
     @Column
->>>>>>> e3b8c0b6ea89620e27c2013a317c0813e967be37
+
     private Long recipeid;
 
     @Column
