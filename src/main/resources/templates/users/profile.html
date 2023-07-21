@@ -27,6 +27,7 @@
 <div>
     <h3>Have a nice restaurant experience? Tell everyone a little about it!</h3>
     <div sec:authorize="isAuthenticated()" class="nav-item">
+        &nbsp;
         <a th:classappend="${selectedPage == 'posts-create'} ? active" class="nav-link" href="/posts/create" style="padding-right: 0.5rem; padding-left: 0.5rem;">Create Blog Post</a>
         &nbsp;
     </div>
