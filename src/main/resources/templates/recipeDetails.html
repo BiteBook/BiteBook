@@ -12,6 +12,14 @@
 <h1 th:text="${recipes.title}"></h1>
 <p th:text="${recipes.ingredients}"></p>
 <p th:text="${recipes.instructions}"></p>
+  
+
+<!-- Form to save the recipe -->
+<form th:action="@{'/recipes/' + ${recipes.recipeid} + '/favorite'}" method="post">
+  <button type="submit">Save Recipe</button>
+</form>
+
+<!-- Meal Planner section -->
 
 <form th:action="@{/mealplanner/add}" method="post">
   <input type="hidden" th:value="${recipes.recipeid}" name="recipeId"/>
