@@ -49,11 +49,25 @@ public class RecipeController {
 //        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 //        User currentUser = userRepository.findByUsername(userDetails.getUsername());
 //        recipe.setUser(currentUser);
+<<<<<<< HEAD
 //        NutritionInfo nutritionInfo = edamamCall.getNutritionInfo(recipe.getIngredients());
 //        recipe.setCalories(nutritionInfo.getCalories());
 //        recipeRepository.save(recipe);
         return "redirect:/recipes/" + recipe.getRecipeid();
     }
+=======
+            NutritionInfo nutritionInfo = edamamService.getNutritionInfo(recipe.getIngredients());
+            recipe.setCalories(nutritionInfo.getCalories());
+            recipe.setProtein(nutritionInfo.getProtein());
+            recipe.setCarbohydrates(nutritionInfo.getCarbohydrates());
+            recipe.setFibre(nutritionInfo.getFibre());
+            recipe.setFats(nutritionInfo.getFats());
+            recipe.setSugar(nutritionInfo.getSugar());
+            recipe.setSodium(nutritionInfo.getSodium());
+            recipeRepository.save(recipe);
+            return "redirect:/recipes/" + recipe.getRecipeid();
+        }
+>>>>>>> e3b8c0b6ea89620e27c2013a317c0813e967be37
 
 
     @GetMapping("/recipes/edit/{id}")
