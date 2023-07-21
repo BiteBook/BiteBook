@@ -15,13 +15,7 @@
 <!-- Add more fields as needed -->
 
 <!-- Form to save the recipe -->
-<form th:action="@{/recipes/new}" method="post">
-  <input type="hidden" name="recipeId" th:value="${recipes.recipeid}" />
-  <input type="hidden" name="title" th:value="${recipes.title}" />
-  <input type="hidden" name="ingredients" th:value="${recipes.ingredients}" />
-  <input type="hidden" name="instructions" th:value="${recipes.instructions}" />
-  <!-- Add more hidden fields for other recipe properties as needed -->
-
+<form th:action="@{'/recipes/' + ${recipes.recipeid} + '/favorite'}" method="post">
   <button type="submit">Save Recipe</button>
 </form>
 
