@@ -119,15 +119,26 @@ import java.util.Optional;
             List<UserFavorite> favoriteRecipes = userFavoriteRepository.findByUser(currentUser);
 
             model.addAttribute("favoriteRecipes", favoriteRecipes);
-//            System.out.println(recipe);
-//            UserFavorite userFavorite = new UserFavorite();
-//            userFavorite.setUser(currentUser);
-//            userFavorite.setRecipeId(recipe.getId());
-//            userFavorite.setRecipeName(recipe.getTitle());
-//            userFavorite.setRecipeDescription(recipe.getDescription());
-//            userFavoriteRepository.save(userFavorite);
-//            return "redirect:/profile?recipeId=" + recipe.getId();
             return "users/savedFavorites";
         }
+        @PostMapping("/recipes/{id}/favorite")
+        public String addToFavorites(@PathVariable Long id, Authentication authentication) {
+            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+            User currentUser = userRepository.findByUsername(userDetails.getUsername());
+
+            Recipe recipe = recipeRepository.findById(id).orElse(null);
+
+            if (recipe != null) {
+                UserFavorite userFavorite = new UserFavorite();
+                userFavorite.setUser(currentUser);
+                userFavorite.setRecipeId(recipe.getRecipeid());
+                userFavorite.setRecipeName(recipe.getTitle());
+                userFavorite.setRecipeDescription(recipe.getInstructions());
+                userFavoriteRepository.save(userFavorite);
+            }
+
+            return "redirect:/recipes/" + id;
+        }
+
 
     }
