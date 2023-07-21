@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html>
 <head>
   <title>Recipe Details</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
@@ -12,7 +12,7 @@
 <h1 th:text="${recipes.title}"></h1>
 <p th:text="${recipes.ingredients}"></p>
 <p th:text="${recipes.instructions}"></p>
-<!-- Add more fields as needed -->
+  
 
 <!-- Form to save the recipe -->
 <form th:action="@{'/recipes/' + ${recipes.recipeid} + '/favorite'}" method="post">
@@ -20,13 +20,16 @@
 </form>
 
 <!-- Meal Planner section -->
+
 <form th:action="@{/mealplanner/add}" method="post">
   <input type="hidden" th:value="${recipes.recipeid}" name="recipeId"/>
   <input type="date" name="date"/>
   <input type="submit" value="Add to Meal Planner"/>
 </form>
 
+
 <div th:replace="partials/footer :: footer"></div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
 </body>
 </html>
