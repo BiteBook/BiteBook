@@ -59,13 +59,17 @@ public class RecipeController {
         //        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 //        User currentUser = userRepository.findByUsername(userDetails.getUsername());
 //        recipe.setUser(currentUser);
-        NutritionInfo nutritionInfo = edamamService.getNutritionInfo(recipe.getIngredients());
-        recipe.setCalories(nutritionInfo.getCalories());
-        recipe.setProtein(nutritionInfo.getProtein());
-        recipe.setFibre(nutritionInfo.getCarbohydrates());
-        recipeRepository.save(recipe);
-        return "redirect:/recipes/" + recipe.getRecipeid();
-    }
+            NutritionInfo nutritionInfo = edamamService.getNutritionInfo(recipe.getIngredients());
+            recipe.setCalories(nutritionInfo.getCalories());
+            recipe.setProtein(nutritionInfo.getProtein());
+            recipe.setCarbohydrates(nutritionInfo.getCarbohydrates());
+            recipe.setFibre(nutritionInfo.getFibre());
+            recipe.setFats(nutritionInfo.getFats());
+            recipe.setSugar(nutritionInfo.getSugar());
+            recipe.setSodium(nutritionInfo.getSodium());
+            recipeRepository.save(recipe);
+            return "redirect:/recipes/" + recipe.getRecipeid();
+        }
 
     @GetMapping("/recipes/edit/{id}")
     public String showEditForm(@PathVariable Long id, Model model) {

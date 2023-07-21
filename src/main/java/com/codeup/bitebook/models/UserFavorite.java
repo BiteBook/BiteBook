@@ -23,7 +23,7 @@ public class UserFavorite {
     @Column(name = "recipe_name")
     private String recipeName;
 
-    @Column(name = "recipe_description")
+    @Column(name = "recipe_description", columnDefinition = "TEXT")
     private String recipeDescription;
 
     // Add any other relevant fields and methods as needed

@@ -36,6 +36,20 @@ public class EdamamService {
 
             nutritionInfo.setCarbohydrates(root.path("totalNutrients").path("CHOCDF").path("quantity").asDouble());
             System.out.println("Carbohydrates: " + nutritionInfo.getCarbohydrates());
+
+            nutritionInfo.setFats(root.path("totalNutrients").path("FAT").path("quantity").asDouble());
+            System.out.println("Fats: " + nutritionInfo.getFats());
+
+            nutritionInfo.setFibre(root.path("totalNutrients").path("FIBTG").path("quantity").asDouble());
+            System.out.println("Fibre: " + nutritionInfo.getFibre());
+
+            nutritionInfo.setSugar(root.path("totalNutrients").path("SUGAR").path("quantity").asDouble());
+            System.out.println("Sugar: " + nutritionInfo.getSugar());
+
+            nutritionInfo.setSodium(root.path("totalNutrients").path("NA").path("quantity").asDouble());
+            System.out.println("Sodium: " + nutritionInfo.getSodium());
+
+
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Response body: " + response.getBody());
