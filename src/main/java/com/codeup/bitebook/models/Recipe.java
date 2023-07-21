@@ -37,6 +37,7 @@ public class Recipe {
     @ManyToOne
     private User user;
 
+
     @Override
     public String toString() {
         return title;
@@ -49,4 +50,5 @@ public class Recipe {
     public String getDescription() {
         return instructions;
     }
+
 }
