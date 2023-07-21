@@ -60,9 +60,9 @@ public class RecipeController {
 //        User currentUser = userRepository.findByUsername(userDetails.getUsername());
 //        recipe.setUser(currentUser);
         NutritionInfo nutritionInfo = edamamService.getNutritionInfo(recipe.getIngredients());
-        recipe.setCalories(String.valueOf(nutritionInfo.getCalories()));
-        recipe.setProtein(String.valueOf(nutritionInfo.getProtein()));
-        recipe.setFibre(String.valueOf(nutritionInfo.getCarbohydrates()));
+        recipe.setCalories(nutritionInfo.getCalories()));
+        recipe.setProtein(nutritionInfo.getProtein()));
+        recipe.setFibre(nutritionInfo.getCarbohydrates()));
         recipeRepository.save(recipe);
         return "redirect:/recipes/" + recipe.getRecipeid();
     }
