@@ -11,6 +11,11 @@ import com.codeup.bitebook.services.Authenticator;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,6 +44,8 @@ public class UserController {
 
 
         model.addAttribute("user", new User());
+        List<String> allAllergies = Arrays.asList("Peanuts", "Tree nuts", "Milk", "Egg", "Wheat", "Soy", "Fish", "Shellfish", "Other");
+        model.addAttribute("allAllergies", allAllergies);
         return "users/sign-up";
     }
 
@@ -46,6 +53,9 @@ public class UserController {
     public String saveUser(@ModelAttribute User user){
         String hash = passwordEncoder.encode(user.getPassword());
         user.setPassword(hash);
+        user.setDietaryPreferences(user.getDietaryPreferences());
+        user.setAllergyList(user.getAllergyList());
+        user.setOtherAllergies(user.getOtherAllergies());
         userDao.save(user);
         return "redirect:/login";
     }
@@ -54,6 +64,23 @@ public class UserController {
         if (principal == null) {
             return "redirect:/login";
         }
+
+        User loggedInUser = userDao.findByUsername(principal.getName());
+        model.addAttribute("user", loggedInUser);
+
+
+        List<UserFavorite> favoriteRecipes = userFavoriteRepository.findByUser(loggedInUser);
+        model.addAttribute("favoriteRecipes", favoriteRecipes);
+
+
+        if (recipeId != null) {
+            Recipe savedRecipe = recipeRepository.findById(recipeId).orElse(null);
+            model.addAttribute("savedRecipe", savedRecipe);
+        }
+
+
+        List<MealPlanner> mealPlanners = mealPlannerRepository.findByUser(loggedInUser);
+
         User user = userDao.findByUsername(principal.getName());
         List<MealPlanner> mealPlanners = mealPlannerRepository.findByUser(user);
         model.addAttribute("user", user);

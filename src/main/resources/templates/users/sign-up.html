@@ -18,6 +18,30 @@
   <label for="password">Password</label>
   <input id="password" type="password" th:field="*{password}" />
 
+  <label for="dietaryPreferences">Dietary Preferences</label>
+  <select id="dietaryPreferences" th:field="*{dietaryPreferences}" multiple>
+    <option value="Gluten-free">Gluten-free</option>
+    <option value="Halal">Halal</option>
+    <option value="Keto">Keto</option>
+    <option value="Kosher">Kosher</option>
+    <option value="Paleo">Paleo</option>
+    <option value="Pescetarian">Pescetarian</option>
+    <option value="Raw">Raw</option>
+    <option value="Vegan">Vegan</option>
+    <option value="Vegetarian">Vegetarian</option>
+    <!-- more options? -->
+  </select>
+
+  <label th:for="allergyList">Allergies:</label><br/>
+  <div th:each="allergy : ${allAllergies}">
+    <input type="checkbox" th:id="${allergy}" th:value="${allergy}" th:field="*{allergyList}"/>
+    <label th:for="${allergy}" th:text="${allergy}"></label><br/>
+  </div>
+
+
+  <label for="otherAllergies">If you selected "Other", please specify:</label>
+  <input id="otherAllergies" th:field="*{otherAllergies}" />
+
   <div th:if="${message}" class="alert alert-danger" role="alert">
     <span th:text="${message}"></span>
   </div>

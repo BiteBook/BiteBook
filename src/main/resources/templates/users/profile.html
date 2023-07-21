@@ -8,7 +8,14 @@
 <body>
 <div th:replace="partials/navbar :: navbar"></div>
 <h1>User Profile</h1>
-<!-- details about the current user -->
+<!-- display details about the current user -->
+<h3 th:text="${user.username} ?: 'No username'"></h3>
+<p th:text="${user.email} ?: 'No email'"></p>
+<p th:text="${user.dietaryPreferences} ?: 'No dietary preferences'"></p>
+<p th:text="${user.allergyList} ?: 'No allergies'"></p>
+<p th:text="${user.otherAllergies} ?: 'No other allergies'"></p>
+
+<!-- Link to create a new recipe -->
 <a th:href="@{/recipes/new}" sec:authorize="isAuthenticated()">Create Recipe</a>
 
 
@@ -31,8 +38,6 @@
         <span th:text="${mealPlanner.date} ?: 'No date'"></span>:
         <span th:text="${mealPlanner.recipe.title} ?: 'No recipe title'"></span>
     </li>
-
-
 
 
 <div th:replace="partials/footer :: footer"></div>
