@@ -20,43 +20,43 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-    @Controller
-    public class RecipeController {
-        private final RecipeRepository recipeRepository;
-        private final UserRepository userRepository;
-        private final EdamamService edamamService;
-        private final UserFavoriteRepository userFavoriteRepository;
+@Controller
+public class RecipeController {
+    private final RecipeRepository recipeRepository;
+    private final UserRepository userRepository;
+    private final EdamamService edamamService;
+    private final UserFavoriteRepository userFavoriteRepository;
 
-        @Autowired
-        public RecipeController(RecipeRepository recipeRepository, UserRepository userRepository, EdamamService edamamService, UserFavoriteRepository userFavoriteRepository) {
-            this.recipeRepository = recipeRepository;
-            this.userRepository = userRepository;
-            this.edamamService = edamamService;
-            this.userFavoriteRepository = userFavoriteRepository;
-        }
+    @Autowired
+    public RecipeController(RecipeRepository recipeRepository, UserRepository userRepository, EdamamService edamamService, UserFavoriteRepository userFavoriteRepository) {
+        this.recipeRepository = recipeRepository;
+        this.userRepository = userRepository;
+        this.edamamService = edamamService;
+        this.userFavoriteRepository = userFavoriteRepository;
+    }
 
-        @GetMapping("/recipes")
-        public String showRecipes(Model model) {
-            model.addAttribute("recipes", recipeRepository.findAll());
-            return "recipeIndex";
-        }
+    @GetMapping("/recipes")
+    public String showRecipes(Model model) {
+        model.addAttribute("recipes", recipeRepository.findAll());
+        return "recipeIndex";
+    }
 
-        @GetMapping("/recipes/{id}")
-        public String showRecipeDetails(@PathVariable Long id, Model model) {
-            Recipe recipe = recipeRepository.findById(id).orElseThrow();
-            model.addAttribute("recipes", recipe);
-            return "recipeDetails";
-        }
+    @GetMapping("/recipes/{id}")
+    public String showRecipeDetails(@PathVariable Long id, Model model) {
+        Recipe recipe = recipeRepository.findById(id).orElseThrow();
+        model.addAttribute("recipes", recipe);
+        return "recipeDetails";
+    }
 
-        @GetMapping("/recipes/new")
-        public String showCreateForm(Model model) {
-            model.addAttribute("recipe", new Recipe());
-            return "createRecipe";
-        }
+    @GetMapping("/recipes/new")
+    public String showCreateForm(Model model) {
+        model.addAttribute("recipe", new Recipe());
+        return "createRecipe";
+    }
 
-        @PostMapping("/recipes/new")
-        public String createRecipe(@ModelAttribute Recipe recipe) {
-            //        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    @PostMapping("/recipes/new")
+    public String createRecipe(@ModelAttribute Recipe recipe) {
+        //        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 //        User currentUser = userRepository.findByUsername(userDetails.getUsername());
 //        recipe.setUser(currentUser);
             NutritionInfo nutritionInfo = edamamService.getNutritionInfo(recipe.getIngredients());
@@ -71,38 +71,38 @@ import java.util.Optional;
             return "redirect:/recipes/" + recipe.getRecipeid();
         }
 
-        @GetMapping("/recipes/edit/{id}")
-        public String showEditForm(@PathVariable Long id, Model model) {
-            Recipe recipe = recipeRepository.findById(id).orElseThrow();
-            model.addAttribute("recipe", recipe);
-            return "editRecipe";
-        }
+    @GetMapping("/recipes/edit/{id}")
+    public String showEditForm(@PathVariable Long id, Model model) {
+        Recipe recipe = recipeRepository.findById(id).orElseThrow();
+        model.addAttribute("recipe", recipe);
+        return "editRecipe";
+    }
 
-        @PostMapping("/recipes/edit/{id}")
-        public String updateRecipe(@PathVariable Long id, @ModelAttribute Recipe recipe) {
-            recipeRepository.save(recipe);
+    @PostMapping("/recipes/edit/{id}")
+    public String updateRecipe(@PathVariable Long id, @ModelAttribute Recipe recipe) {
+        recipeRepository.save(recipe);
 //            UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 //        User currentUser = userRepository.findByUsername(userDetails.getUsername());
 //
 //        if (!recipe.getUser().equals(currentUser)) {
 //            return "redirect:/error";
 //        }
-            return "redirect:/recipes/" + id;
+        return "redirect:/recipes/" + id;
+    }
+
+    @DeleteMapping("/recipes/{id}")
+    public String deleteRecipe(@PathVariable Long id) {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User currentUser = userRepository.findByUsername(userDetails.getUsername());
+        Recipe recipe = recipeRepository.findById(id).orElseThrow();
+
+        if (!recipe.getUser().equals(currentUser)) {
+            return "redirect:/error";
         }
 
-        @DeleteMapping("/recipes/{id}")
-        public String deleteRecipe(@PathVariable Long id) {
-            UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            User currentUser = userRepository.findByUsername(userDetails.getUsername());
-            Recipe recipe = recipeRepository.findById(id).orElseThrow();
-
-            if (!recipe.getUser().equals(currentUser)) {
-                return "redirect:/error";
-            }
-
-            recipeRepository.deleteById(id);
-            return "redirect:/recipes";
-        }
+        recipeRepository.deleteById(id);
+        return "redirect:/recipes";
+    }
 
 //        @GetMapping("/profile/{recipeId}")
 //        public String showProfile(Model model, @PathVariable Long recipeId) {
@@ -115,23 +115,34 @@ import java.util.Optional;
 //            return "users/profile";
 //        }
 
-        @GetMapping("/favorites")
-        public String showFavorites(Model model, Authentication authentication) {
-            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-            User currentUser = userRepository.findByUsername(userDetails.getUsername());
+    @GetMapping("/favorites")
+    public String showFavorites(Model model, Authentication authentication) {
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        User currentUser = userRepository.findByUsername(userDetails.getUsername());
 
-            List<UserFavorite> favoriteRecipes = userFavoriteRepository.findByUser(currentUser);
+        List<UserFavorite> favoriteRecipes = userFavoriteRepository.findByUser(currentUser);
 
-            model.addAttribute("favoriteRecipes", favoriteRecipes);
-//            System.out.println(recipe);
-//            UserFavorite userFavorite = new UserFavorite();
-//            userFavorite.setUser(currentUser);
-//            userFavorite.setRecipeId(recipe.getId());
-//            userFavorite.setRecipeName(recipe.getTitle());
-//            userFavorite.setRecipeDescription(recipe.getDescription());
-//            userFavoriteRepository.save(userFavorite);
-//            return "redirect:/profile?recipeId=" + recipe.getId();
-            return "users/savedFavorites";
+        model.addAttribute("favoriteRecipes", favoriteRecipes);
+        return "users/savedFavorites";
+    }
+    @PostMapping("/recipes/{id}/favorite")
+    public String addToFavorites(@PathVariable Long id, Authentication authentication) {
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        User currentUser = userRepository.findByUsername(userDetails.getUsername());
+
+        Recipe recipe = recipeRepository.findById(id).orElse(null);
+
+        if (recipe != null) {
+            UserFavorite userFavorite = new UserFavorite();
+            userFavorite.setUser(currentUser);
+            userFavorite.setRecipeId(recipe.getRecipeid());
+            userFavorite.setRecipeName(recipe.getTitle());
+            userFavorite.setRecipeDescription(recipe.getInstructions());
+            userFavoriteRepository.save(userFavorite);
         }
 
+        return "redirect:/recipes/" + id;
     }
+
+
+}
