@@ -62,7 +62,11 @@ import java.util.Optional;
             NutritionInfo nutritionInfo = edamamService.getNutritionInfo(recipe.getIngredients());
             recipe.setCalories(nutritionInfo.getCalories());
             recipe.setProtein(nutritionInfo.getProtein());
-            recipe.setFibre(nutritionInfo.getCarbohydrates());
+            recipe.setCarbohydrates(nutritionInfo.getCarbohydrates());
+            recipe.setFibre(nutritionInfo.getFibre());
+            recipe.setFats(nutritionInfo.getFats());
+            recipe.setSugar(nutritionInfo.getSugar());
+            recipe.setSodium(nutritionInfo.getSodium());
             recipeRepository.save(recipe);
             return "redirect:/recipes/" + recipe.getRecipeid();
         }
