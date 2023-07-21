@@ -2,6 +2,7 @@ package com.codeup.bitebook.models;
 
 import jakarta.persistence.*;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,12 +11,17 @@ import java.util.List;
 
 @Entity
 @Table(name = "recipes")
+@Data
 @Getter @Setter
 public class Recipe {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
+<<<<<<< HEAD
+=======
     @Column
+>>>>>>> e3b8c0b6ea89620e27c2013a317c0813e967be37
     private Long recipeid;
 
     @Column
@@ -54,7 +60,6 @@ public class Recipe {
     private List<MealPlanner> mealPlanners;
     @ManyToOne
     private User user;
-
 
 
     @Override

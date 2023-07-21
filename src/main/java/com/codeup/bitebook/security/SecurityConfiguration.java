@@ -34,7 +34,7 @@ public class SecurityConfiguration {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
-//    @Bean
+    //    @Bean
 //    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 //        http.authorizeHttpRequests((requests) -> requests
 //                        /* Pages that require authentication
@@ -57,17 +57,17 @@ public class SecurityConfiguration {
 //                .httpBasic(withDefaults());
 //        return http.build();
 //    }
-@Bean
-public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-    http.authorizeHttpRequests((requests) -> requests
-                    .anyRequest().permitAll() //permit all requests TESTING ONLY
-            )
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.authorizeHttpRequests((requests) -> requests
+                        .anyRequest().permitAll() //permit all requests TESTING ONLY
+                )
 
-            .formLogin((login) -> login.loginPage("/login").defaultSuccessUrl("/posts"))
+                .formLogin((login) -> login.loginPage("/login").defaultSuccessUrl("/posts"))
 
-            .logout((logout) -> logout.logoutSuccessUrl("/"))
-            .httpBasic(withDefaults());
-    return http.build();
-}
+                .logout((logout) -> logout.logoutSuccessUrl("/"))
+                .httpBasic(withDefaults());
+        return http.build();
+    }
 
 }

@@ -28,4 +28,3 @@ public class UserFavorite {
 
     // Add any other relevant fields and methods as needed
 }
-
