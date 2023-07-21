@@ -18,4 +18,3 @@ public class Authenticator {
         return loggedInUser;
     }
 }
-

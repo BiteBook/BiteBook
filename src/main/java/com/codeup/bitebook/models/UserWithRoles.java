@@ -46,4 +46,3 @@ public class UserWithRoles extends User implements UserDetails {
         return super.toString();
     }
 }
-
