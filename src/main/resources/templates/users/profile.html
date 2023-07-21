@@ -2,22 +2,42 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
 <head>
-  <title>User Profile</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <title>User Profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 </head>
 <body>
 <div th:replace="partials/navbar :: navbar"></div>
 <h1>User Profile</h1>
-<!-- details about the current user -->
+<!-- display details about the current user -->
+<h3 th:text="${user.username} ?: 'No username'"></h3>
+<p th:text="${user.email} ?: 'No email'"></p>
+<p th:text="${user.dietaryPreferences} ?: 'No dietary preferences'"></p>
+<p th:text="${user.allergyList} ?: 'No allergies'"></p>
+<p th:text="${user.otherAllergies} ?: 'No other allergies'"></p>
+
+<!-- Link to create a new recipe -->
 <a th:href="@{/recipes/new}" sec:authorize="isAuthenticated()">Create Recipe</a>
 
-<h2>Meal Planner</h2>
-<ul>
-  <li th:each="mealPlanner : ${mealPlanners}">
-    <span th:text="${mealPlanner.date}"></span>:
-    <span th:text="${mealPlanner.recipe.title}"></span>
-  </li>
-</ul>
+
+<!-- Display the saved recipe details, if available -->
+<div th:if="${savedRecipe}">
+    <h2>Saved Recipe Details:</h2>
+    <p>Title: <span th:text="${savedRecipe.title} ?: 'No title'"></span></p>
+</div>
+<div>
+    <h3>Have a nice restaurant experience? Tell everyone a little about it!</h3>
+    <div sec:authorize="isAuthenticated()" class="nav-item">
+        <a th:classappend="${selectedPage == 'posts-create'} ? active" class="nav-link" href="/posts/create" style="padding-right: 0.5rem; padding-left: 0.5rem;">Create Blog Post</a>
+        &nbsp;
+    </div>
+</div>
+
+<ul th:if="${mealPlanners}">
+    <h2>Meal Planner</h2>
+    <li th:each="mealPlanner : ${mealPlanners}">
+        <span th:text="${mealPlanner.date} ?: 'No date'"></span>:
+        <span th:text="${mealPlanner.recipe.title} ?: 'No recipe title'"></span>
+    </li>
 
 
 <div th:replace="partials/footer :: footer"></div>

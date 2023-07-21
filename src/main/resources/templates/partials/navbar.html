@@ -36,9 +36,6 @@
 <!--          <li class="nav-item">-->
 <!--            <a th:classappend="${selectedPage == 'posts'} ? active" class="nav-link" aria-current="page" href="/posts" style="padding-right: 0.5rem; padding-left: 0.5rem;">Posts</a>-->
 <!--          </li>-->
-          <li sec:authorize="isAuthenticated()" class="nav-item">
-            <a th:classappend="${selectedPage == 'posts-create'} ? active" class="nav-link" href="/posts/create" style="padding-right: 0.5rem; padding-left: 0.5rem;">Create Post</a>
-          </li>
           <li class="nav-item">
             <a class="nav-link" th:href="@{/}">Home</a>
           </li>
