@@ -55,17 +55,26 @@ import java.util.Optional;
         }
 
         @PostMapping("/recipes/new")
-        public String createRecipe(@ModelAttribute Recipe recipe) {
-            //        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        User currentUser = userRepository.findByUsername(userDetails.getUsername());
-//        recipe.setUser(currentUser);
-            NutritionInfo nutritionInfo = edamamService.getNutritionInfo(recipe.getIngredients());
-            recipe.setCalories(nutritionInfo.getCalories());
-            recipe.setProtein(nutritionInfo.getProtein());
-            recipe.setFibre(nutritionInfo.getCarbohydrates());
-            recipeRepository.save(recipe);
-            return "redirect:/recipes/" + recipe.getRecipeid();
+        public String createRecipe(@RequestParam Long recipeId, Authentication authentication) {
+            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+            User currentUser = userRepository.findByUsername(userDetails.getUsername());
+
+            Recipe recipe = recipeRepository.findById(recipeId).orElse(null);
+
+            if (recipe != null) {
+                // Save the recipe to the user's favorite list in the "user_favorite" table
+                UserFavorite userFavorite = new UserFavorite();
+                userFavorite.setUser(currentUser);
+                userFavorite.setRecipeId(recipe.getId());
+                userFavorite.setRecipeName(recipe.getTitle());
+                userFavorite.setRecipeDescription(recipe.getDescription());
+                userFavoriteRepository.save(userFavorite);
+            }
+
+            // Redirect to the profile page with the saved recipe's ID as a query parameter
+            return "redirect:/profile?recipeId=" + recipeId;
         }
+
 
         @GetMapping("/recipes/edit/{id}")
         public String showEditForm(@PathVariable Long id, Model model) {
