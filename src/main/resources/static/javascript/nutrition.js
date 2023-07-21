@@ -1,20 +1,20 @@
 "use strict";
 
 // let ingredients = ['flour 1 cup ', ' 1 sugar cup', 'cup 1 milk'];
-function calculateNutrition(ingrediants){
+function calculateNutrition(ingredients){
     let totalcals = 0;
     let totalfibre = 0;
     let totalcarbs = 0;
     let totalprotein = 0;
 
 
-let ingredient = '2 cups milk';
-let nutrition = edamamCall(ingredient);
-nutrition.then(function (result) {
-    console.log(result);
-    console.log(result.totalNutrients.PROCNT.quantity + result.totalNutrients.PROCNT.unit + ' ' + result.totalNutrients.PROCNT.label);
-    console.log(result.calories + ' calories');
-})
+// let ingredient = '2 cups milk';
+// let nutrition = edamamCall(ingredient);
+// nutrition.then(function (result) {
+//     console.log(result);
+//     console.log(result.totalNutrients.PROCNT.quantity + result.totalNutrients.PROCNT.unit + ' ' + result.totalNutrients.PROCNT.label);
+//     console.log(result.calories + ' calories');
+// })
     ingredients.forEach(ingredient => {
         let nutrition = edamamCall(ingredient);
         nutrition.then(function (result) {
