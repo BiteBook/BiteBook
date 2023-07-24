@@ -14,7 +14,7 @@
 
 <style>
     body {
-        background-color: #63a2e8;
+        background-color: #ea8960;
         text-decoration: underline;
     }
 </style>
@@ -27,6 +27,7 @@
 <head>
     <h1>BiteBook</h1>
 
+    <hr>
 
     <h1 id="hello user">HELLO "USERNAME"</h1>
 
@@ -55,33 +56,59 @@
     <div th:replace="partials/footer :: footer"></div>
     <script type="text/javascript">
         function clearSearch() {
-            window.location = "[[@{/}]]";
+            window.location = " ";
         }
     </script>
 </head>
+
+
+<div class="container">
+    <h1 class="mt-5">TEST</h1>
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="testcard">
+                <img src="path_torecipepics" class="card-img-top" alt="piepic">
+                <div class="test-body">
+                    <h5 class="card-title">TEST1</h5>
+                    <p class="card-text">RECIPE</p>
+                    <a href="#" class="btn btn-primary">RATE RECIPE</a>
+                    <a href="#" class="btn btn-gold">Recommendations</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 <section id="popularRecipes">
     <h2>Trending Recipes</h2>
     <div id="recipeList"></div>
     <p>Check out these quick and easy recipes:</p>
+
+
     <div class="container">
+        <img src="/../../..img/blueberry-pie-recipe-5-1.jpg" alt="Blueberry Pie">
         <div class="recipe-card">
             <!-- Recipe 4 content -->
             <h3>Recipe 4</h3>
             <p>Ingredients: ...</p>
             <p>Cooking Instructions: ...</p>
         </div>
+        <img src="/../../..img/blueberry-pie-recipe-5-1.jpg" alt="Blueberry Pie">
         <div class="recipe-card">
             <!-- Recipe 5 content -->
             <h3>Recipe 5</h3>
             <p>Ingredients: ...</p>
             <p>Cooking Instructions: ...</p>
         </div>
+        <img src="/../../..img/blueberry-pie-recipe-5-1.jpg" alt="Blueberry Pie">
         <div class="recipe-card">
             <!-- Recipe 6 content -->
             <h3>Recipe 6</h3>
             <p>Ingredients: ...</p>
             <p>Cooking Instructions: ...</p>
+
         </div>
     </div>
 </section>
@@ -96,18 +123,21 @@
 
     <p>Check out these quick and easy recipes:</p>
     <div class="container">
+        <img src="/../../..img/blueberry-pie-recipe-5-1.jpg" alt="Blueberry Pie">
         <div class="recipe-card">
             <!-- Recipe 4 content -->
             <h3>Recipe 4</h3>
             <p>Ingredients: ...</p>
             <p>Cooking Instructions: ...</p>
         </div>
+        <img src="/../../..img/blueberry-pie-recipe-5-1.jpg" alt="Blueberry Pie">
         <div class="recipe-card">
             <!-- Recipe 5 content -->
             <h3>Recipe 5</h3>
             <p>Ingredients: ...</p>
             <p>Cooking Instructions: ...</p>
         </div>
+        <img src="/../../..img/blueberry-pie-recipe-5-1.jpg" alt="Blueberry Pie">
         <div class="recipe-card">
             <!-- Recipe 6 content -->
             <h3>Recipe 6</h3>
