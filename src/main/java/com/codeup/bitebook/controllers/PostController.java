@@ -4,6 +4,7 @@ import com.codeup.bitebook.models.Post;
 import com.codeup.bitebook.models.User;
 import com.codeup.bitebook.repositories.PostRepository;
 import com.codeup.bitebook.repositories.UserRepository;
+import com.codeup.bitebook.services.Authenticator;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -51,9 +52,7 @@ public class PostController {
 
     @PostMapping("/create")
     public String doCreate(@ModelAttribute Post post) {
-
-        // TODO: use user id 1 for now. change later to currently logged in user
-        User loggedInUser = userDao.findById(1L).get();
+        User loggedInUser = Authenticator.getLoggedInUser();
         post.setCreator(loggedInUser);
         postDao.save(post);
 
