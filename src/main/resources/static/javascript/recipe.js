@@ -10,6 +10,8 @@ function useMutation(REMOVE_RECIPE) {
 
 }
 
+
+
 // Define the search function
 function performSearch() {
     // Clear previous search results
@@ -26,7 +28,6 @@ function performSearch() {
     const searchResultsData = searchRecipes(query, difficulty);
 
     // Display search results
-    displaySearchResults(searchResultsData);
 
     //easy, medium, difficult
     function getSelectedDifficulty() {

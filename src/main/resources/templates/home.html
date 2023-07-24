@@ -11,7 +11,7 @@
 
 </head>
 
-<body>
+
 <style>
     body {
         background-color: #63a2e8;
@@ -32,8 +32,9 @@
 
 
     <hr>
+    <title></title>
 
-    </head>
+</head>
 
     <form th:action="@{/recipes/search}">
          <input type="text" name="keyword" id="keyword" size="50" th:value="${keyword}" required />
@@ -58,7 +59,6 @@
         }
     </script>
 </head>
-
 
 <section id="popularRecipes">
     <h2>Trending Recipes</h2>
@@ -118,8 +118,6 @@
 
 </section>
 
-
-
 <footer>
     <p>© 2023 Your Food Recipe. All rights reserved.</p>
 </footer>
@@ -129,5 +127,5 @@
 <script src="/javascript/recipe.js"></script>
 <script src="/javascript/nutrition.js"></script>
 
-</body>
+
 </html>
