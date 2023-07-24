@@ -1,10 +1,7 @@
 package com.codeup.bitebook.controllers;
-import com.codeup.bitebook.models.EdamamService;
-import com.codeup.bitebook.models.NutritionInfo;
-import com.codeup.bitebook.models.Recipe;
-import com.codeup.bitebook.models.User;
-import com.codeup.bitebook.models.UserFavorite;
+import com.codeup.bitebook.models.*;
 import com.codeup.bitebook.repositories.RecipeRepository;
+import com.codeup.bitebook.repositories.ReviewRepository;
 import com.codeup.bitebook.repositories.UserFavoriteRepository;
 import com.codeup.bitebook.repositories.UserRepository;
 import com.codeup.bitebook.services.Authenticator;
@@ -23,12 +20,14 @@ public class RecipeController {
     private final UserRepository userRepository;
     private final EdamamService edamamService;
     private final UserFavoriteRepository userFavoriteRepository;
+    private final ReviewRepository reviewRepository;
     @Autowired
-    public RecipeController(RecipeRepository recipeRepository, UserRepository userRepository, EdamamService edamamService, UserFavoriteRepository userFavoriteRepository) {
+    public RecipeController(RecipeRepository recipeRepository, UserRepository userRepository, EdamamService edamamService, UserFavoriteRepository userFavoriteRepository, ReviewRepository reviewRepository) {
         this.recipeRepository = recipeRepository;
         this.userRepository = userRepository;
         this.edamamService = edamamService;
         this.userFavoriteRepository = userFavoriteRepository;
+        this.reviewRepository = reviewRepository;
     }
     @GetMapping("/recipes")
     public String showRecipes(Model model) {
@@ -39,13 +38,41 @@ public class RecipeController {
     public String showRecipeDetails(@PathVariable Long id, Model model, Authentication authentication) {
         Recipe recipe = recipeRepository.findById(id).orElseThrow();
         model.addAttribute("recipes", recipe);
+        model.addAttribute("review", new Review());
 
+        // Fetch the comments for the recipe from the database
+        List<Review> comments = reviewRepository.findByRecipe(recipe);
+        model.addAttribute("comments", comments);
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         User currentUser = userRepository.findByUsername(userDetails.getUsername());
         model.addAttribute("currentUser", currentUser);
 
         return "recipeDetails";
     }
+    @PostMapping("/recipes/{id}")
+    public String getComments (@PathVariable long id ,@ModelAttribute Review review ,@RequestParam String rating,@RequestParam String comment){
+        System.out.println("rating " + rating );
+        review.setRating(rating);
+        review.setComment(comment);
+        System.out.println("comment " + comment);
+        Recipe recipe = recipeRepository.findById(id).orElseThrow();
+        review.setRecipe(recipe);
+        reviewRepository.save(review);
+
+
+        return "redirect:/recipes/" + id;
+
+
+
+    }
+
+
+
+
+
+        
+    }
+
 
     @GetMapping("/recipes/new")
     public String showCreateForm(Model model) {
