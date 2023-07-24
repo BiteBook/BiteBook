@@ -1,5 +1,6 @@
 package com.codeup.bitebook.repositories;
 
+import com.codeup.bitebook.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import com.codeup.bitebook.models.Recipe;
 import org.springframework.data.jpa.repository.Query;
@@ -18,6 +19,7 @@ public interface RecipeRepository extends JpaRepository<Recipe, Long> {
             + "OR p.dietary LIKE %:keyword%")
 
     List<Recipe> search(@Param("keyword") String keyword);
+    List<Recipe> findByUser(User user);
 
 
 }

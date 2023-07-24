@@ -36,21 +36,28 @@ public class RecipeController {
         return "recipeIndex";
     }
     @GetMapping("/recipes/{id}")
-    public String showRecipeDetails(@PathVariable Long id, Model model) {
+    public String showRecipeDetails(@PathVariable Long id, Model model, Authentication authentication) {
         Recipe recipe = recipeRepository.findById(id).orElseThrow();
         model.addAttribute("recipes", recipe);
+
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        User currentUser = userRepository.findByUsername(userDetails.getUsername());
+        model.addAttribute("currentUser", currentUser);
+
         return "recipeDetails";
     }
+
     @GetMapping("/recipes/new")
     public String showCreateForm(Model model) {
         model.addAttribute("recipe", new Recipe());
         return "createRecipe";
     }
     @PostMapping("/recipes/new")
-    public String createRecipe(@ModelAttribute Recipe recipe) {
-        //        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        User currentUser = userRepository.findByUsername(userDetails.getUsername());
-//        recipe.setUser(currentUser);
+    public String createRecipe(@ModelAttribute Recipe recipe, Authentication authentication) {
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        User currentUser = userRepository.findByUsername(userDetails.getUsername());
+        recipe.setUser(currentUser);
+
         NutritionInfo nutritionInfo = edamamService.getNutritionInfo(recipe.getIngredients());
         recipe.setCalories(nutritionInfo.getCalories());
         recipe.setProtein(nutritionInfo.getProtein());
@@ -59,27 +66,45 @@ public class RecipeController {
         recipe.setFats(nutritionInfo.getFats());
         recipe.setSugar(nutritionInfo.getSugar());
         recipe.setSodium(nutritionInfo.getSodium());
+
         recipeRepository.save(recipe);
+
         return "redirect:/recipes/" + recipe.getRecipeid();
     }
 
+
     @GetMapping("/recipes/edit/{id}")
-    public String showEditForm(@PathVariable Long id, Model model) {
+    public String showEditForm(@PathVariable Long id, Model model, Authentication authentication) {
         Recipe recipe = recipeRepository.findById(id).orElseThrow();
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        User currentUser = userRepository.findByUsername(userDetails.getUsername());
+
+        if (!recipe.getUser().equals(currentUser)) {
+            return "redirect:/error";
+        }
+
         model.addAttribute("recipe", recipe);
         return "editRecipe";
     }
-    @PostMapping("/recipes/edit/{id}")
-    public String updateRecipe(@PathVariable Long id, @ModelAttribute Recipe recipe) {
-        recipeRepository.save(recipe);
-//            UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        User currentUser = userRepository.findByUsername(userDetails.getUsername());
-//
-//        if (!recipe.getUser().equals(currentUser)) {
-//            return "redirect:/error";
-//        }
+
+    @PutMapping("/recipes/edit/{id}")
+    public String updateRecipe(@PathVariable Long id, @ModelAttribute Recipe updatedRecipe, Authentication authentication) {
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        User currentUser = userRepository.findByUsername(userDetails.getUsername());
+
+        Recipe currentRecipe = recipeRepository.findById(id).orElseThrow();
+
+        if (!currentRecipe.getUser().equals(currentUser)) {
+            return "redirect:/error";
+        }
+
+        updatedRecipe.setUser(currentUser);
+        updatedRecipe.setRecipeid(id);
+        recipeRepository.save(updatedRecipe);
         return "redirect:/recipes/" + id;
     }
+
+
     @DeleteMapping("/recipes/{id}")
     public String deleteRecipe(@PathVariable Long id) {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

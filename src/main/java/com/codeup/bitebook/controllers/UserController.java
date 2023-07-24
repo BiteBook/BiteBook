@@ -99,5 +99,18 @@ public class UserController {
 
         return "redirect:/profile";
     }
+    @GetMapping("/profile/personal-recipes")
+    public String showPersonalRecipes(Model model, Principal principal) {
+        if (principal == null) {
+            return "redirect:/login";
+        }
+
+        User loggedInUser = userDao.findByUsername(principal.getName());
+        List<Recipe> personalRecipes = recipeRepository.findByUser(loggedInUser);
+        model.addAttribute("personalRecipes", personalRecipes);
+
+        return "users/personalRecipes";
+    }
+
 
 }

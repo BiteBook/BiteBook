@@ -6,7 +6,7 @@ target/
 !**/src/test/**/target/
 
 
-keys.js
+src/main/resources/static/javascript/keys.js
 
 ### STS ###
 .apt_generated
