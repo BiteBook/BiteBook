@@ -24,33 +24,98 @@
 <h1>This is the home page</h1>
 
 
-<header>
+<head>
     <h1>BiteBook</h1>
 
-    HELLO 5GUIS!!
+
+    <h1 id="hello user">HELLO "USERNAME"</h1>
+
+
     <hr>
 
+    </head>
 
-    <label for="searchInput">Search:</label>
-    <input type="text" id="searchInput" placeholder="Search easy/medium/difficult...">
-    <button id="searchButton">Search</button>
-    <div id="searchResults">
-        <div id="easyResults"></div>
-        <div id="mediumResults"></div>
-        <div id="hardResults"></div>
-    </div>
+    <form th:action="@{/recipes/search}">
+         <input type="text" name="keyword" id="keyword" size="50" th:value="${keyword}" required />
+        <input type="submit" value="Search" />
+        <input type="button" value="Clear" id="btnClear" onclick="clearSearch()" />
+    </form>
 
-</header>
+    <!-- loop through and display each recipe -->
+
+    <ul>
+        <th:block th:each="recipe : ${recipes}">
+            <li>
+                <a th:href="@{/recipes/{id}(id=${recipe.recipeid})}" th:text="${recipe.title}"></a>
+            </li>
+        </th:block>
+    </ul>
+
+    <div th:replace="partials/footer :: footer"></div>
+    <script type="text/javascript">
+        function clearSearch() {
+            window.location = "[[@{/}]]";
+        }
+    </script>
+</head>
+
 
 <section id="popularRecipes">
     <h2>Trending Recipes</h2>
     <div id="recipeList"></div>
+    <p>Check out these quick and easy recipes:</p>
+    <div class="container">
+        <div class="recipe-card">
+            <!-- Recipe 4 content -->
+            <h3>Recipe 4</h3>
+            <p>Ingredients: ...</p>
+            <p>Cooking Instructions: ...</p>
+        </div>
+        <div class="recipe-card">
+            <!-- Recipe 5 content -->
+            <h3>Recipe 5</h3>
+            <p>Ingredients: ...</p>
+            <p>Cooking Instructions: ...</p>
+        </div>
+        <div class="recipe-card">
+            <!-- Recipe 6 content -->
+            <h3>Recipe 6</h3>
+            <p>Ingredients: ...</p>
+            <p>Cooking Instructions: ...</p>
+        </div>
+    </div>
 </section>
 
 
 <section id="readyRecipes">
     <h2>Ready in 15MINS Recipes</h2>
     <div id="readyList"></div>
+
+    <div id="readyRecipesContainer" class="container"></div>
+
+
+    <p>Check out these quick and easy recipes:</p>
+    <div class="container">
+        <div class="recipe-card">
+            <!-- Recipe 4 content -->
+            <h3>Recipe 4</h3>
+            <p>Ingredients: ...</p>
+            <p>Cooking Instructions: ...</p>
+        </div>
+        <div class="recipe-card">
+            <!-- Recipe 5 content -->
+            <h3>Recipe 5</h3>
+            <p>Ingredients: ...</p>
+            <p>Cooking Instructions: ...</p>
+        </div>
+        <div class="recipe-card">
+            <!-- Recipe 6 content -->
+            <h3>Recipe 6</h3>
+            <p>Ingredients: ...</p>
+            <p>Cooking Instructions: ...</p>
+        </div>
+    </div>
+
 </section>
 
 

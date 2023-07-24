@@ -16,5 +16,12 @@ public class HomeController {
         return "developers";
     }
 
+
+    @GetMapping("/recipeIndex")
+    public String showRecipeIndex() {
+        return "recipeindex";
+    }
+
+
 }
 
