@@ -63,7 +63,7 @@ public class SecurityConfiguration {
                         .anyRequest().permitAll() //permit all requests TESTING ONLY
                 )
 
-                .formLogin((login) -> login.loginPage("/login").defaultSuccessUrl("/posts"))
+                .formLogin((login) -> login.loginPage("/login").defaultSuccessUrl("/"))
 
                 .logout((logout) -> logout.logoutSuccessUrl("/"))
                 .httpBasic(withDefaults());

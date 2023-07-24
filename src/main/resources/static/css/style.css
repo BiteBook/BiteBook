@@ -6,6 +6,7 @@
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
 }
+
 #hello user {
     /* Your CSS styles for the title text here */
     font-size: 36px;
@@ -37,49 +38,27 @@ body {
 /*    margin-bottom: 20px;*/
 /*    text-align: center;*/
 
-.rating-box .stars {
-    display: flex;
-    align-items: center;
-    justify-content: center; /* Added to center the stars horizontally */
-    gap: 25px;
-}
-.stars i {
-    color: #e6e6e6;
-    font-size: 35px;
-    cursor: pointer;
-    transition: color 0.2s ease;
-}
-.stars i.active {
-    color: #ff9c1a;
-}
 
-.modal-body .Shepard-Pie img {
-    max-width: 100%;
-    height: auto;
-}
 
-.form-group {
-    display: flex;
-    flex-direction: column; /* Added to stack the elements vertically */
-    align-items: center; /* Added to center the elements horizontally */
-    text-align: center;
 
-}
+
+
+
 /* Example CSS styles for the search bar */
-#searchInput {
-    padding: 5px;
-    width: 200px;
-    margin-right: 5px;
-}
+/*#searchInput {*/
+/*    padding: 5px;*/
+/*    width: 200px;*/
+/*    margin-right: 5px;*/
+/*}*/
 
-#searchButton {
-    padding: 5px 10px;
-    background-color: #ddd;
-    border: none;
-    cursor: pointer;
-}
+/*#searchButton {*/
+/*    padding: 5px 10px;*/
+/*    background-color: #ddd;*/
+/*    border: none;*/
+/*    cursor: pointer;*/
+/*}*/
 
-#searchResults {
-    margin-top: 10px;
-}
+/*#searchResults {*/
+/*    margin-top: 10px;*/
+/*}*/
 

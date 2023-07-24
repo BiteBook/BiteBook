@@ -3,12 +3,18 @@ package com.codeup.bitebook.models;
 import com.codeup.bitebook.models.NutritionInfo;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 @Service
 public class EdamamService {
+    @Value("${edamam.appId}")
+    private String edamamAppId;
+
+    @Value("${edamam.key}")
+    private String edamamKey;
     private RestTemplate restTemplate;
 
     public EdamamService() {
@@ -16,8 +22,6 @@ public class EdamamService {
     }
 
     public NutritionInfo getNutritionInfo(String ingredients) {
-        String edamamAppId = System.getenv("EDAMAM_APPID");
-        String edamamKey = System.getenv("EDAMAM_KEY");
         String url = "https://api.edamam.com/api/nutrition-data?app_id=" + edamamAppId + "&app_key=" + edamamKey + "&ingr=" + ingredients;
 
         ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);

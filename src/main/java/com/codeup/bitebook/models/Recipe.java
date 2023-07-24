@@ -56,6 +56,8 @@ public class Recipe {
     private Double sodium;
     @OneToMany(mappedBy = "recipe")
     private List<MealPlanner> mealPlanners;
+    @OneToMany(mappedBy = "recipe")
+    private List<Review> reviews;
     @ManyToOne
     private User user;
 
