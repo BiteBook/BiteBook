@@ -16,7 +16,10 @@
 <div th:fragment="navbar">
   <nav th:fragment="navbar" class="navbar navbar-expand-sm navbar-light bg-light">
     <div class="container">
-      <a class="navbar-brand" href="#" style="text-transform: uppercase; font-weight: bold; text-align: center;">BiteBook</a>
+      <a class="navbar-brand" th:href="@{/}" style="text-transform: uppercase; font-weight: bold; text-align: center;">
+        <img src="/img/img.png" alt="Logo" style="height: 30px;">
+        BiteBook
+      </a>
       <div id="navbarNav" class="w-100">
         <ul class="navbar-nav justify-content-between">
           <li sec:authorize="!isAuthenticated()" class="nav-item">
@@ -29,25 +32,13 @@
             <a class="nav-link" th:href="@{/profile}">Profile</a>
           </li>
           <li sec:authorize="isAuthenticated()" class="nav-item">
-            <a class="nav-link" th:href="@{/profile}"></a>
-          </li>
-          <li sec:authorize="isAuthenticated()" class="nav-item">
             <form th:action="@{/logout}" th:method="post">
               <button class="btn-link btn" style="margin-top: 8px;">Logout</button>
             </form>
           </li>
-<!--          <li class="nav-item">-->
-<!--            <a th:classappend="${selectedPage == 'posts'} ? active" class="nav-link" aria-current="page" href="/posts" style="padding-right: 0.5rem; padding-left: 0.5rem;">Posts</a>-->
-<!--          </li>-->
-          <li class="nav-item">
-            <a class="nav-link" th:href="@{/}">Home</a>
-          </li>
           <li class="nav-item">
             <a class="nav-link" th:href="@{/recipes}">Recipes</a>
           </li>
-<!--          <li class="nav-item">-->
-<!--            <a class="nav-link" th:href="@{/posts}">Blog</a>-->
-<!--          </li>-->
           <li class="nav-item">
             <a class="nav-link" th:href="@{/developers}">Our Developers</a>
           </li>

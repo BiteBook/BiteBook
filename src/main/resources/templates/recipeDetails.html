@@ -16,6 +16,12 @@
 <h1 th:text="${recipes.title}"></h1>
 <p th:text="${recipes.ingredients}"></p>
 <p th:text="${recipes.instructions}"></p>
+<!-- Add more fields as needed -->
+<form action="#" th:action="@{/recipes/{id}(id=${recipes.recipeid})}" th:method="delete">
+  <input type="submit" value="Delete">
+</form>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editRecipeModal" th:authorize="${currentUser.username == recipes.user.username}">Edit Recipe</button>
+
 
 
 <!-- Add a div to display comments -->
@@ -39,6 +45,7 @@
   <input type="date" name="date"/>
   <input type="submit" value="Add to Meal Planner"/>
 </form>
+
 
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ratingModal">
   Review Recipe
@@ -118,6 +125,38 @@
     </div>
 </div>
 
+
+<!-- Bootstrap Modal for Editing Recipe -->
+<div class="modal fade" id="editRecipeModal" tabindex="-1" role="dialog" aria-labelledby="editRecipeModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editRecipeModalLabel">Edit Recipe</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form th:action="@{'/recipes/edit/' + ${recipes.recipeid}}" th:object="${recipes}" method="post">
+          <input type="hidden" name="_method" value="put" />
+          <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" id="title" th:field="*{title}" required>
+          </div>
+          <div class="form-group">
+            <label for="ingredients">Ingredients</label>
+            <textarea class="form-control" id="ingredients" th:field="*{ingredients}" required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="instructions">Instructions</label>
+            <textarea class="form-control" id="instructions" th:field="*{instructions}" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Save Changes</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 <!-- Include Bootstrap JS -->

@@ -20,6 +20,7 @@
 
 <!-- Link to favorites page -->
 <a th:href="@{/favorites}" sec:authorize="isAuthenticated()">Favorites</a>
+<a th:href="@{/profile/personal-recipes}">Personal Recipes</a>
 
 
 <!-- Display the saved recipe details, if available -->
@@ -34,6 +35,7 @@
         &nbsp;
     </div>
 </div>
+
 
 <ul th:if="${mealPlanners}">
     <h2>Meal Planner</h2>
