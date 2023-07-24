@@ -71,7 +71,7 @@ public class RecipeController {
 
 
         
-    }
+
 
 
     @GetMapping("/recipes/new")
