@@ -44,6 +44,8 @@ public class RecipeController {
         List<Review> comments = reviewRepository.findByRecipe(recipe);
         model.addAttribute("comments", comments);
 
+
+
         return "recipeDetails";
     }
     @PostMapping("/recipes/{id}")
