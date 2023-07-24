@@ -46,130 +46,137 @@
 
 <!-- Bootstrap Modal for Reviewing Recipe -->
 <div class="modal fade" id="ratingModal" tabindex="-1" role="dialog" aria-labelledby="ratingModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="ratingModalLabel">Rate the Recipe</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-
-
-      <form th:action="@{'/recipes/' + ${recipes.recipeid}}"  th:object="${review}" th:method="post" >
-      <div class="modal-body">
-
-          <div class="form-check form-check-inline">
-
-            <input th:field="*{rating}" class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-            <label class="form-check-label" for="inlineCheckbox1">1</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input th:field="*{rating}"  class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-            <label class="form-check-label" for="inlineCheckbox2">2</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input th:field="*{rating}"  class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
-            <label class="form-check-label" for="inlineCheckbox3">3</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input th:field="*{rating}"  class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option4">
-            <label class="form-check-label" for="inlineCheckbox4">4</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input th:field="*{rating}"  class="form-check-input" type="checkbox" id="inlineCheckbox5" value="option5">
-            <label class="form-check-label" for="inlineCheckbox5">5</label>
-          </div>
-<!--        <div class="form-check form-check-inline">-->
-<!--          <input th:field="*{rating}" class =form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">-->
-<!--          <label class="form-check-label" for="inlineCheckbox3">3 </label>-->
-<!--        </div>-->
-          <div class="rating-box">
-            <h3 class="mb-3">Your Rating:</h3>
-  <!--          <div class="stars">-->
-  <!--            <i class="star-icon fas fa-star"></i>-->
-  <!--            <i class="star-icon fas fa-star"></i>-->
-  <!--            <i class="star-icon fas fa-star"></i>-->
-  <!--            <i class="star-icon fas fa-star"></i>-->
-  <!--            <i class="star-icon fas fa-star"></i>-->
-          </div>
-          <div class="container mt-4">
-            <div class="form-group">
-              <label for="comment-modal">Leave a Comment:</label>
-              <textarea th:field="*{comment}" class="form-control" id="comment-modal" rows="3"></textarea>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ratingModalLabel">Rate the Recipe</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
 
+            <form th:action="@{'/recipes/' + ${recipes.recipeid}}" th:object="${review}" th:method="post">
+                <div class="modal-body">
+                    <div class="form-check form-check-inline">
+                        <input th:field="*{rating}" class="form-check-input" type="radio" id="star5" value="5" name="ratingGroup">
+                        <label class="form-check-label star-icon" for="star5">
+                            <i class="fas fa-star"></i>
+                            5
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input th:field="*{rating}" class="form-check-input" type="radio" id="star4" value="4" name="ratingGroup">
+                        <label class="form-check-label star-icon" for="star4">
+                            <i class="fas fa-star"></i>
+                            4
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input th:field="*{rating}" class="form-check-input" type="radio" id="star3" value="3" name="ratingGroup">
+                        <label class="form-check-label star-icon" for="star3">
+                            <i class="fas fa-star"></i>
+                            3
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input th:field="*{rating}" class="form-check-input" type="radio" id="star2" value="2" name="ratingGroup">
+                        <label class="form-check-label star-icon" for="star2">
+                            <i class="fas fa-star"></i>
+                            2
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input th:field="*{rating}" class="form-check-input" type="radio" id="star1" value="1" name="ratingGroup">
+                        <label class="form-check-label star-icon" for="star1">
+                            <i class="fas fa-star"></i>
+                            1
+                        </label>
+                    </div>
 
-          </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <!-- Corrected function name here -->
-        <button type="submit" class="btn btn-primary"  >Submit Rating and Comment</button>
-      </div>
-    </form>
+
+
+                <!-- Remove the <div class="rating-box"> if not needed -->
+                    <div class="rating-box">
+                        <h3 class="mb-3">Your Rating:</h3>
+
+                    </div>
+
+                    <div class="container mt-4">
+                        <div class="form-group">
+                            <label for="comment-modal">Leave a Comment:</label>
+                            <textarea th:field="*{comment}" class="form-control" id="comment-modal" rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <!-- Corrected function name here -->
+                    <button type="submit" class="btn btn-primary">Submit Rating and Comment</button>
+                </div>
+            </form>
+        </div>
     </div>
-  </div>
 </div>
 
 
-<!-- JavaScript code for handling rating stars -->
-<script>
-  const stars = document.querySelectorAll(".star-icon");
 
-  stars.forEach((star, index1) => {
-    star.addEventListener("click", () => {
-      stars.forEach((star, index2) => {
-        index1 >= index2 ? star.classList.add("active") : star.classList.remove("active");
-      });
-    });
-  });
+<!--&lt;!&ndash; JavaScript code for handling rating stars &ndash;&gt;-->
+<!--<script>-->
+<!--  const stars = document.querySelectorAll(".star-icon");-->
 
-  <!-- JavaScript code for handling rating stars and comments -->
+<!--  stars.forEach((star, index1) => {-->
+<!--    star.addEventListener("click", () => {-->
+<!--      stars.forEach((star, index2) => {-->
+<!--        index1 >= index2 ? star.classList.add("active") : star.classList.remove("active");-->
+<!--      });-->
+<!--    });-->
+<!--  });-->
 
-  // Function to handle comment submission
-  function submitComment() {
-    // Get the comment text from the textarea
-    var commentText = document.getElementById("comment-modal").value;
+<!--  &lt;!&ndash; JavaScript code for handling rating stars and comments &ndash;&gt;-->
 
-    // Create a new paragraph element to display the comment
-    var newComment = document.createElement("p");
-    newComment.textContent = commentText;
+<!--  // Function to handle comment submission-->
+<!--  function submitComment() {-->
+<!--    // Get the comment text from the textarea-->
+<!--    var commentText = document.getElementById("comment-modal").value;-->
 
-    // Append the comment to the displayArea div
-    var displayArea = document.getElementById("displayArea");
-    displayArea.appendChild(newComment);
+<!--    // Create a new paragraph element to display the comment-->
+<!--    var newComment = document.createElement("p");-->
+<!--    newComment.textContent = commentText;-->
 
-    // Save the comment to Local Storage
-    var comments = JSON.parse(localStorage.getItem("comments")) || [];
-    comments.push(commentText);
-    localStorage.setItem("comments", JSON.stringify(comments));
+<!--    // Append the comment to the displayArea div-->
+<!--    var displayArea = document.getElementById("displayArea");-->
+<!--    displayArea.appendChild(newComment);-->
 
-    // Clear the textarea
-    document.getElementById("comment-modal").value = "";
+<!--    // Save the comment to Local Storage-->
+<!--    var comments = JSON.parse(localStorage.getItem("comments")) || [];-->
+<!--    comments.push(commentText);-->
+<!--    localStorage.setItem("comments", JSON.stringify(comments));-->
 
-    // Close the modal after submitting the comment
-    $("#ratingModal").modal("hide");
-  }
+<!--    // Clear the textarea-->
+<!--    document.getElementById("comment-modal").value = "";-->
 
-  // Function to load comments from Local Storage when the page loads
-  function loadComments() {
-    var comments = JSON.parse(localStorage.getItem("comments")) || [];
+<!--    // Close the modal after submitting the comment-->
+<!--    $("#ratingModal").modal("hide");-->
+<!--  }-->
 
-    // Create paragraph elements for each comment and append them to the displayArea div
-    var displayArea = document.getElementById("displayArea");
-    comments.forEach(function(commentText) {
-      var newComment = document.createElement("p");
-      newComment.textContent = commentText;
-      displayArea.appendChild(newComment);
-    });
-  }
+<!--  // Function to load comments from Local Storage when the page loads-->
+<!--  function loadComments() {-->
+<!--    var comments = JSON.parse(localStorage.getItem("comments")) || [];-->
 
-  // Call the loadComments function when the page finishes loading
-  document.addEventListener("DOMContentLoaded", function() {
-    loadComments();
-  });
-</script>
+<!--    // Create paragraph elements for each comment and append them to the displayArea div-->
+<!--    var displayArea = document.getElementById("displayArea");-->
+<!--    comments.forEach(function(commentText) {-->
+<!--      var newComment = document.createElement("p");-->
+<!--      newComment.textContent = commentText;-->
+<!--      displayArea.appendChild(newComment);-->
+<!--    });-->
+<!--  }-->
+
+<!--  // Call the loadComments function when the page finishes loading-->
+<!--  document.addEventListener("DOMContentLoaded", function() {-->
+<!--    loadComments();-->
+<!--  });-->
+<!--</script>-->
 
 
 <!-- Include Bootstrap JS -->
