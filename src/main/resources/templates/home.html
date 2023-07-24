@@ -7,10 +7,10 @@
     <link rel="stylesheet" href="/../../resources/static/css/style.css">
 </head>
 
-<body>
+
 <style>
     body {
-        background-color: #63a2e8;
+        background-color: #ea8960;
         text-decoration: underline;
     }
 </style>
@@ -20,27 +20,67 @@
 <h1>This is the home page</h1>
 
 
-<header>
+<head>
     <h1>BiteBook</h1>
 
-    HELLO 5GUIS!!
     <hr>
 
+    <h1 id="hello user">HELLO "USERNAME"</h1>
 
-    <label for="searchInput">Search:</label>
-    <input type="text" id="searchInput" placeholder="Search easy/medium/difficult...">
-    <button id="searchButton">Search</button>
-    <div id="searchResults">
-        <div id="easyResults"></div>
-        <div id="mediumResults"></div>
-        <div id="hardResults"></div>
+
+    <hr>
+    <title></title>
+
+</head>
+
+    <form th:action="@{/recipes/search}">
+         <input type="text" name="keyword" id="keyword" size="50" th:value="${keyword}" required />
+        <input type="submit" value="Search" />
+        <input type="button" value="Clear" id="btnClear" onclick="clearSearch()" />
+    </form>
+
+    <!-- loop through and display each recipe -->
+
+    <ul>
+        <th:block th:each="recipe : ${recipes}">
+            <li>
+                <a th:href="@{/recipes/{id}(id=${recipe.recipeid})}" th:text="${recipe.title}"></a>
+            </li>
+        </th:block>
+    </ul>
+
+    <div th:replace="partials/footer :: footer"></div>
+    <script type="text/javascript">
+       function clearSearch() {
+            window.location = " ";
+        }
+    </script>
+</head>
+
+
+<div class="container">
+    <h1 class="mt-5">TEST</h1>
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="testcard">
+                <img src="path_torecipepics" class="card-img-top" alt="piepic">
+                <div class="test-body">
+                    <h5 class="card-title">TEST1</h5>
+                    <p class="card-text">RECIPE</p>
+                    <a href="#" class="btn btn-primary">RATE RECIPE</a>
+                    <a href="#" class="btn btn-gold">Recommendations</a>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
 
-</header>
+
 
 
 <section id="popularRecipes">
     <h2>Trending Recipes</h2>
+
     <div id="recipeList" class="row">
         <div class="col-md-3">
             <div class="card">
@@ -88,6 +128,8 @@
 
 <section id="readyRecipes">
     <h2>Ready in 15MINS Recipes</h2>
+    <div id="readyList"></div>
+
     <div id="readyList" class="row">
         <div class="col-md-3">
             <div class="card">
@@ -132,11 +174,39 @@
     </div>
 </section>
 
+    <div id="readyRecipesContainer" class="container"></div>
 
+
+    <p>Check out these quick and easy recipes:</p>
+    <div class="container">
+        <img src="/../../..img/blueberry-pie-recipe-5-1.jpg" alt="Blueberry Pie">
+        <div class="recipe-card">
+            <!-- Recipe 4 content -->
+            <h3>Recipe 4</h3>
+            <p>Ingredients: ...</p>
+            <p>Cooking Instructions: ...</p>
+        </div>
+        <img src="/../../..img/blueberry-pie-recipe-5-1.jpg" alt="Blueberry Pie">
+        <div class="recipe-card">
+            <!-- Recipe 5 content -->
+            <h3>Recipe 5</h3>
+            <p>Ingredients: ...</p>
+            <p>Cooking Instructions: ...</p>
+        </div>
+        <img src="/../../..img/blueberry-pie-recipe-5-1.jpg" alt="Blueberry Pie">
+        <div class="recipe-card">
+            <!-- Recipe 6 content -->
+            <h3>Recipe 6</h3>
+            <p>Ingredients: ...</p>
+            <p>Cooking Instructions: ...</p>
+        </div>
+    </div>
+
+</section>
 
 
 <footer>
-    <p>© 2023 Your Food Recipe. All rights reserved.</p>
+    <p>© 2023 BITEBOOK. All rights reserved.</p>
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
@@ -144,5 +214,5 @@
 <script src="/javascript/recipe.js"></script>
 <script src="/javascript/nutrition.js"></script>
 
-</body>
+
 </html>
