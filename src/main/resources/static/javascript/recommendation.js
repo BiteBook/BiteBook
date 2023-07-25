@@ -1,5 +1,4 @@
 "use strict";
-/*
 
 
 const searchForm = document.querySelector('#form')
@@ -13,29 +12,29 @@ searchForm.addEventListener('submit', (e) => {
 
 async function searchRecipes(){
     const searchValue = searchInput.value.trim();
-    const response = await fetch(`https://api.edamam.com/api/nutrition-data?app_id=${USERID}&app_key=${APIKEY}&ingr=${ingr}`).then(response => response.json()).then(data => data)
-    displayRecipes(data.hits);
+    const response = await fetch(`https://api.spoonacular.com/recipes/716429/information?includeSimilar=true.?apiKey=${APIKEY2}&query=${searchValue}`).then(response => response.json());
+    displayRecipes(response.results);
 }
-let ingredientList = "";
-
 function displayRecipes(recipes) {
     let html = '';
     recipes.forEach((recipe) => {
+        const imageUrl = recipe.image ? recipe.image : 'placeholder-image.jpg';
+        const recipeUrl = recipe.sourceUrl ? recipe.sourceUrl : '#'; // Provide a default URL if missing
         html += `
-        <div>
-            <img src="${recipe.recipe.image}" alt="${recipe.recipe.label}">
-            <h3>${recipe.recipe.label}</h3>
-            <ul>
-                ${recipe.recipe.ingredientLines.map(ingredient => `<li>${ingredient}</li>`).join('')}
-            </ul>
-            <a href="${recipe.recipe.url}" target="_blank">View Recipe</a>
-        </div> 
-        `
-    })
+      <div>
+        <img src="${imageUrl}" alt="${recipe.title}">
+        <h3>${recipe.title}</h3>
+        <ul>
+          ${recipe.extendedIngredients.map(ingredient => `<li>${ingredient.original}</li>`).join('')}
+        </ul>
+        <a href="${recipeUrl}" target="_blank">View Recipe</a>
+      </div>
+    `;
+    });
     resultsList.innerHTML = html;
 }
 
 
 
 
-*/
+
