@@ -31,10 +31,16 @@
     <h3>Have a nice restaurant experience? Tell everyone a little about it!</h3>
     <div sec:authorize="isAuthenticated()" class="nav-item">
         <a th:classappend="${selectedPage == 'posts-create'} ? active" class="nav-link" href="/posts/create" style="padding-right: 0.5rem; padding-left: 0.5rem;">Create Blog Post</a>
-        &nbsp;
+        &nbsp
     </div>
 </div>
-
+<div>
+    <th:block th:each="post : ${posts}">
+        <li>
+            <a th:href="@{/profile/{id}(id=${post.loggeinInUser})}" th:text="${post.title}"></a>
+        </li>
+    </th:block>
+</div>
 
 <ul th:if="${mealPlanners}">
     <h2>Meal Planner</h2>
