@@ -13,3 +13,67 @@
 //         });
 //     });
 // });
+
+/*
+
+// Get all the recipe rating sections
+const ratingSections = document.querySelectorAll('.rating-section');
+
+// Function to highlight stars on hover
+function highlightStars(ratingSection, rating) {
+    const stars = ratingSection.querySelectorAll('.star');
+    stars.forEach((star, index) => {
+        star.classList.toggle('filled', index < rating);
+    });
+}
+
+// Function to set the rating for a recipe
+function setRating(ratingSection, rating) {
+    // Save the rating value to the backend (you will need to implement this)
+    const recipeId = ratingSection.dataset.recipeId;
+    // Here, you would make a request to your backend API to update the recipe's rating
+    // Replace the following line with the actual API call
+    // Example:
+    fetch(`/api/recipes/${recipeId}/rating`, { method: 'POST', body: JSON.stringify({ rating }) });
+}
+
+// Attach event listeners for each rating section
+ratingSections.forEach(ratingSection => {
+    const stars = ratingSection.querySelectorAll('.star');
+
+    // Handle hover over stars
+    stars.forEach(star => {
+        star.addEventListener('mouseover', () => {
+            const rating = parseInt(star.dataset.rating);
+            highlightStars(ratingSection, rating);
+        });
+
+        star.addEventListener('mouseleave', () => {
+            // Reset the stars to show the current rating
+            const currentRating = parseInt(ratingSection.dataset.rating) || 0;
+            highlightStars(ratingSection, currentRating);
+        });
+        star.addEventListener('mouseleave', () => {
+            // Reset the stars to show the current rating
+            const currentRating = parseInt(ratingSection.dataset.rating) || 0;
+            highlightStars(ratingSection, currentRating);
+        });
+        star.addEventListener('mouseleave', () => {
+            // Reset the stars to show the current rating
+            const currentRating = parseInt(ratingSection.dataset.rating) || 0;
+            highlightStars(ratingSection, currentRating);
+        });
+        star.addEventListener('mouseleave', () => {
+            // Reset the stars to show the current rating
+            const currentRating = parseInt(ratingSection.dataset.rating) || 0;
+            highlightStars(ratingSection, currentRating);
+        });
+
+        // Handle click on a star to set the rating
+        star.addEventListener('click', () => {
+            const rating = parseInt(star.dataset.rating);
+            setRating(ratingSection, rating);
+            ratingSection.dataset.rating = rating;
+        });
+    });
+});*/
