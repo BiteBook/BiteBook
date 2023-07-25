@@ -11,10 +11,12 @@
 <form th:action="@{/sign-up}" method="POST" th:object="${user}">
   <label for="username">Username</label>
   <input id="username" th:field="*{username}" />
+  <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Error</span>
+
 
   <label for="email">Email</label>
   <input id="email" th:field="*{email}" />
-
+  <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</p>
   <label for="password">Password</label>
   <input id="password" type="password" th:field="*{password}" />
 

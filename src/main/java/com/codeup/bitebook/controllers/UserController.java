@@ -8,10 +8,14 @@ import com.codeup.bitebook.repositories.RecipeRepository;
 import com.codeup.bitebook.repositories.UserFavoriteRepository;
 import com.codeup.bitebook.repositories.UserRepository;
 import com.codeup.bitebook.services.Authenticator;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.bind.annotation.*;
 import com.codeup.bitebook.models.Post;
 import com.codeup.bitebook.repositories.PostRepository;
@@ -19,10 +23,15 @@ import java.security.Principal;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+
 
 
 @Controller
 public class UserController {
+
 
     private UserRepository userDao;
     private PasswordEncoder passwordEncoder;
@@ -53,12 +62,20 @@ public class UserController {
     }
 
     @PostMapping("/sign-up")
-    public String saveUser(@ModelAttribute User user){
+    public String saveUser(@Valid @ModelAttribute User user, BindingResult bindingResult, Model model){
+        if (userDao.findByUsername(user.getUsername()) != null) {
+            bindingResult.rejectValue("username", "error.user", "Username is already taken");
+        }
+        if (bindingResult.hasErrors()) {
+            return "users/sign-up";
+        }
         String hash = passwordEncoder.encode(user.getPassword());
         user.setPassword(hash);
         userDao.save(user);
         return "redirect:/login";
     }
+
+
     @GetMapping("/profile")
     public String showProfile(Model model, @RequestParam(name = "recipeId", required = false) Long recipeId, Principal principal) {
         if (principal == null) {
@@ -129,6 +146,47 @@ public class UserController {
         }
     }
 
+    @PostMapping("/profile/edit-username")
+    public String editUsername(@ModelAttribute User user, Principal principal) {
+        User loggedInUser = userDao.findByUsername(principal.getName());
+
+        // Check if the new username is already taken
+        if (userDao.findByUsername(user.getUsername()) != null) {
+            // If taken, redirect back to the profile page with an error message
+            return "redirect:/profile?error=username";
+        }
+
+        loggedInUser.setUsername(user.getUsername());
+        userDao.save(loggedInUser);
+
+        // Fetch the updated user from the database
+        loggedInUser = userDao.findByUsername(user.getUsername());
+
+        // Create a new authentication token
+        Authentication newAuth = new UsernamePasswordAuthenticationToken(loggedInUser, null, loggedInUser.getAuthorities());
+
+        // Update the security context with the new authentication token
+        SecurityContextHolder.getContext().setAuthentication(newAuth);
+
+        return "redirect:/profile";
+    }
+    @PostMapping("/profile/change-password")
+    public String changePassword(@RequestParam String currentPassword, @RequestParam String newPassword, Principal principal) {
+        User loggedInUser = userDao.findByUsername(principal.getName());
+
+        // Check if the current password is correct
+        if (!passwordEncoder.matches(currentPassword, loggedInUser.getPassword())) {
+            // If the current password is incorrect, redirect back to the profile page with an error message
+            return "redirect:/profile?error=password";
+        }
+
+        // Encode the new password and save it
+        String hash = passwordEncoder.encode(newPassword);
+        loggedInUser.setPassword(hash);
+        userDao.save(loggedInUser);
+
+        return "redirect:/profile";
+    }
 
 
 }

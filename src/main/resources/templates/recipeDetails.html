@@ -24,10 +24,13 @@
 <p th:text="${recipes.carbohydrates}"></p>
 <p th:text="${recipes.sodium}"></p>
 <!-- Add more fields as needed -->
-<form action="#" th:action="@{/recipes/{id}(id=${recipes.recipeid})}" th:method="delete">
-  <input type="submit" value="Delete">
+<!-- Only show the delete button if the current user is the creator of the recipe -->
+<form th:if="${currentUser.username == recipes.user.username}" action="#" th:action="@{/recipes/{id}(id=${recipes.recipeid})}" th:method="delete">
+    <input type="submit" value="Delete">
 </form>
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editRecipeModal" th:authorize="${currentUser.username == recipes.user.username}">Edit Recipe</button>
+
+<!-- Only show the edit button if the current user is the creator of the recipe -->
+<button th:if="${currentUser.username == recipes.user.username}" type="button" class="btn btn-primary" data-toggle="modal" data-target="#editRecipeModal">Edit Recipe</button>
 
 
 
