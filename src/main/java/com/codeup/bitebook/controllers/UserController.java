@@ -12,14 +12,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
+import org.springframework.web.bind.annotation.*;
+import com.codeup.bitebook.models.Post;
+import com.codeup.bitebook.repositories.PostRepository;
 import java.security.Principal;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 
 @Controller
@@ -28,20 +27,18 @@ public class UserController {
     private UserRepository userDao;
     private PasswordEncoder passwordEncoder;
     private MealPlannerRepository mealPlannerRepository;
-
-
     private RecipeRepository recipeRepository;
-
     private  UserFavoriteRepository userFavoriteRepository;
+    private PostRepository postDao;
 
     @Autowired
-    public UserController(UserRepository userDao, PasswordEncoder passwordEncoder, RecipeRepository recipeRepository,UserFavoriteRepository userFavoriteRepository,MealPlannerRepository mealPlannerRepository) {
+    public UserController(UserRepository userDao, PasswordEncoder passwordEncoder, RecipeRepository recipeRepository,UserFavoriteRepository userFavoriteRepository,MealPlannerRepository mealPlannerRepository, PostRepository postDao) {
         this.userDao = userDao;
         this.passwordEncoder = passwordEncoder;
         this.recipeRepository = recipeRepository;
         this.userFavoriteRepository = userFavoriteRepository;
         this.mealPlannerRepository = mealPlannerRepository;
-
+        this.postDao = postDao;
     }
 
     @GetMapping("/sign-up")
@@ -70,6 +67,12 @@ public class UserController {
 
         User loggedInUser = userDao.findByUsername(principal.getName());
         model.addAttribute("user", loggedInUser);
+
+        List<Post> userPosts = postDao.findByCreatorOrderByCreatedDateDesc(loggedInUser);
+        if (userPosts.size() > 3) {
+            userPosts = userPosts.subList(0, 3);
+        }
+        model.addAttribute("userPosts", userPosts);
 
         List<UserFavorite> favoriteRecipes = userFavoriteRepository.findByUser(loggedInUser);
         model.addAttribute("favoriteRecipes", favoriteRecipes);
@@ -111,6 +114,21 @@ public class UserController {
 
         return "users/personalRecipes";
     }
+
+    @GetMapping("/users/{userId}/posts")
+    public String showUserPosts(@PathVariable long userId, Model model) {
+        Optional<User> userOptional = userDao.findById(userId);
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            List<Post> posts = postDao.findByCreatorOrderByCreatedDateDesc(user);
+            model.addAttribute("posts", posts);
+            return "users/userPosts";
+        } else {
+//             redirect to a 404 page
+            return "redirect:/404";
+        }
+    }
+
 
 
 }

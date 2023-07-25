@@ -21,7 +21,7 @@
 <!-- Link to favorites page -->
 <a th:href="@{/favorites}" sec:authorize="isAuthenticated()">Favorites</a>
 <a th:href="@{/profile/personal-recipes}">Personal Recipes</a>
-
+<a th:href="@{/users/{userId}/posts(userId=${user.id})}">View Post History</a>
 
 <!-- Display the saved recipe details, if available -->
 <div th:if="${savedRecipe}">
@@ -35,8 +35,11 @@
         &nbsp;
     </div>
 </div>
-
-
+<div th:each="post : ${userPosts}">
+    <h3 th:text="${post.title}"></h3>
+    <p th:text="${post.body}"></p>
+    <a th:href="@{/posts/{id}(id=${post.id})}">Read More</a>
+</div>
 <ul th:if="${mealPlanners}">
     <h2>Meal Planner</h2>
     <li th:each="mealPlanner : ${mealPlanners}">

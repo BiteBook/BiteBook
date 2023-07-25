@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -54,6 +55,7 @@ public class PostController {
     public String doCreate(@ModelAttribute Post post) {
         User loggedInUser = Authenticator.getLoggedInUser();
         post.setCreator(loggedInUser);
+        post.setCreatedDate(LocalDateTime.now());
         postDao.save(post);
 
         return "redirect:/posts";
@@ -65,4 +67,19 @@ public class PostController {
         model.addAttribute("newPost", postToEdit);
         return "/posts/create";
     }
+    // PostController.java
+
+    @GetMapping("/user/{username}")
+    public String showUserPosts(@PathVariable String username, Model model) {
+        User user = userDao.findByUsername(username);
+        if (user == null) {
+            return "redirect:/posts";
+        }
+
+        List<Post> userPosts = postDao.findByCreatorOrderByCreatedDateDesc(user);
+        model.addAttribute("userPosts", userPosts);
+
+        return "/posts/user";
+    }
+
 }

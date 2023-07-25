@@ -1,7 +1,6 @@
 package com.codeup.bitebook.models;
 
-
-
+import java.time.LocalDateTime;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,6 +18,9 @@ public class Post {
     private long id;
 
     @Column(nullable = false)
+    private LocalDateTime createdDate;
+
+    @Column(nullable = false)
     private String title;
 
     @Column(length = 1024, nullable = false)
@@ -32,6 +34,14 @@ public class Post {
         this.title = title;
         this.body = body;
         this.creator = creator;
+    }
+
+    public LocalDateTime getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(LocalDateTime createdDate) {
+        this.createdDate = createdDate;
     }
 
     public long getId() {
