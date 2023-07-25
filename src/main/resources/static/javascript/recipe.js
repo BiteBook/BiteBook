@@ -1,3 +1,5 @@
+"use strict";
+
 // Get references to the input field, search button, and search results container
 const searchInput = document.getElementById('searchInput');
 const searchButton = document.getElementById('searchButton');
