@@ -40,9 +40,15 @@ public class RecipeController {
         model.addAttribute("recipes", recipe);
         model.addAttribute("review", new Review());
 
-        // Fetch the comments for the recipe from the database
+        // Fetch the comments and ratings for the recipe from the database
         List<Review> comments = reviewRepository.findByRecipe(recipe);
+        List<Review> ratings = reviewRepository.findByRecipe(recipe);
+
+        // Add the comments and ratings to the model without redefining variables
         model.addAttribute("comments", comments);
+        model.addAttribute("reviews", ratings);
+
+        // Use the existing 'authentication' parameter directly to get 'currentUser'
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         User currentUser = userRepository.findByUsername(userDetails.getUsername());
         model.addAttribute("currentUser", currentUser);
