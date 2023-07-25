@@ -16,6 +16,13 @@
 <h1 th:text="${recipes.title}"></h1>
 <p th:text="${recipes.ingredients}"></p>
 <p th:text="${recipes.instructions}"></p>
+<p th:text="${recipes.calories}"></p>
+<p th:text="${recipes.protein}"></p>
+<p th:text="${recipes.sugar}"></p>
+<p th:text="${recipes.fats}"></p>
+<p th:text="${recipes.fibre}"></p>
+<p th:text="${recipes.carbohydrates}"></p>
+<p th:text="${recipes.sodium}"></p>
 <!-- Add more fields as needed -->
 <form action="#" th:action="@{/recipes/{id}(id=${recipes.recipeid})}" th:method="delete">
   <input type="submit" value="Delete">

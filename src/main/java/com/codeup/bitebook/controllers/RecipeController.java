@@ -84,8 +84,8 @@ public class RecipeController {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         User currentUser = userRepository.findByUsername(userDetails.getUsername());
         recipe.setUser(currentUser);
-
-        NutritionInfo nutritionInfo = edamamService.getNutritionInfo(recipe.getIngredients());
+        System.out.println(recipe.getIngredients());
+        NutritionInfo nutritionInfo = edamamService.allNutrition(recipe.getIngredients());
         recipe.setCalories(nutritionInfo.getCalories());
         recipe.setProtein(nutritionInfo.getProtein());
         recipe.setCarbohydrates(nutritionInfo.getCarbohydrates());
