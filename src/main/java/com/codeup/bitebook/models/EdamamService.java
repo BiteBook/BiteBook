@@ -15,50 +15,69 @@ public class EdamamService {
 
     @Value("${edamam.key}")
     private String edamamKey;
-    private RestTemplate restTemplate;
+    private final RestTemplate restTemplate;
+    public double totalCalories = 0;
+    public double totalProtein = 0;
+    public double totalFibre = 0;
+    public double totalFat = 0;
+    public double totalSugar = 0;
+    public double totalCarbs = 0;
+    public double totalSodium = 0;
 
     public EdamamService() {
-        this.restTemplate = new RestTemplate();
+        restTemplate = new RestTemplate();
     }
 
-    public NutritionInfo getNutritionInfo(String ingredients) {
+    public void getNutritionInfo(String ingredients) {
         String url = "https://api.edamam.com/api/nutrition-data?app_id=" + edamamAppId + "&app_key=" + edamamKey + "&ingr=" + ingredients;
 
         ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
 
-        NutritionInfo nutritionInfo = new NutritionInfo();
-
         try {
             ObjectMapper mapper = new ObjectMapper();
             JsonNode root = mapper.readTree(response.getBody());
-
-            nutritionInfo.setCalories(root.path("calories").asDouble());
-            System.out.println("Calories: " + nutritionInfo.getCalories());
-
-            nutritionInfo.setProtein(root.path("totalNutrients").path("PROCNT").path("quantity").asDouble());
-            System.out.println("Protein: " + nutritionInfo.getProtein());
-
-            nutritionInfo.setCarbohydrates(root.path("totalNutrients").path("CHOCDF").path("quantity").asDouble());
-            System.out.println("Carbohydrates: " + nutritionInfo.getCarbohydrates());
-
-            nutritionInfo.setFats(root.path("totalNutrients").path("FAT").path("quantity").asDouble());
-            System.out.println("Fats: " + nutritionInfo.getFats());
-
-            nutritionInfo.setFibre(root.path("totalNutrients").path("FIBTG").path("quantity").asDouble());
-            System.out.println("Fibre: " + nutritionInfo.getFibre());
-
-            nutritionInfo.setSugar(root.path("totalNutrients").path("SUGAR").path("quantity").asDouble());
-            System.out.println("Sugar: " + nutritionInfo.getSugar());
-
-            nutritionInfo.setSodium(root.path("totalNutrients").path("NA").path("quantity").asDouble());
-            System.out.println("Sodium: " + nutritionInfo.getSodium());
-
+            System.out.println(root);
+            totalCalories += (root.path("calories").asDouble());
+            totalProtein += (root.path("totalNutrients").path("PROCNT").path("quantity").asDouble());
+            totalCarbs += (root.path("totalNutrients").path("CHOCDF").path("quantity").asDouble());
+            totalFat += (root.path("totalNutrients").path("FAT").path("quantity").asDouble());
+            totalFibre += (root.path("totalNutrients").path("FIBTG").path("quantity").asDouble());
+            totalSugar += (root.path("totalNutrients").path("SUGAR").path("quantity").asDouble());
+            totalSodium += (root.path("totalNutrients").path("NA").path("quantity").asDouble());
 
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Response body: " + response.getBody());
         }
 
+
+    }
+    public NutritionInfo allNutrition(String ingredientList){
+        totalCalories = 0;
+        totalProtein = 0;
+        totalFibre = 0;
+        totalFat = 0;
+        totalSugar = 0;
+        totalCarbs = 0;
+        totalSodium = 0;
+        NutritionInfo nutritionInfo = new NutritionInfo();
+        String[] ingredientArr = ingredientList.split(",");
+        for (String s : ingredientArr) {
+            getNutritionInfo(s);
+        }
+
+        nutritionInfo.setCalories(totalCalories);
+        nutritionInfo.setProtein(totalProtein);
+        nutritionInfo.setCarbohydrates(totalCarbs);
+        nutritionInfo.setFats(totalFat);
+        nutritionInfo.setFibre(totalFibre);
+        nutritionInfo.setSugar(totalSugar);
+        nutritionInfo.setSodium(totalSodium);
+
+
+
         return nutritionInfo;
     }
+
+
 }
