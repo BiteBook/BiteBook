@@ -73,8 +73,6 @@ public class EdamamService {
         nutritionInfo.setFibre(Math.round(totalFibre));
         nutritionInfo.setSugar(Math.round(totalSugar));
         nutritionInfo.setSodium(Math.round(totalSodium));
-
-
         return nutritionInfo;
     }
 
