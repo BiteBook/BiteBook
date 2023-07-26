@@ -1,54 +1,63 @@
 
+    // Replace 'YOUR_API_KEY' with your actual Spoonacular API key
+    const APIKEY2  = '43c9ca641fd149cfa982fabb08dfabe7';
+    const searchQuery = 'yogurt'; // You can change the search query here
 
-// Get all the recipe rating sections
-const ratingSections = document.querySelectorAll('.rating-section');
+    // Function to make the API call and display the search results
+    function searchForRecipes() {
+    const url = `https://api.spoonacular.com/food/products/search?query=${searchQuery}&apiKey=${apiKey}`;
 
-function highlightStars(ratingSection, rating) {
-    const stars = ratingSection.querySelectorAll('.star');
-    stars.forEach((star, index) => {
-        star.classList.toggle('filled', index < rating);
-    });
+    fetch(url)
+    .then(response => response.json())
+    .then(data => displayResults(data.products))
+    .catch(error => console.error('Error fetching data:', error));
 }
 
-// Function to set the rating for a recipe
-function setRating(ratingSection, rating) {
-    // Save the rating value to the backend
-    const recipeId = ratingSection.dataset.recipeId;
-    fetch(`/api/recipes/${recipeId}/rating`, { method: 'POST', body: JSON.stringify({ rating }) });
+    // Function to display the search results
+    function displayResults(products) {
+    const searchResultsDiv = document.getElementById('searchResults');
+    searchResultsDiv.innerHTML = '';
+
+    if (products.length === 0) {
+    searchResultsDiv.innerHTML = '<p>No results found.</p>';
+    return;
 }
-ratingSections.forEach(ratingSection => {
-    const stars = ratingSection.querySelectorAll('.star');
 
-    stars.forEach(star => {
-        star.addEventListener('mouseover', () => {
-            const rating = parseInt(star.dataset.rating);
-            highlightStars(ratingSection, rating);
-        });
-
-        star.addEventListener('mouseleave', () => {
-            // Reset the stars to show the current rating
-            const currentRating = parseInt(ratingSection.dataset.rating) || 0;
-            highlightStars(ratingSection, currentRating);
-        });
-        star.addEventListener('mouseleave', () => {
-            const currentRating = parseInt(ratingSection.dataset.rating) || 0;
-            highlightStars(ratingSection, currentRating);
-        });
-        star.addEventListener('mouseleave', () => {
-            const currentRating = parseInt(ratingSection.dataset.rating) || 0;
-            highlightStars(ratingSection, currentRating);
-        });
-        star.addEventListener('mouseleave', () => {
-            // Reset the stars to show the current rating
-            const currentRating = parseInt(ratingSection.dataset.rating) || 0;
-            highlightStars(ratingSection, currentRating);
-        });
-
-        // Handle click on a star to set the rating
-        star.addEventListener('click', () => {
-            const rating = parseInt(star.dataset.rating);
-            setRating(ratingSection, rating);
-            ratingSection.dataset.rating = rating;
-        });
-    });
+    products.forEach(product => {
+    const productCard = createProductCard(product);
+    searchResultsDiv.appendChild(productCard);
 });
+}
+
+    // Function to create a card for each product
+    function createProductCard(product) {
+    const card = document.createElement('div');
+    card.classList.add('card');
+
+    const cardBody = document.createElement('div');
+    cardBody.classList.add('card-body');
+
+    const productName = document.createElement('h5');
+    productName.classList.add('card-title');
+    productName.textContent = product.title;
+
+    const productImage = document.createElement('img');
+    productImage.classList.add('card-img-top');
+    productImage.src = product.image;
+    productImage.alt = product.title;
+
+    const productDescription = document.createElement('p');
+    productDescription.classList.add('card-text');
+    productDescription.textContent = product.description;
+
+    cardBody.appendChild(productName);
+    cardBody.appendChild(productImage);
+    cardBody.appendChild(productDescription);
+    card.appendChild(cardBody);
+
+    return card;
+}
+
+    // Call the function to initiate the API call and display results
+    searchForRecipes();
+
