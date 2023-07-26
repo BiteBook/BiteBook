@@ -1,4 +1,5 @@
 package com.codeup.bitebook.controllers;
+
 import com.codeup.bitebook.models.MealPlanner;
 import com.codeup.bitebook.models.Recipe;
 import com.codeup.bitebook.models.User;
@@ -10,12 +11,10 @@ import com.codeup.bitebook.repositories.UserRepository;
 import com.codeup.bitebook.services.Authenticator;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.bind.annotation.*;
 import com.codeup.bitebook.models.Post;
 import com.codeup.bitebook.repositories.PostRepository;
@@ -27,17 +26,14 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-
-
 @Controller
 public class UserController {
-
 
     private UserRepository userDao;
     private PasswordEncoder passwordEncoder;
     private MealPlannerRepository mealPlannerRepository;
     private RecipeRepository recipeRepository;
-    private  UserFavoriteRepository userFavoriteRepository;
+    private UserFavoriteRepository userFavoriteRepository;
     private PostRepository postDao;
 
     @Autowired
@@ -75,15 +71,14 @@ public class UserController {
         return "redirect:/login";
     }
 
-
     @GetMapping("/profile")
-    public String showProfile(Model model, @RequestParam(name = "recipeId", required = false) Long recipeId, Principal principal) {
+    public String showProfile(Model model, Principal principal) {
         if (principal == null) {
             return "redirect:/login";
         }
-
         User loggedInUser = userDao.findByUsername(principal.getName());
         model.addAttribute("user", loggedInUser);
+        model.addAttribute("currentUser", loggedInUser);
 
         List<Post> userPosts = postDao.findByCreatorOrderByCreatedDateDesc(loggedInUser);
         if (userPosts.size() > 3) {
@@ -94,31 +89,34 @@ public class UserController {
         List<UserFavorite> favoriteRecipes = userFavoriteRepository.findByUser(loggedInUser);
         model.addAttribute("favoriteRecipes", favoriteRecipes);
 
-        if (recipeId != null) {
-            Recipe savedRecipe = recipeRepository.findById(recipeId).orElse(null);
-            model.addAttribute("savedRecipe", savedRecipe);
-        }
-
         List<MealPlanner> mealPlanners = mealPlannerRepository.findByUser(loggedInUser);
         model.addAttribute("mealPlanners", mealPlanners);
 
         List<String> allAllergies = Arrays.asList("Peanuts", "Tree nuts", "Milk", "Egg", "Wheat", "Soy", "Fish", "Shellfish", "Other");
         model.addAttribute("allAllergies", allAllergies);
-
+        model.addAttribute("selectedPage", "profile");
         return "users/profile";
     }
+
     @PostMapping("/profile/edit")
     public String editPreferences(@ModelAttribute User user, Principal principal) {
         User loggedInUser = userDao.findByUsername(principal.getName());
 
-        loggedInUser.setDietaryPreferences(user.getDietaryPreferences());
-        loggedInUser.setAllergyList(user.getAllergyList());
-        loggedInUser.setOtherAllergies(user.getOtherAllergies());
+        if (user.getDietaryPreferences() != null && !user.getDietaryPreferences().isEmpty()) {
+            loggedInUser.setDietaryPreferences(user.getDietaryPreferences());
+        }
+        if (user.getAllergyList() != null && !user.getAllergyList().isEmpty()) {
+            loggedInUser.setAllergyList(user.getAllergyList());
+        }
+        if (user.getOtherAllergies() != null && !user.getOtherAllergies().isEmpty()) {
+            loggedInUser.setOtherAllergies(user.getOtherAllergies());
+        }
 
         userDao.save(loggedInUser);
 
         return "redirect:/profile";
     }
+
     @GetMapping("/profile/personal-recipes")
     public String showPersonalRecipes(Model model, Principal principal) {
         if (principal == null) {
@@ -134,6 +132,9 @@ public class UserController {
 
     @GetMapping("/users/{userId}/posts")
     public String showUserPosts(@PathVariable long userId, Model model) {
+        if (userId <= 0) {
+            return "redirect:/404";
+        }
         Optional<User> userOptional = userDao.findById(userId);
         if (userOptional.isPresent()) {
             User user = userOptional.get();
@@ -141,7 +142,6 @@ public class UserController {
             model.addAttribute("posts", posts);
             return "users/userPosts";
         } else {
-//             redirect to a 404 page
             return "redirect:/404";
         }
     }
@@ -150,43 +150,55 @@ public class UserController {
     public String editUsername(@ModelAttribute User user, Principal principal) {
         User loggedInUser = userDao.findByUsername(principal.getName());
 
-        // Check if the new username is already taken
-        if (userDao.findByUsername(user.getUsername()) != null) {
-            // If taken, redirect back to the profile page with an error message
+        if (user.getUsername() != null && !user.getUsername().equals(loggedInUser.getUsername()) && userDao.findByUsername(user.getUsername()) != null) {
             return "redirect:/profile?error=username";
         }
 
         loggedInUser.setUsername(user.getUsername());
         userDao.save(loggedInUser);
 
-        // Fetch the updated user from the database
         loggedInUser = userDao.findByUsername(user.getUsername());
 
-        // Create a new authentication token
         Authentication newAuth = new UsernamePasswordAuthenticationToken(loggedInUser, null, loggedInUser.getAuthorities());
 
-        // Update the security context with the new authentication token
         SecurityContextHolder.getContext().setAuthentication(newAuth);
 
         return "redirect:/profile";
     }
+
     @PostMapping("/profile/change-password")
     public String changePassword(@RequestParam String currentPassword, @RequestParam String newPassword, Principal principal) {
         User loggedInUser = userDao.findByUsername(principal.getName());
 
-        // Check if the current password is correct
         if (!passwordEncoder.matches(currentPassword, loggedInUser.getPassword())) {
-            // If the current password is incorrect, redirect back to the profile page with an error message
             return "redirect:/profile?error=password";
         }
 
-        // Encode the new password and save it
-        String hash = passwordEncoder.encode(newPassword);
-        loggedInUser.setPassword(hash);
-        userDao.save(loggedInUser);
+        if (newPassword != null && !newPassword.isEmpty()) {
+            String hash = passwordEncoder.encode(newPassword);
+            loggedInUser.setPassword(hash);
+            userDao.save(loggedInUser);
+        }
 
         return "redirect:/profile";
     }
 
-
+    @GetMapping("/users/{userId}")
+    public String showUserProfile(@PathVariable Long userId, Model model, Principal principal) {
+        if (userId == null || userId <= 0) {
+            return "redirect:/404";
+        }
+        Optional<User> userOptional = userDao.findById(userId);
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            model.addAttribute("user", user);
+            if (principal != null) {
+                User loggedInUser = userDao.findByUsername(principal.getName());
+                model.addAttribute("loggedInUser", loggedInUser);
+            }
+            return "users/profile";
+        } else {
+            return "redirect:/404";
+        }
+    }
 }
