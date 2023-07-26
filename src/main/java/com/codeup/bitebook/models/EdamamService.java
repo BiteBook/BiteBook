@@ -66,13 +66,13 @@ public class EdamamService {
             getNutritionInfo(s);
         }
 
-        nutritionInfo.setCalories(totalCalories);
-        nutritionInfo.setProtein(totalProtein);
-        nutritionInfo.setCarbohydrates(totalCarbs);
-        nutritionInfo.setFats(totalFat);
-        nutritionInfo.setFibre(totalFibre);
-        nutritionInfo.setSugar(totalSugar);
-        nutritionInfo.setSodium(totalSodium);
+        nutritionInfo.setCalories(Math.round(totalCalories));
+        nutritionInfo.setProtein(Math.round(totalProtein));
+        nutritionInfo.setCarbohydrates(Math.round(totalCarbs));
+        nutritionInfo.setFats(Math.round(totalFat));
+        nutritionInfo.setFibre(Math.round(totalFibre));
+        nutritionInfo.setSugar(Math.round(totalSugar));
+        nutritionInfo.setSodium(Math.round(totalSodium));
 
 
 
