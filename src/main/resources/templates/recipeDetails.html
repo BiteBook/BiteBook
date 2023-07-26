@@ -16,13 +16,36 @@
 <h1 th:text="${recipes.title}"></h1>
 <p th:text="${recipes.ingredients}"></p>
 <p th:text="${recipes.instructions}"></p>
-<p th:text="${recipes.calories}"></p>
-<p th:text="${recipes.protein}"></p>
-<p th:text="${recipes.sugar}"></p>
-<p th:text="${recipes.fats}"></p>
-<p th:text="${recipes.fibre}"></p>
-<p th:text="${recipes.carbohydrates}"></p>
-<p th:text="${recipes.sodium}"></p>
+<table>
+    <tr>
+        <td>Calories: </td>
+        <td th:text="${recipes.calories}"></td>
+    </tr>
+    <tr>
+        <td>Protein: </td>
+        <td th:text="${recipes.protein}"></td>
+    </tr>
+    <tr>
+        <td>Sugar: </td>
+        <td th:text="${recipes.sugar}"></td>
+    </tr>
+    <tr>
+        <td>Fats: </td>
+        <td th:text="${recipes.fats}"></td>
+    </tr>
+    <tr>
+        <td>Carbs: </td>
+        <td th:text="${recipes.carbohydrates}"></td>
+    </tr>
+    <tr>
+        <td>Fibre: </td>
+        <td th:text="${recipes.fibre}"></td>
+    </tr>
+    <tr>
+        <td>Sodium: </td>
+        <td th:text="${recipes.sodium}"></td>
+    </tr>
+</table>
 <!-- Add more fields as needed -->
 <form action="#" th:action="@{/recipes/{id}(id=${recipes.recipeid})}" th:method="delete">
   <input type="submit" value="Delete">
