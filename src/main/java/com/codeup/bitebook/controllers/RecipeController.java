@@ -220,7 +220,7 @@ public class RecipeController {
 
 
         model.addAttribute("recommendedRecipes", recommendedRecipes);
-        return "users/recommendations";
+        return "recommendation";
     }
 
 
