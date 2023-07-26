@@ -12,7 +12,7 @@ searchForm.addEventListener('submit', (e) => {
 
 async function searchRecipes(){
     const searchValue = searchInput.value.trim();
-    const response = await fetch(`https://api.spoonacular.com/recipes/716429/information?includeSimilar=true.?apiKey=${APIKEY2}&query=${searchValue}`).then(response => response.json());
+    const response = await fetch(`https://api.spoonacular.com/recipes/716429/information?includeSimilar=true.?apiKey=${APIKEY}&query=${searchValue}`).then(response => response.json());
     displayRecipes(response.results);
 }
 function displayRecipes(recipes) {
@@ -29,10 +29,12 @@ function displayRecipes(recipes) {
         </ul>
         <a href="${recipeUrl}" target="_blank">View Recipe</a>
       </div>
+     
     `;
     });
     resultsList.innerHTML = html;
 }
+
 
 
 
