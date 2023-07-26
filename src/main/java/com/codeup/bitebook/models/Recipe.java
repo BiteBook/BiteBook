@@ -30,8 +30,9 @@ public class Recipe {
     private String instructions;
     @Column
     private String tools;
-    @Column
+    @Column(length = 1000)
     private String photo;
+
     @Column
     private String difficulty;
     @Column
