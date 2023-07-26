@@ -17,9 +17,12 @@ public interface RecipeRepository extends JpaRepository<Recipe, Long> {
             + " OR p.time LIKE %:keyword%"
             + " OR p.region LIKE %:keyword%"
             + "OR p.dietary LIKE %:keyword%")
-
     List<Recipe> search(@Param("keyword") String keyword);
+
     List<Recipe> findByUser(User user);
 
 
+
 }
+
+

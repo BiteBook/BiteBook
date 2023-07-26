@@ -14,6 +14,18 @@ public class Review {
         @Column(nullable = false)
         private String comment;
 
+    @Column(nullable = false)
+    private int rating;
+
+    @ManyToOne
+    @JoinColumn (name = "recipeid")
+    private Recipe recipe;
+
+    @ManyToOne
+    @JoinColumn (name = "reviewerId")
+    private User reviewer;
+
+
     public long getId() {
         return id;
     }
@@ -30,11 +42,11 @@ public class Review {
         this.comment = comment;
     }
 
-    public String getRating() {
+    public int getRating() {
         return rating;
     }
 
-    public void setRating(String rating) {
+    public void  setRating(int rating) {
         this.rating = rating;
     }
 
@@ -46,11 +58,8 @@ public class Review {
         this.recipe = recipe;
     }
 
-    @Column(nullable = false)
-        private String rating;
 
-        @ManyToOne
-        @JoinColumn (name = "recipeid")
-        private Recipe recipe;
+
+
     }
 

@@ -23,6 +23,9 @@
 <a th:href="@{/profile/personal-recipes}">Personal Recipes</a>
 <a th:href="@{/users/{userId}/posts(userId=${user.id})}">View Post History</a>
 
+<!-- Add a link or button to view recommended recipes -->
+<a th:href="@{/profile/recommendations}">View Recommended Recipes</a>
+
 <!-- Display the saved recipe details, if available -->
 <div th:if="${savedRecipe}">
     <h2>Saved Recipe Details:</h2>

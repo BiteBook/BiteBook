@@ -105,6 +105,7 @@ public class UserController {
         List<String> allAllergies = Arrays.asList("Peanuts", "Tree nuts", "Milk", "Egg", "Wheat", "Soy", "Fish", "Shellfish", "Other");
         model.addAttribute("allAllergies", allAllergies);
 
+
         return "users/profile";
     }
     @PostMapping("/profile/edit")
