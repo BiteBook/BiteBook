@@ -51,7 +51,6 @@
 
 
 
-<section id="popularRecipes">
     <h2>Trending Recipes</h2>
 
     <div id="recipeList" class="row">
@@ -151,17 +150,20 @@
                 </div>
             </section>
 <!-- adding a recommendation searchFinder/recipeFinder-->
+<section id="popularRecipes">
+    <h2>Popular Recipes</h2>
+    <div id="popularRecipeList" class="row">
+    </div>
 
 <div class ="container">
     <h2>RecipeFinder</h2>
-    <form th:action="@{/recipes/search}">
+    <form id="searchFoRecipes">
     <label for="search"></label><input type="text" id="search" placeholder="Recommendations">
         <button type="button" id="submit" class="btn">Search</button>
-        <div id="searchResults"></div>
-
     </form>
-
+    <div id="searchResults"></div>
 </div>
+</section>
 
 
 <footer>
@@ -171,7 +173,6 @@
 <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
 <script src="/javascript/keys.js"></script>
 <script src="/javascript/recipe.js"></script>
-<script src="/javascript/ratings.js"></script>
 
 
 </html>
