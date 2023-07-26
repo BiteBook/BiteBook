@@ -75,7 +75,6 @@ public class EdamamService {
         nutritionInfo.setSodium(Math.round(totalSodium));
 
 
-
         return nutritionInfo;
     }
 
