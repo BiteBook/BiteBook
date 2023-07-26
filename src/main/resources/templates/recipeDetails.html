@@ -10,6 +10,7 @@
 </head>
 <body>
 <div th:replace="~{partials/navbar :: navbar}"></div>
+<img th:src="${recipes.photo}" alt="Recipe photo">
 
 <h1>Recipe Details</h1>
 <!-- display details about a specific recipe -->
@@ -157,22 +158,32 @@
         </button>
       </div>
       <div class="modal-body">
-        <form th:action="@{'/recipes/edit/' + ${recipes.recipeid}}" th:object="${recipes}" method="post">
-          <input type="hidden" name="_method" value="put" />
-          <div class="form-group">
-            <label for="title">Title</label>
-            <input type="text" class="form-control" id="title" th:field="*{title}" required>
-          </div>
-          <div class="form-group">
-            <label for="ingredients">Ingredients</label>
-            <textarea class="form-control" id="ingredients" th:field="*{ingredients}" required></textarea>
-          </div>
-          <div class="form-group">
-            <label for="instructions">Instructions</label>
-            <textarea class="form-control" id="instructions" th:field="*{instructions}" required></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary">Save Changes</button>
-        </form>
+          <form th:action="@{'/recipes/edit/' + ${recipes.recipeid}}" th:object="${recipes}" method="post">
+              <input type="hidden" name="_method" value="put" />
+              <div class="form-group">
+                  <label for="title">Title</label>
+                  <input type="text" class="form-control" id="title" th:field="*{title}" required>
+              </div>
+              <div class="form-group">
+                  <label for="ingredients">Ingredients</label>
+                  <textarea class="form-control" id="ingredients" th:field="*{ingredients}" required></textarea>
+              </div>
+              <div class="form-group">
+                  <label for="instructions">Instructions</label>
+                  <textarea class="form-control" id="instructions" th:field="*{instructions}" required></textarea>
+              </div>
+              <!-- Hidden fields for the image and nutrition facts -->
+              <input type="hidden" th:field="*{photo}">
+              <input type="hidden" th:field="*{calories}">
+              <input type="hidden" th:field="*{protein}">
+              <input type="hidden" th:field="*{sugar}">
+              <input type="hidden" th:field="*{fats}">
+              <input type="hidden" th:field="*{fibre}">
+              <input type="hidden" th:field="*{carbohydrates}">
+              <input type="hidden" th:field="*{sodium}">
+              <button type="submit" class="btn btn-primary">Save Changes</button>
+          </form>
+
       </div>
     </div>
   </div>
