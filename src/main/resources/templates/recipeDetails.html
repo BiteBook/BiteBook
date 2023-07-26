@@ -15,6 +15,7 @@
 <h1>Recipe Details</h1>
 <!-- display details about a specific recipe -->
 <h1 th:text="${recipes.title}"></h1>
+<p>Created by: <a th:href="@{'/users/' + ${recipes.user.id}}"> <span th:text="${recipes.user.username}"></span></a></p>
 <p th:text="${recipes.ingredients}"></p>
 <p th:text="${recipes.instructions}"></p>
 <table>

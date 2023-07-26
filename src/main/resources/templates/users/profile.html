@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head>
     <title>User Profile</title>
@@ -31,7 +31,8 @@
 <div>
     <h3>Have a nice restaurant experience? Tell everyone a little about it!</h3>
     <div sec:authorize="isAuthenticated()" class="nav-item">
-        <a th:classappend="${selectedPage == 'posts-create'} ? active" class="nav-link" href="/posts/create" style="padding-right: 0.5rem; padding-left: 0.5rem;">Create Blog Post</a>
+        <a th:classappend="${selectedPage == 'posts-create'} ? 'active' : ''" class="nav-link" href="/posts/create" style="padding-right: 0.5rem; padding-left: 0.5rem;">Create Blog Post</a>
+
         &nbsp;
     </div>
 </div>
@@ -52,15 +53,19 @@
     <div th:if="${param.error[0] == 'password'}" class="alert alert-danger">Current password is incorrect</div>
 </div>
 
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editUsernameModal">
-    Edit Username
-</button>
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editPreferencesModal">
-    Edit Preferences
-</button>
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#changePasswordModal">
-    Change Password
-</button>
+<div th:if="${currentUser?.username == user.username}">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editUsernameModal">
+        Edit Username
+    </button>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editPreferencesModal">
+        Edit Preferences
+    </button>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#changePasswordModal">
+        Change Password
+    </button>
+</div>
+
+
 <!-- The Edit Diet Modal -->
 <div class="modal" id="editPreferencesModal">
     <div class="modal-dialog">
