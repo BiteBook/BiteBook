@@ -5,7 +5,7 @@ const USERID = '46040ebe';
 const APIKEY2  = '43c9ca641fd149cfa982fabb08dfabe7';
 const FTKEY = 'AP72YdaNdSv2KE0YsTzHCz'
 
-/*
 
-const NUTRKEY = '4a8bcbae8f9214ab34c0023005f93e67';
-const NUTRID ='625ea141';*/
+const APIKEY3 ='4d1bf95e5a584ed1805759872ebe2313';
+/*//backupspooonacular//*/
+

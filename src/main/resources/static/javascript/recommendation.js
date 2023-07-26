@@ -29,10 +29,12 @@ function displayRecipes(recipes) {
         </ul>
         <a href="${recipeUrl}" target="_blank">View Recipe</a>
       </div>
+     
     `;
     });
     resultsList.innerHTML = html;
 }
+
 
 
 
