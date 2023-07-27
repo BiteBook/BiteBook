@@ -34,6 +34,7 @@
         <a th:classappend="${selectedPage == 'posts-create'} ? 'active' : ''" class="nav-link" href="/posts/create" style="padding-right: 0.5rem; padding-left: 0.5rem;">Create Blog Post</a>
     </div>
 </div>
+
 <div th:if="${currentUser?.username == user.username}">
     <h3>Your Blog Posts</h3>
     <div th:if="${userPosts}">
@@ -55,6 +56,7 @@
         </div>
     </div>
 </div>
+
     &nbsp;
     <a th:href="@{/users/{userId}/posts(userId=${user.id})}">View Post History</a>
 </div>
@@ -119,6 +121,7 @@
         </div>
     </div>
 </div>
+
 <!-- Username Modal -->
 <div class="modal" id="editUsernameModal">
     <div class="modal-dialog">
@@ -173,6 +176,7 @@
         </div>
     </div>
 </div>
+
 <div th:replace="~{partials/footer :: footer}"></div>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
