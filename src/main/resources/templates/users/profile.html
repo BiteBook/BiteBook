@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head>
     <title>User Profile</title>
@@ -31,7 +31,8 @@
 <div>
     <h3>Have a nice restaurant experience? Tell everyone a little about it!</h3>
     <div sec:authorize="isAuthenticated()" class="nav-item">
-        <a th:classappend="${selectedPage == 'posts-create'} ? active" class="nav-link" href="/posts/create" style="padding-right: 0.5rem; padding-left: 0.5rem;">Create Blog Post</a>
+        <a th:classappend="${selectedPage == 'posts-create'} ? 'active' : ''" class="nav-link" href="/posts/create" style="padding-right: 0.5rem; padding-left: 0.5rem;">Create Blog Post</a>
+
         &nbsp;
     </div>
 </div>
@@ -58,23 +59,32 @@
         <span th:text="${mealPlanner.recipe.title} ?: 'No recipe title'"></span>
     </li>
 </ul>
+<div th:if="${param.error}">
+    <div th:if="${param.error[0] == 'username'}" class="alert alert-danger">Username is already taken</div>
+    <div th:if="${param.error[0] == 'password'}" class="alert alert-danger">Current password is incorrect</div>
+</div>
 
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editPreferencesModal">
-    Edit Preferences
-</button>
+<div th:if="${currentUser?.username == user.username}">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editUsernameModal">
+        Edit Username
+    </button>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editPreferencesModal">
+        Edit Preferences
+    </button>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#changePasswordModal">
+        Change Password
+    </button>
+</div>
 
-<!-- The Modal -->
+
+<!-- The Edit Diet Modal -->
 <div class="modal" id="editPreferencesModal">
     <div class="modal-dialog">
         <div class="modal-content">
-
-            <!-- Modal Header -->
             <div class="modal-header">
                 <h4 class="modal-title">Edit Preferences</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
-
-            <!-- Modal Body -->
             <div class="modal-body">
                 <form th:action="@{/profile/edit}" method="POST" th:object="${user}">
                     <div class="form-group">
@@ -100,10 +110,10 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
             </div>
-
         </div>
     </div>
 </div>
+
 <div class="modal fade" id="editPostModal" tabindex="-1" role="dialog" aria-labelledby="editPostModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -126,6 +136,62 @@
                     </div>
                     <button type="submit" class="btn btn-primary">Save Changes</button>
                 </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+=======
+<!-- Username Modal -->
+<div class="modal" id="editUsernameModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Edit Username</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form th:action="@{/profile/edit-username}" method="POST" th:object="${user}">
+                    <div class="form-group">
+                        <label for="username">Username:</label>
+                        <input type="text" id="username" th:field="*{username}" class="form-control"/>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Update Username</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Password Modal  -->
+<div class="modal" id="changePasswordModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Change Password</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form th:action="@{/profile/change-password}" method="POST">
+                    <div class="form-group">
+                        <label for="currentPassword">Current Password:</label>
+                        <input type="password" id="currentPassword" name="currentPassword" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="newPassword">New Password:</label>
+                        <input type="password" id="newPassword" name="newPassword" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm New Password:</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword" class="form-control"/>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Change Password</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>

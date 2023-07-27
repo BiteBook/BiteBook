@@ -12,11 +12,11 @@ import java.util.List;
 
 public interface RecipeRepository extends JpaRepository<Recipe, Long> {
 
-    @Query("SELECT p FROM Recipe p WHERE p.title LIKE %:keyword%"
-            + " OR p.difficulty LIKE %:keyword%"
-            + " OR p.time LIKE %:keyword%"
-            + " OR p.region LIKE %:keyword%"
-            + "OR p.dietary LIKE %:keyword%")
+    @Query("SELECT p FROM Recipe p WHERE p.title LIKE :keyword"
+            + " OR p.difficulty LIKE :keyword"
+            + " OR p.time LIKE :keyword"
+            + " OR p.region LIKE :keyword"
+            + " OR p.dietStyle LIKE :keyword")
 
     List<Recipe> search(@Param("keyword") String keyword);
     List<Recipe> findByUser(User user);
