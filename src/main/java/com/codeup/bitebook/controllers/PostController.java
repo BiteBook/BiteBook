@@ -88,7 +88,7 @@ public class PostController {
 
         return "/posts/user";
     }
-    @DeleteMapping("/posts/{id}")
+    @DeleteMapping("/posts/delete/{id}")
     public String deletePost(@PathVariable Long id) {
         org.springframework.security.core.userdetails.UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User currentUser = userRepository.findByUsername(userDetails.getUsername());

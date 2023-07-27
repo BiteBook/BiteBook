@@ -39,6 +39,7 @@
     <td><h3 th:text="${post.title}"></h3></td>
     <td><p th:text="${#strings.abbreviate(post.body,200)}"></p></td>
     <td><a th:href="@{/posts/{id}(id=${post.id})}">Read More</a></td>
+    <td><a th:href="@{/posts/delete/{id}(id=${post.id})}"class="btn btn-danger">Delete</a></td>
 </tr>
 <div>
     &nbsp;
