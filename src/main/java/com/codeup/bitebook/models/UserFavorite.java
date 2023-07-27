@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Table(name = "user_favorite")
 @Getter
@@ -26,11 +28,10 @@ public class UserFavorite {
     @Column(name = "recipe_description", columnDefinition = "TEXT")
     private String recipeDescription;
 
-    @ManyToOne // Add this annotation for the Recipe association
-    @JoinColumn(name = "recipeId") // Assuming this column links to the id of the Recipe entity
+    @ManyToOne
+    @JoinColumn(name = "recipeid")
     private Recipe recipe;
 
-    // Add any other relevant fields and methods as needed
 
-    // Add any other relevant fields and methods as needed
 }
+
