@@ -14,9 +14,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.*;
+
 import org.springframework.web.multipart.MultipartFile;
-import java.util.Optional;
+
 @Controller
 public class RecipeController {
     private final RecipeRepository recipeRepository;
@@ -59,7 +60,7 @@ public class RecipeController {
         return "recipeDetails";
     }
     @PostMapping("/recipes/{id}")
-    public String getComments (@PathVariable long id ,@ModelAttribute Review review ,@RequestParam String rating,@RequestParam String comment){
+    public String getComments (@PathVariable long id ,@ModelAttribute Review review ,@RequestParam int rating,@RequestParam String comment){
         System.out.println("rating " + rating );
         review.setRating(rating);
         review.setComment(comment);
@@ -195,5 +196,47 @@ public class RecipeController {
         }
 
         return "redirect:/recipes/" + id;
+    }
+
+    @GetMapping("/profile/recommendations")
+    public String showRecommendations(Model model, Authentication authentication) {
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        User currentUser = userRepository.findByUsername(userDetails.getUsername());
+
+        // Get user's past ratings from the database
+        List<Review> pastRatings = reviewRepository.findByReviewer(currentUser);
+
+        // Get user's saved recipes from the database
+        List<UserFavorite> savedRecipes = userFavoriteRepository.findByUser(currentUser);
+
+        //  Calculate average ratings for each recipe
+        Map<Recipe, Integer> averageRatings = new HashMap<>();
+        for (Review rating : pastRatings) {
+            Recipe recipe = rating.getRecipe();
+            int  ratingValue = rating.getRating();
+
+            if (averageRatings.containsKey(recipe)) {
+                int currentRating = averageRatings.get(recipe);
+                int updatedRating = (currentRating + ratingValue) / 2;
+                averageRatings.put(recipe, updatedRating);
+            } else {
+                averageRatings.put(recipe, ratingValue);
+            }
+        }
+
+//   Filter out recipes with ratings below 4.0 and recipes that are already saved
+        List<Recipe> recommendedRecipes = new ArrayList<>();
+        for (Map.Entry<Recipe, Integer> entry : averageRatings.entrySet()) {
+            Recipe recipe = entry.getKey();
+            int averageRating = entry.getValue();
+
+            if (averageRating >= 4.0 && !savedRecipes.contains(recipe)) {
+                recommendedRecipes.add(recipe);
+            }
+        }
+
+
+        model.addAttribute("recommendedRecipes", recommendedRecipes);
+        return "recommendation";
     }
 }

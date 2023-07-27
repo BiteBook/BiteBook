@@ -22,6 +22,9 @@
 <a th:href="@{/favorites}" sec:authorize="isAuthenticated()">Favorites</a>
 <a th:href="@{/profile/personal-recipes}">Personal Recipes</a>
 
+<!-- Add a link or button to view recommended recipes -->
+<a th:href="@{/profile/recommendations}">View Recommended Recipes</a>
+
 
 <!-- Display the saved recipe details, if available -->
 <div th:if="${savedRecipe}">

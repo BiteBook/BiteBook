@@ -48,6 +48,8 @@ public class User implements UserDetails {
 
     @OneToMany(mappedBy = "user")
     private List<MealPlanner> mealPlanners;
+    @OneToMany(mappedBy = "reviewer")
+    private List<Review> reviews;
 
 
 
