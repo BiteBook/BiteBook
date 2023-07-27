@@ -7,26 +7,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="/../../resources/static/css/style.css">
-</head>
 <div th:replace="~{partials/navbar :: navbar}"></div>
-<h1>This is the home page</h1>
-<head>
     <h1>BiteBook</h1>
-    <hr>
-    <h1 id="hello user">HELLO "USERNAME"</h1>
-    <hr>
-    <title></title>
-
-
-
+    <h2 id="greeting"></h2>
     <form th:action="@{/recipes/search}">
         <input type="text" name="keyword" id="keyword" size="50" th:value="${keyword}" required />
         <input type="submit" value="Search" />
         <input type="button" value="Clear" id="btnClear" onclick="clearSearch()" />
     </form>
-
-    <!-- loop through and display each recipe -->
-
     <ul>
         <th:block th:each="recipe : ${recipes}">
             <li>
@@ -41,7 +29,6 @@
             window.location = " ";
         }
     </script>
-
 </head>
 
     <h2>Trending Recipes</h2>
@@ -166,6 +153,7 @@
 <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
 <script src="/javascript/keys.js"></script>
 <script src="/javascript/recipe.js"></script>
+<script src="/javascript/Greetings.js"></script>
 
 
 </html>
