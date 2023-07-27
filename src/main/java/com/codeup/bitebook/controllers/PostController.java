@@ -106,6 +106,13 @@ public class PostController {
         return "redirect:/posts";
     }
 
+    @GetMapping("/posts/edit/{id}")
+    public String editPostForm(@PathVariable Long id, Model model, Authentication authentication) {
+        Post post = postRepository.findById(id).orElseThrow();
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        User currentUser = userRepository.findByUsername(userDetails.getUsername());
+
+
 
     @PostMapping("/posts/{id}/edit")
     public String editPost(@PathVariable Long id, @ModelAttribute Post post) {
@@ -118,6 +125,22 @@ public class PostController {
         existingPost.setTitle(post.getTitle());
         existingPost.setBody(post.getBody());
         postRepository.save(existingPost);
+        return "redirect:/posts/" + id;
+    }
+    @PutMapping("/posts/edit/{id}")
+    public String updatePost(@PathVariable Long id, @ModelAttribute Post updatedPost, Authentication authentication) {
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        User currentUser = userRepository.findByUsername(userDetails.getUsername());
+
+        Post currentPost = postRepository.findById(id).orElseThrow();
+
+        if (!currentPost.getUser().equals(currentUser)) {
+            return "redirect:/error";
+        }
+
+        updatedPost.setUser(currentUser);
+        updatedPost.setId(id);
+        postRepository.save(updatedPost);
         return "redirect:/posts/" + id;
     }
 
