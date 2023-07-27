@@ -40,7 +40,11 @@ public class Recipe {
     @Column
     private String region;
     @Column
-    private String dietary;
+    private String dietStyle;
+
+    @Column(columnDefinition = "TEXT")
+    private String allergens;
+
     @Column
     private Double calories;
     @Column
