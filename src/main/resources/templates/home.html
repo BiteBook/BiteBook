@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="/../../resources/static/css/style.css">
-<div th:replace="~{partials/navbar :: navbar}"></div>
+    <div th:replace="~{partials/navbar :: navbar}"></div>
     <h1>BiteBook</h1>
     <h2 id="greeting"></h2>
     <form th:action="@{/recipes/search}">
@@ -25,154 +25,135 @@
 
     <div th:replace="partials/footer :: footer"></div>
     <script type="text/javascript">
-       function clearSearch() {
+        function clearSearch() {
             window.location = " ";
         }
     </script>
 </head>
 
-    <h2>Trending Recipes</h2>
-    <div id="recipeList" class="row">
-        <div class="col-md-3">
-            <div class="card">
-                <img src="/img/Shepherds-Pie.webp" class="card-img-top" alt="Recipe Name">
-                <div class="card-body">
-                    <h5 class="card-title">Recipe Name</h5>
-                    <p class="card-text">Cook time: 45 mins</p>
-                    <a href="#" class="btn btn-primary">View Recipe</a>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
+<h2>Trending Recipes</h2>
+
+<div id="recipeList" class="row">
+    <div class="col-md-3">
+        <div class="card">
+            <img src="/img/Shepherds-Pie.webp" class="card-img-top" alt="Recipe Name">
+            <div class="card-body">
+                <h5 class="card-title">Recipe Name</h5>
+                <p class="card-text">Cook time: 45 mins</p>
+                <a href="#" class="btn btn-primary">View Recipe</a>
+
+                <span class="heading">User Rating</span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star"></span>
                 </form>
 
-                </div>
             </div>
         </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card">
+            <img src="/img/Shepherds-Pie.webp" class="card-img-top" alt="Recipe Name">
+            <div class="card-body">
+                <h5 class="card-title">Recipe Name</h5>
+                <p class="card-text">Cook time: 45 mins</p>
+                <a href="#" class="btn btn-primary">View Recipe</a>
+                <span class="heading">User Rating</span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star"></span>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card">
+            <img src="/img/Shepherds-Pie.webp" class="card-img-top" alt="Recipe Name">
+            <div class="card-body">
+                <h5 class="card-title">Recipe Name</h5>
+                <p class="card-text">Cook time: 45 mins</p>
+                <a href="#" class="btn btn-primary">View Recipe</a>
+                <span class="heading">User Rating</span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star"></span>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card">
+            <img src="/img/Shepherds-Pie.webp" class="card-img-top" alt="Recipe Name">
+            <div class="card-body">
+                <h5 class="card-title">Recipe Name</h5>
+                <p class="card-text">Cook time: 45 mins</p>
+                <a href="#" class="btn btn-primary">View Recipe</a>
+                <span class="heading">User Rating</span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star"></span>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+<section id="readyRecipes">
+    <h2>Ready in 15MINS Recipes</h2>
+    <div id="readyList" class="row">
         <div class="col-md-3">
             <div class="card">
                 <img src="/img/Shepherds-Pie.webp" class="card-img-top" alt="Recipe Name">
                 <div class="card-body">
                     <h5 class="card-title">Recipe Name</h5>
-                    <p class="card-text">Cook time: 45 mins</p>
+                    <p class="card-text">Cook time: 15 mins</p>
                     <a href="#" class="btn btn-primary">View Recipe</a>
+                    <span class="heading">User Rating</span>
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star"></span>
-                </form>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card">
-                <img src="/img/Shepherds-Pie.webp" class="card-img-top" alt="Recipe Name">
-                <div class="card-body">
-                    <h5 class="card-title">Recipe Name</h5>
-                    <p class="card-text">Cook time: 45 mins</p>
-                    <a href="#" class="btn btn-primary">View Recipe</a>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                </form>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card">
-                <img src="/img/Shepherds-Pie.webp" class="card-img-top" alt="Recipe Name">
-                <div class="card-body">
-                    <h5 class="card-title">Recipe Name</h5>
-                    <p class="card-text">Cook time: 45 mins</p>
-                    <a href="#" class="btn btn-primary">View Recipe</a>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                </form>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 </section>
-
-            <section id="readyRecipes">
-                <h2>Ready in 15MINS Recipes</h2>
-                <div id="readyList" class="row">
-                    <div class="col-md-3">
-                        <div class="card">
-                            <img src="/img/Shepherds-Pie.webp" class="card-img-top" alt="Recipe Name">
-                            <div class="card-body">
-                                <h5 class="card-title">Recipe Name</h5>
-                                <p class="card-text">Cook time: 15 mins</p>
-                                <a href="#" class="btn btn-primary">View Recipe</a>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star"></span>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
 <!-- adding a recommendation searchFinder/recipeFinder-->
 <section id="popularRecipes">
     <h2>Popular Recipes</h2>
     <div id="popularRecipeList" class="row">
     </div>
 
-<div class ="container">
-    <h2>RecipeFinder</h2>
-    <form id="searchFoRecipes">
-    <label for="search"></label><input type="text" id="search" placeholder="Recommendations">
-        <button type="button" id="submit" class="btn">Search</button>
-    </form>
-    <div id="searchResults"></div>
-</div>
+    <div class ="container">
+        <h2>RecipeFinder</h2>
+        <form id="searchFoRecipes">
+            <label for="search"></label><input type="text" id="search" placeholder="Recommendations">
+            <button type="button" id="submit" class="btn">Search</button>
+        </form>
+        <div id="searchResults"></div>
+    </div>
 </section>
 
-<footer class="bg-dark text-light py-4">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <p>© 2023 BITEBOOK. All rights reserved.</p>
-            </div>
-            <div class="col-md-6">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <!-- Add your chatbot component here -->
-                        <div class="chatbot">
-                            <!-- Your chatbot UI or code goes here -->
-                            <!-- You can use an embedded chatbot widget or custom chatbot design -->
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <!-- Add other components or links here -->
-                        <ul class="list-unstyled">
-                            <li><a href="#">Company</a></li>
 
-                            <li><a href="#">Privacy Policy</a></li>
-                            <li><a href="#">Terms of Service</a></li>
-                            <!-- Add more links or components as needed -->
-                        </ul>
-                            <li><a href="#">Privacy Policy</a></li>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<footer>
+    <p>© 2023 BITEBOOK. All rights reserved.</p>
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
 <script src="/javascript/keys.js"></script>
 <script src="/javascript/recipe.js"></script>
 <script src="/javascript/Greetings.js"></script>
-<script src="/javascript/recommendation.js" ></script>
+
+
 </html>
