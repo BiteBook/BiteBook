@@ -204,5 +204,11 @@ public class UserController {
         }
 
     }
+    @GetMapping("/api/username")
+    @ResponseBody
+    public String currentUserName(Principal principal) {
+        return principal != null ? principal.getName() : "";
+    }
+
 
 }
