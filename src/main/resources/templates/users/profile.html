@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <title>User Profile</title>
@@ -16,11 +16,11 @@
 <p th:text="${user.otherAllergies} ?: 'No other allergies'"></p>
 
 <!-- Link to create a new recipe -->
-<a th:href="@{/recipes/new}" sec:authorize="isAuthenticated()">Create Recipe</a>
+<a th:href="@{/recipes/new}" th:if="${currentUser?.username == user.username}">Create Recipe</a>
 
 <!-- Link to favorites page -->
-<a th:href="@{/favorites}" sec:authorize="isAuthenticated()">Favorites</a>
-<a th:href="@{/profile/personal-recipes}">Personal Recipes</a>
+<a th:href="@{/users/{userId}/favorites(userId=${user.id})}" th:if="${currentUser != null}">Favorites</a>
+<a th:href="@{/users/{userId}/profile/personal-recipes(userId=${user.id})}">Personal Recipes</a>
 
 
 <!-- Display the saved recipe details, if available -->
@@ -28,27 +28,33 @@
     <h2>Saved Recipe Details:</h2>
     <p>Title: <span th:text="${savedRecipe.title} ?: 'No title'"></span></p>
 </div>
-<div>
+<div th:if="${currentUser?.username == user.username}">
     <h3>Have a nice restaurant experience? Tell everyone a little about it!</h3>
-    <div sec:authorize="isAuthenticated()" class="nav-item">
+    <div class="nav-item">
         <a th:classappend="${selectedPage == 'posts-create'} ? 'active' : ''" class="nav-link" href="/posts/create" style="padding-right: 0.5rem; padding-left: 0.5rem;">Create Blog Post</a>
-
-        &nbsp;
     </div>
 </div>
-<tr th:each="post : ${userPosts}">
-    <td><h3 th:text="${post.title}"></h3></td>
-    <td><p th:text="${#strings.abbreviate(post.body,200)}"></p></td>
-    <td><a th:href="@{/posts/{id}(id=${post.id})}">Read More</a></td>
-    <!-- Only show the delete button if the current user is the creator of the recipe -->
-    <form th:if="${currentUser.username == post.user.username}" action="#" th:action="@{/posts/{id}(id=${post.id})}" th:method="delete">
-        <input type="submit" value="Delete">
-    </form>
+<div th:if="${currentUser?.username == user.username}">
+    <h3>Your Blog Posts</h3>
+    <div th:if="${userPosts}">
+        <div th:each="post : ${userPosts}">
+            <h4 th:text="${post.title}"></h4>
+            <p th:text="${#strings.abbreviate(post.body,200)}"></p>
+            <a th:href="@{/posts/{id}(id=${post.id})}">Read More</a>
+        </div>
+    </div>
+</div>
 
-    <!-- Only show the edit button if the current user is the creator of the recipe -->
-    <button th:if="${currentUser.username == post.user.username}" type="button" class="btn btn-primary" data-toggle="modal" data-target="#editPostModal">Edit Post</button>
-</tr>
-<div>
+<div th:if="${currentUser?.username != user.username}">
+    <h3>Here's what <span th:text="${user.username}"></span> has to say!</h3>
+    <div th:if="${userPosts}">
+        <div th:each="post : ${userPosts}">
+            <h4 th:text="${post.title}"></h4>
+            <p th:text="${#strings.abbreviate(post.body,200)}"></p>
+            <a th:href="@{/posts/{id}(id=${post.id})}">Read More</a>
+        </div>
+    </div>
+</div>
     &nbsp;
     <a th:href="@{/users/{userId}/posts(userId=${user.id})}">View Post History</a>
 </div>
