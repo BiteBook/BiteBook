@@ -110,35 +110,35 @@
             <form th:action="@{'/recipes/' + ${recipes.recipeid}}" th:object="${review}" th:method="post">
                 <div class="modal-body">
                     <div class="form-check form-check-inline">
-                        <input th:field="*{rating}" class="form-check-input" type="radio" id="star5" value="5 Stars" name="ratingGroup">
+                        <input th:field="*{rating}" class="form-check-input" type="radio" id="star5" value=5 name="ratingGroup">
                         <label class="form-check-label star-icon" for="star5">
                             <i class="fas fa-star"></i>
                             5
                         </label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input th:field="*{rating}" class="form-check-input" type="radio" id="star4" value="4 Stars" name="ratingGroup">
+                        <input th:field="*{rating}" class="form-check-input" type="radio" id="star4" value= 4 name="ratingGroup">
                         <label class="form-check-label star-icon" for="star4">
                             <i class="fas fa-star"></i>
                             4
                         </label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input th:field="*{rating}" class="form-check-input" type="radio" id="star3" value="3 Stars" name="ratingGroup">
+                        <input th:field="*{rating}" class="form-check-input" type="radio" id="star3" value=3 name="ratingGroup">
                         <label class="form-check-label star-icon" for="star3">
                             <i class="fas fa-star"></i>
                             3
                         </label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input th:field="*{rating}" class="form-check-input" type="radio" id="star2" value="2 Stars" name="ratingGroup">
+                        <input th:field="*{rating}" class="form-check-input" type="radio" id="star2" value=2 name="ratingGroup">
                         <label class="form-check-label star-icon" for="star2">
                             <i class="fas fa-star"></i>
                             2
                         </label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input th:field="*{rating}" class="form-check-input" type="radio" id="star1" value="1 Star" name="ratingGroup">
+                        <input th:field="*{rating}" class="form-check-input" type="radio" id="star1" value= 1 name="ratingGroup">
                         <label class="form-check-label star-icon" for="star1">
                             <i class="fas fa-star"></i>
                             1
