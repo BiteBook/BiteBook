@@ -21,7 +21,7 @@
 <!-- Link to favorites page -->
 <a th:href="@{/favorites}" sec:authorize="isAuthenticated()">Favorites</a>
 <a th:href="@{/profile/personal-recipes}">Personal Recipes</a>
-<a th:href="@{/users/{userId}/posts(userId=${user.id})}">View Post History</a>
+
 
 <!-- Display the saved recipe details, if available -->
 <div th:if="${savedRecipe}">
@@ -35,10 +35,14 @@
         &nbsp;
     </div>
 </div>
-<div th:each="post : ${userPosts}">
-    <h3 th:text="${post.title}"></h3>
-    <p th:text="${post.body}"></p>
-    <a th:href="@{/posts/{id}(id=${post.id})}">Read More</a>
+<tr th:each="post : ${userPosts}">
+    <td><h3 th:text="${post.title}"></h3></td>
+    <td><p th:text="${#strings.abbreviate(post.body,200)}"></p></td>
+    <td><a th:href="@{/posts/{id}(id=${post.id})}">Read More</a></td>
+</tr>
+<div>
+    &nbsp;
+    <a th:href="@{/users/{userId}/posts(userId=${user.id})}">View Post History</a>
 </div>
 <ul th:if="${mealPlanners}">
     <h2>Meal Planner</h2>
@@ -101,6 +105,6 @@
 
 <div th:replace="partials/footer :: footer"></div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
-
+<script src="resources/static/javascript/blog.js"></script>
 </body>
 </html>

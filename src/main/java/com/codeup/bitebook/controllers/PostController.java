@@ -1,12 +1,16 @@
 package com.codeup.bitebook.controllers;
 
 import com.codeup.bitebook.models.Post;
+import com.codeup.bitebook.models.Recipe;
 import com.codeup.bitebook.models.User;
 import com.codeup.bitebook.repositories.PostRepository;
 import com.codeup.bitebook.repositories.UserRepository;
 import com.codeup.bitebook.services.Authenticator;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +26,9 @@ import java.util.Optional;
 @RequestMapping("/posts")
 public class PostController {
     private PostRepository postDao;
+    private PostRepository postRepository;
     private UserRepository userDao;
+    private UserRepository userRepository;
 
 
     @GetMapping("")
@@ -77,9 +83,34 @@ public class PostController {
         }
 
         List<Post> userPosts = postDao.findByCreatorOrderByCreatedDateDesc(user);
-        model.addAttribute("userPosts", userPosts);
+        List<Post> firstThreePosts = userPosts.subList(0,2);
+        model.addAttribute("userPosts", firstThreePosts);
 
         return "/posts/user";
+    }
+    @DeleteMapping("/posts/{id}")
+    public String deletePost(@PathVariable Long id) {
+        org.springframework.security.core.userdetails.UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User currentUser = userRepository.findByUsername(userDetails.getUsername());
+        Post post = postRepository.findById(id).orElseThrow();
+        if (!post.getUser().equals(currentUser)) {
+            return "redirect:/error";
+        }
+        postRepository.deleteById(id);
+        return "redirect:/posts";
+    }
+    @GetMapping("/posts/edit/{id}")
+    public String showEditForm(@PathVariable Long id, Model model, Authentication authentication) {
+        Post post = postRepository.findById(id).orElseThrow();
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        User currentUser = userRepository.findByUsername(userDetails.getUsername());
+
+        if (!post.getUser().equals(currentUser)) {
+            return "redirect:/error";
+        }
+
+        model.addAttribute("post", post);
+        return "editPost";
     }
 
 }
