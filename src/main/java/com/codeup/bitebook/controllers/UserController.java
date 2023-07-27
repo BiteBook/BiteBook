@@ -1,9 +1,5 @@
 package com.codeup.bitebook.controllers;
-
-import com.codeup.bitebook.models.MealPlanner;
-import com.codeup.bitebook.models.Recipe;
-import com.codeup.bitebook.models.User;
-import com.codeup.bitebook.models.UserFavorite;
+import com.codeup.bitebook.models.*;
 import com.codeup.bitebook.repositories.MealPlannerRepository;
 import com.codeup.bitebook.repositories.RecipeRepository;
 import com.codeup.bitebook.repositories.UserFavoriteRepository;
@@ -16,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import com.codeup.bitebook.models.Post;
 import com.codeup.bitebook.repositories.PostRepository;
 import java.security.Principal;
 import java.util.Arrays;
@@ -78,7 +73,11 @@ public class UserController {
         }
         User loggedInUser = userDao.findByUsername(principal.getName());
         model.addAttribute("user", loggedInUser);
-        model.addAttribute("currentUser", loggedInUser);
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserWithRoles currentUser = (UserWithRoles) authentication.getPrincipal();
+
+        model.addAttribute("currentUser", currentUser);
 
         List<Post> userPosts = postDao.findByCreatorOrderByCreatedDateDesc(loggedInUser);
         if (userPosts.size() > 3) {
@@ -97,6 +96,7 @@ public class UserController {
         model.addAttribute("selectedPage", "profile");
         return "users/profile";
     }
+
 
     @PostMapping("/profile/edit")
     public String editPreferences(@ModelAttribute User user, Principal principal) {
@@ -117,17 +117,17 @@ public class UserController {
         return "redirect:/profile";
     }
 
-    @GetMapping("/profile/personal-recipes")
-    public String showPersonalRecipes(Model model, Principal principal) {
-        if (principal == null) {
-            return "redirect:/login";
+    @GetMapping("/users/{userId}/personal-recipes")
+    public String showPersonalRecipes(@PathVariable Long userId, Model model) {
+        Optional<User> userOptional = userDao.findById(userId);
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            List<Recipe> personalRecipes = recipeRepository.findByUser(user);
+            model.addAttribute("personalRecipes", personalRecipes);
+            return "users/personalRecipes";
+        } else {
+            return "redirect:/404";
         }
-
-        User loggedInUser = userDao.findByUsername(principal.getName());
-        List<Recipe> personalRecipes = recipeRepository.findByUser(loggedInUser);
-        model.addAttribute("personalRecipes", personalRecipes);
-
-        return "users/personalRecipes";
     }
 
     @GetMapping("/users/{userId}/posts")
@@ -192,13 +192,17 @@ public class UserController {
         if (userOptional.isPresent()) {
             User user = userOptional.get();
             model.addAttribute("user", user);
+            List<Post> userPosts = postDao.findByCreatorOrderByCreatedDateDesc(user);
+            model.addAttribute("userPosts", userPosts);
             if (principal != null) {
                 User loggedInUser = userDao.findByUsername(principal.getName());
-                model.addAttribute("loggedInUser", loggedInUser);
+                model.addAttribute("currentUser", loggedInUser);
             }
             return "users/profile";
         } else {
             return "redirect:/404";
         }
+
     }
+
 }

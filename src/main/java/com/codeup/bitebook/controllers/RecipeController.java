@@ -58,6 +58,7 @@ public class RecipeController {
 
         return "recipeDetails";
     }
+
     @PostMapping("/recipes/{id}")
     public String getComments (@PathVariable long id ,@ModelAttribute Review review ,@RequestParam String rating,@RequestParam String comment){
         System.out.println("rating " + rating );
@@ -167,33 +168,38 @@ public class RecipeController {
         return "redirect:/recipes";
     }
 
-    @GetMapping("/favorites")
-    public String showFavorites(Model model, Authentication authentication) {
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        User currentUser = userRepository.findByUsername(userDetails.getUsername());
-
-        List<UserFavorite> favoriteRecipes = userFavoriteRepository.findByUser(currentUser);
-
-        model.addAttribute("favoriteRecipes", favoriteRecipes);
-        return "users/savedFavorites";
-    }
-
-    @PostMapping("/recipes/{id}/favorite")
-    public String addToFavorites(@PathVariable Long id, Authentication authentication) {
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        User currentUser = userRepository.findByUsername(userDetails.getUsername());
-
-        Recipe recipe = recipeRepository.findById(id).orElse(null);
-
-        if (recipe != null) {
-            UserFavorite userFavorite = new UserFavorite();
-            userFavorite.setUser(currentUser);
-            userFavorite.setRecipeId(recipe.getRecipeid());
-            userFavorite.setRecipeName(recipe.getTitle());
-            userFavorite.setRecipeDescription(recipe.getInstructions());
-            userFavoriteRepository.save(userFavorite);
+    @GetMapping("/users/{userId}/favorites")
+    public String showFavorites(@PathVariable Long userId, Model model) {
+        Optional<User> userOptional = userRepository.findById(userId);
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            List<UserFavorite> favoriteRecipes = userFavoriteRepository.findByUser(user);
+            model.addAttribute("favoriteRecipes", favoriteRecipes);
+            return "users/savedFavorites";
+        } else {
+            return "redirect:/404";
         }
-
-        return "redirect:/recipes/" + id;
     }
+
+    @PostMapping("/users/{userId}/recipes/{id}/favorite")
+    public String addToFavorites(@PathVariable Long userId, @PathVariable Long id) {
+        Optional<User> userOptional = userRepository.findById(userId);
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            Recipe recipe = recipeRepository.findById(id).orElse(null);
+            if (recipe != null) {
+                UserFavorite userFavorite = new UserFavorite();
+                userFavorite.setUser(user);
+                userFavorite.setRecipeId(recipe.getRecipeid());
+                userFavorite.setRecipeName(recipe.getTitle());
+                userFavorite.setRecipeDescription(recipe.getInstructions());
+                userFavoriteRepository.save(userFavorite);
+            }
+            return "redirect:/users/" + userId + "/recipes/" + id;
+        } else {
+            return "redirect:/404";
+        }
+    }
+
+
 }
