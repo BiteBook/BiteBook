@@ -32,7 +32,7 @@ function calculateNutrition(ingredients){
 
 }
 async function edamamCall(ingr){
-    return await fetch(`https://api.edamam.com/api/nutrition-data?app_id=${EDAMAM_APPID}&app_key=${EDAMAM_KEY}&ingr=${ingr}`).then(response => response.json()).then(data => data)
+    return await fetch(`https://api.edamam.com/api/nutrition-data?app_id=${USERID}&app_key=${APIKEY}&ingr=${ingr}`).then(response => response.json()).then(data => data)
 }
 let ingredientList = "";
 

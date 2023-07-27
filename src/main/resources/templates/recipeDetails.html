@@ -10,31 +10,76 @@
 </head>
 <body>
 <div th:replace="~{partials/navbar :: navbar}"></div>
+<img th:src="${recipes.photo}" alt="Recipe photo">
 
 <h1>Recipe Details</h1>
 <!-- display details about a specific recipe -->
 <h1 th:text="${recipes.title}"></h1>
+<p>Created by: <a th:href="@{'/users/' + ${recipes.user.id}}"> <span th:text="${recipes.user.username}"></span></a></p>
 <p th:text="${recipes.ingredients}"></p>
 <p th:text="${recipes.instructions}"></p>
+<table>
+    <tr>
+        <td>Calories: </td>
+        <td th:text="${recipes.calories}"></td>
+    </tr>
+    <tr>
+        <td>Protein: </td>
+        <td th:text="${recipes.protein}"></td>
+    </tr>
+    <tr>
+        <td>Sugar: </td>
+        <td th:text="${recipes.sugar}"></td>
+    </tr>
+    <tr>
+        <td>Fats: </td>
+        <td th:text="${recipes.fats}"></td>
+    </tr>
+    <tr>
+        <td>Carbs: </td>
+        <td th:text="${recipes.carbohydrates}"></td>
+    </tr>
+    <tr>
+        <td>Fibre: </td>
+        <td th:text="${recipes.fibre}"></td>
+    </tr>
+    <tr>
+        <td>Sodium: </td>
+        <td th:text="${recipes.sodium}"></td>
+    </tr>
+</table>
 <!-- Add more fields as needed -->
-<form action="#" th:action="@{/recipes/{id}(id=${recipes.recipeid})}" th:method="delete">
-  <input type="submit" value="Delete">
+<!-- Only show the delete button if the current user is the creator of the recipe -->
+<form th:if="${currentUser.username == recipes.user.username}" action="#" th:action="@{/recipes/{id}(id=${recipes.recipeid})}" th:method="delete">
+    <input type="submit" value="Delete">
 </form>
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editRecipeModal" th:authorize="${currentUser.username == recipes.user.username}">Edit Recipe</button>
+
+<!-- Only show the edit button if the current user is the creator of the recipe -->
+<button th:if="${currentUser.username == recipes.user.username}" type="button" class="btn btn-primary" data-toggle="modal" data-target="#editRecipeModal">Edit Recipe</button>
 
 
 
 <!-- Add a div to display comments -->
 <div id="displayArea">
-  <!-- Iterate over the comments and display them -->
-  <h3>Comments:</h3>
-  <div th:each="comment : ${comments}">
-    <p th:text="${comment.comment}"></p>
-  </div>
-</div>
+        <!-- Iterate over the comments and display them -->
+        <h3>Comments and Ratings:</h3>
+        <div th:each="comment, commentStatus : ${comments}">
+            <p th:text="${comment.comment}"></p>
+            <p th:text="${reviews[commentStatus.index].rating}"></p>
+        </div>
+    </div>
 
 
-<!-- Form to save the recipe -->
+    <!--        &lt;!&ndash; Iterate over the ratings and display them &ndash;&gt;-->
+<!--        <h3>Ratings:</h3>-->
+<!--        <div th:each="rating : ${reviews}">-->
+<!--            <p th:text="${rating.rating}"></p>-->
+<!--        </div>-->
+<!--    </div>-->
+
+
+
+    <!-- Form to save the recipe -->
 <form th:action="@{'/recipes/' + ${recipes.recipeid} + '/favorite'}" method="post">
   <button type="submit">Save Recipe</button>
 </form>
@@ -65,35 +110,35 @@
             <form th:action="@{'/recipes/' + ${recipes.recipeid}}" th:object="${review}" th:method="post">
                 <div class="modal-body">
                     <div class="form-check form-check-inline">
-                        <input th:field="*{rating}" class="form-check-input" type="radio" id="star5" value="5" name="ratingGroup">
+                        <input th:field="*{rating}" class="form-check-input" type="radio" id="star5" value="5 Stars" name="ratingGroup">
                         <label class="form-check-label star-icon" for="star5">
                             <i class="fas fa-star"></i>
                             5
                         </label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input th:field="*{rating}" class="form-check-input" type="radio" id="star4" value="4" name="ratingGroup">
+                        <input th:field="*{rating}" class="form-check-input" type="radio" id="star4" value="4 Stars" name="ratingGroup">
                         <label class="form-check-label star-icon" for="star4">
                             <i class="fas fa-star"></i>
                             4
                         </label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input th:field="*{rating}" class="form-check-input" type="radio" id="star3" value="3" name="ratingGroup">
+                        <input th:field="*{rating}" class="form-check-input" type="radio" id="star3" value="3 Stars" name="ratingGroup">
                         <label class="form-check-label star-icon" for="star3">
                             <i class="fas fa-star"></i>
                             3
                         </label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input th:field="*{rating}" class="form-check-input" type="radio" id="star2" value="2" name="ratingGroup">
+                        <input th:field="*{rating}" class="form-check-input" type="radio" id="star2" value="2 Stars" name="ratingGroup">
                         <label class="form-check-label star-icon" for="star2">
                             <i class="fas fa-star"></i>
                             2
                         </label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input th:field="*{rating}" class="form-check-input" type="radio" id="star1" value="1" name="ratingGroup">
+                        <input th:field="*{rating}" class="form-check-input" type="radio" id="star1" value="1 Star" name="ratingGroup">
                         <label class="form-check-label star-icon" for="star1">
                             <i class="fas fa-star"></i>
                             1
@@ -137,22 +182,32 @@
         </button>
       </div>
       <div class="modal-body">
-        <form th:action="@{'/recipes/edit/' + ${recipes.recipeid}}" th:object="${recipes}" method="post">
-          <input type="hidden" name="_method" value="put" />
-          <div class="form-group">
-            <label for="title">Title</label>
-            <input type="text" class="form-control" id="title" th:field="*{title}" required>
-          </div>
-          <div class="form-group">
-            <label for="ingredients">Ingredients</label>
-            <textarea class="form-control" id="ingredients" th:field="*{ingredients}" required></textarea>
-          </div>
-          <div class="form-group">
-            <label for="instructions">Instructions</label>
-            <textarea class="form-control" id="instructions" th:field="*{instructions}" required></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary">Save Changes</button>
-        </form>
+          <form th:action="@{'/recipes/edit/' + ${recipes.recipeid}}" th:object="${recipes}" method="post">
+              <input type="hidden" name="_method" value="put" />
+              <div class="form-group">
+                  <label for="title">Title</label>
+                  <input type="text" class="form-control" id="title" th:field="*{title}" required>
+              </div>
+              <div class="form-group">
+                  <label for="ingredients">Ingredients</label>
+                  <textarea class="form-control" id="ingredients" th:field="*{ingredients}" required></textarea>
+              </div>
+              <div class="form-group">
+                  <label for="instructions">Instructions</label>
+                  <textarea class="form-control" id="instructions" th:field="*{instructions}" required></textarea>
+              </div>
+              <!-- Hidden fields for the image and nutrition facts -->
+              <input type="hidden" th:field="*{photo}">
+              <input type="hidden" th:field="*{calories}">
+              <input type="hidden" th:field="*{protein}">
+              <input type="hidden" th:field="*{sugar}">
+              <input type="hidden" th:field="*{fats}">
+              <input type="hidden" th:field="*{fibre}">
+              <input type="hidden" th:field="*{carbohydrates}">
+              <input type="hidden" th:field="*{sodium}">
+              <button type="submit" class="btn btn-primary">Save Changes</button>
+          </form>
+
       </div>
     </div>
   </div>

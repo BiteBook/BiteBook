@@ -12,7 +12,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
 import java.util.List;
+import org.springframework.web.multipart.MultipartFile;
 import java.util.Optional;
 @Controller
 public class RecipeController {
@@ -40,9 +43,15 @@ public class RecipeController {
         model.addAttribute("recipes", recipe);
         model.addAttribute("review", new Review());
 
-        // Fetch the comments for the recipe from the database
+        // Fetch the comments and ratings for the recipe from the database
         List<Review> comments = reviewRepository.findByRecipe(recipe);
+        List<Review> ratings = reviewRepository.findByRecipe(recipe);
+
+        // Add the comments and ratings to the model without redefining variables
         model.addAttribute("comments", comments);
+        model.addAttribute("reviews", ratings);
+
+        // Use the existing 'authentication' parameter directly to get 'currentUser'
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         User currentUser = userRepository.findByUsername(userDetails.getUsername());
         model.addAttribute("currentUser", currentUser);
@@ -59,20 +68,9 @@ public class RecipeController {
         review.setRecipe(recipe);
         reviewRepository.save(review);
 
-
         return "redirect:/recipes/" + id;
 
-
-
     }
-
-
-
-
-
-        
-
-
 
     @GetMapping("/recipes/new")
     public String showCreateForm(Model model) {
@@ -80,12 +78,13 @@ public class RecipeController {
         return "createRecipe";
     }
     @PostMapping("/recipes/new")
-    public String createRecipe(@ModelAttribute Recipe recipe, Authentication authentication) {
+    public String createRecipe(@ModelAttribute Recipe recipe, @RequestParam("photo") String photoUrl, Authentication authentication) {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         User currentUser = userRepository.findByUsername(userDetails.getUsername());
         recipe.setUser(currentUser);
-
-        NutritionInfo nutritionInfo = edamamService.getNutritionInfo(recipe.getIngredients());
+        recipe.setPhoto(photoUrl);
+        System.out.println(recipe.getIngredients());
+        NutritionInfo nutritionInfo = edamamService.allNutrition(recipe.getIngredients());
         recipe.setCalories(nutritionInfo.getCalories());
         recipe.setProtein(nutritionInfo.getProtein());
         recipe.setCarbohydrates(nutritionInfo.getCarbohydrates());
@@ -95,9 +94,12 @@ public class RecipeController {
         recipe.setSodium(nutritionInfo.getSodium());
 
         recipeRepository.save(recipe);
+        System.out.println(photoUrl);
 
         return "redirect:/recipes/" + recipe.getRecipeid();
     }
+
+
 
 
     @GetMapping("/recipes/edit/{id}")
@@ -125,11 +127,32 @@ public class RecipeController {
             return "redirect:/error";
         }
 
+        if (!updatedRecipe.getIngredients().equals(currentRecipe.getIngredients())) {
+            NutritionInfo nutritionInfo = edamamService.allNutrition(updatedRecipe.getIngredients());
+            updatedRecipe.setCalories(nutritionInfo.getCalories());
+            updatedRecipe.setProtein(nutritionInfo.getProtein());
+            updatedRecipe.setCarbohydrates(nutritionInfo.getCarbohydrates());
+            updatedRecipe.setFibre(nutritionInfo.getFibre());
+            updatedRecipe.setFats(nutritionInfo.getFats());
+            updatedRecipe.setSugar(nutritionInfo.getSugar());
+            updatedRecipe.setSodium(nutritionInfo.getSodium());
+        } else {
+            // If ingredients have not changed, copy nutrition facts from current recipe
+            updatedRecipe.setCalories(currentRecipe.getCalories());
+            updatedRecipe.setProtein(currentRecipe.getProtein());
+            updatedRecipe.setCarbohydrates(currentRecipe.getCarbohydrates());
+            updatedRecipe.setFibre(currentRecipe.getFibre());
+            updatedRecipe.setFats(currentRecipe.getFats());
+            updatedRecipe.setSugar(currentRecipe.getSugar());
+            updatedRecipe.setSodium(currentRecipe.getSodium());
+        }
+
         updatedRecipe.setUser(currentUser);
         updatedRecipe.setRecipeid(id);
         recipeRepository.save(updatedRecipe);
         return "redirect:/recipes/" + id;
     }
+
 
 
     @DeleteMapping("/recipes/{id}")
