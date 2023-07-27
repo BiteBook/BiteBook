@@ -86,7 +86,7 @@ public class PostController {
         List<Post> firstThreePosts = userPosts.subList(0,2);
         model.addAttribute("userPosts", firstThreePosts);
 
-        return "/posts/user";
+        return "users/userPosts";
     }
     @DeleteMapping("/posts/{id}")
     public String deletePost(@PathVariable Long id) {
