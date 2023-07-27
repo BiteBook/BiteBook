@@ -12,8 +12,6 @@ public class RatingController  {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false)
-    private String comment;
 
     public long getId() {
         return id;
@@ -43,7 +41,7 @@ public class RatingController  {
     private String rating;
 
     @ManyToOne
-    @JoinColumn (name = "recipeid")
+    @JoinColumn (name = "recipe_id")
     private Recipe recipe;
 }
 
