@@ -12,28 +12,14 @@ searchForm.addEventListener('submit', (e) => {
 
 async function searchRecipes(){
     const searchValue = searchInput.value.trim();
-    const response = await fetch(`https://api.spoonacular.com/recipes/716429/information?includeSimilar=true.?apiKey=${APIKEY2}&query=${searchValue}`).then(response => response.json());
+    const response = await fetch(`https://api.edamam.com/api/recipes/v2/0123456789abcdef0123456789abcdef?app_id=YOUR_APP_ID&app_key=YOUR_APP_KEY&type=public
+${APIKEY}&query=${searchValue}`).then(response => response.json());
     displayRecipes(response.results);
 }
 function displayRecipes(recipes) {
-    let html = '';
-    recipes.forEach((recipe) => {
-        const imageUrl = recipe.image ? recipe.image : 'placeholder-image.jpg';
-        const recipeUrl = recipe.sourceUrl ? recipe.sourceUrl : '#'; // Provide a default URL if missing
-        html += `
-      <div>
-        <img src="${imageUrl}" alt="${recipe.title}">
-        <h3>${recipe.title}</h3>
-        <ul>
-          ${recipe.extendedIngredients.map(ingredient => `<li>${ingredient.original}</li>`).join('')}
-        </ul>
-        <a href="${recipeUrl}" target="_blank">View Recipe</a>
-      </div>
-     
-    `;
-    });
-    resultsList.innerHTML = html;
+
 }
+
 
 
 
