@@ -30,7 +30,6 @@ public class PostController {
     private UserRepository userDao;
     private UserRepository userRepository;
 
-
     @GetMapping("")
     public String posts(Model model){
         List<Post> posts = postDao.findAll();
@@ -38,6 +37,7 @@ public class PostController {
         model.addAttribute("posts",posts);
         return "/posts/index";
     }
+
     @GetMapping("/{id}")
     public String showSinglePost(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes) {
         Optional<Post> optionalPost = postDao.findById(id);
@@ -54,8 +54,6 @@ public class PostController {
         model.addAttribute("post", optionalPost.get());
         return "/posts/show";
     }
-
-
 
     @GetMapping("/create")
     public String showCreate(Model model) {
@@ -79,7 +77,6 @@ public class PostController {
         model.addAttribute("newPost", postToEdit);
         return "/posts/create";
     }
-    // PostController.java
 
     @GetMapping("/user/{username}")
     public String showUserPosts(@PathVariable String username, Model model) {
@@ -94,7 +91,8 @@ public class PostController {
 
         return "users/userPosts";
     }
-    @PostMapping("/posts/{id}/delete")
+
+    @DeleteMapping("/{id}/delete")
     public String deletePost(@PathVariable Long id) {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User currentUser = userRepository.findByUsername(userDetails.getUsername());
@@ -106,15 +104,7 @@ public class PostController {
         return "redirect:/posts";
     }
 
-    @GetMapping("/posts/edit/{id}")
-    public String editPostForm(@PathVariable Long id, Model model, Authentication authentication) {
-        Post post = postRepository.findById(id).orElseThrow();
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        User currentUser = userRepository.findByUsername(userDetails.getUsername());
-
-
-
-    @PostMapping("/posts/{id}/edit")
+    @PostMapping("/{id}/edit")
     public String editPost(@PathVariable Long id, @ModelAttribute Post post) {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User currentUser = userRepository.findByUsername(userDetails.getUsername());
@@ -127,23 +117,5 @@ public class PostController {
         postRepository.save(existingPost);
         return "redirect:/posts/" + id;
     }
-    @PutMapping("/posts/edit/{id}")
-    public String updatePost(@PathVariable Long id, @ModelAttribute Post updatedPost, Authentication authentication) {
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        User currentUser = userRepository.findByUsername(userDetails.getUsername());
-
-        Post currentPost = postRepository.findById(id).orElseThrow();
-
-        if (!currentPost.getUser().equals(currentUser)) {
-            return "redirect:/error";
-        }
-
-        updatedPost.setUser(currentUser);
-        updatedPost.setId(id);
-        postRepository.save(updatedPost);
-        return "redirect:/posts/" + id;
-    }
-
-
 
 }
