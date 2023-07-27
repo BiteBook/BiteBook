@@ -34,6 +34,7 @@
         <a th:classappend="${selectedPage == 'posts-create'} ? 'active' : ''" class="nav-link" href="/posts/create" style="padding-right: 0.5rem; padding-left: 0.5rem;">Create Blog Post</a>
     </div>
 </div>
+
 <div th:if="${currentUser?.username == user.username}">
     <h3>Your Blog Posts</h3>
     <div th:if="${userPosts}">
@@ -55,6 +56,7 @@
         </div>
     </div>
 </div>
+
     &nbsp;
     <a th:href="@{/users/{userId}/posts(userId=${user.id})}">View Post History</a>
 </div>
@@ -119,35 +121,35 @@
         </div>
     </div>
 </div>
+<!--Post Modal-->
+<!--<div class="modal fade" id="editPostModal" tabindex="-1" role="dialog" aria-labelledby="editPostModalLabel" aria-hidden="true">-->
+<!--    <div class="modal-dialog" role="document">-->
+<!--        <div class="modal-content">-->
+<!--            <div class="modal-header">-->
+<!--                <h5 class="modal-title" id="editRecipeModalLabel">Edit Post</h5>-->
+<!--                <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--                    <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+<!--            </div>-->
+<!--            <div class="modal-body">-->
+<!--                <form th:action="@{'/posts/edit/' + ${post.id}}" th:object="${posts}" method="post">-->
+<!--                    <input type="hidden" name="_method" value="put" />-->
+<!--                    <div class="form-group">-->
+<!--                        <label for="title">Title</label>-->
+<!--                        <input type="text" class="form-control" id="title" th:field="*{post.title}" required>-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <label for="body">Body</label>-->
+<!--                        <textarea class="form-control" id="body" th:field="*{post.body}" required></textarea>-->
+<!--                    </div>-->
+<!--                    <button type="submit" class="btn btn-primary">Save Changes</button>-->
+<!--                </form>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 
-<div class="modal fade" id="editPostModal" tabindex="-1" role="dialog" aria-labelledby="editPostModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editRecipeModalLabel">Edit Post</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form th:action="@{'/posts/edit/' + ${post.id}}" th:object="${posts}" method="post">
-                    <input type="hidden" name="_method" value="put" />
-                    <div class="form-group">
-                        <label for="title">Title</label>
-                        <input type="text" class="form-control" id="title" th:field="*{post.title}" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="body">Body</label>
-                        <textarea class="form-control" id="body" th:field="*{post.body}" required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 
-=======
 <!-- Username Modal -->
 <div class="modal" id="editUsernameModal">
     <div class="modal-dialog">
