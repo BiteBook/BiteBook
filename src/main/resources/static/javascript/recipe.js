@@ -2,7 +2,7 @@
 
 // Replace 'YOUR_API_KEY' with your actual Spoonacular API key
 const APIKEY2  = '43c9ca641fd149cfa982fabb08dfabe7';
-const searchQuery = ' '; // You can change the search query here
+const searchQuery = ' keyword'; // You can change the search query here
 
 // Function to make the API call and display the search results
 function searchForRecipes() {
@@ -64,7 +64,6 @@ searchForRecipes();
 
 
 function fetchPopularRecipes() {
-    // Replace 'YOUR_API_ENDPOINT' with the actual API endpoint for popular recipes
     fetch('43c9ca641fd149cfa982fabb08dfabe7')
         .then(response => response.json())
         .then(data => displayPopularRecipes(data))
