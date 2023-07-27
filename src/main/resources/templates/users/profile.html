@@ -40,6 +40,13 @@
     <td><h3 th:text="${post.title}"></h3></td>
     <td><p th:text="${#strings.abbreviate(post.body,200)}"></p></td>
     <td><a th:href="@{/posts/{id}(id=${post.id})}">Read More</a></td>
+    <!-- Only show the delete button if the current user is the creator of the recipe -->
+    <form th:if="${currentUser.username == post.user.username}" action="#" th:action="@{/posts/{id}(id=${post.id})}" th:method="delete">
+        <input type="submit" value="Delete">
+    </form>
+
+    <!-- Only show the edit button if the current user is the creator of the recipe -->
+    <button th:if="${currentUser.username == post.user.username}" type="button" class="btn btn-primary" data-toggle="modal" data-target="#editPostModal">Edit Post</button>
 </tr>
 <div>
     &nbsp;
@@ -106,6 +113,35 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="editPostModal" tabindex="-1" role="dialog" aria-labelledby="editPostModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editRecipeModalLabel">Edit Post</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form th:action="@{'/posts/edit/' + ${post.id}}" th:object="${posts}" method="post">
+                    <input type="hidden" name="_method" value="put" />
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input type="text" class="form-control" id="title" th:field="*{post.title}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="body">Body</label>
+                        <textarea class="form-control" id="body" th:field="*{post.body}" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+=======
 <!-- Username Modal -->
 <div class="modal" id="editUsernameModal">
     <div class="modal-dialog">
@@ -160,6 +196,7 @@
         </div>
     </div>
 </div>
+
 <div th:replace="~{partials/footer :: footer}"></div>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
