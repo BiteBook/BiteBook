@@ -88,4 +88,24 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+    public boolean matchesDietaryNeeds(Recipe recipe) {
+        // Check if the recipe's diet style matches the user's dietary preferences
+        if (dietaryPreferences != null && !dietaryPreferences.contains(recipe.getDietStyle())) {
+            return false;
+        }
+
+        // Check if the recipe contains any allergens that the user is allergic to
+        if (allergyList != null) {
+            for (String allergen : allergyList) {
+                if (recipe.getAllergens() != null && recipe.getAllergens().contains(allergen)) {
+                    return false;
+                }
+            }
+        }
+
+        // If the recipe passed all checks, it matches the user's dietary needs
+        return true;
+    }
+
 }

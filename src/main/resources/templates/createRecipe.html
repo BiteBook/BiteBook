@@ -20,6 +20,31 @@
   <input type="text" th:field="*{difficulty}" placeholder="Difficulty">
   <input type="number" th:field="*{time}" placeholder="Time">
   <input type="text" th:field="*{region}" placeholder="Region">
+  <select th:field="*{dietStyle}" multiple>
+    <option value="Gluten-free">Gluten-free</option>
+    <option value="Halal">Halal</option>
+    <option value="Keto">Keto</option>
+    <option value="Kosher">Kosher</option>
+    <option value="Paleo">Paleo</option>
+    <option value="Pescetarian">Pescetarian</option>
+    <option value="Raw">Raw</option>
+    <option value="Vegan">Vegan</option>
+    <option value="Vegetarian">Vegetarian</option>
+    <option value="Not Sure">Not Sure</option>
+  </select>
+  <select th:field="*{allergens}" multiple>
+    <option value="Peanuts">Peanuts</option>
+    <option value="Tree nuts">Tree nuts</option>
+    <option value="Dairy">Dairy</option>
+    <option value="Gluten">Gluten</option>
+    <option value="Egg">Egg</option>
+    <option value="Wheat">Wheat</option>
+    <option value="Soy">Soy</option>
+    <option value="Fish">Fish</option>
+    <option value="Shellfish">Shellfish</option>
+    <option value="None">None</option>
+  </select>
+
   <input type="submit" value="Create Recipe">
   <div type="text/html" th:field="*{calories}" id="nutrition"></div>
 </form>
