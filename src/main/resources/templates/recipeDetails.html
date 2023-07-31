@@ -63,7 +63,6 @@
             data-toggle="modal" data-target="#editRecipeModal">Edit Recipe
     </button>
 </div>
-
 <div id="displayArea">
     <!-- Iterate over the comments and display them -->
     <h3>Comments and Ratings:</h3>
@@ -75,7 +74,6 @@
         </div>
     </div>
 </div>
-
 <form th:action="@{'/recipes/' + ${recipes.recipeid} + '/favorite'}" method="post">
     <button type="submit">Save Recipe</button>
 </form>

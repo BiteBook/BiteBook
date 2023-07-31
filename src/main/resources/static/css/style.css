@@ -14,20 +14,22 @@
     color: #333;
     /* Add any other styles you want */
 }
-/* Styling for the container that holds the gold stars */
-.gold-stars-container {
-    display: inline-block;
-    vertical-align: middle; /* Align the stars vertically with the rating */
-    margin-left: 10px; /* Adjust the spacing between the rating and stars as needed */
-}
+/*.gold-stars-container {
+/*        color: transparent; !* Set the color of the stars container to transparent *!*/
+/*display: inline-block;*/
+/*vertical-align: middle;*/
+/*margin-left: 10px;*/
+/*position: relative; !* Set the position to relative to contain the stars *!*/
+/*}*/
 
-/* Styling for the gold stars */
-
-
-
-#gold-stars {
+.gold-stars-container::before {
+    content: "\f005 \f005 \f005 \f005 \f005"; /* Unicode for five gold stars (Font Awesome) */
+    font-family: "Font Awesome 5 Free"; /* Set the Font Awesome font family */
     color: gold; /* Set the color of the stars to gold */
     font-size: 20px; /* Adjust the size of the stars as needed */
+    position: absolute; /* Position the stars absolutely within the container */
+    top: 0; /* Position the stars at the top of the container */
+    left: 0; /* Position the stars at the left of the container */
 }
 
 /* Optional: Add some spacing between the stars and the rating value */
@@ -40,23 +42,8 @@
 
 
 
-/* Example CSS styles for the search bar */
-/*#searchInput {*/
-/*    padding: 5px;*/
-/*    width: 200px;*/
-/*    margin-right: 5px;*/
-/*}*/
 
-/*#searchButton {*/
-/*    padding: 5px 10px;*/
-/*    background-color: #ddd;*/
-/*    border: none;*/
-/*    cursor: pointer;*/
-/*}*/
 
-/*#searchResults {*/
-/*    margin-top: 10px;*/
-/*}*/
 .card {
     width: 300px;
     height: 400px;
