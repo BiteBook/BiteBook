@@ -17,6 +17,10 @@ public class UserFavorite {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @ManyToOne
+    @JoinColumn(name = "creator_id")
+    private User creator;
+
     @Column(name = "recipe_id")
     private Long recipeId;
 
@@ -25,6 +29,4 @@ public class UserFavorite {
 
     @Column(name = "recipe_description", columnDefinition = "TEXT")
     private String recipeDescription;
-
-    // Add any other relevant fields and methods as needed
 }
