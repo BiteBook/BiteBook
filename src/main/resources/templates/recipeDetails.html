@@ -64,20 +64,18 @@
     </button>
 </div>
 
-
 <div id="displayArea">
     <!-- Iterate over the comments and display them -->
     <h3>Comments and Ratings:</h3>
     <div th:each="comment, commentStatus : ${comments}">
         <td><a th:href="@{'/users/' + ${comment.user.id}}" th:text="${comment.user.username}"></a></td>
         <p th:text="${comment.comment}"></p>
-        <p th:text="${reviews[commentStatus.index].rating}"></p>
+        <div class="gold-stars-container">
+            <div class="gold-stars" th:attr="data-rating=${reviews[commentStatus.index].rating}"></div>
+        </div>
     </div>
 </div>
 
-
-
-<!-- Form to save the recipe -->
 <form th:action="@{'/recipes/' + ${recipes.recipeid} + '/favorite'}" method="post">
     <button type="submit">Save Recipe</button>
 </form>
