@@ -23,6 +23,7 @@ public class RecipeController {
     private final EdamamService edamamService;
     private final UserFavoriteRepository userFavoriteRepository;
     private final ReviewRepository reviewRepository;
+
     @Autowired
     public RecipeController(RecipeRepository recipeRepository, UserRepository userRepository, EdamamService edamamService, UserFavoriteRepository userFavoriteRepository, ReviewRepository reviewRepository) {
         this.recipeRepository = recipeRepository;
@@ -31,6 +32,7 @@ public class RecipeController {
         this.userFavoriteRepository = userFavoriteRepository;
         this.reviewRepository = reviewRepository;
     }
+
     @Autowired
     private UserRepository userDao;
     @Autowired
@@ -44,6 +46,7 @@ public class RecipeController {
         model.addAttribute("recipes", recipeRepository.findAll());
         return "recipeIndex";
     }
+
     @GetMapping("/recipes/{id}")
     public String showRecipeDetails(@PathVariable Long id, Model model, Authentication authentication) {
         Recipe recipe = recipeRepository.findById(id).orElseThrow();
@@ -62,12 +65,6 @@ public class RecipeController {
         List<String> reviewers = getReviewersForRecipe(recipe);
         model.addAttribute("reviewers", reviewers);
 
-
-        // Use the existing 'authentication' parameter directly to get 'currentUser'
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        User currentUser = userRepository.findByUsername(userDetails.getUsername());
-        model.addAttribute("currentUser", currentUser);
-      
         // Check if the user is logged in before trying to get the UserDetails and User objects
         if (authentication != null) {
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
@@ -79,6 +76,8 @@ public class RecipeController {
 
         return "recipeDetails";
     }
+
+
     private List<String> getReviewersForRecipe(Recipe recipe) {
         List<Review> reviews = reviewRepository.findByRecipe(recipe);
         List<String> reviewers = new ArrayList<>();
@@ -92,10 +91,9 @@ public class RecipeController {
     }
 
 
-
     @PostMapping("/recipes/{id}")
-    public String getComments (@PathVariable long id ,@ModelAttribute Review review ,@RequestParam int rating,@RequestParam String comment){
-        System.out.println("rating " + rating );
+    public String getComments(@PathVariable long id, @ModelAttribute Review review, @RequestParam int rating, @RequestParam String comment) {
+        System.out.println("rating " + rating);
         review.setRating(rating);
         review.setComment(comment);
         System.out.println("comment " + comment);
@@ -108,12 +106,13 @@ public class RecipeController {
     }
 
     @GetMapping("/recipes/new")
-    public String showCreateRecipeForm(Model model){
+    public String showCreateRecipeForm(Model model) {
         model.addAttribute("recipe", new Recipe());
         model.addAttribute("allDietStyles", dietStyleRepository.findAll());
         model.addAttribute("allAllergens", allergenRepository.findAll());
         return "createRecipe";
     }
+
     @PostMapping("/recipes/new")
     public String createRecipe(@ModelAttribute Recipe recipe, @RequestParam("photo") String photoUrl, @RequestParam List<Long> dietStyleIds, @RequestParam List<Long> allergenIds, Authentication authentication) {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
@@ -148,8 +147,6 @@ public class RecipeController {
 
         return "redirect:/recipes/" + recipe.getRecipeid();
     }
-
-
 
 
     @GetMapping("/recipes/edit/{id}")
@@ -208,8 +205,6 @@ public class RecipeController {
     }
 
 
-
-
     @DeleteMapping("/recipes/{id}")
     public String deleteRecipe(@PathVariable Long id) {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -249,60 +244,5 @@ public class RecipeController {
             userFavoriteRepository.save(userFavorite);
         }
         return "redirect:/recipes/" + id;
-    }
-
-        @GetMapping("/profile/recommendations")
-        public String showRecommendations(Model model, Authentication authentication) {
-            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-            User currentUser = userRepository.findByUsername(userDetails.getUsername());
-
-            // Get user's past ratings from the database
-            List<Review> pastRatings = reviewRepository.findByReviewer(currentUser);
-
-            //  Calculate average ratings for each recipe
-            Map<Long, Integer> averageRatings = new HashMap<>();
-            Map<Long, Integer> ratingCounts = new HashMap<>();
-            for (Review rating : pastRatings) {
-                Long recipeId = rating.getRecipe().getRecipeid();
-                int ratingValue = rating.getRating();
-
-                if (averageRatings.containsKey(recipeId)) {
-                    int currentRatingSum = averageRatings.get(recipeId);
-                    int currentRatingCount = ratingCounts.get(recipeId);
-                    averageRatings.put(recipeId, currentRatingSum + ratingValue);
-                    ratingCounts.put(recipeId, currentRatingCount + 1);
-                } else {
-                    averageRatings.put(recipeId, ratingValue);
-                    ratingCounts.put(recipeId, 1);
-                }
-            }
-
-            // Calculate the average rating for each recipe
-            Map<Long, Integer> averageRatingsResult = new HashMap<>();
-            for (Long recipeId : averageRatings.keySet()) {
-                int ratingSum = averageRatings.get(recipeId);
-                int ratingCount = ratingCounts.get(recipeId);
-                int averageRating = ratingSum / ratingCount;
-                averageRatingsResult.put(recipeId, averageRating);
-            }
-
-            // Filter out recipes with average ratings below 4
-            List<Recipe> recommendedRecipes = new ArrayList<>();
-            for (Map.Entry<Long, Integer> entry : averageRatingsResult.entrySet()) {
-                Long recipeId = entry.getKey();
-                int averageRating = entry.getValue();
-
-                if (averageRating >= 4) {
-                    Recipe recipe = recipeRepository.findById(recipeId).orElse(null);
-                    if (recipe != null) {
-                        recommendedRecipes.add(recipe);
-                    }
-                }
-            }
-
-            model.addAttribute("recommendedRecipes", recommendedRecipes);
-            return "recommendations";
-        }
-
     }
 }
