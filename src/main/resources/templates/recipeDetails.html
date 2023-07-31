@@ -63,15 +63,19 @@
 
 
 
-<!-- Add a div to display comments -->
 <div id="displayArea">
     <!-- Iterate over the comments and display them -->
     <h3>Comments and Ratings:</h3>
     <div th:each="comment, commentStatus : ${comments}">
         <p th:text="${comment.comment}"></p>
-        <p th:text="${reviews[commentStatus.index].rating}"></p>
+        <div class="gold-stars-container">
+            <div class="gold-stars" th:attr="data-rating=${reviews[commentStatus.index].rating}"></div>
+        </div>
     </div>
 </div>
+
+
+
 
 
 
