@@ -1,9 +1,6 @@
 package com.codeup.bitebook.controllers;
 import com.codeup.bitebook.models.*;
-import com.codeup.bitebook.repositories.RecipeRepository;
-import com.codeup.bitebook.repositories.ReviewRepository;
-import com.codeup.bitebook.repositories.UserFavoriteRepository;
-import com.codeup.bitebook.repositories.UserRepository;
+import com.codeup.bitebook.repositories.*;
 import com.codeup.bitebook.services.Authenticator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -15,7 +12,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.*;
-
+import java.security.Principal;
+import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
@@ -33,6 +31,14 @@ public class RecipeController {
         this.userFavoriteRepository = userFavoriteRepository;
         this.reviewRepository = reviewRepository;
     }
+    @Autowired
+    private UserRepository userDao;
+    @Autowired
+    private DietStyleRepository dietStyleRepository;
+
+    @Autowired
+    private AllergenRepository allergenRepository;
+
     @GetMapping("/recipes")
     public String showRecipes(Model model) {
         model.addAttribute("recipes", recipeRepository.findAll());
@@ -57,11 +63,19 @@ public class RecipeController {
         model.addAttribute("reviewers", reviewers);
 
 
-
         // Use the existing 'authentication' parameter directly to get 'currentUser'
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         User currentUser = userRepository.findByUsername(userDetails.getUsername());
         model.addAttribute("currentUser", currentUser);
+      
+        // Check if the user is logged in before trying to get the UserDetails and User objects
+        if (authentication != null) {
+            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+            User currentUser = userRepository.findByUsername(userDetails.getUsername());
+            model.addAttribute("currentUser", currentUser);
+        } else {
+            model.addAttribute("currentUser", null);
+        }
 
         return "recipeDetails";
     }
@@ -76,6 +90,8 @@ public class RecipeController {
         }
         return reviewers;
     }
+
+
 
     @PostMapping("/recipes/{id}")
     public String getComments (@PathVariable long id ,@ModelAttribute Review review ,@RequestParam int rating,@RequestParam String comment){
@@ -92,17 +108,21 @@ public class RecipeController {
     }
 
     @GetMapping("/recipes/new")
-    public String showCreateForm(Model model) {
+    public String showCreateRecipeForm(Model model){
         model.addAttribute("recipe", new Recipe());
+        model.addAttribute("allDietStyles", dietStyleRepository.findAll());
+        model.addAttribute("allAllergens", allergenRepository.findAll());
         return "createRecipe";
     }
     @PostMapping("/recipes/new")
-    public String createRecipe(@ModelAttribute Recipe recipe, @RequestParam("photo") String photoUrl, Authentication authentication) {
+    public String createRecipe(@ModelAttribute Recipe recipe, @RequestParam("photo") String photoUrl, @RequestParam List<Long> dietStyleIds, @RequestParam List<Long> allergenIds, Authentication authentication) {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         User currentUser = userRepository.findByUsername(userDetails.getUsername());
         recipe.setUser(currentUser);
         recipe.setPhoto(photoUrl);
-        System.out.println(recipe.getIngredients());
+        recipe.setDietStyles(dietStyleRepository.findAllById(dietStyleIds));
+        recipe.setAllergens(allergenRepository.findAllById(allergenIds));
+        recipe.setTime(recipe.getHours() * 60 + recipe.getMinutes());
         NutritionInfo nutritionInfo = edamamService.allNutrition(recipe.getIngredients());
         recipe.setCalories(nutritionInfo.getCalories());
         recipe.setProtein(nutritionInfo.getProtein());
@@ -112,8 +132,19 @@ public class RecipeController {
         recipe.setSugar(nutritionInfo.getSugar());
         recipe.setSodium(nutritionInfo.getSodium());
 
+        if (allergenIds == null || allergenIds.isEmpty()) {
+            // Handle the error, e.g., return an error message or throw an exception
+        } else {
+            for (Long allergenId : allergenIds) {
+                Optional<Allergen> allergen = allergenRepository.findById(allergenId);
+                if (!allergen.isPresent()) {
+                    // Handle the error, e.g., return an error message or throw an exception
+                }
+            }
+        }
+
         recipeRepository.save(recipe);
-        System.out.println(photoUrl);
+        recipeRepository.flush();
 
         return "redirect:/recipes/" + recipe.getRecipeid();
     }
@@ -136,9 +167,11 @@ public class RecipeController {
     }
 
     @PutMapping("/recipes/edit/{id}")
-    public String updateRecipe(@PathVariable Long id, @ModelAttribute Recipe updatedRecipe, Authentication authentication) {
+    public String updateRecipe(@PathVariable Long id, @ModelAttribute Recipe updatedRecipe, @RequestParam List<Long> dietStyleIds, @RequestParam List<Long> allergenIds, Authentication authentication) {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         User currentUser = userRepository.findByUsername(userDetails.getUsername());
+
+        updatedRecipe.setTime(updatedRecipe.getHours() * 60 + updatedRecipe.getMinutes());
 
         Recipe currentRecipe = recipeRepository.findById(id).orElseThrow();
 
@@ -156,7 +189,6 @@ public class RecipeController {
             updatedRecipe.setSugar(nutritionInfo.getSugar());
             updatedRecipe.setSodium(nutritionInfo.getSodium());
         } else {
-            // If ingredients have not changed, copy nutrition facts from current recipe
             updatedRecipe.setCalories(currentRecipe.getCalories());
             updatedRecipe.setProtein(currentRecipe.getProtein());
             updatedRecipe.setCarbohydrates(currentRecipe.getCarbohydrates());
@@ -168,9 +200,13 @@ public class RecipeController {
 
         updatedRecipe.setUser(currentUser);
         updatedRecipe.setRecipeid(id);
+        updatedRecipe.setDietStyles(dietStyleRepository.findAllById(dietStyleIds));
+        updatedRecipe.setAllergens(allergenRepository.findAllById(allergenIds));
+
         recipeRepository.save(updatedRecipe);
         return "redirect:/recipes/" + id;
     }
+
 
 
 
@@ -199,27 +235,21 @@ public class RecipeController {
         }
     }
 
-    @PostMapping("/users/{userId}/recipes/{id}/favorite")
-    public String addToFavorites(@PathVariable Long userId, @PathVariable Long id) {
-        Optional<User> userOptional = userRepository.findById(userId);
-        if (userOptional.isPresent()) {
-            User user = userOptional.get();
-            Recipe recipe = recipeRepository.findById(id).orElse(null);
-            if (recipe != null) {
-                UserFavorite userFavorite = new UserFavorite();
-                userFavorite.setUser(user);
-                userFavorite.setRecipeId(recipe.getRecipeid());
-                userFavorite.setRecipeName(recipe.getTitle());
-                userFavorite.setRecipeDescription(recipe.getInstructions());
-                userFavoriteRepository.save(userFavorite);
-            }
-            return "redirect:/users/" + userId + "/recipes/" + id;
-        } else {
-            return "redirect:/404";
+    @PostMapping("/recipes/{id}/favorite")
+    public String addToFavorites(@PathVariable Long id, Principal principal) {
+        User loggedInUser = userDao.findByUsername(principal.getName());
+        Recipe recipe = recipeRepository.findById(id).orElse(null);
+        if (recipe != null) {
+            UserFavorite userFavorite = new UserFavorite();
+            userFavorite.setUser(loggedInUser);
+            userFavorite.setCreator(recipe.getUser());
+            userFavorite.setRecipeId(recipe.getRecipeid());
+            userFavorite.setRecipeName(recipe.getTitle());
+            userFavorite.setRecipeDescription(recipe.getInstructions());
+            userFavoriteRepository.save(userFavorite);
         }
+        return "redirect:/recipes/" + id;
     }
-
-
 
         @GetMapping("/profile/recommendations")
         public String showRecommendations(Model model, Authentication authentication) {
@@ -274,8 +304,5 @@ public class RecipeController {
             return "recommendations";
         }
 
-        // Other existing methods...
     }
-
-
-
+}

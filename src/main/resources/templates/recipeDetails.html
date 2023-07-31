@@ -50,12 +50,16 @@
 </table>
 <!-- Add more fields as needed -->
 <!-- Only show the delete button if the current user is the creator of the recipe -->
-<form th:if="${currentUser.username == recipes.user.username}" action="#" th:action="@{/recipes/{id}(id=${recipes.recipeid})}" th:method="delete">
-    <input type="submit" value="Delete">
-</form>
+<div th:if="${currentUser != null}">
+    <form th:if="${currentUser.username == recipes.user.username}" action="#" th:action="@{/recipes/{id}(id=${recipes.recipeid})}" th:method="delete">
+        <input type="submit" value="Delete">
+    </form>
+</div>
 
 <!-- Only show the edit button if the current user is the creator of the recipe -->
-<button th:if="${currentUser.username == recipes.user.username}" type="button" class="btn btn-primary" data-toggle="modal" data-target="#editRecipeModal">Edit Recipe</button>
+<div th:if="${currentUser != null}">
+    <button th:if="${currentUser.username == recipes.user.username}" type="button" class="btn btn-primary" data-toggle="modal" data-target="#editRecipeModal">Edit Recipe</button>
+</div>
 
 
 

@@ -13,8 +13,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import com.codeup.bitebook.models.DietStyle;
+import com.codeup.bitebook.models.Allergen;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class SearchController {
@@ -28,17 +31,17 @@ public class SearchController {
     }
 
     @GetMapping("/recipes/search")
-    public String searchByAll(Model model, @RequestParam (name="keyword") String keyword, @RequestParam (name="dietaryFilter", required = false) String dietaryFilter, Authentication authentication) {
-        System.out.println(" in search");
+    public String searchByAll(Model model, @RequestParam(name="keyword") String keyword, @RequestParam(name="dietaryFilter", required = false) String dietaryFilter, Authentication authentication) {
         List<Recipe> listRecipes;
         if ("on".equals(dietaryFilter)) {
             UserWithRoles userWithRoles = (UserWithRoles) authentication.getPrincipal();
             User currentUser = userRepository.findByUsername(userWithRoles.getUsername());
-            listRecipes = service.listAllWithFilter(keyword, currentUser);
+            List<Long> dietStyleIds = currentUser.getDietaryPreferences().stream().map(DietStyle::getId).collect(Collectors.toList());
+            List<Long> allergenIds = currentUser.getAllergyList().stream().map(Allergen::getId).collect(Collectors.toList());
+            listRecipes = service.listAllWithFilter(keyword, dietStyleIds, allergenIds, currentUser);
         } else {
-            listRecipes = service.listAll(keyword);
+            listRecipes = service.listAll(keyword, null, null);
         }
-        System.out.println(listRecipes);
         model.addAttribute("recipes", listRecipes);
         model.addAttribute("keyword", keyword);
 

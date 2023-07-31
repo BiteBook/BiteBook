@@ -15,13 +15,14 @@
   <tr>
     <th>Recipe ID</th>
     <th>Recipe Name</th>
-    <th>Recipe Description</th>
+    <th>Creator</th>
   </tr>
   <tr th:each="favoriteRecipe : ${favoriteRecipes}">
     <td th:text="${favoriteRecipe.recipeId}"></td>
-    <td th:text="${favoriteRecipe.recipeName}"></td>
-    <td th:text="${favoriteRecipe.recipeDescription}"></td>
+    <td><a th:href="@{'/recipes/' + ${favoriteRecipe.recipeId}}" th:text="${favoriteRecipe.recipeName}"></a></td>
+    <td><a th:href="@{'/users/' + ${favoriteRecipe.creator.id}}" th:text="${favoriteRecipe.creator.username}"></a></td>
   </tr>
+
 </table>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>

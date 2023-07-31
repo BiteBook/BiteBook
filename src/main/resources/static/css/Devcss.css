@@ -1,0 +1,30 @@
+body {
+    background: linear-gradient(175deg ,#7a7876 15% , #ff5838, #74281d, #290a07);
+}
+
+.card-row:nth-child(odd) .card {
+    margin-bottom: 100px;
+}
+
+.navbar, .card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+.card-row {
+    flex-wrap: nowrap;
+}
+.card {
+    flex-grow: 1;
+}
+.card-width {
+    max-width: 70%;
+}
+
+
+.card .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.flex-grow {
+    flex-grow: .5;
+}

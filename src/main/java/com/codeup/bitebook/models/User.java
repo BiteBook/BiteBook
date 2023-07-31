@@ -38,16 +38,28 @@ public class User implements UserDetails {
     @NotBlank(message = "Password is mandatory")
     @Size(min = 8, message = "Password must be at least 8 characters long")
     private String password;
-    @ElementCollection
-    private List<String> dietaryPreferences;
-    @ElementCollection
-    private List<String> allergyList;
     @Column
     private String otherAllergies;
 
 
     @OneToMany(mappedBy = "user")
     private List<MealPlanner> mealPlanners;
+
+    @ManyToMany
+    @JoinTable(
+            name = "user_diet_styles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "diet_style_id")
+    )
+    private List<DietStyle> dietaryPreferences;
+
+    @ManyToMany
+    @JoinTable(
+            name = "user_allergens",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "allergen_id")
+    )
+    private List<Allergen> allergyList;
 
 
 
@@ -90,18 +102,14 @@ public class User implements UserDetails {
     }
 
     public boolean matchesDietaryNeeds(Recipe recipe) {
-        // Check if the recipe's diet style matches the user's dietary preferences
-        if (dietaryPreferences != null && !dietaryPreferences.contains(recipe.getDietStyle())) {
+        // Check if the user's dietary preferences match the recipe's diet styles
+        if (dietaryPreferences != null && !recipe.getDietStyles().containsAll(dietaryPreferences)) {
             return false;
         }
 
-        // Check if the recipe contains any allergens that the user is allergic to
-        if (allergyList != null) {
-            for (String allergen : allergyList) {
-                if (recipe.getAllergens() != null && recipe.getAllergens().contains(allergen)) {
-                    return false;
-                }
-            }
+        // Check if the user's allergy list matches the recipe's allergens
+        if (allergyList != null && !recipe.getAllergens().containsAll(allergyList)) {
+            return false;
         }
 
         // If the recipe passed all checks, it matches the user's dietary needs
