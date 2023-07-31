@@ -7,13 +7,11 @@ import jakarta.persistence.*;
 @Table(name="recipe-reviews")
 public class Review {
 
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
-        @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private long id;
-
-        @Column(nullable = false)
-        private String comment;
-
+    @Column(nullable = false)
+    private String comment;
 
     @Column(nullable = false)
     private int rating;
@@ -24,10 +22,9 @@ public class Review {
 
     @ManyToOne // Many reviews can be associated with one user
     @JoinColumn(name = "user_id") // This is the foreign key column in the recipe_reviews table
-    private User reviewer; // The user who wrote the review
+    private User user; // The user who wrote the review
 
-
-
+    // getters and setters
 
     public long getId() {
         return id;
@@ -61,11 +58,11 @@ public class Review {
         this.recipe = recipe;
     }
 
-    public User getReviewer() {
-        return reviewer;
+    public User getUser() {
+        return user;
     }
 
-    public void setReviewer(User reviewer) {
-        this.reviewer = reviewer;
+    public void setUser(User user) {
+        this.user = user;
     }
 }

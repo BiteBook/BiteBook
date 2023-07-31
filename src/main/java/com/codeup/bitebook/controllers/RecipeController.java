@@ -4,6 +4,7 @@ import com.codeup.bitebook.repositories.*;
 import com.codeup.bitebook.services.Authenticator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -56,14 +57,16 @@ public class RecipeController {
         // Fetch the comments and ratings for the recipe from the database
         List<Review> comments = reviewRepository.findByRecipe(recipe);
         List<Review> ratings = reviewRepository.findByRecipe(recipe);
+        List<Review> reviews = reviewRepository.findByRecipe(recipe);
 
         // Add the comments and ratings to the model without redefining variables
         model.addAttribute("comments", comments);
         model.addAttribute("reviews", ratings);
+        model.addAttribute("reviews", reviews);
 
         // Fetch the usernames of reviewers for the recipe from the database and add them to the model
-        List<String> reviewers = getReviewersForRecipe(recipe);
-        model.addAttribute("reviewers", reviewers);
+        List<String> users = getUsersForRecipe(recipe);
+        model.addAttribute("users", users);
 
         // Check if the user is logged in before trying to get the UserDetails and User objects
         if (authentication != null) {
@@ -78,32 +81,35 @@ public class RecipeController {
     }
 
 
-    private List<String> getReviewersForRecipe(Recipe recipe) {
+    private List<String> getUsersForRecipe(Recipe recipe) {
         List<Review> reviews = reviewRepository.findByRecipe(recipe);
-        List<String> reviewers = new ArrayList<>();
+        List<String> users = new ArrayList<>();
         for (Review review : reviews) {
-            User reviewer = review.getReviewer();
-            if (reviewer != null) {
-                reviewers.add(reviewer.getUsername());
+            User user = review.getUser();
+            if (user != null) {
+                users.add(user.getUsername());
             }
         }
-        return reviewers;
+        return users;
     }
 
 
+
     @PostMapping("/recipes/{id}")
-    public String getComments(@PathVariable long id, @ModelAttribute Review review, @RequestParam int rating, @RequestParam String comment) {
+    public String getComments(@PathVariable long id, @ModelAttribute Review review, @RequestParam int rating, @RequestParam String comment, Principal principal) {
         System.out.println("rating " + rating);
         review.setRating(rating);
         review.setComment(comment);
         System.out.println("comment " + comment);
         Recipe recipe = recipeRepository.findById(id).orElseThrow();
         review.setRecipe(recipe);
+        User user = userDao.findByUsername(principal.getName()); // Get the current logged in user
+        review.setUser(user); // Set the user to the review
         reviewRepository.save(review);
 
         return "redirect:/recipes/" + id;
-
     }
+
 
     @GetMapping("/recipes/new")
     public String showCreateRecipeForm(Model model) {
@@ -244,5 +250,14 @@ public class RecipeController {
             userFavoriteRepository.save(userFavorite);
         }
         return "redirect:/recipes/" + id;
+    }
+    @PostMapping("/reviews")
+    public String submitReview(@RequestParam String comment, @RequestParam int rating, @AuthenticationPrincipal User user) {
+        Review review = new Review();
+        review.setComment(comment);
+        review.setRating(rating);
+        review.setUser(user);
+        reviewRepository.save(review);
+        return "redirect:/reviews";
     }
 }
