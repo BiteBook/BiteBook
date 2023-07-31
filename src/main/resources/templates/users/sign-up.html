@@ -13,31 +13,20 @@
   <input id="username" th:field="*{username}" />
   <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Error</span>
 
-
   <label for="email">Email</label>
   <input id="email" th:field="*{email}" />
   <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</p>
   <label for="password">Password</label>
   <input id="password" type="password" th:field="*{password}" />
 
-  <label for="dietaryPreferences">Dietary Preferences</label>
-  <select id="dietaryPreferences" th:field="*{dietaryPreferences}" multiple>
-    <option value="Gluten-free">Gluten-free</option>
-    <option value="Halal">Halal</option>
-    <option value="Keto">Keto</option>
-    <option value="Kosher">Kosher</option>
-    <option value="Paleo">Paleo</option>
-    <option value="Pescetarian">Pescetarian</option>
-    <option value="Raw">Raw</option>
-    <option value="Vegan">Vegan</option>
-    <option value="Vegetarian">Vegetarian</option>
-    <!-- more options? -->
+  <select id="dietaryPreferences" th:field="*{dietaryPreferences}">
+    <option th:each="dietStyle : ${allDietStyles}" th:value="${dietStyle.id}" th:text="${dietStyle.name}"></option>
   </select>
 
-  <label th:for="allergyList">Allergies:</label><br/>
-  <div th:each="allergy : ${allAllergies}">
-    <input type="checkbox" th:id="${allergy}" th:value="${allergy}" th:field="*{allergyList}"/>
-    <label th:for="${allergy}" th:text="${allergy}"></label><br/>
+
+  <div th:each="allergen : ${allAllergens}">
+    <input type="checkbox" th:id="${'allergy-' + allergen.id}" th:value="${allergen.id}" th:field="*{allergyList}" />
+    <label th:for="${'allergy-' + allergen.id}" th:text="${allergen.name}"></label>
   </div>
 
 
@@ -50,5 +39,9 @@
 
   <input value="Sign me up!" type="submit" />
 </form>
+<div th:replace="~{partials/footer :: footer}"></div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 </body>
 </html>

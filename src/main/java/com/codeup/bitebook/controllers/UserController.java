@@ -1,9 +1,6 @@
 package com.codeup.bitebook.controllers;
 import com.codeup.bitebook.models.*;
-import com.codeup.bitebook.repositories.MealPlannerRepository;
-import com.codeup.bitebook.repositories.RecipeRepository;
-import com.codeup.bitebook.repositories.UserFavoriteRepository;
-import com.codeup.bitebook.repositories.UserRepository;
+import com.codeup.bitebook.repositories.*;
 import com.codeup.bitebook.services.Authenticator;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import com.codeup.bitebook.repositories.PostRepository;
+import java.util.stream.Collectors;
 import java.security.Principal;
 import java.util.Arrays;
 import java.util.List;
@@ -32,14 +29,23 @@ public class UserController {
     private PostRepository postDao;
 
     @Autowired
-    public UserController(UserRepository userDao, PasswordEncoder passwordEncoder, RecipeRepository recipeRepository,UserFavoriteRepository userFavoriteRepository,MealPlannerRepository mealPlannerRepository, PostRepository postDao) {
+    public UserController(UserRepository userDao, PasswordEncoder passwordEncoder, RecipeRepository recipeRepository,UserFavoriteRepository userFavoriteRepository,MealPlannerRepository mealPlannerRepository, PostRepository postDao, DietStyleRepository dietStyleRepository, AllergenRepository allergenRepository) {
         this.userDao = userDao;
         this.passwordEncoder = passwordEncoder;
         this.recipeRepository = recipeRepository;
         this.userFavoriteRepository = userFavoriteRepository;
         this.mealPlannerRepository = mealPlannerRepository;
         this.postDao = postDao;
+        this.dietStyleRepository = dietStyleRepository;
+        this.allergenRepository = allergenRepository;
     }
+
+    @Autowired
+    private DietStyleRepository dietStyleRepository;
+
+    @Autowired
+    private AllergenRepository allergenRepository;
+
 
     @GetMapping("/sign-up")
     public String showSignupForm(Model model){
@@ -49,6 +55,11 @@ public class UserController {
         model.addAttribute("user", new User());
         List<String> allAllergies = Arrays.asList("Peanuts", "Tree nuts", "Milk", "Egg", "Wheat", "Soy", "Fish", "Shellfish", "Other");
         model.addAttribute("allAllergies", allAllergies);
+
+        // Add all diet styles and allergens to the model
+        model.addAttribute("allDietStyles", dietStyleRepository.findAll());
+        model.addAttribute("allAllergens", allergenRepository.findAll());
+
         return "users/sign-up";
     }
 
@@ -58,13 +69,25 @@ public class UserController {
             bindingResult.rejectValue("username", "error.user", "Username is already taken");
         }
         if (bindingResult.hasErrors()) {
+            // Add all diet styles and allergens to the model again
+            model.addAttribute("allDietStyles", dietStyleRepository.findAll());
+            model.addAttribute("allAllergens", allergenRepository.findAll());
             return "users/sign-up";
         }
         String hash = passwordEncoder.encode(user.getPassword());
         user.setPassword(hash);
+
+        // Convert the IDs submitted by the form into Allergen and DietStyle entities
+        List<Allergen> allergens = allergenRepository.findAllById(user.getAllergyList().stream().map(Allergen::getId).collect(Collectors.toList()));
+        user.setAllergyList(allergens);
+
+        List<DietStyle> dietStyles = dietStyleRepository.findAllById(user.getDietaryPreferences().stream().map(DietStyle::getId).collect(Collectors.toList()));
+        user.setDietaryPreferences(dietStyles);
+
         userDao.save(user);
         return "redirect:/login";
     }
+
 
     @GetMapping("/profile")
     public String showProfile(Model model, Principal principal) {
@@ -93,6 +116,11 @@ public class UserController {
 
         List<String> allAllergies = Arrays.asList("Peanuts", "Tree nuts", "Milk", "Egg", "Wheat", "Soy", "Fish", "Shellfish", "Other");
         model.addAttribute("allAllergies", allAllergies);
+
+        // Add all diet styles and allergens to the model
+        model.addAttribute("allDietStyles", dietStyleRepository.findAll());
+        model.addAttribute("allAllergens", allergenRepository.findAll());
+
         model.addAttribute("selectedPage", "profile");
         return "users/profile";
     }
@@ -117,7 +145,7 @@ public class UserController {
         return "redirect:/profile";
     }
 
-    @GetMapping("/users/{userId}/personal-recipes")
+    @GetMapping("/users/{userId}/profile/personal-recipes")
     public String showPersonalRecipes(@PathVariable Long userId, Model model) {
         Optional<User> userOptional = userDao.findById(userId);
         if (userOptional.isPresent()) {
@@ -129,6 +157,7 @@ public class UserController {
             return "redirect:/404";
         }
     }
+
 
     @GetMapping("/users/{userId}/posts")
     public String showUserPosts(@PathVariable long userId, Model model) {

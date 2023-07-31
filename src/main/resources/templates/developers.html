@@ -1,84 +1,160 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>Our Developers</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <title>Our Developers</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/Devcss.css">
+    <script src="https://kit.fontawesome.com/d7c23920df.js" crossorigin="anonymous"></script>
 </head>
 <body>
-<div th:replace="partials/navbar :: navbar"></div>
+<div th:replace="~{partials/navbar :: navbar}"></div>
 <div class="container">
-  <h1 class="mt-5">Our Developers</h1>
-  <div class="row mt-4">
-    <div class="col-md-4">
-      <div class="card">
-        <img src="/img/funny-facebook-profile-pictures-4256-x-2832-ais01bxb63e0xymm.jpg" class="card-img-top" alt="Developer Name">
-        <div class="card-body">
-          <h5 class="card-title">Logan Rodriguez</h5>
-          <p class="card-text">Short bio about the developer.</p>
-<!--          <a href="#" class="btn btn-primary">View Profile</a>-->
+    <h1 class="mt-5">Our Developers</h1>
+
+    <div class="row mt-4 card-row">
+        <div class="col-xxl-12 col-md-10 flex-grow card-width" style="margin-left: 1em;">
+            <div class="card mb-4">
+                <div class="row g-0">
+                    <div class="col-md-6">
+                        <img src="/img/funny-facebook-profile-pictures-4256-x-2832-ais01bxb63e0xymm.jpg"
+                             class="img-fluid" alt="Developer Name">
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card-body align-self-start">
+                            <h4 class="card-title">Benjamin Meadors</h4>
+                            <h6 class="card-sub-title">"The Postmaster"</h6>
+                            <p class="card-text">Lorem Ipsum is the single greatest threat. We are not - we are not
+                                keeping up with other websites. Lorem Ipsum best not make any more threats to your
+                                website. It will be met with fire and fury like the world has never seen. Does everybody
+                                know that pig named Lorem Ipsum? An ‘extremely credible source’ has called my office and
+                                told me that Barack Obama’s placeholder text is a fraud.</p>
+                            <div class="d-flex justify-content-space-evenly">
+                                <i class="fa-brands fa-linkedin m-2" style="color: #c54a07;"></i><i
+                                    class="fa-brands fa-github m-2" style="color: #c54a07;"></i><i
+                                    class="fa-solid fa-utensils m-2" style="color: #c54a07;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-</div>
-<div class="container">
-  <div class="row mt-4">
-    <div class="col-md-4">
-      <div class="card">
-        <img src="/img/monkey-jokes-puns.jpg" class="card-img-top" alt="Developer Name">
-        <div class="card-body">
-          <h5 class="card-title">Benjamin Meadors</h5>
-          <p class="card-text">Short bio about the developer.</p>
-<!--          <a href="#" class="btn btn-primary">View Profile</a>-->
+    <div class="row mt-4 card-row">
+        <div class="col-xxl-10 col-md-8 ms-auto order-md-2 flex-grow card-width" style="margin-right: 1em;">
+            <div class="card mb-4">
+                <div class="row g-0">
+                    <div class="col-md-6 order-md-2">
+                        <img src="/img/monkey-jokes-puns.jpg" class="img-fluid" alt="Developer Name">
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card-body align-self-start">
+                            <h4 class="card-title">Joseph Fuentes</h4>
+                            <h6 class="card-sub-title">"Review Wrangler"</h6>
+                            <p class="card-text">Bro ipsum dolor sit amet gaper backside single track, manny Bike epic
+                                clipless. Schraeder drop gondy, rail fatty slash gear jammer steeps clipless rip bowl
+                                couloir bomb hole berm. Huck cruiser crank endo, sucker hole piste ripping ACL huck
+                                greasy flow face plant pinner. Japan air Skate park big ring trucks shuttle stoked
+                                rock-ectomy.</p>
+                            <div class="d-flex justify-content-space-evenly">
+                                <i class="fa-brands fa-linkedin m-2" style="color: #c54a07;"></i><i
+                                    class="fa-brands fa-github m-2" style="color: #c54a07;"></i><i
+                                    class="fa-solid fa-utensils m-2" style="color: #c54a07;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-</div>
-<div class="container">
-  <div class="row mt-4">
-    <div class="col-md-4">
-      <div class="card">
-        <img src="/img/images-2.jpeg" class="card-img-top" alt="Developer Name" width="300" height="156">
-        <div class="card-body">
-          <h5 class="card-title">Joseph Fuentes</h5>
-          <p class="card-text">Short bio about the developer.</p>
-<!--          <a href="#" class="btn btn-primary">View Profile</a>-->
+    <div class="row mt-4 card-row">
+        <div class="col-xxl-10 col-md-10 flex-grow card-width" style="margin-left: 1em;">
+            <div class="card mb-4">
+                <div class="row g-0">
+                    <div class="col-md-6">
+                        <img src="/img/img_1.png"
+                             class="img-fluid" alt="Developer Name">
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card-body align-self-start">
+                            <h4 class="card-title">Liam O'Connor</h4>
+                            <h6 class="card-sub-title">"The Exterminator"</h6>
+                            <p class="card-text">Professional Software Developer and Marine Veteran with experience in
+                                cultivating teams, managing projects, and finding solutions to complex challenges. Nerds
+                                out over TLOTR, Pokemon, Sci-Fi/Fantasy books, and enjoys classic board game nights.
+                                Father to 2 cats and a GSD.
+                            </p>
+                            <div class="d-flex justify-content-space-evenly">
+                                <a href="https://www.linkedin.com/in/liam-a-oconnor/" target="_blank"><i
+                                        class="fa-brands fa-linkedin m-2" style="color: #c54a07;"></i></a>
+                                <a href="https://github.com/Liam0C0NN0R" target="_blank"><i
+                                        class="fa-brands fa-github m-2" style="color: #c54a07;"></i></a>
+                                <i class="fa-solid fa-utensils m-2" style="color: #c54a07;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-</div>
-<div class="container">
-  <div class="row mt-4">
-    <div class="col-md-4">
-      <div class="card">
-        <img src="/img/Liam-M.jpeg" class="card-img-top" alt="Developer Name">
-        <div class="card-body">
-          <h5 class="card-title">Liam O'Connor</h5>
-          <p class="card-text">Short bio about the developer.</p>
-<!--          <a href="#" class="btn btn-primary">View Profile</a>-->
+    <div class="row mt-4 card-row">
+        <div class="col-xxl-10 col-md-10 ms-auto order-md-2 flex-grow card-width" style="margin-right: 1em;">
+            <div class="card mb-4">
+                <div class="row g-0">
+                    <div class="col-md-6 order-md-2">
+                        <img src="/static/img/Logan.jpeg" class="img-fluid" alt="Developer Name">
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card-body align-self-start">
+                            <h4 class="card-title">Logan Rodriguez</h4>
+                            <h6 class="card-sub-title">"The API Guy"</h6>
+                            <p class="card-text">Swearem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
+                                scelerisque accumsan nisl, a mattis eros vestibulum et. Vestibulum placerat purus ut
+                                nibh aliquam fringilla. Aenean et tortor diam, id tempor elit. Vivamus sagittis ornare
+                                fuck. Nullam lacinia jizzmopper vel diam tempor et consequat ligula porttitor..</p>
+                            <div class="d-flex justify-content-space-evenly">
+                                <i class="fa-brands fa-linkedin m-2" style="color: #c54a07;"></i><i
+                                    class="fa-brands fa-github m-2" style="color: #c54a07;"></i><i
+                                    class="fa-solid fa-utensils m-2" style="color: #c54a07;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-</div>
-<div class="container">
-  <div class="row mt-4">
-    <div class="col-md-4">
-      <div class="card">
-        <img src="/img/photo-1581828060707-37894f1ed9b8.jpeg" class="card-img-top" alt="Developer Name">
-        <div class="card-body">
-          <h5 class="card-title">Patrick Mireles</h5>
-          <p class="card-text">Short bio about the developer.</p>
-<!--          <a href="#" class="btn btn-primary">View Profile</a>-->
+    <div class="row mt-4 card-row">
+        <div class="col-xxl-10 col-md-10 flex-grow card-width" style="margin-left: 1em;">
+            <div class="card mb-4">
+                <div class="row g-0">
+                    <div class="col-md-6">
+                        <img src="/img/funny-facebook-profile-pictures-4256-x-2832-ais01bxb63e0xymm.jpg"
+                             class="img-fluid" alt="Developer Name">
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card-body align-self-start">
+                            <h4 class="card-title">Patrick Mireles</h4>
+                            <h6 class="card-sub-title"> "Chatbot Champion"</h6>
+                            <p class="card-text">That right there is the mail. Now let's talk about the mail. Can we
+                                talk about the mail please, Mac? I've been dying to talk about the mail with you all
+                                day, okay? Pepe Silvia, this name keeps comin' up over and over and over again. Every
+                                day Pepe's mail's getting sent back to me. Pepe Silvia, Pepe Silvia, I look in the mail,
+                                this whole box is Pepe Silvia!</p>
+                            <div class="d-flex justify-content-space-evenly">
+                                <i class="fa-brands fa-linkedin m-2" style="color: #c54a07;"></i><i
+                                    class="fa-brands fa-github m-2" style="color: #c54a07;"></i><i
+                                    class="fa-solid fa-utensils m-2" style="color: #c54a07;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>
-<div th:replace="partials/footer :: footer"></div>
+
+
+<div th:replace="~{partials/footer :: footer}"></div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 </body>
 </html>

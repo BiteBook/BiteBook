@@ -63,3 +63,7 @@
 /*#searchResults {*/
 /*    margin-top: 10px;*/
 /*}*/
+.card {
+    width: 300px;
+    height: 400px;
+}

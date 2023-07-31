@@ -8,7 +8,6 @@ import lombok.Setter;
 
 import java.util.List;
 
-
 @Entity
 @Table(name = "recipes")
 @Data
@@ -17,9 +16,6 @@ public class Recipe {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
-    @Column
-
     private Long recipeid;
 
     @Column
@@ -36,14 +32,14 @@ public class Recipe {
     @Column
     private String difficulty;
     @Column
-    private String time;
+    private Integer hours;
+    @Column
+    private Integer minutes;
+    @Column
+    private Integer time;
+
     @Column
     private String region;
-    @Column
-    private String dietStyle;
-
-    @Column(columnDefinition = "TEXT")
-    private String allergens;
 
     @Column
     private Double calories;
@@ -66,6 +62,22 @@ public class Recipe {
     @ManyToOne
     private User user;
 
+    @ManyToMany
+    @JoinTable(
+            name = "recipe_diet_styles",
+            joinColumns = @JoinColumn(name = "recipe_id"),
+            inverseJoinColumns = @JoinColumn(name = "diet_style_id")
+    )
+    private List<DietStyle> dietStyles;
+
+    @ManyToMany
+    @JoinTable(
+            name = "recipe_allergens",
+            joinColumns = @JoinColumn(name = "recipe_id"),
+            inverseJoinColumns = @JoinColumn(name = "allergen_id")
+    )
+    private List<Allergen> allergens;
+
 
     @Override
     public String toString() {
@@ -80,4 +92,23 @@ public class Recipe {
         return instructions;
     }
 
+    public void setHours(Integer hours) {
+        this.hours = hours;
+        calculateTime();
+    }
+
+    public void setMinutes(Integer minutes) {
+        this.minutes = minutes;
+        calculateTime();
+    }
+
+    private void calculateTime() {
+        if (this.hours != null && this.minutes != null) {
+            this.time = this.hours * 60 + this.minutes;
+        }
+    }
+
+    public void setTime(int time) {
+        this.time = time;
+    }
 }

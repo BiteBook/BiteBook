@@ -18,37 +18,22 @@
   <input type="hidden" id="fileupload" th:field="*{photo}">
   <button class="btn btn-green" id="picker" type="button">Pick file</button>
   <input type="text" th:field="*{difficulty}" placeholder="Difficulty">
-  <input type="number" th:field="*{time}" placeholder="Time">
+  <input type="number" th:field="*{hours}" placeholder="Hours">
+  <input type="number" th:field="*{minutes}" placeholder="Minutes">
   <input type="text" th:field="*{region}" placeholder="Region">
-  <select th:field="*{dietStyle}" multiple>
-    <option value="Gluten-free">Gluten-free</option>
-    <option value="Halal">Halal</option>
-    <option value="Keto">Keto</option>
-    <option value="Kosher">Kosher</option>
-    <option value="Paleo">Paleo</option>
-    <option value="Pescetarian">Pescetarian</option>
-    <option value="Raw">Raw</option>
-    <option value="Vegan">Vegan</option>
-    <option value="Vegetarian">Vegetarian</option>
-    <option value="Not Sure">Not Sure</option>
+  <label for="dietStyles">Diet Styles</label>
+  <select id="dietStyles" name="dietStyleIds" multiple>
+    <option th:each="dietStyle : ${allDietStyles}" th:value="${dietStyle.id}" th:text="${dietStyle.name}"></option>
   </select>
-  <select th:field="*{allergens}" multiple>
-    <option value="Peanuts">Peanuts</option>
-    <option value="Tree nuts">Tree nuts</option>
-    <option value="Dairy">Dairy</option>
-    <option value="Gluten">Gluten</option>
-    <option value="Egg">Egg</option>
-    <option value="Wheat">Wheat</option>
-    <option value="Soy">Soy</option>
-    <option value="Fish">Fish</option>
-    <option value="Shellfish">Shellfish</option>
-    <option value="None">None</option>
+
+  <label for="allergens">Allergens</label>
+  <select id="allergens" name="allergenIds" multiple>
+    <option th:each="allergen : ${allAllergens}" th:value="${allergen.id}" th:text="${allergen.name}"></option>
   </select>
 
   <input type="submit" value="Create Recipe">
   <div type="text/html" th:field="*{calories}" id="nutrition"></div>
 </form>
-
 
 <button id="submit">testing</button>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
