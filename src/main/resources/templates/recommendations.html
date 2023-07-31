@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+<h1>Recommended Recipes</h1>
+<div th:each="recipe : ${recommendedRecipes}">
+  <h3 th:text="${recipe.title}"></h3>
+  <p th:text="${recipe.description}"></p>
+
+</div>
+</body>
+</html>
