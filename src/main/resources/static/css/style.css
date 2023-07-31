@@ -14,32 +14,26 @@
     color: #333;
     /* Add any other styles you want */
 }
+/* Styling for the container that holds the gold stars */
+.gold-stars-container {
+    display: inline-block;
+    vertical-align: middle; /* Align the stars vertically with the rating */
+    margin-left: 10px; /* Adjust the spacing between the rating and stars as needed */
+}
 
-/*body {
-    !*height: 100vh;*!
-    !*display: flex;*!
-    !*align-items: center;*!
-    !*justify-content: center;*!
-    !*
-    background: linear-gradient(45deg, #ffd195, #cc4e00);
-    }
-    *!
- */
+/* Styling for the gold stars */
 
-/*.rating-box {*/
-/*    position: relative;*/
-/*    background: #fff;*/
-/*    padding: 25px 50px 35px;*/
-/*    border-radius: 25px;*/
-/*    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);*/
-/*}*/
-/*.rating-box header {*/
-/*    font-size: 22px;*/
-/*    color: #dadada;*/
-/*    font-weight: 500;*/
-/*    margin-bottom: 20px;*/
-/*    text-align: center;*/
 
+
+#gold-stars {
+    color: gold; /* Set the color of the stars to gold */
+    font-size: 20px; /* Adjust the size of the stars as needed */
+}
+
+/* Optional: Add some spacing between the stars and the rating value */
+.gold-stars-container {
+    margin-right: 5px;
+}
 
 
 
