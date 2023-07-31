@@ -1,0 +1,51 @@
+body {
+
+    background: linear-gradient(175deg , #fff5ec, #eedbc5, rgb(255, 213, 182) 15%, #ffa562); }
+.navbar, .card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+
+
+    font-family: 'Lugrasimo', sans-serif;
+}
+
+
+h1 {
+    font-family: 'Lugrasimo', sans-serif;
+}
+
+label {
+    font-family: 'Lugrasimo', sans-serif;
+}
+
+.navbar,
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Custom CSS for checkbox alignment */
+.form-group .form-check {
+    margin-bottom: 1rem;
+}
+
+/* Custom CSS to move the checkboxes to the right */
+.checkbox-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+}
+
+.form-check {
+    margin-right: 20px;
+}
+
+/* Custom CSS to make allergens parallel with form elements */
+.form-group .form-check-inline {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+/* Custom CSS to center the form */
+.vh-100 {
+    min-height: 100vh;
+}
