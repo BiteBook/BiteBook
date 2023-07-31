@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-  <title>Recipe Details</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/static/css/style.css">
-  <!-- Fontawesome CDN Link -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
-  <script src="/javascript/ratings.js" defer></script>
+    <title>Recipe Details</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <!-- Fontawesome CDN Link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <script src="/javascript/ratings.js" defer></script>
 </head>
 <body>
 <div th:replace="~{partials/navbar :: navbar}"></div>
@@ -20,54 +20,56 @@
 <p th:text="${recipes.instructions}"></p>
 <table>
     <tr>
-        <td>Calories: </td>
+        <td>Calories:</td>
         <td th:text="${recipes.calories}"></td>
     </tr>
     <tr>
-        <td>Protein: </td>
+        <td>Protein:</td>
         <td th:text="${recipes.protein}"></td>
     </tr>
     <tr>
-        <td>Sugar: </td>
+        <td>Sugar:</td>
         <td th:text="${recipes.sugar}"></td>
     </tr>
     <tr>
-        <td>Fats: </td>
+        <td>Fats:</td>
         <td th:text="${recipes.fats}"></td>
     </tr>
     <tr>
-        <td>Carbs: </td>
+        <td>Carbs:</td>
         <td th:text="${recipes.carbohydrates}"></td>
     </tr>
     <tr>
-        <td>Fibre: </td>
+        <td>Fibre:</td>
         <td th:text="${recipes.fibre}"></td>
     </tr>
     <tr>
-        <td>Sodium: </td>
+        <td>Sodium:</td>
         <td th:text="${recipes.sodium}"></td>
     </tr>
 </table>
 <!-- Add more fields as needed -->
 <!-- Only show the delete button if the current user is the creator of the recipe -->
 <div th:if="${currentUser != null}">
-    <form th:if="${currentUser.username == recipes.user.username}" action="#" th:action="@{/recipes/{id}(id=${recipes.recipeid})}" th:method="delete">
+    <form th:if="${currentUser.username == recipes.user.username}" action="#"
+          th:action="@{/recipes/{id}(id=${recipes.recipeid})}" th:method="delete">
         <input type="submit" value="Delete">
     </form>
 </div>
 
 <!-- Only show the edit button if the current user is the creator of the recipe -->
 <div th:if="${currentUser != null}">
-    <button th:if="${currentUser.username == recipes.user.username}" type="button" class="btn btn-primary" data-toggle="modal" data-target="#editRecipeModal">Edit Recipe</button>
+    <button th:if="${currentUser.username == recipes.user.username}" type="button" class="btn btn-primary"
+            data-toggle="modal" data-target="#editRecipeModal">Edit Recipe
+    </button>
 </div>
 
 
-
-<!-- Add a div to display comments -->
 <div id="displayArea">
     <!-- Iterate over the comments and display them -->
     <h3>Comments and Ratings:</h3>
     <div th:each="comment, commentStatus : ${comments}">
+        <td><a th:href="@{'/users/' + ${comment.user.id}}" th:text="${comment.user.username}"></a></td>
         <p th:text="${comment.comment}"></p>
         <p th:text="${reviews[commentStatus.index].rating}"></p>
     </div>
@@ -75,27 +77,26 @@
 
 
 
-
-
-    <!-- Form to save the recipe -->
+<!-- Form to save the recipe -->
 <form th:action="@{'/recipes/' + ${recipes.recipeid} + '/favorite'}" method="post">
-  <button type="submit">Save Recipe</button>
+    <button type="submit">Save Recipe</button>
 </form>
 
 <!-- Meal Planner section -->
 <form th:action="@{/mealplanner/add}" method="post">
-  <input type="hidden" th:value="${recipes.recipeid}" name="recipeId"/>
-  <input type="date" name="date"/>
-  <input type="submit" value="Add to Meal Planner"/>
+    <input type="hidden" th:value="${recipes.recipeid}" name="recipeId"/>
+    <input type="date" name="date"/>
+    <input type="submit" value="Add to Meal Planner"/>
 </form>
 
 
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ratingModal">
-  Review Recipe
+    Review Recipe
 </button>
 
 <!-- Bootstrap Modal for Reviewing Recipe -->
-<div class="modal fade" id="ratingModal" tabindex="-1" role="dialog" aria-labelledby="ratingModalLabel" aria-hidden="true">
+<div class="modal fade" id="ratingModal" tabindex="-1" role="dialog" aria-labelledby="ratingModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -108,35 +109,40 @@
             <form th:action="@{'/recipes/' + ${recipes.recipeid}}" th:object="${review}" th:method="post">
                 <div class="modal-body">
                     <div class="form-check form-check-inline">
-                        <input th:field="*{rating}" class="form-check-input" type="radio" id="star5" value=5 name="ratingGroup">
+                        <input th:field="*{rating}" class="form-check-input" type="radio" id="star5" value=5
+                               name="ratingGroup">
                         <label class="form-check-label star-icon" for="star5">
                             <i class="fas fa-star"></i>
                             5
                         </label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input th:field="*{rating}" class="form-check-input" type="radio" id="star4" value=4 name="ratingGroup">
+                        <input th:field="*{rating}" class="form-check-input" type="radio" id="star4" value=4
+                               name="ratingGroup">
                         <label class="form-check-label star-icon" for="star4">
                             <i class="fas fa-star"></i>
                             4
                         </label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input th:field="*{rating}" class="form-check-input" type="radio" id="star3" value=3 name="ratingGroup">
+                        <input th:field="*{rating}" class="form-check-input" type="radio" id="star3" value=3
+                               name="ratingGroup">
                         <label class="form-check-label star-icon" for="star3">
                             <i class="fas fa-star"></i>
                             3
                         </label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input th:field="*{rating}" class="form-check-input" type="radio" id="star2" value= 2 name="ratingGroup">
+                        <input th:field="*{rating}" class="form-check-input" type="radio" id="star2" value=2
+                               name="ratingGroup">
                         <label class="form-check-label star-icon" for="star2">
                             <i class="fas fa-star"></i>
                             2
                         </label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input th:field="*{rating}" class="form-check-input" type="radio" id="star1" value=1 name="ratingGroup">
+                        <input th:field="*{rating}" class="form-check-input" type="radio" id="star1" value=1
+                               name="ratingGroup">
                         <label class="form-check-label star-icon" for="star1">
                             <i class="fas fa-star"></i>
                             1
@@ -144,8 +150,7 @@
                     </div>
 
 
-
-                <!-- Remove the <div class="rating-box"> if not needed -->
+                    <!-- Remove the <div class="rating-box"> if not needed -->
                     <div class="rating-box">
                         <h3 class="mb-3">Your Rating:</h3>
 
@@ -170,45 +175,46 @@
 
 
 <!-- Bootstrap Modal for Editing Recipe -->
-<div class="modal fade" id="editRecipeModal" tabindex="-1" role="dialog" aria-labelledby="editRecipeModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="editRecipeModalLabel">Edit Recipe</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-          <form th:action="@{'/recipes/edit/' + ${recipes.recipeid}}" th:object="${recipes}" method="post">
-              <input type="hidden" name="_method" value="put" />
-              <div class="form-group">
-                  <label for="title">Title</label>
-                  <input type="text" class="form-control" id="title" th:field="*{title}" required>
-              </div>
-              <div class="form-group">
-                  <label for="ingredients">Ingredients</label>
-                  <textarea class="form-control" id="ingredients" th:field="*{ingredients}" required></textarea>
-              </div>
-              <div class="form-group">
-                  <label for="instructions">Instructions</label>
-                  <textarea class="form-control" id="instructions" th:field="*{instructions}" required></textarea>
-              </div>
-              <!-- Hidden fields for the image and nutrition facts -->
-              <input type="hidden" th:field="*{photo}">
-              <input type="hidden" th:field="*{calories}">
-              <input type="hidden" th:field="*{protein}">
-              <input type="hidden" th:field="*{sugar}">
-              <input type="hidden" th:field="*{fats}">
-              <input type="hidden" th:field="*{fibre}">
-              <input type="hidden" th:field="*{carbohydrates}">
-              <input type="hidden" th:field="*{sodium}">
-              <button type="submit" class="btn btn-primary">Save Changes</button>
-          </form>
+<div class="modal fade" id="editRecipeModal" tabindex="-1" role="dialog" aria-labelledby="editRecipeModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editRecipeModalLabel">Edit Recipe</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form th:action="@{'/recipes/edit/' + ${recipes.recipeid}}" th:object="${recipes}" method="post">
+                    <input type="hidden" name="_method" value="put"/>
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input type="text" class="form-control" id="title" th:field="*{title}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ingredients">Ingredients</label>
+                        <textarea class="form-control" id="ingredients" th:field="*{ingredients}" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="instructions">Instructions</label>
+                        <textarea class="form-control" id="instructions" th:field="*{instructions}" required></textarea>
+                    </div>
+                    <!-- Hidden fields for the image and nutrition facts -->
+                    <input type="hidden" th:field="*{photo}">
+                    <input type="hidden" th:field="*{calories}">
+                    <input type="hidden" th:field="*{protein}">
+                    <input type="hidden" th:field="*{sugar}">
+                    <input type="hidden" th:field="*{fats}">
+                    <input type="hidden" th:field="*{fibre}">
+                    <input type="hidden" th:field="*{carbohydrates}">
+                    <input type="hidden" th:field="*{sodium}">
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </form>
 
-      </div>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 
