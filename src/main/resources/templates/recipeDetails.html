@@ -61,7 +61,30 @@
     <button th:if="${currentUser.username == recipes.user.username}" type="button" class="btn btn-primary" data-toggle="modal" data-target="#editRecipeModal">Edit Recipe</button>
 </div>
 
+<!--<style>-->
+<!--    .gold-stars-container {-->
+<!--        color: transparent; /* Set the color of the stars container to transparent */-->
+<!--        display: inline-block;-->
+<!--        vertical-align: middle;-->
+<!--        margin-left: 10px;-->
+<!--        position: relative; /* Set the position to relative to contain the stars */-->
+<!--    }-->
 
+<!--    .gold-stars-container::before {-->
+<!--        content: "\f005 \f005 \f005 \f005 \f005"; /* Unicode for five gold stars (Font Awesome) */-->
+<!--        font-family: "Font Awesome 5 Free"; /* Set the Font Awesome font family */-->
+<!--        color: gold; /* Set the color of the stars to gold */-->
+<!--        font-size: 20px; /* Adjust the size of the stars as needed */-->
+<!--        position: absolute; /* Position the stars absolutely within the container */-->
+<!--        top: 0; /* Position the stars at the top of the container */-->
+<!--        left: 0; /* Position the stars at the left of the container */-->
+<!--    }-->
+
+<!--    /* Optional: Add some spacing between the stars and the rating value */-->
+<!--    .gold-stars-container {-->
+<!--        margin-right: 5px;-->
+<!--    }-->
+<!--</style>-->
 
 <div id="displayArea">
     <!-- Iterate over the comments and display them -->
@@ -73,6 +96,21 @@
         </div>
     </div>
 </div>
+<!--<script>-->
+<!--    // Get all elements with the class "gold-stars"-->
+<!--    const ratingContainers = document.querySelectorAll(".gold-stars");-->
+
+<!--    // Iterate over each element and add gold stars based on the rating value-->
+<!--    ratingContainers.forEach((ratingElement) => {-->
+<!--        const ratingValue = parseInt(ratingElement.getAttribute("data-rating"));-->
+<!--        let starsHTML = '';-->
+<!--        for (let i = 1; i <= ratingValue; i++) {-->
+<!--            starsHTML += '<i class="fas fa-star" style="color: gold;"></i>'; // Font Awesome gold star icon-->
+<!--        }-->
+<!--        ratingElement.innerHTML = starsHTML; // Add the gold stars to the element-->
+<!--    });-->
+<!--</script>-->
+
 
 
 
