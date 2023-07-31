@@ -8,15 +8,17 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
-   <link rel="stylesheet" href="/../../resources/static/css/style.css">
+   <link rel="stylesheet" href="/css/style.css">
   <div th:replace="~{partials/navbar :: navbar}"></div>
   <h1>BiteBook</h1>
   <h2 id="greeting"></h2>
+  <div class="container">
   <form th:action="@{/recipes/search}">
     <input type="text" name="keyword" id="keyword" size="50" th:value="${keyword}" required />
     <input type="submit" value="Search" />
     <input type="button" value="Clear" id="btnClear" onclick="clearSearch()" />
   </form>
+  </div>
 <!--  <ul>-->
 <!--    <th:block th:each="recipe : ${recipes}">-->
 <!--      <li th:if="${recipe != null}">-->
@@ -44,6 +46,9 @@
   </div>
 </div>
 
+
+  <h2>Ready in 15 mins Recipes</h2>
+
 <div id="readyList" class="row">
   <th:block th:each="recipe : ${readyIn15Recipes}" th:if="${recipe != null}">
     <div class="col-md-3">
@@ -59,30 +64,12 @@
   </th:block>
 </div>
 
-<!-- adding a recommendation searchFinder/recipeFinder-->
-<section id="popularRecipes">
-  <h2>Popular Recipes</h2>
-  <div id="popularRecipeList" class="row">
-  </div>
-
-  <div class ="container">
-    <h2>RecipeFinder</h2>
-    <form id="searchFoRecipes">
-      <label for="search"></label><input type="text" id="search" placeholder="Recommendations">
-      <button type="button" id="submit" class="btn">Search</button>
-    </form>
-    <div id="searchResults"></div>
-  </div>
-</section>
-
-
 
 
 <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <script src="/javascript/keys.js"></script>
-<script src="/javascript/recipe.js"></script>
 <script src="/javascript/Greetings.js"></script>
 <script src="/javascript/Slick.js"></script>
 
