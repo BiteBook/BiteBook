@@ -2,7 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Create Recipe</title>
+  <title th:text="${title}">Title</title>
+  <link rel="icon" type="image/png" href="/img/img.png">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="/static/css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
@@ -21,15 +22,17 @@
   <input type="number" th:field="*{hours}" placeholder="Hours">
   <input type="number" th:field="*{minutes}" placeholder="Minutes">
   <input type="text" th:field="*{region}" placeholder="Region">
-  <label for="dietStyles">Diet Styles</label>
-  <select id="dietStyles" name="dietStyleIds" multiple>
-    <option th:each="dietStyle : ${allDietStyles}" th:value="${dietStyle.id}" th:text="${dietStyle.name}"></option>
-  </select>
+  <label>Diet Styles</label>
+  <div th:each="dietStyle : ${allDietStyles}">
+    <input type="checkbox" th:id="${dietStyle.id}" th:value="${dietStyle.id}" th:name="dietStyleIds">
+    <label th:for="${dietStyle.id}" th:text="${dietStyle.name}"></label>
+  </div>
 
-  <label for="allergens">Allergens</label>
-  <select id="allergens" name="allergenIds" multiple>
-    <option th:each="allergen : ${allAllergens}" th:value="${allergen.id}" th:text="${allergen.name}"></option>
-  </select>
+  <label>Allergens</label>
+  <div th:each="allergen : ${allAllergens}">
+    <input type="checkbox" th:id="${allergen.id}" th:value="${allergen.id}" th:name="allergenIds">
+    <label th:for="${allergen.id}" th:text="${allergen.name}"></label>
+  </div>
 
   <input type="submit" value="Create Recipe">
   <div type="text/html" th:field="*{calories}" id="nutrition"></div>
