@@ -105,6 +105,28 @@ h2 {
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
+
+/*.gold-stars-container {
+/*        color: transparent; !* Set the color of the stars container to transparent *!*/
+/*display: inline-block;*/
+/*vertical-align: middle;*/
+/*margin-left: 10px;*/
+/*position: relative; !* Set the position to relative to contain the stars *!*/
+/*}*/
+
+.gold-stars-container::before {
+    content: "\f005 \f005 \f005 \f005 \f005"; /* Unicode for five gold stars (Font Awesome) */
+    font-family: "Font Awesome 5 Free"; /* Set the Font Awesome font family */
+    color: gold; /* Set the color of the stars to gold */
+    font-size: 20px; /* Adjust the size of the stars as needed */
+    position: absolute; /* Position the stars absolutely within the container */
+    top: 0; /* Position the stars at the top of the container */
+    left: 0; /* Position the stars at the left of the container */
+}
+
+/* Optional: Add some spacing between the stars and the rating value */
+.gold-stars-container {
+    margin-right: 5px;
 }
 
 .login-form input[type="submit"] {
@@ -136,5 +158,4 @@ h2 {
     font-size: 24px;
 
 }
-
 
