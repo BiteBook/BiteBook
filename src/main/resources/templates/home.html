@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
-   <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/style.css">
 
   <div th:replace="~{partials/navbar :: navbar}"></div>
 
@@ -17,6 +17,9 @@
   <br>
 
   <h2 id="greeting"></h2>
+
+
+
   <br>
 
   <div class="container">
@@ -24,11 +27,12 @@
       <input type="text" name="keyword" id="keyword" size="50" th:value="${keyword}" required placeholder="Search for recipes" />
 
       <button type="submit">Search</button>
-      <button type="button" id="btnClear" onclick="clearSearch()">Clear</button>
+<!--       <button type="button" id="btnClear" onclick="clearSearch()">Clear</button> -->
     </form>
   </div>
 
   <!--  <ul>-->
+
 <!--    <th:block th:each="recipe : ${recipes}">-->
 <!--      <li th:if="${recipe != null}">-->
 <!--        <a th:href="@{/recipes/{id}(id=${recipe.recipeid})}" th:text="${recipe.title}"></a>-->
@@ -38,7 +42,9 @@
 
 </head>
 <body>
+
 <br>
+
 
 <h2>Trending Recipes</h2>
 
@@ -76,8 +82,27 @@
   </th:block>
 </div>
 
+
+<!-- adding a recommendation searchFinder/recipeFinder-->
+<section id="popularRecipes">
+  <h2>Popular Recipes</h2>
+  <div id="popularRecipeList" class="row">
+  </div>
+
+  <div class ="container">
+    <h2>RecipeFinder</h2>
+    <form id="searchFoRecipes">
+      <label for="search"></label><input type="text" id="search" placeholder="Recommendations">
+      <button type="button" id="submit" class="btn">Search</button>
+    </form>
+    <div id="searchResults"></div>
+  </div>
+</section>
+</div>
+
 <br>
 <!--corners images-->
+
 
 
 
