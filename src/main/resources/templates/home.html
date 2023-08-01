@@ -9,13 +9,14 @@
   <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
    <link rel="stylesheet" href="/../../resources/static/css/style.css">
+  <link rel="stylesheet" href="/css/simplystyle.css">
   <div th:replace="~{partials/navbar :: navbar}"></div>
   <h1>BiteBook</h1>
   <h2 id="greeting"></h2>
   <form th:action="@{/recipes/search}">
     <input type="text" name="keyword" id="keyword" size="50" th:value="${keyword}" required />
     <input type="submit" value="Search" />
-    <input type="button" value="Clear" id="btnClear" onclick="clearSearch()" />
+<!--    <input type="button" value="Clear" id="btnClear" onclick="clearSearch()" />-->
   </form>
 <!--  <ul>-->
 <!--    <th:block th:each="recipe : ${recipes}">-->
@@ -27,6 +28,7 @@
 
 </head>
 <body>
+<div class="proback">
 <h2>Trending Recipes</h2>
 
 <div id="recipeList" class="row">
@@ -74,7 +76,7 @@
     <div id="searchResults"></div>
   </div>
 </section>
-
+</div>
 
 
 
