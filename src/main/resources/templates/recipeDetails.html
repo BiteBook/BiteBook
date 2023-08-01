@@ -17,54 +17,105 @@
 
 
 
-<h1>Recipe Details</h1>
-<!-- display details about a specific recipe -->
-<h1 th:text="${recipes.title}"></h1>
-<p>Created by: <a th:href="@{'/users/' + ${recipes.user.id}}"> <span th:text="${recipes.user.username}"></span></a></p>
-<p>Total Time: <span th:text="${recipes.hours}"></span> hours <span th:text="${recipes.minutes}"></span> minutes</p>
-<p th:text="${recipes.ingredients}"></p>
-<p th:text="${recipes.instructions}"></p>
-<h3>Diet Styles:</h3>
-<ul th:each="dietStyle : ${recipeDietStyles}">
-    <li th:text="${dietStyle.name}"></li>
-</ul>
 
-<!-- Allergens -->
-<h3>Allergens:</h3>
-<ul th:each="allergen : ${recipeAllergens}">
-    <li th:text="${allergen.name}"></li>
-</ul>
-<table>
-    <tr>
-        <td>Calories:</td>
-        <td th:text="${recipes.calories}"></td>
-    </tr>
-    <tr>
-        <td>Protein:</td>
-        <td th:text="${recipes.protein}"></td>
-    </tr>
-    <tr>
-        <td>Sugar:</td>
-        <td th:text="${recipes.sugar}"></td>
-    </tr>
-    <tr>
-        <td>Fats:</td>
-        <td th:text="${recipes.fats}"></td>
-    </tr>
-    <tr>
-        <td>Carbs:</td>
-        <td th:text="${recipes.carbohydrates}"></td>
-    </tr>
-    <tr>
-        <td>Fibre:</td>
-        <td th:text="${recipes.fibre}"></td>
-    </tr>
-    <tr>
-        <td>Sodium:</td>
-        <td th:text="${recipes.sodium}"></td>
-    </tr>
-</table>
-<!-- Add more fields as needed -->
+    <h1 th:text="${recipes.title}"></h1>
+    <br>
+    <h3>Created by: <a th:href="@{'/users/' + ${recipes.user.id}}"> <span th:text="${recipes.user.username}"></span></a></h3>
+    <br>
+<div class="container text-center">
+    <div class="row">
+        <div class="col">
+            <img th:src="${recipes.photo}" alt="Recipe photo" class="recipe-img">
+        </div>
+        <div class="col">
+            <!-- Allergens -->
+            <div class="allergens">
+                <h3>Allergens:</h3>
+                <ul th:each="allergen : ${recipeAllergens}">
+                    <li th:text="${allergen.name}"></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col">
+            <!-- Diet Styles -->
+            <div class="diet-styles">
+                <h3>Diet Styles:</h3>
+                <ul th:each="dietStyle : ${recipeDietStyles}">
+                    <li th:text="${dietStyle.name}"></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Second container for ingredients and instructions -->
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h3>Ingredients :</h3>
+            <p th:text="${recipes.ingredients}"></p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <h4>Instructions :</h4>
+            <p th:text="${recipes.instructions}"></p>
+        </div>
+    </div>
+</div>
+
+    <!-- Card for the table -->
+    <div class="card recipe-card">
+        <div class="card-body">
+            <div class="card-header text-center">
+                <h3>Nutrition Facts</h3>
+            </div>
+            <table class="table table-borderless">
+                <tr>
+                    <td>Calories:</td>
+                    <td th:text="${recipes.calories}"></td>
+                </tr>
+                <tr>
+                    <td>Protein:</td>
+                    <td th:text="${recipes.protein}"></td>
+                </tr>
+                <tr>
+                    <td>Sugar:</td>
+                    <td th:text="${recipes.sugar}"></td>
+                </tr>
+                <tr>
+                    <td>Fats:</td>
+                    <td th:text="${recipes.fats}"></td>
+                </tr>
+                <tr>
+                    <td>Carbs:</td>
+                    <td th:text="${recipes.carbohydrates}"></td>
+                </tr>
+                <tr>
+                    <td>Fibre:</td>
+                    <td th:text="${recipes.fibre}"></td>
+                </tr>
+                <tr>
+                    <td>Sodium:</td>
+                    <td th:text="${recipes.sodium}"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <form th:action="@{'/recipes/' + ${recipes.recipeid} + '/favorite'}" method="post">
+        <button type="submit">Save Recipe</button>
+    </form>
+
+    <!-- Meal Planner section -->
+    <form th:action="@{/mealplanner/add}" method="post">
+        <input type="hidden" th:value="${recipes.recipeid}" name="recipeId"/>
+        <input type="date" name="date"/>
+        <input type="submit" value="Add to Meal Planner"/>
+    </form>
+
+
+
+    <!-- Add more fields as needed -->
 <!-- Only show the delete button if the current user is the creator of the recipe -->
 <div th:if="${currentUser != null}">
     <form th:if="${currentUser.username == recipes.user.username}" action="#"
@@ -105,21 +156,10 @@
 </div>
 </div>
 
-<form th:action="@{'/recipes/' + ${recipes.recipeid} + '/favorite'}" method="post">
-    <button type="submit">Save Recipe</button>
-</form>
-
-<!-- Meal Planner section -->
-<form th:action="@{/mealplanner/add}" method="post">
-    <input type="hidden" th:value="${recipes.recipeid}" name="recipeId"/>
-    <input type="date" name="date"/>
-    <input type="submit" value="Add to Meal Planner"/>
-</form>
 
 
 <!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ratingModal">-->
-<!--    Review Recipe-->
-<!--</button>-->
+
 
 <!-- Bootstrap Modal for Reviewing Recipe -->
 <div class="modal fade" id="ratingModal" tabindex="-1" role="dialog" aria-labelledby="ratingModalLabel"

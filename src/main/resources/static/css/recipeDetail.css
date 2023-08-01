@@ -12,24 +12,56 @@ body {
     font-family: 'Lumanosimo', cursive;
 }
 
-.container {
+/* Custom CSS for the recipe image */
+.recipe-img {
+    width: auto;
+    height: 400px;
+    object-fit: cover;
+}
+
+
+.container.text-center {
+    margin-bottom: 20px;
+}
+
+
+.container.text-center .row {
+    justify-content: center;
+}
+
+
+.container.text-center .col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
+    margin-bottom: 20px;
 }
 
-.container img {
-    max-width: 500px;
-    height: auto;
-    margin: 0;
-    float: left; /* Set the image to float to the left */
+
+
+/* Custom CSS for the allergens and diet styles section */
+.allergens-diet-styles {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
 }
 
+.allergens-diet-styles .allergens {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.allergens-diet-styles .diet-styles {
+    flex: 1;
+}
 
 .recipe-card {
     max-width: 400px; /* Adjust the width as needed */
     margin: 20px auto; /* Adjust the margin as needed */
     background: linear-gradient(175deg, #fff5ec, #eedbc5, rgb(255, 213, 182) 15%, #ffa562);
     border: 1px solid #ccc; /* Optional: Add border around the card */
-    float: left;
+
 }
 
 
