@@ -18,14 +18,6 @@
     <input type="submit" value="Search" />
     <input type="button" value="Clear" id="btnClear" onclick="clearSearch()" />
   </form>
-<!--  <ul>-->
-<!--    <th:block th:each="recipe : ${recipes}">-->
-<!--      <li th:if="${recipe != null}">-->
-<!--        <a th:href="@{/recipes/{id}(id=${recipe.recipeid})}" th:text="${recipe.title}"></a>-->
-<!--      </li>-->
-<!--    </th:block>-->
-<!--  </ul>-->
-
 </head>
 <body>
 <h2>Trending Recipes</h2>
@@ -60,21 +52,6 @@
   </th:block>
 </div>
 
-<!-- adding a recommendation searchFinder/recipeFinder-->
-<section id="popularRecipes">
-  <h2>Popular Recipes</h2>
-  <div id="popularRecipeList" class="row">
-  </div>
-
-  <div class ="container">
-    <h2>RecipeFinder</h2>
-    <form id="searchFoRecipes">
-      <label for="search"></label><input type="text" id="search" placeholder="Recommendations">
-      <button type="button" id="submit" class="btn">Search</button>
-    </form>
-    <div id="searchResults"></div>
-  </div>
-</section>
 
 
 
@@ -90,10 +67,5 @@
 
 <div th:replace="~{partials/footer :: footer}"></div>
 
-<script type="text/javascript">
-  function clearSearch() {
-    window.location = " ";
-  }
-</script>
 </body>
 </html>

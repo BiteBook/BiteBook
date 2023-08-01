@@ -12,12 +12,37 @@
     font-size: 36px;
     font-weight: bold;
     color: #333;
-    /* Add any other styles you want */
 }
-body {
-    background: linear-gradient(175deg ,#7a7876 15% , #ff5838, #74281d, #290a07);
+    /* Add any other styles you want */
+body { background: linear-gradient(175deg , #fff5ec, #eedbc5, rgb(255, 213, 182) 15%, #ffa562); }
+.navbar, .card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
 
+
+
+/*.gold-stars-container {
+/*        color: transparent; !* Set the color of the stars container to transparent *!*/
+/*display: inline-block;*/
+/*vertical-align: middle;*/
+/*margin-left: 10px;*/
+/*position: relative; !* Set the position to relative to contain the stars *!*/
+/*}*/
+
+.gold-stars-container::before {
+    content: "\f005 \f005 \f005 \f005 \f005"; /* Unicode for five gold stars (Font Awesome) */
+    font-family: "Font Awesome 5 Free"; /* Set the Font Awesome font family */
+    color: gold; /* Set the color of the stars to gold */
+    font-size: 20px; /* Adjust the size of the stars as needed */
+    position: absolute; /* Position the stars absolutely within the container */
+    top: 0; /* Position the stars at the top of the container */
+    left: 0; /* Position the stars at the left of the container */
+}
+
+/* Optional: Add some spacing between the stars and the rating value */
+.gold-stars-container {
+    margin-right: 5px;
+}
 .card {
     width: 300px;
     height: 400px;
