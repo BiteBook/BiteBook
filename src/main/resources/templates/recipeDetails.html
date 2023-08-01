@@ -4,6 +4,7 @@
     <title>Recipe Details</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/css/recipeDetail.css">
     <!-- Fontawesome CDN Link -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
     <script src="/javascript/ratings.js" defer></script>
@@ -63,17 +64,32 @@
             data-toggle="modal" data-target="#editRecipeModal">Edit Recipe
     </button>
 </div>
-<div id="displayArea">
-    <!-- Iterate over the comments and display them -->
-    <h3>Comments and Ratings:</h3>
-    <div th:each="comment, commentStatus : ${comments}">
-        <td><a th:href="@{'/users/' + ${comment.user.id}}" th:text="${comment.user.username}"></a></td>
-        <p th:text="${comment.comment}"></p>
-        <div class="gold-stars-container">
-            <div class="gold-stars" th:attr="data-rating=${reviews[commentStatus.index].rating}"></div>
+<div class="comments-section">
+    <h3>Like this recipe? Tell us how it turn out!</h3>
+    <div class="text-center">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ratingModal">
+            Write your review!
+        </button>
+    </div>
+    <div class="container text-center">
+        <div class="row align-items-start">
+            <div class="col">
+                <div th:each="comment, commentStatus : ${comments}" class="comment-rating-container">
+                    <div class="gold-stars-container">
+                        <div class="gold-stars" th:attr="data-rating=${reviews[commentStatus.index].rating}"></div>
+                    </div>
+                    <div class="comment-info">
+                        <p th:text="${comment.comment}"></p>
+                        <a th:href="@{'/users/' + ${comment.user.id}}" th:text="${comment.user.username}" class="comment-user"></a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
 </div>
+</div>
+
 <form th:action="@{'/recipes/' + ${recipes.recipeid} + '/favorite'}" method="post">
     <button type="submit">Save Recipe</button>
 </form>
@@ -86,9 +102,9 @@
 </form>
 
 
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ratingModal">
-    Review Recipe
-</button>
+<!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ratingModal">-->
+<!--    Review Recipe-->
+<!--</button>-->
 
 <!-- Bootstrap Modal for Reviewing Recipe -->
 <div class="modal fade" id="ratingModal" tabindex="-1" role="dialog" aria-labelledby="ratingModalLabel"
@@ -214,7 +230,7 @@
 </div>
 
 
-<!-- Include Bootstrap JS -->
+
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
