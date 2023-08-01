@@ -15,6 +15,6 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
 
     List<Review> findByRecipe(Recipe recipe);
 
-    List<Review> findByReviewer(User currentUser);
+    List<Review> findByUser(User currentUser);
 }
 

@@ -1,10 +1,12 @@
-const ratingContainers = document.querySelectorAll(".gold-stars-container");
+// Get all elements with the class "gold-stars"
+const ratingContainers = document.querySelectorAll(".gold-stars");
 
-ratingContainers.forEach((container) => {
-    const ratingValue = parseInt(container.querySelector(".gold-stars").getAttribute("data-rating"));
+// Iterate over each element and add gold stars based on the rating value
+ratingContainers.forEach((ratingElement) => {
+    const ratingValue = parseInt(ratingElement.getAttribute("data-rating"));
     let starsHTML = '';
     for (let i = 1; i <= ratingValue; i++) {
-        starsHTML += '<i class="fas fa-star"></i>'; // Font Awesome solid gold star icon
+        starsHTML += '<i class="fas fa-star" style="color: gold;"></i>'; // Font Awesome gold star icon
     }
-    container.querySelector(".gold-stars").innerHTML = starsHTML;
+    ratingElement.innerHTML = starsHTML; // Add the gold stars to the element
 });

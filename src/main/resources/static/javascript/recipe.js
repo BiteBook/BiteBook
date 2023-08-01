@@ -1,9 +1,5 @@
 "use strict";
 
-// Replace 'YOUR_API_KEY' with your actual Spoonacular API key
-const APIKEY2  = '43c9ca641fd149cfa982fabb08dfabe7';
-const searchQuery = ' keyword'; // You can change the search query here
-
 // Function to make the API call and display the search results
 function searchForRecipes() {
     const url = `https://api.spoonacular.com/recipes/716429/information?includeSimilar=true.?query=${searchQuery}&apiKey=${APIKEY2}`;

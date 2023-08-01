@@ -21,11 +21,11 @@ public class RatingController  {
         this.id = id;
     }
 
-    public String getRating() {
+    public int getRating() {
         return rating;
     }
 
-    public void setRating(String rating) {
+    public void setRating(int rating) {
         this.rating = rating;
     }
 
@@ -38,7 +38,7 @@ public class RatingController  {
     }
 
     @Column(nullable = false)
-    private String rating;
+    private int rating;
 
     @ManyToOne
     @JoinColumn (name = "recipe_id")
