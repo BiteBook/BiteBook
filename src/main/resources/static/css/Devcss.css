@@ -1,5 +1,6 @@
-body {
-    background: linear-gradient(175deg ,#7a7876 15% , #ff5838, #74281d, #290a07);
+body { background: linear-gradient(175deg , #fff5ec, #eedbc5, rgb(255, 213, 182) 15%, #ffa562); }
+.navbar, .card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
 
 .card-row:nth-child(odd) .card {

@@ -63,6 +63,11 @@ public class RecipeController {
         model.addAttribute("comments", comments);
         model.addAttribute("reviews", ratings);
         model.addAttribute("reviews", reviews);
+        model.addAttribute("allDietStyles", dietStyleRepository.findAll());
+        model.addAttribute("allAllergens", allergenRepository.findAll());
+        model.addAttribute("recipeDietStyles", recipe.getDietStyles());
+        model.addAttribute("recipeAllergens", recipe.getAllergens());
+
 
         // Fetch the usernames of reviewers for the recipe from the database and add them to the model
         List<String> users = getUsersForRecipe(recipe);
@@ -103,8 +108,8 @@ public class RecipeController {
         System.out.println("comment " + comment);
         Recipe recipe = recipeRepository.findById(id).orElseThrow();
         review.setRecipe(recipe);
-        User user = userDao.findByUsername(principal.getName()); // Get the current logged in user
-        review.setUser(user); // Set the user to the review
+        User user = userDao.findByUsername(principal.getName());
+        review.setUser(user);
         reviewRepository.save(review);
 
         return "redirect:/recipes/" + id;
@@ -120,7 +125,8 @@ public class RecipeController {
     }
 
     @PostMapping("/recipes/new")
-    public String createRecipe(@ModelAttribute Recipe recipe, @RequestParam("photo") String photoUrl, @RequestParam List<Long> dietStyleIds, @RequestParam List<Long> allergenIds, Authentication authentication) {
+    public String createRecipe(@ModelAttribute Recipe recipe, @RequestParam("photo") String photoUrl, @RequestParam(required = false) List<Long> dietStyleIds, @RequestParam List<Long> allergenIds, Authentication authentication)
+    {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         User currentUser = userRepository.findByUsername(userDetails.getUsername());
         recipe.setUser(currentUser);
@@ -136,6 +142,7 @@ public class RecipeController {
         recipe.setFats(nutritionInfo.getFats());
         recipe.setSugar(nutritionInfo.getSugar());
         recipe.setSodium(nutritionInfo.getSodium());
+        recipe.setDietStyles(dietStyleRepository.findAllById(dietStyleIds));
 
         if (allergenIds == null || allergenIds.isEmpty()) {
             // Handle the error, e.g., return an error message or throw an exception
@@ -146,6 +153,9 @@ public class RecipeController {
                     // Handle the error, e.g., return an error message or throw an exception
                 }
             }
+        }
+        if (dietStyleIds != null) {
+            recipe.setDietStyles(dietStyleRepository.findAllById(dietStyleIds));
         }
 
         recipeRepository.save(recipe);
@@ -166,17 +176,24 @@ public class RecipeController {
         }
 
         model.addAttribute("recipe", recipe);
+        model.addAttribute("allDietStyles", dietStyleRepository.findAll());
+        model.addAttribute("allAllergens", allergenRepository.findAll());
         return "editRecipe";
     }
+
 
     @PutMapping("/recipes/edit/{id}")
     public String updateRecipe(@PathVariable Long id, @ModelAttribute Recipe updatedRecipe, @RequestParam List<Long> dietStyleIds, @RequestParam List<Long> allergenIds, Authentication authentication) {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         User currentUser = userRepository.findByUsername(userDetails.getUsername());
 
-        updatedRecipe.setTime(updatedRecipe.getHours() * 60 + updatedRecipe.getMinutes());
+        int hours = (updatedRecipe.getHours() != null) ? updatedRecipe.getHours() : 0;
+        int minutes = (updatedRecipe.getMinutes() != null) ? updatedRecipe.getMinutes() : 0;
+
+        updatedRecipe.setTime(hours * 60 + minutes);
 
         Recipe currentRecipe = recipeRepository.findById(id).orElseThrow();
+
 
         if (!currentRecipe.getUser().equals(currentUser)) {
             return "redirect:/error";

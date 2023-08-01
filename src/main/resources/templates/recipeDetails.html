@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/css/recipeDetail.css">
     <!-- Fontawesome CDN Link -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <link rel="icon" type="image/png" href="/img/img.png">
     <script src="/javascript/ratings.js" defer></script>
 </head>
 <body>
@@ -17,8 +18,19 @@
 <!-- display details about a specific recipe -->
 <h1 th:text="${recipes.title}"></h1>
 <p>Created by: <a th:href="@{'/users/' + ${recipes.user.id}}"> <span th:text="${recipes.user.username}"></span></a></p>
+<p>Total Time: <span th:text="${recipes.hours}"></span> hours <span th:text="${recipes.minutes}"></span> minutes</p>
 <p th:text="${recipes.ingredients}"></p>
 <p th:text="${recipes.instructions}"></p>
+<h3>Diet Styles:</h3>
+<ul th:each="dietStyle : ${recipeDietStyles}">
+    <li th:text="${dietStyle.name}"></li>
+</ul>
+
+<!-- Allergens -->
+<h3>Allergens:</h3>
+<ul th:each="allergen : ${recipeAllergens}">
+    <li th:text="${allergen.name}"></li>
+</ul>
 <table>
     <tr>
         <td>Calories:</td>
@@ -186,7 +198,7 @@
 </div>
 
 
-<!-- Bootstrap Modal for Editing Recipe -->
+<!-- Modal for Editing Recipe -->
 <div class="modal fade" id="editRecipeModal" tabindex="-1" role="dialog" aria-labelledby="editRecipeModalLabel"
      aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -212,6 +224,28 @@
                         <label for="instructions">Instructions</label>
                         <textarea class="form-control" id="instructions" th:field="*{instructions}" required></textarea>
                     </div>
+                    <h3>Diet Styles:</h3>
+                    <div th:each="dietStyle : ${allDietStyles}">
+                        <input type="checkbox" th:id="${dietStyle.id}" th:value="${dietStyle.id}" th:name="dietStyleIds"
+                               th:checked="${#lists.contains(recipeDietStyles, dietStyle)}">
+                        <label th:for="${dietStyle.id}" th:text="${dietStyle.name}"></label>
+                    </div>
+                    <h3>Allergens:</h3>
+                    <div th:each="allergen : ${allAllergens}">
+                        <input type="checkbox" th:id="${allergen.id}" th:value="${allergen.id}" th:name="allergenIds"
+                               th:checked="${#lists.contains(recipeAllergens, allergen)}">
+                        <label th:for="${allergen.id}" th:text="${allergen.name}"></label>
+                    </div>
+                    <div class="form-group">
+                        <label for="hours">Hours</label>
+                        <input type="number" class="form-control" id="hours" th:field="*{hours}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="minutes">Minutes</label>
+                        <input type="number" class="form-control" id="minutes" th:field="*{minutes}" required>
+                    </div>
+
+
                     <!-- Hidden fields for the image and nutrition facts -->
                     <input type="hidden" th:field="*{photo}">
                     <input type="hidden" th:field="*{calories}">
