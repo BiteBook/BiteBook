@@ -8,6 +8,19 @@ body { background: linear-gradient(175deg , #fff5ec, #eedbc5, rgb(255, 213, 182)
     --hover-color: #ff5838;   /* Hover color - darker shade of blue */
 }
 
+
+.background-search {
+    background-image: url('../img/search-background.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 20rem;
+}
+
+.searchbar-sizing {
+    width: 24rem;
+    height: 3rem;
+}
+
 .btn.btn-primary {
     background-color: var(--primary-color);
     color: #fff;
@@ -105,6 +118,7 @@ h2 {
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
+}
 
 /*.gold-stars-container {
 /*        color: transparent; !* Set the color of the stars container to transparent *!*/
@@ -144,18 +158,19 @@ h2 {
 }
 
 
-.search-form {
-    padding: 20px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end; /* Add this line to move the form to the right */
-    margin-right: 20px; /* Add margin-right to control the spacing on the right */
-}
+/*.search-form {*/
+/*    padding: 20px;*/
+/*    border-radius: 10px;*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    justify-content: flex-end; !* Add this line to move the form to the right *!*/
+/*    margin-right: 20px; !* Add margin-right to control the spacing on the right *!*/
+/*}*/
 
 .search-form input {
     text-align: center;
     font-size: 24px;
-
 }
+
+
 
