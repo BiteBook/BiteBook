@@ -1,19 +1,111 @@
-/* Import Google font - Poppins */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
+
+body { background: linear-gradient(175deg , #fff5ec, #eedbc5, rgb(255, 213, 182) 15%, #ffa562); }
+.navbar, .card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+:root {
+    --primary-color: #ea8960; /* Default primary color - blue */
+    --hover-color: #ff5838;   /* Hover color - darker shade of blue */
 }
 
-#hello user {
-    /* Your CSS styles for the title text here */
-    font-size: 36px;
-    font-weight: bold;
-    color: #333;
-    /* Add any other styles you want */
+.btn.btn-primary {
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
+
+/* Hover effect */
+.btn.btn-primary:hover {
+    background-color: var(--hover-color);
+}
+.card {
+    width: 300px;
+    height: 400px;
+}
+.footer {
+    background-color: #333;
+    color: #fff;
+    padding: 30px 0;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer h3 {
+    color: #fff;
+}
+
+.footer p {
+    color: #ccc;
+}
+
+.footer-left,
+.footer-middle,
+.footer-right {
+    flex: 1;
+    margin-right: 20px;
+}
+
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.footer-bottom p {
+    color: #ccc;
+}
+
+
+h1{
+    text-align: center;
+    font-size: 24px;
+    color: #333;
+
+
+}
+h2 {
+    text-align: center;
+    font-size: 24px;
+    color: #333;
+
+}
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+}
+
+.login-form {
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+}
+
+.login-form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.login-form input[type="text"],
+.login-form input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+
 /*.gold-stars-container {
 /*        color: transparent; !* Set the color of the stars container to transparent *!*/
 /*display: inline-block;*/
@@ -37,14 +129,33 @@
     margin-right: 5px;
 }
 
-
-
-
-
-
-
-
-.card {
-    width: 300px;
-    height: 400px;
+.login-form input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #ea8960;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
+
+.login-form input[type="submit"]:hover {
+    background-color: #ff5838;
+}
+
+
+.search-form {
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* Add this line to move the form to the right */
+    margin-right: 20px; /* Add margin-right to control the spacing on the right */
+}
+
+.search-form input {
+    text-align: center;
+    font-size: 24px;
+
+}
+
