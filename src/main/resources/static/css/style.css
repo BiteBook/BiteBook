@@ -38,11 +38,6 @@ body { background: linear-gradient(175deg , #fff5ec, #eedbc5, rgb(255, 213, 182)
     margin-right: 20px;
 }
 
-.social-icons a {
-    color: #fff;
-    margin-right: 10px;
-    font-size: 24px;
-}
 
 .footer-bottom {
     text-align: center;
@@ -108,23 +103,23 @@ h2 {
 }
 
 .login-form input[type="submit"]:hover {
-    background-color: #0056b3;
+    background-color: #ff5838;
 }
 
 
 .search-form {
-    background-color: #f1f1f1;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     display: flex;
     align-items: center;
+    justify-content: flex-end; /* Add this line to move the form to the right */
+    margin-right: 20px; /* Add margin-right to control the spacing on the right */
 }
 
 .search-form input {
-    padding: 30px;
-    margin-right: 10px;
-    border: none;
-    border-radius: 5px;
+    text-align: center;
+    font-size: 24px;
+
 }
+
 
