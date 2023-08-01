@@ -1,13 +1,38 @@
 /* Custom CSS for the recipe details page */
 body {
     background: linear-gradient(175deg, #fff5ec, #eedbc5, rgb(255, 213, 182) 15%, #ffa562);
-    font-family: 'Lugrasimo', cursive;
+
 }
 
 .navbar,
 .card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
+.navbar-brand{
+    font-family: 'Lumanosimo', cursive;
+}
+
+.container {
+    text-align: center;
+}
+
+.container img {
+    max-width: 500px;
+    height: auto;
+    margin: 0;
+    float: left; /* Set the image to float to the left */
+}
+
+
+.recipe-card {
+    max-width: 400px; /* Adjust the width as needed */
+    margin: 20px auto; /* Adjust the margin as needed */
+    background: linear-gradient(175deg, #fff5ec, #eedbc5, rgb(255, 213, 182) 15%, #ffa562);
+    border: 1px solid #ccc; /* Optional: Add border around the card */
+    float: left;
+}
+
+
 
 /* Custom CSS to move the checkboxes to the right */
 .checkbox-container {
@@ -33,8 +58,7 @@ body {
 }
 
 
-/* Add your other custom CSS styles here */
-/* ... */
+
 
 /* Custom CSS for the recipe details section */
 .recipe-details {
