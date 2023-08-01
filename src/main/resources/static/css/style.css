@@ -3,9 +3,24 @@ body { background: linear-gradient(175deg , #fff5ec, #eedbc5, rgb(255, 213, 182)
 .navbar, .card {
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
+:root {
+    --primary-color: #ea8960; /* Default primary color - blue */
+    --hover-color: #ff5838;   /* Hover color - darker shade of blue */
+}
 
+.btn.btn-primary {
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
 
-
+/* Hover effect */
+.btn.btn-primary:hover {
+    background-color: var(--hover-color);
+}
 .card {
     width: 300px;
     height: 400px;
@@ -67,7 +82,7 @@ h2 {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 50vh;
 }
 
 .login-form {
