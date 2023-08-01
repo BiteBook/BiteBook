@@ -13,9 +13,7 @@ h1 {
     font-family: 'Lugrasimo', sans-serif;
 }
 
-label {
-    font-family: 'Lugrasimo', sans-serif;
-}
+
 
 .navbar,
 .card {
@@ -48,4 +46,20 @@ label {
 /* Custom CSS to center the form */
 .vh-100 {
     min-height: 100vh;
+}
+
+
+/* Custom styles for the button */
+.custom-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #EA8960;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.custom-button:hover {
+    background-color: #0056B3;
 }
