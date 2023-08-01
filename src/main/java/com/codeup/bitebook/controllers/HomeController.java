@@ -30,11 +30,9 @@ public class HomeController {
                 .map(objects -> objects[0] != null ? recipeRepository.findById((Long) objects[0]).orElse(null) : null)
                 .collect(Collectors.toList());
         model.addAttribute("trendingRecipes", trendingRecipes);
-
+        model.addAttribute("title", "Home");
         List<Recipe> readyIn15Recipes = recipeRepository.findRandomRecipesReadyIn15Minutes(PageRequest.of(0, 10));
         if (readyIn15Recipes.isEmpty()) {
-            // Handle the case where there are no recipes that are ready in 15 minutes
-            // For example, you could add a default recipe or show a message to the user
         }
         model.addAttribute("readyIn15Recipes", readyIn15Recipes);
 
@@ -43,12 +41,14 @@ public class HomeController {
 
 
     @GetMapping("/developers")
-    public String showDevelopers() {
+    public String showDevelopers(Model model) {
+        model.addAttribute("title", "Developers");
         return "developers";
     }
 
     @GetMapping("/recipeIndex")
-    public String showRecipeIndex() {
+    public String showRecipeIndex(Model model) {
+        model.addAttribute("title", "Recipe Index");
         return "recipeindex";
     }
 }

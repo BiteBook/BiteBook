@@ -33,7 +33,7 @@ public class PostController {
     @GetMapping("")
     public String posts(Model model){
         List<Post> posts = postDao.findAll();
-
+        model.addAttribute("title", "Posts");
         model.addAttribute("posts",posts);
         return "/posts/index";
     }
@@ -49,7 +49,7 @@ public class PostController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         User currentUser = userRepository.findByUsername(userDetails.getUsername());
-
+        model.addAttribute("title", "Post Details");
         model.addAttribute("currentUser", currentUser);
         model.addAttribute("post", optionalPost.get());
         return "/posts/show";
@@ -58,6 +58,7 @@ public class PostController {
     @GetMapping("/create")
     public String showCreate(Model model) {
         model.addAttribute("newPost", new Post());
+        model.addAttribute("title", "Create Post");
         return "/posts/create";
     }
 
@@ -75,6 +76,7 @@ public class PostController {
     public String showEdit(@PathVariable Long id, Model model) {
         Post postToEdit = postDao.getReferenceById(id);
         model.addAttribute("newPost", postToEdit);
+        model.addAttribute("title", "Edit Post");
         return "/posts/create";
     }
 
@@ -88,7 +90,7 @@ public class PostController {
         List<Post> userPosts = postDao.findByCreatorOrderByCreatedDateDesc(user);
         List<Post> firstThreePosts = userPosts.subList(0,2);
         model.addAttribute("userPosts", firstThreePosts);
-
+        model.addAttribute("title", "User Posts");
         return "users/userPosts";
     }
 
