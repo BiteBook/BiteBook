@@ -29,3 +29,13 @@ body { background: linear-gradient(175deg , #fff5ec, #eedbc5, rgb(255, 213, 182)
 .flex-grow {
     flex-grow: .5;
 }
+
+footer {
+    background-color: #f0f0f0;
+    padding: 10px;
+    text-align: center;
+}
+
+footer p {
+    margin: 0;
+}
