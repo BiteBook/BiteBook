@@ -2,16 +2,22 @@ package com.codeup.bitebook.controllers;
 
 import com.codeup.bitebook.models.MealPlanner;
 import com.codeup.bitebook.models.Recipe;
+import com.codeup.bitebook.models.SimpleMealPlanner;
 import com.codeup.bitebook.models.User;
 import com.codeup.bitebook.repositories.MealPlannerRepository;
 import com.codeup.bitebook.repositories.RecipeRepository;
 import com.codeup.bitebook.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import java.security.Principal;
 import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 
 @Controller
 public class MealPlannerController {
@@ -31,12 +37,14 @@ public class MealPlannerController {
     public String addRecipeToMealPlanner(@RequestParam Long recipeId, @RequestParam LocalDate date, Principal principal) {
         User user = userRepository.findByUsername(principal.getName());
         Recipe recipe = recipeRepository.findById(recipeId).orElseThrow(() -> new IllegalArgumentException("Invalid recipe Id:" + recipeId));
+
         MealPlanner mealPlanner = new MealPlanner();
         mealPlanner.setUser(user);
         mealPlanner.setRecipe(recipe);
         mealPlanner.setDate(date);
         mealPlannerRepository.save(mealPlanner);
-        return "redirect:/profile";
-    }
 
+        return "redirect:/profile?username=" + user.getUsername();
+
+    }
 }

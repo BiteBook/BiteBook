@@ -92,11 +92,18 @@ public class UserController {
 
 
     @GetMapping("/profile")
-    public String showProfile(Model model, Principal principal) {
+    public String showProfile(@RequestParam(required = false) String username, Principal principal, Model model) {
         if (principal == null) {
             return "redirect:/login";
         }
         User loggedInUser = userDao.findByUsername(principal.getName());
+        User user;
+        if (username == null || username.isEmpty()) {
+            user = loggedInUser;
+        } else {
+            user = userDao.findByUsername(username);
+        }
+
         model.addAttribute("user", loggedInUser);
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -114,7 +121,10 @@ public class UserController {
         model.addAttribute("favoriteRecipes", favoriteRecipes);
 
         List<MealPlanner> mealPlanners = mealPlannerRepository.findByUser(loggedInUser);
-        model.addAttribute("mealPlanners", mealPlanners);
+        List<SimpleMealPlanner> simpleMealPlanners = mealPlanners.stream()
+                .map(SimpleMealPlanner::new)
+                .collect(Collectors.toList());
+        model.addAttribute("mealPlanners", simpleMealPlanners);
 
         List<String> allAllergies = Arrays.asList("Peanuts", "Tree nuts", "Milk", "Egg", "Wheat", "Soy", "Fish", "Shellfish", "Other");
         model.addAttribute("allAllergies", allAllergies);
@@ -127,6 +137,8 @@ public class UserController {
         model.addAttribute("selectedPage", "profile");
         return "users/profile";
     }
+
+
 
 
     @PostMapping("/profile/edit")
