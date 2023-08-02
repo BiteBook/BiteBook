@@ -48,3 +48,121 @@ th, td {
 .creator {
     width: 40%; /* You can adjust the width as per your design */
 }
+
+.veggie-image {
+    background-image: url('../img/Backgrounds/Veggie.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute; /* Fixed position */
+    top: 100px; /* Adjust the top position */
+    left: -170px; /* Adjust the left position */
+    width: 500px;
+    height: 600px;
+    transform: rotate(65deg); /* Rotate 45 degrees */
+    z-index: -1; /* Set a lower z-index to move it behind other elements */
+}
+
+.BellPepper-image {
+    background-image: url('../img/Backgrounds/BellPepper.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    bottom: 200px; /* Adjust the bottom position */
+    left: -50px; /* Adjust the left position */
+    width: 500px;
+    height: 600px;
+    transform: rotate(65deg); /* Rotate 65 degrees */
+    z-index: -1; /* Set a lower z-index to move it behind other elements */
+}
+
+.carrot-image {
+    background-image: url('../img/Backgrounds/carrot.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 300px; /* Adjust the top position */
+    right: -120px; /* Adjust the right position */
+    width: 500px;
+    height: 600px;
+    transform: rotate(65deg); /* Rotate 65 degrees */
+    z-index: -1; /* Set a lower z-index to move it behind other elements */
+}
+
+.Colander-image {
+    background-image: url('../img/Backgrounds/Colander.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 600px; /* Adjust the top position */
+    left: 200px; /* Adjust the left position */
+    width: 500px;
+    height: 600px;
+    transform: rotate(65deg); /* Rotate 65 degrees */
+    z-index: -1; /* Set a lower z-index to move it behind other elements */
+}
+
+.cucumber-image {
+    background-image: url('../img/Backgrounds/cucumber.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute; /* Fixed position */
+    top: 900px; /* Adjust the top position */
+    left: -200px; /* Adjust the left position */
+    width: 500px;
+    height: 600px;
+    transform: rotate(65deg); /* Rotate 45 degrees */
+    z-index: -1; /* Set a lower z-index to move it behind other elements */
+}
+
+.garlic-image {
+    background-image: url('../img/Backgrounds/garlic.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute; /* Fixed position */
+    top: 1200px; /* Adjust the top position */
+    left: -100px; /* Adjust the left position */
+    width: 500px;
+    height: 600px;
+    transform: rotate(65deg); /* Rotate 45 degrees */
+    z-index: -1; /* Set a lower z-index to move it behind other elements */
+}
+
+.mango-image {
+    background-image: url('../img/Backgrounds/mango.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute; /* Fixed position */
+    top: 1500px; /* Adjust the top position */
+    left: -150px; /* Adjust the left position */
+    width: 500px;
+    height: 600px;
+    transform: rotate(65deg); /* Rotate 45 degrees */
+    z-index: -1; /* Set a lower z-index to move it behind other elements */
+}
+
+.Pot-image {
+    background-image: url('../img/Backgrounds/Pot.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute; /* Fixed position */
+    top: 1800px; /* Adjust the top position */
+    right: -100px; /* Adjust the right position */
+    width: 500px;
+    height: 600px;
+    transform: rotate(65deg); /* Rotate 45 degrees */
+    z-index: -1; /* Set a lower z-index to move it behind other elements */
+}
+
+.RollingPin-image {
+    background-image: url('../img/Backgrounds/RollingPin.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute; /* Fixed position */
+    top: 2000px; /* Adjust the top position */
+    left: -150px; /* Adjust the left position */
+    width: 500px;
+    height: 600px;
+    transform: rotate(65deg); /* Rotate 45 degrees */
+    z-index: -1; /* Set a lower z-index to move it behind other elements */
+}
+
