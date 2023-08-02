@@ -202,3 +202,17 @@ h3{
     color: #f9d24b;
     margin-right: 5px; /* Add some spacing between user info and rating */
 }
+/* Custom button styles */
+.custom-button {
+
+    padding: 10px;
+    background-color: #EA8960;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.custom-button:hover {
+    background-color: #ff5838;
+}

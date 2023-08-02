@@ -102,16 +102,22 @@
         </div>
     </div>
 </div>
+<!-- Save Recipe form -->
+<div class="container text-end">
     <form th:action="@{'/recipes/' + ${recipes.recipeid} + '/favorite'}" method="post">
-        <button type="submit">Save Recipe</button>
+        <button type="submit" class="custom-button">Save Recipe</button>
     </form>
+</div>
 
-    <!-- Meal Planner section -->
+<!-- Meal Planner form -->
+<div class="container text-end">
     <form th:action="@{/mealplanner/add}" method="post">
         <input type="hidden" th:value="${recipes.recipeid}" name="recipeId"/>
-        <input type="date" name="date"/>
-        <input type="submit" value="Add to Meal Planner"/>
+        <input type="date" name="date" class="custom-button"/>
+        <input type="submit" value="Add to Meal Planner" class="custom-button"/>
     </form>
+</div>
+
 
 
 
@@ -133,7 +139,7 @@
 <div class="comments-section">
     <h3>Like this recipe? Tell us how it turn out!</h3>
     <div class="text-center">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ratingModal">
+        <button type="button" class="custom-button" data-toggle="modal" data-target="#ratingModal">
             Write your review!
         </button>
     </div>
