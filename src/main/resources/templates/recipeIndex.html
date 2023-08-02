@@ -27,8 +27,8 @@
 <section id="recipeList">
     <div class="container">
         <div class="row">
-            <div th:each="recipe : ${recipes}" th:if="${recipe != null}" class="col-md-3">
-                <div class="card">
+            <div th:each="recipe : ${recipes}" th:if="${recipe != null}" class="col">
+                <div class="card d-flex justify-content-evenly mt-2 mb-4">
                     <img th:if="${recipe.photo != null}" th:src="${recipe.photo}" class="card-img-top" alt="Recipe Name">
                     <img th:unless="${recipe.photo}" th:src="@{/img/img.png}" class="card-img-top" alt="Default Thumbnail">
                     <div class="card-body">
