@@ -14,13 +14,12 @@
 </head>
 <body>
 <div th:replace="~{partials/navbar :: navbar}"></div>
-<div class="hero-image container background-search d-flex justify-content-center ">
-    <div class="background-overlay"></div>
+<div class="hero-image">
     <img src="/img/img_3.png" alt="Hero Image">
+    <div class="title-container">
+        <h1 th:text="${recipes.title}"></h1>
+    </div>
 </div>
-<div class="container">
-</div>
-    <h1 th:text="${recipes.title}"></h1>
     <br>
     <h3>Created by: <a th:href="@{'/users/' + ${recipes.user.id}}"> <span th:text="${recipes.user.username}"></span></a></h3>
     <br>
