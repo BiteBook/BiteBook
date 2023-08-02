@@ -133,7 +133,11 @@ public class RecipeController {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         User currentUser = userRepository.findByUsername(userDetails.getUsername());
         recipe.setUser(currentUser);
-        recipe.setPhoto(photoUrl);
+        if (photoUrl != null) {
+            recipe.setPhoto(photoUrl);
+        } else {
+            recipe.setPhoto("https://t4.ftcdn.net/jpg/02/51/95/53/360_F_251955356_FAQH0U1y1TZw3ZcdPGybwUkH90a3VAhb.jpg");
+        }
         recipe.setDietStyles(dietStyleRepository.findAllById(dietStyleIds));
         recipe.setAllergens(allergenRepository.findAllById(allergenIds));
         recipe.setTime(recipe.getHours() * 60 + recipe.getMinutes());
@@ -146,6 +150,8 @@ public class RecipeController {
         recipe.setSugar(nutritionInfo.getSugar());
         recipe.setSodium(nutritionInfo.getSodium());
         recipe.setDietStyles(dietStyleRepository.findAllById(dietStyleIds));
+
+
 
         if (allergenIds == null || allergenIds.isEmpty()) {
             // Handle the error, e.g., return an error message or throw an exception
