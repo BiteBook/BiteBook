@@ -28,23 +28,3 @@
     padding: 10px 20px; /* Add some padding to the title text for better visibility */
     border-radius: 8px; /* Add border-radius for a rounded background */
 }
-
-/* Add CSS to spread out the columns in the table */
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-th, td {
-    padding: 8px;
-    text-align: left;
-}
-
-/* Define the width for each column */
-.recipe-name {
-    width: 60%; /* You can adjust the width as per your design */
-}
-
-.creator {
-    width: 40%; /* You can adjust the width as per your design */
-}

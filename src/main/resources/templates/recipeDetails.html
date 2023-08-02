@@ -26,25 +26,30 @@
 <div class="container text-center">
     <div class="row">
         <div class="col-4">
-            <img th:src="${recipes.photo}" alt="Recipe photo" class="recipe-img">
+            <div class="card recipe-card">
+                <img th:src="${recipes.photo}" alt="Recipe photo" class="card-img-top recipe-img">
+            </div>
         </div>
         <div class="col-4">
-            <!-- Allergens and Diet Styles Section -->
-            <div class="allergens-diet-styles">
-                <!-- Allergens -->
-                <div class="allergens">
-                    <h3>Allergens:</h3>
-                    <ul th:each="allergen : ${recipeAllergens}">
-                        <li th:text="${allergen.name}"></li>
-                    </ul>
-                </div>
-
-                <!-- Diet Styles -->
-                <div class="diet-styles">
-                    <h3>Diet Styles:</h3>
-                    <ul th:each="dietStyle : ${recipeDietStyles}">
-                        <li th:text="${dietStyle.name}"></li>
-                    </ul>
+            <div class="card recipe-card">
+                <div class="card-body">
+                    <!-- Allergens and Diet Styles Section -->
+                    <div class="allergens-diet-styles">
+                        <!-- Allergens -->
+                        <div class="allergens">
+                            <h3>Allergens:</h3>
+                            <ul th:each="allergen : ${recipeAllergens}">
+                                <li th:text="${allergen.name}"></li>
+                            </ul>
+                        </div>
+                        <!-- Diet Styles -->
+                        <div class="diet-styles">
+                            <h3>Diet Styles:</h3>
+                            <ul th:each="dietStyle : ${recipeDietStyles}">
+                                <li th:text="${dietStyle.name}"></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -96,17 +101,26 @@
 <div class="container">
     <div class="row">
         <div class="col">
-            <h3>Ingredients :</h3>
-            <p th:text="${recipes.ingredients}"></p>
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">Ingredients :</h3>
+                    <p class="card-text" th:text="${recipes.ingredients}"></p>
+                </div>
+            </div>
         </div>
     </div>
     <div class="row">
         <div class="col">
-            <h3>Instructions :</h3>
-            <p th:text="${recipes.instructions}"></p>
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">Instructions :</h3>
+                    <p class="card-text" th:text="${recipes.instructions}"></p>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
 <!-- Save Recipe form -->
 <div class="container text-end">
     <form th:action="@{'/recipes/' + ${recipes.recipeid} + '/favorite'}" method="post">
@@ -166,6 +180,7 @@
 
 </div>
 </div>
+
 
 
 
@@ -316,7 +331,16 @@
         </div>
     </div>
 </div>
-
+<div class="shroom-image"></div>
+<div class="veggie-image"></div>
+<div class="BellPepper-image"></div>
+<div class="carrot-image"></div>
+<div class="Colander-image"></div>
+<!--<div class="cucumber-image"></div>-->
+<!--<div class="garlic-image"></div>-->
+<!--<div class="mango-image"></div>-->
+<!--<div class="Pot-image"></div>-->
+<!--<div class="RollingPin-image"></div>-->
 
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
