@@ -44,6 +44,7 @@ public class RecipeController {
 
     @GetMapping("/recipes")
     public String showRecipes(Model model) {
+        model.addAttribute("title", "Recipes");
         model.addAttribute("recipes", recipeRepository.findAll());
         return "recipeIndex";
     }
@@ -53,6 +54,7 @@ public class RecipeController {
         Recipe recipe = recipeRepository.findById(id).orElseThrow();
         model.addAttribute("recipes", recipe);
         model.addAttribute("review", new Review());
+        model.addAttribute("title", "Recipe Details");
 
         // Fetch the comments and ratings for the recipe from the database
         List<Review> comments = reviewRepository.findByRecipe(recipe);
@@ -119,6 +121,7 @@ public class RecipeController {
     @GetMapping("/recipes/new")
     public String showCreateRecipeForm(Model model) {
         model.addAttribute("recipe", new Recipe());
+        model.addAttribute("title", "Create Recipe");
         model.addAttribute("allDietStyles", dietStyleRepository.findAll());
         model.addAttribute("allAllergens", allergenRepository.findAll());
         return "createRecipe";
@@ -174,7 +177,7 @@ public class RecipeController {
         if (!recipe.getUser().equals(currentUser)) {
             return "redirect:/error";
         }
-
+        model.addAttribute("title", "Edit Recipe");
         model.addAttribute("recipe", recipe);
         model.addAttribute("allDietStyles", dietStyleRepository.findAll());
         model.addAttribute("allAllergens", allergenRepository.findAll());
@@ -246,6 +249,7 @@ public class RecipeController {
         if (userOptional.isPresent()) {
             User user = userOptional.get();
             List<UserFavorite> favoriteRecipes = userFavoriteRepository.findByUser(user);
+            model.addAttribute("title", "Favorites");
             model.addAttribute("favoriteRecipes", favoriteRecipes);
             return "users/savedFavorites";
         } else {
