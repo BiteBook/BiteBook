@@ -59,6 +59,7 @@ public class UserController {
         // Add all diet styles and allergens to the model
         model.addAttribute("allDietStyles", dietStyleRepository.findAll());
         model.addAttribute("allAllergens", allergenRepository.findAll());
+        model.addAttribute("title", "Sign Up");
 
         return "users/sign-up";
     }
@@ -83,6 +84,7 @@ public class UserController {
 
         List<DietStyle> dietStyles = dietStyleRepository.findAllById(user.getDietaryPreferences().stream().map(DietStyle::getId).collect(Collectors.toList()));
         user.setDietaryPreferences(dietStyles);
+        model.addAttribute("title", "Save User");
 
         userDao.save(user);
         return "redirect:/login";
@@ -90,11 +92,18 @@ public class UserController {
 
 
     @GetMapping("/profile")
-    public String showProfile(Model model, Principal principal) {
+    public String showProfile(@RequestParam(required = false) String username, Principal principal, Model model) {
         if (principal == null) {
             return "redirect:/login";
         }
         User loggedInUser = userDao.findByUsername(principal.getName());
+        User user;
+        if (username == null || username.isEmpty()) {
+            user = loggedInUser;
+        } else {
+            user = userDao.findByUsername(username);
+        }
+
         model.addAttribute("user", loggedInUser);
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -112,7 +121,10 @@ public class UserController {
         model.addAttribute("favoriteRecipes", favoriteRecipes);
 
         List<MealPlanner> mealPlanners = mealPlannerRepository.findByUser(loggedInUser);
-        model.addAttribute("mealPlanners", mealPlanners);
+        List<SimpleMealPlanner> simpleMealPlanners = mealPlanners.stream()
+                .map(SimpleMealPlanner::new)
+                .collect(Collectors.toList());
+        model.addAttribute("mealPlanners", simpleMealPlanners);
 
         List<String> allAllergies = Arrays.asList("Peanuts", "Tree nuts", "Milk", "Egg", "Wheat", "Soy", "Fish", "Shellfish", "Other");
         model.addAttribute("allAllergies", allAllergies);
@@ -120,10 +132,13 @@ public class UserController {
         // Add all diet styles and allergens to the model
         model.addAttribute("allDietStyles", dietStyleRepository.findAll());
         model.addAttribute("allAllergens", allergenRepository.findAll());
+        model.addAttribute("title", "Profile");
 
         model.addAttribute("selectedPage", "profile");
         return "users/profile";
     }
+
+
 
 
     @PostMapping("/profile/edit")
@@ -151,6 +166,7 @@ public class UserController {
         if (userOptional.isPresent()) {
             User user = userOptional.get();
             List<Recipe> personalRecipes = recipeRepository.findByUser(user);
+            model.addAttribute("title", "Personal Recipes");
             model.addAttribute("personalRecipes", personalRecipes);
             return "users/personalRecipes";
         } else {
@@ -169,6 +185,7 @@ public class UserController {
             User user = userOptional.get();
             List<Post> posts = postDao.findByCreatorOrderByCreatedDateDesc(user);
             model.addAttribute("posts", posts);
+            model.addAttribute("title", "User Posts");
             return "users/userPosts";
         } else {
             return "redirect:/404";
@@ -227,6 +244,7 @@ public class UserController {
                 User loggedInUser = userDao.findByUsername(principal.getName());
                 model.addAttribute("currentUser", loggedInUser);
             }
+            model.addAttribute("title", "User Profile");
             return "users/profile";
         } else {
             return "redirect:/404";

@@ -2,7 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Our Developers</title>
+    <title th:text="${title}">Title</title>
+    <link rel="icon" type="image/png" href="/img/img.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/Devcss.css">
     <script src="https://kit.fontawesome.com/d7c23920df.js" crossorigin="anonymous"></script>
@@ -10,145 +11,118 @@
 <body>
 <div th:replace="~{partials/navbar :: navbar}"></div>
 <div class="container">
-    <h1 class="mt-5">Our Developers</h1>
+    <h1 class="mt-5 text-center">About Us</h1>
 
-    <div class="row mt-4 card-row">
-        <div class="col-xxl-12 col-md-10 flex-grow card-width" style="margin-left: 1em;">
-            <div class="card mb-4">
-                <div class="row g-0">
-                    <div class="col-md-6">
-                        <img src="/img/funny-facebook-profile-pictures-4256-x-2832-ais01bxb63e0xymm.jpg"
-                             class="img-fluid" alt="Developer Name">
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card-body align-self-start">
-                            <h4 class="card-title">Benjamin Meadors</h4>
-                            <h6 class="card-sub-title">"The Postmaster"</h6>
-                            <p class="card-text">Lorem Ipsum is the single greatest threat. We are not - we are not
-                                keeping up with other websites. Lorem Ipsum best not make any more threats to your
-                                website. It will be met with fire and fury like the world has never seen. Does everybody
-                                know that pig named Lorem Ipsum? An ‘extremely credible source’ has called my office and
-                                told me that Barack Obama’s placeholder text is a fraud.</p>
-                            <div class="d-flex justify-content-space-evenly">
-                                <i class="fa-brands fa-linkedin m-2" style="color: #c54a07;"></i><i
-                                    class="fa-brands fa-github m-2" style="color: #c54a07;"></i><i
-                                    class="fa-solid fa-utensils m-2" style="color: #c54a07;"></i>
-                            </div>
-                        </div>
-                    </div>
+    <div class="grid-container">
+        <div class="grid-item">
+            <img src="/img/Evil.jpg"
+                 class="card-img img-fluid" alt="Developer Name">
+            <div class="card-body align-self-start">
+                <h4 class="card-title">Benjamin Meadors</h4>
+                <h6 class="card-sub-title">"The Postmaster"</h6>
+                <p class="card-text">Highly driven software developer and Air Force Veteran with experience in managing teams, overlooking projects and troubleshooting complex problems. Motivated to continue learning and honing my skill sets to contribute to the growth of productive software applications.</p>
+                <div class="d-flex justify-content-space-evenly">
+                    <a href="https://www.linkedin.com/in/benjamin-meadors/" target="_blank"><i
+                            class="fa-brands fa-linkedin m-2" style="color: #c54a07;"></i></a>
+                    <a href="https://github.com/Ben-Meadors" target="_blank"><i
+                            class="fa-brands fa-github m-2" style="color: #c54a07;"></i></a>
+            </div>
+            </div>
+        </div>
+        <div class="grid-item">
+            <img src="/img/JosephFuentes.jpg" class="card-img img-fluid" alt="Developer Name">
+            <div class="card-body align-self-start">
+                <h4 class="card-title">Joseph Fuentes</h4>
+                <h6 class="card-sub-title">"Review Wrangler"</h6>
+                <p class="card-text">I'm a passionate full-stack developer with a love for coding and a thirst for challenges. Proficient in Java, HTML, jQuery, JavaScript, CSS, and Spring Boot, I'm on the lookout for an exciting role to apply my skills. When not coding, I enjoy exploring the world through travel, embracing new experiences, and savoring my favorite food, pizza. Let's tackle challenges together and create cutting-edge solutions!</p>
+                <div class="d-flex justify-content-space-evenly">
+                    <a href="https://www.linkedin.com/in/joseph-fuentes1" target="_blank"><i
+                            class="fa-brands fa-linkedin m-2" style="color: #c54a07;"></i></a>
+                    <a href="https://github.com/Jf0311" target="_blank"><i
+                            class="fa-brands fa-github m-2" style="color: #c54a07;"></i></a>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row mt-4 card-row">
-        <div class="col-xxl-10 col-md-8 ms-auto order-md-2 flex-grow card-width" style="margin-right: 1em;">
-            <div class="card mb-4">
-                <div class="row g-0">
-                    <div class="col-md-6 order-md-2">
-                        <img src="/img/monkey-jokes-puns.jpg" class="img-fluid" alt="Developer Name">
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card-body align-self-start">
-                            <h4 class="card-title">Joseph Fuentes</h4>
-                            <h6 class="card-sub-title">"Review Wrangler"</h6>
-                            <p class="card-text">Bro ipsum dolor sit amet gaper backside single track, manny Bike epic
-                                clipless. Schraeder drop gondy, rail fatty slash gear jammer steeps clipless rip bowl
-                                couloir bomb hole berm. Huck cruiser crank endo, sucker hole piste ripping ACL huck
-                                greasy flow face plant pinner. Japan air Skate park big ring trucks shuttle stoked
-                                rock-ectomy.</p>
-                            <div class="d-flex justify-content-space-evenly">
-                                <i class="fa-brands fa-linkedin m-2" style="color: #c54a07;"></i><i
-                                    class="fa-brands fa-github m-2" style="color: #c54a07;"></i><i
-                                    class="fa-solid fa-utensils m-2" style="color: #c54a07;"></i>
-                            </div>
-                        </div>
-                    </div>
+        <div class="grid-item">
+            <img src="/img/img_1.png"
+                 class="card-img img-fluid" alt="Developer Name">
+            <div class="card-body align-self-start">
+                <h4 class="card-title">Liam O'Connor</h4>
+                <h6 class="card-sub-title">"The Exterminator"</h6>
+                <p class="card-text">Professional Software Developer and Marine Veteran with experience in
+                    cultivating teams, managing projects, and finding solutions to complex challenges. Nerds
+                    out over TLOTR, Pokemon, Sci-Fi/Fantasy books, and enjoys classic board game nights.
+                    Father to 2 cats and a GSD.
+                </p>
+                <div class="d-flex justify-content-space-evenly">
+                    <a href="https://www.linkedin.com/in/liam-a-oconnor/" target="_blank"><i
+                            class="fa-brands fa-linkedin m-2" style="color: #c54a07;"></i></a>
+                    <a href="https://github.com/Liam0C0NN0R" target="_blank"><i
+                            class="fa-brands fa-github m-2" style="color: #c54a07;"></i></a>
+                    <i class="fa-solid fa-utensils m-2" style="color: #c54a07;"></i>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row mt-4 card-row">
-        <div class="col-xxl-10 col-md-10 flex-grow card-width" style="margin-left: 1em;">
-            <div class="card mb-4">
-                <div class="row g-0">
-                    <div class="col-md-6">
-                        <img src="/img/img_1.png"
-                             class="img-fluid" alt="Developer Name">
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card-body align-self-start">
-                            <h4 class="card-title">Liam O'Connor</h4>
-                            <h6 class="card-sub-title">"The Exterminator"</h6>
-                            <p class="card-text">Professional Software Developer and Marine Veteran with experience in
-                                cultivating teams, managing projects, and finding solutions to complex challenges. Nerds
-                                out over TLOTR, Pokemon, Sci-Fi/Fantasy books, and enjoys classic board game nights.
-                                Father to 2 cats and a GSD.
-                            </p>
-                            <div class="d-flex justify-content-space-evenly">
-                                <a href="https://www.linkedin.com/in/liam-a-oconnor/" target="_blank"><i
-                                        class="fa-brands fa-linkedin m-2" style="color: #c54a07;"></i></a>
-                                <a href="https://github.com/Liam0C0NN0R" target="_blank"><i
-                                        class="fa-brands fa-github m-2" style="color: #c54a07;"></i></a>
-                                <i class="fa-solid fa-utensils m-2" style="color: #c54a07;"></i>
-                            </div>
-                        </div>
-                    </div>
+        <div class="grid-item">
+            <img src="/img/Logan.jpeg" class="card-img img-fluid" alt="Developer Name">
+            <div class="card-body align-self-start">
+                <h4 class="card-title">Logan Rodriguez</h4>
+                <h6 class="card-sub-title">"The API Guy"</h6>
+                <p class="card-text">Eager Full Stack Software Developer, leveraging analytical and
+                    problem-solving abilities,
+                    along with good judgment, to deliver business solutions that significantly enhance the
+                    customer experience
+                    while driving revenue generation. Confident in taking initiative and proactively building
+                    customer-focused
+                    interactive applications using modern development practices, employing JavaScript and Java
+                    coding. Having
+                    been in the STEM ecosystem since the age of 11. I started to code at the young age of 13 and
+                    loved it ever
+                    since. I hope to become a Software Developer that can leave his mark on the world.</p>
+                <div class="d-flex justify-content-space-evenly">
+                    <a href="http://www.linkedin.com/in/logan-rodriguez04" target="_blank"><i
+                            class="fa-brands fa-linkedin m-2" style="color: #c54a07;"></i></a>
+                    <a href="https://github.com/rodriguezlogan" target="_blank"><i
+                            class="fa-brands fa-github m-2" style="color: #c54a07;"></i></a>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row mt-4 card-row">
-        <div class="col-xxl-10 col-md-10 ms-auto order-md-2 flex-grow card-width" style="margin-right: 1em;">
-            <div class="card mb-4">
-                <div class="row g-0">
-                    <div class="col-md-6 order-md-2">
-                        <img src="/img/Logan.jpeg" class="img-fluid" alt="Developer Name">
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card-body align-self-start">
-                            <h4 class="card-title">Logan Rodriguez</h4>
-                            <h6 class="card-sub-title">"The API Guy"</h6>
-                            <p class="card-text">Eager Full Stack Software Developer, leveraging analytical and problem-solving abilities, along with good judgment, to deliver business solutions that significantly enhance the customer experience while driving revenue generation. Confident in taking initiative and proactively building customer-focused interactive applications using modern development practices, employing JavaScript and Java coding. Having been in the STEM ecosystem since the age of 11. I started to code at the young age of 13 and loved it ever since. I hope to become a Software Developer that can leave his mark on the world.</p>
-                            <div class="d-flex justify-content-space-evenly">
-                                <i class="fa-brands fa-linkedin m-2" style="color: #c54a07;"></i><i
-                                    class="fa-brands fa-github m-2" style="color: #c54a07;"></i><i
-                                    class="fa-solid fa-utensils m-2" style="color: #c54a07;"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row mt-4 card-row">
-        <div class="col-xxl-10 col-md-10 flex-grow card-width" style="margin-left: 1em;">
-            <div class="card mb-4">
-                <div class="row g-0">
-                    <div class="col-md-6">
-                        <img src="/img/Patrick.jpg"
-                             class="img-fluid" alt="Developer Name">
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card-body align-self-start">
-                            <h4 class="card-title">Patrick Mireles</h4>
-                            <h6 class="card-sub-title"> "Chatbot Champion"</h6>
-                            <p class="card-text">A Full Stack Web Developer with experience in JAVA, JS, Python and other web technologies. In my previous roles as a Technical Director, I managed and directed studio operations for news broadcasts, ensuring lighting and camera automation. As a former infantryman in the US Marine Corps, I developed valuable qualities such as disciplines and adaptability. I thrive in high-pressure situations and excel in problem-solving and attention to detail. My goal as a web developer is to create intuitive, friendly web applications, with a current focus on health and sports projects. I am passionate about technology and eager to collaborate with other developers, learn new tools and frameworks, and contribute to impactful projects. My unique combination  of military, broadcasting, and web development experience provides a diverse and versatile perspective that can benefit any organization.
-                            </p>
-                            <div class="d-flex justify-content-space-evenly">
-                                <i class="fa-brands fa-linkedin m-2" style="color: #c54a07;"></i><i
-                                    class="fa-brands fa-github m-2" style="color: #c54a07;"></i><i
-                                    class="fa-solid fa-utensils m-2" style="color: #c54a07;"></i>
-                            </div>
-                        </div>
-                    </div>
+        <div class="grid-item">
+            <img src="/img/Patrick.jpg"
+                 class="card-img img-fluid" alt="Developer Name">
+            <div class="card-body align-self-start">
+                <h4 class="card-title">Patrick Mireles</h4>
+                <h6 class="card-sub-title"> "Chatbot Champion"</h6>
+                <p class="card-text">A Full Stack Web Developer with experience in JAVA, JS, Python and
+                    other web technologies.
+                    In my previous roles as a Technical Director, I managed and directed studio operations
+                    for news broadcasts,
+                    ensuring lighting and camera automation. As a former infantryman in the US Marine Corps,
+                    I developed
+                    valuable qualities such as disciplines and adaptability. I thrive in high-pressure
+                    situations and excel in
+                    problem-solving and attention to detail. My goal as a web developer is to create
+                    intuitive, friendly web
+                    applications, with a current focus on health and sports projects. I am passionate about
+                    technology and eager
+                    to collaborate with other developers, learn new tools and frameworks, and contribute to
+                    impactful projects.
+                    My unique combination of military, broadcasting, and web development experience provides
+                    a diverse and
+                    versatile perspective that can benefit any organization.
+                </p>
+                <div class="d-flex justify-content-space-evenly">
+                    <a href="https://www.linkedin.com/in/patrick-mireles-161a5367/" target="_blank"><i
+                            class="fa-brands fa-linkedin m-2" style="color: #c54a07;"></i></a>
+                    <a href="https://github.com/preli03" target="_blank"><i
+                            class="fa-brands fa-github m-2" style="color: #c54a07;"></i></a>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-
-<div th:replace="~{partials/footer :: footer}"></div>
+<!--<div th:replace="~{partials/footer :: footer}"></div>-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 </body>
 </html>

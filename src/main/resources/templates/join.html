@@ -2,7 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8" />
-  <title>Join</title>
+  <title th:text="${title}">Title</title>
+  <link rel="icon" type="image/png" href="/img/img.png">
 </head>
 <body>
 <div th:replace="partials/navbar :: navbar"></div>

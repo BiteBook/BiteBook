@@ -1,13 +1,113 @@
-/* Custom CSS for the recipe details page */
+.hero-image {
+    position: relative;
+    width: 100%;
+    height: 400px; /* Adjust the height as per your design */
+    overflow: hidden;
+    /* Center horizontally and vertically */
+    display: flex;
+    align-items: center;
+}
+
+.hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure the image covers the entire container */
+    object-position: center; /* Center the image within the container */
+}
+
+/* Background Overlay */
+.background-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Adjust the opacity as desired */
+    z-index: 1;
+}
+
+
+h1{
+    text-align: center;
+    margin-top: 5px;
+}
+
+
 body {
     background: linear-gradient(175deg, #fff5ec, #eedbc5, rgb(255, 213, 182) 15%, #ffa562);
-    font-family: 'Lugrasimo', cursive;
+
 }
 
 .navbar,
 .card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
+.navbar-brand{
+    font-family: 'Lumanosimo', cursive;
+}
+
+/* Custom CSS for the recipe image */
+.recipe-img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+}
+
+
+.container.text-center {
+    margin-bottom: 20px;
+}
+
+
+.container.text-center .row {
+    justify-content: center;
+}
+
+
+.container.text-center .col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+
+
+/* Custom CSS for the allergens and diet styles section */
+.allergens-diet-styles {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.allergens-diet-styles .allergens {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.allergens-diet-styles .diet-styles {
+    flex: 1;
+}
+
+.recipe-card {
+    text-align: center;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: linear-gradient(175deg, #fff5ec, #eedbc5, rgb(255, 213, 182) 15%, #ffa562);
+}
+
+h3{
+    text-align: center;
+}
+
+p{
+    font-family:"Times New Roman";
+    font-size: large;
+}
+
+
 
 /* Custom CSS to move the checkboxes to the right */
 .checkbox-container {
@@ -15,6 +115,7 @@ body {
     justify-content: flex-end;
     align-items: flex-start;
 }
+
 
 .form-check {
     margin-right: 20px;
@@ -33,8 +134,7 @@ body {
 }
 
 
-/* Add your other custom CSS styles here */
-/* ... */
+
 
 /* Custom CSS for the recipe details section */
 .recipe-details {
@@ -134,3 +234,19 @@ body {
     color: #f9d24b;
     margin-right: 5px; /* Add some spacing between user info and rating */
 }
+/* Custom button styles */
+.custom-button {
+
+    padding: 10px;
+    background-color: #EA8960;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.custom-button:hover {
+    background-color: #ff5838;
+}
+
+
