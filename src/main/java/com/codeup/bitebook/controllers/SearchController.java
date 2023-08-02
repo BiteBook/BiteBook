@@ -44,6 +44,7 @@ public class SearchController {
         }
         model.addAttribute("recipes", listRecipes);
         model.addAttribute("keyword", keyword);
+        model.addAttribute("title", "Search Recipes");
 
         return "recipeIndex";
     }
