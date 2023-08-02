@@ -10,6 +10,28 @@
       padding-right: 0.5rem;
       padding-left: 0.5rem;
     }
+    .logout-button {
+      color: #212529;
+      text-decoration: none;
+      background: none;
+      border: none;
+      padding: 0;
+      font-size: 1rem;
+      line-height: 1.5;
+      cursor: pointer;
+      display: inline;
+      vertical-align: baseline;
+    }
+    .logout-button:hover {
+      text-decoration: underline;
+    }
+    .navbar-nav .nav-item .btn {
+      padding: .5rem 0;
+    }
+    .btn.logout-button{
+      margin: 0;
+    }
+
   </style>
 </head>
 <body>
@@ -33,7 +55,9 @@
           </li>
           <li sec:authorize="isAuthenticated()" class="nav-item">
             <form th:action="@{/logout}" th:method="post">
-              <button class="btn-link btn" style="margin-top: 8px;">Logout</button>
+              <button class="btn logout-button">Logout</button>
+
+
             </form>
           </li>
           <li class="nav-item">

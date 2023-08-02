@@ -15,35 +15,58 @@
 
 <body>
 <div class="shroom-image"></div>
+<div class="pot-image"></div>
 <div class="veggie-image"></div>
-
 <div class="content">
     <h2 id="greeting"></h2>
     <div class="card profile-card">
         <div class="card-body">
-            <h5 class="card-title" th:text="${user.username} ?: 'No username'"></h5>
-            <h6 class="card-subtitle mb-2 text-muted">Dietary Preferences:</h6>
-            <p class="card-text">
-            <span th:each="diet, iterStat : ${user.dietaryPreferences}"
-                  th:text="${diet.name} + (iterStat.last ? '' : ', ')"></span>
-            </p>
-            <h6 class="card-subtitle mb-2 text-muted">Allergies:</h6>
-            <p class="card-text">
-                <span th:each="allergy : ${user.allergyList}" th:text="${allergy.name} + ', '"></span>
-            </p>
-            <div class="buttons-grid">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editUsernameModal">Edit Username</button>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editPreferencesModal">Edit Preferences</button>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#changePasswordModal">Change Password</button>
-                <a th:href="@{/recipes/new}" th:if="${currentUser?.username == user.username}">Create Recipe</a>
-                <a th:href="@{/users/{userId}/favorites(userId=${user.id})}" th:if="${currentUser != null}">Favorites</a>
-                <a th:href="@{/users/{userId}/profile/personal-recipes(userId=${user.id})}">Personal Recipes</a>
+            <div class="left-section">
+                <h5 class="card-title" th:text="${user.username} ?: 'No username'"></h5>
+                <h6 class="card-subtitle mb-2 text-muted">Dietary Preferences:</h6>
+                <p class="card-text">
+                <span th:each="diet, iterStat : ${user.dietaryPreferences}"
+                      th:text="${diet.name} + (iterStat.last ? '' : ', ')"></span>
+                </p>
+                <h6 class="card-subtitle mb-2 text-muted">Allergies:</h6>
+                <p class="card-text">
+                    <span th:each="allergy : ${user.allergyList}" th:text="${allergy.name} + ', '"></span>
+                </p>
             </div>
-
-            <!-- About Me section -->
-            <div class="about-me">
-                <h6>About Me:</h6>
-                <p>Your bio here...</p>
+            <div class="right-section">
+                <div class="buttons-grid">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editUsernameModal">
+                        Edit Username
+                    </button>
+                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                            data-target="#editPreferencesModal">Edit Preferences
+                    </button>
+                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                            data-target="#changePasswordModal">Change Password
+                    </button>
+                    <a th:href="@{/recipes/new}" th:if="${currentUser?.username == user.username}">Create Recipe</a>
+                    <a th:href="@{/users/{userId}/favorites(userId=${user.id})}"
+                       th:if="${currentUser != null}">Favorites</a>
+                    <a th:href="@{/users/{userId}/profile/personal-recipes(userId=${user.id})}">Personal Recipes</a>
+                </div>
+            </div>
+            <div class="bottom-section">
+                <div class="about-me">
+                    <h6>About Me:</h6>
+                    <p>How far away hydrogen atoms laws of physics cosmos galaxies Flatland? Intelligent beings cosmic
+                        ocean
+                        courage of our questions citizens of distant epochs rich in heavy atoms Sea of Tranquility?
+                        Another
+                        world as a patch of light invent the universe intelligent beings courage of our questions as a
+                        patch
+                        of light. Network of wormholes vanquish the impossible vastness is bearable only through love
+                        from
+                        which we spring two ghostly white figures in coveralls and helmets are softly dancing citizens
+                        of
+                        distant epochs and billions upon billions upon billions upon billions upon billions upon
+                        billions
+                        upon billions.</p>
+                </div>
             </div>
         </div>
     </div>
@@ -54,15 +77,17 @@
                 <div class="blog-content" th:if="${userPosts}">
                     <div th:each="post : ${userPosts}" class="card ms-3 ps-3 pb-2 pt-2">
                         <div class="blog-content">
-                            <h3 th:text="${post.title}" class="card-title"></h3>
+                            <h4 th:text="${post.title}" class="card-title"></h4>
                             <p th:text="${#strings.abbreviate(post.body,200)}"
                                class="card-text text-center"></p>
                             <a th:href="@{/posts/{id}(id=${post.id})}" class="card-link">Read More</a>
                         </div>
                     </div>
+                    <div class="view-post-history">
+                        <a th:href="@{/users/{userId}/posts(userId=${user.id})}" class="btn btn-primary">View Post
+                            History</a>
+                    </div>
                 </div>
-                <a th:href="@{/users/{userId}/posts(userId=${user.id})}" class="btn btn-primary">View Post
-                    History</a>
             </div>
         </div>
         <div class="calendar">
@@ -81,7 +106,7 @@
                     </div>
                 </ul>
             </div>
-            <div th:if="${currentUser?.username == user.username}">
+            <div class="post-exp" th:if="${currentUser?.username == user.username}">
                 <h3>Want to share a recent culinary experience?</h3>
                 <div class="nav-item">
                     <a th:classappend="${selectedPage == 'posts-create'} ? 'active' : ''" class="btn btn-primary"
@@ -93,7 +118,6 @@
         </div>
     </div>
 </div>
-</div>
 <div th:if="${currentUser?.username != user.username}">
     <h3>Here's what <span th:text="${user.username}"></span> has to say!</h3>
     <div th:if="${userPosts}">
@@ -104,10 +128,6 @@
         </div>
     </div>
 </div>
-
-&nbsp;
-</div>
-
 
 <div th:if="${param.error}">
     <div th:if="${param.error[0] == 'username'}" class="alert alert-danger">Username is already taken</div>
