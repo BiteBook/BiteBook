@@ -40,18 +40,20 @@
 <h2>Trending Recipes</h2>
 
 <div id="recipeList" class="row">
-    <div th:each="recipe : ${trendingRecipes}" th:if="${recipe != null}">
+    <th:block th:each="recipe : ${trendingRecipes}" th:if="${recipe != null}">
         <div class="col-md-3">
-            <div class="card">
-                <img th:if="${recipe.photo != null}" th:src="${recipe.photo}" class="card-img-top" alt="Recipe Name">
-                <div class="card-body">
-                    <h5 class="card-title" th:text="${recipe.title}">Recipe Name</h5>
-                    <p class="card-text" th:text="'Cook time: ' + ${recipe.time} + ' mins'">Cook time: 45 mins</p>
-                    <a th:href="@{/recipes/{id}(id=${recipe.recipeid})}" class="btn btn-primary">View Recipe</a>
+            <div class="card-show">
+                <div class="card">
+                    <img th:if="${recipe.photo != null}" th:src="${recipe.photo}" class="card-img-top" alt="Recipe Name">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${recipe.title}">Recipe Name</h5>
+                        <p class="card-text" th:text="'Cook time: ' + ${recipe.time} + ' mins'">Cook time: 45 mins</p>
+                        <a th:href="@{/recipes/{id}(id=${recipe.recipeid})}" class="btn btn-primary">View Recipe</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </th:block>
 </div>
 <br>
 
@@ -61,6 +63,7 @@
 <div id="readyList" class="row">
     <th:block th:each="recipe : ${readyIn15Recipes}" th:if="${recipe != null}">
         <div class="col-md-3">
+            <div class="card-show">
             <div class="card">
                 <img th:if="${recipe.photo != null}" th:src="${recipe.photo}" class="card-img-top" alt="Recipe Name">
                 <div class="card-body">
@@ -69,11 +72,28 @@
                     <a th:href="@{/recipes/{id}(id=${recipe.recipeid})}" class="btn btn-primary">View Recipe</a>
                 </div>
             </div>
+            </div>
         </div>
     </th:block>
 </div>
 
 
+<!-- adding a recommendation searchFinder/recipeFinder-->
+<section id="popularRecipes">
+    <h2>Popular Recipes</h2>
+    <div id="popularRecipeList" class="row">
+    </div>
+
+    <div class ="container">
+        <h2>RecipeFinder</h2>
+        <form id="searchFoRecipes">
+            <label for="search"></label><input type="text" id="search" placeholder="Recommendations">
+            <button type="button" id="submit" class="btn">Search</button>
+        </form>
+        <div id="searchResults"></div>
+    </div>
+</section>
+</div>
 
 <br>
 
