@@ -1,30 +1,46 @@
 .hero-image {
     position: relative;
     width: 100%;
-    height: 400px; /* Adjust the height as per your design */
+    height: 250px; /* Adjust the height as per your design */
     overflow: hidden;
-    /* Center horizontally and vertically */
-    display: flex;
-    align-items: center;
 }
 
 .hero-image img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Ensure the image covers the entire container */
+    background-size: contain;
     object-position: center; /* Center the image within the container */
 }
 
-/* Background Overlay */
-.background-overlay {
+.title-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 100%;
+}
+
+.title-container h1 {
+    font-size: 44px; /* Adjust the font size as per your design */
+    color: black; /* Change the color of the title text */
+    background-color: rgba(255, 165, 98, 0.7); /* Use rgba with the desired background color and opacity */
+    padding: 10px 20px; /* Add some padding to the title text for better visibility */
+    border-radius: 8px; /* Add border-radius for a rounded background */
+}
+
+/* Add an overlay with a semi-transparent background color */
+.hero-image::before {
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Adjust the opacity as desired */
-    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.5); /* Adjust the alpha value to control the darkness (0 to 1) */
 }
+
+
 
 
 h1{
@@ -41,7 +57,9 @@ body {
 .navbar,
 .card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    background-color: #ffa562;
 }
+
 .navbar-brand{
     font-family: 'Lumanosimo', cursive;
 }
@@ -249,4 +267,174 @@ p{
     background-color: #ff5838;
 }
 
+.recipe-card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add a subtle shadow for a 3D effect */
+}
+
+.recipe-img {
+    width: 100%;
+    height: 400px; /* Adjust the height as per your design to make it bigger */
+    object-fit: cover; /* Ensure the image covers the entire container */
+    border-top-left-radius: 8px; /* Add rounded corners for the top left and top right edges */
+    border-top-right-radius: 8px;
+}
+
+.allergens-diet-styles {
+    padding: 10px;
+}
+
+.allergens h3,
+.diet-styles h3 {
+    margin-bottom: 5px;
+}
+
+.allergens ul,
+.diet-styles ul {
+    list-style: none;
+    padding: 0;
+}
+
+.allergens li,
+.diet-styles li {
+    margin-bottom: 5px;
+}
+
+.recipe-card .card-header {
+    background-color: #EA8960;
+    color: #fff;
+    font-size: 18px;
+    padding: 10px;
+}
+
+.shroom-image {
+    background-image: url('../img/Backgrounds/Shroom.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    bottom: 0; /* Adjust the bottom position */
+    right: 0; /* Adjust the right position */
+    width: 500px;
+    height: 500px;
+    z-index: -1; /* Set a lower z-index to move it behind other elements */
+}
+
+.veggie-image {
+    background-image: url('../img/Backgrounds/Veggie.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute; /* Fixed position */
+    top: 100px; /* Adjust the top position */
+    left: -170px; /* Adjust the left position */
+    width: 500px;
+    height: 600px;
+    transform: rotate(65deg); /* Rotate 45 degrees */
+    z-index: -1; /* Set a lower z-index to move it behind other elements */
+}
+
+.BellPepper-image {
+    background-image: url('../img/Backgrounds/BellPepper.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    bottom: 200px; /* Adjust the bottom position */
+    left: -50px; /* Adjust the left position */
+    width: 500px;
+    height: 600px;
+    transform: rotate(65deg); /* Rotate 65 degrees */
+    z-index: -1; /* Set a lower z-index to move it behind other elements */
+}
+
+.carrot-image {
+    background-image: url('../img/Backgrounds/carrot.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 300px; /* Adjust the top position */
+    right: -120px; /* Adjust the right position */
+    width: 500px;
+    height: 600px;
+    transform: rotate(65deg); /* Rotate 65 degrees */
+    z-index: -1; /* Set a lower z-index to move it behind other elements */
+}
+
+.Colander-image {
+    background-image: url('../img/Backgrounds/Colander.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 600px; /* Adjust the top position */
+    left: 200px; /* Adjust the left position */
+    width: 500px;
+    height: 600px;
+    transform: rotate(65deg); /* Rotate 65 degrees */
+    z-index: -1; /* Set a lower z-index to move it behind other elements */
+}
+
+.cucumber-image {
+    background-image: url('../img/Backgrounds/cucumber.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute; /* Fixed position */
+    top: 900px; /* Adjust the top position */
+    left: -200px; /* Adjust the left position */
+    width: 500px;
+    height: 600px;
+    transform: rotate(65deg); /* Rotate 45 degrees */
+    z-index: -1; /* Set a lower z-index to move it behind other elements */
+}
+
+/*.garlic-image {*/
+/*    background-image: url('../img/Backgrounds/garlic.png');*/
+/*    background-size: contain;*/
+/*    background-repeat: no-repeat;*/
+/*    position: absolute; !* Fixed position *!*/
+/*    top: 1200px; !* Adjust the top position *!*/
+/*    left: -100px; !* Adjust the left position *!*/
+/*    width: 500px;*/
+/*    height: 600px;*/
+/*    transform: rotate(65deg); !* Rotate 45 degrees *!*/
+/*    z-index: -1; !* Set a lower z-index to move it behind other elements *!*/
+/*}*/
+
+/*.mango-image {*/
+/*    background-image: url('../img/Backgrounds/mango.png');*/
+/*    background-size: contain;*/
+/*    background-repeat: no-repeat;*/
+/*    position: absolute; !* Fixed position *!*/
+/*    top: 1500px; !* Adjust the top position *!*/
+/*    left: -150px; !* Adjust the left position *!*/
+/*    width: 500px;*/
+/*    height: 600px;*/
+/*    transform: rotate(65deg); !* Rotate 45 degrees *!*/
+/*    z-index: -1; !* Set a lower z-index to move it behind other elements *!*/
+/*}*/
+
+/*.Pot-image {*/
+/*    background-image: url('../img/Backgrounds/Pot.png');*/
+/*    background-size: contain;*/
+/*    background-repeat: no-repeat;*/
+/*    position: absolute; !* Fixed position *!*/
+/*    top: 1800px; !* Adjust the top position *!*/
+/*    right: -100px; !* Adjust the right position *!*/
+/*    width: 500px;*/
+/*    height: 600px;*/
+/*    transform: rotate(65deg); !* Rotate 45 degrees *!*/
+/*    z-index: -1; !* Set a lower z-index to move it behind other elements *!*/
+/*}*/
+
+/*.RollingPin-image {*/
+/*    background-image: url('../img/Backgrounds/RollingPin.png');*/
+/*    background-size: contain;*/
+/*    background-repeat: no-repeat;*/
+/*    position: absolute; !* Fixed position *!*/
+/*    top: 2000px; !* Adjust the top position *!*/
+/*    left: -150px; !* Adjust the left position *!*/
+/*    width: 500px;*/
+/*    height: 600px;*/
+/*    transform: rotate(65deg); !* Rotate 45 degrees *!*/
+/*    z-index: -1; !* Set a lower z-index to move it behind other elements *!*/
+/*}*/
 

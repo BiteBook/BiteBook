@@ -1,0 +1,30 @@
+.hero-image {
+    position: relative;
+    width: 100%;
+    height: 250px; /* Adjust the height as per your design */
+    overflow: hidden;
+}
+
+.hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure the image covers the entire container */
+    object-position: center; /* Center the image within the container */
+}
+
+.title-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 100%;
+}
+
+.title-container h1 {
+    font-size: 44px; /* Adjust the font size as per your design */
+    color: black; /* Change the color of the title text */
+    background-color: rgba(234, 137, 96, 0.7); /* Use rgba with the desired background color and opacity */
+    padding: 10px 20px; /* Add some padding to the title text for better visibility */
+    border-radius: 8px; /* Add border-radius for a rounded background */
+}
