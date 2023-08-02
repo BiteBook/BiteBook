@@ -173,5 +173,12 @@ h2 {
     font-size: 24px;
 }
 
+.card-img-top{
+    max-height: 200px;
+    width: auto;
+}
 
-
+.card-show{
+    display: flex;
+    justify-content: center;
+}
