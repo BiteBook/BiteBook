@@ -28,14 +28,42 @@ html{
     justify-content: space-between;
 }
 
-footer {
-    background-color: #f0f0f0;
-    padding: 10px;
-    text-align: center;
+.footer {
+    background-color: #333;
+    color: #fff;
+    padding: 30px 0;
 }
 
-footer p {
-    margin: 0;
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer h3 {
+    color: #fff;
+}
+
+.footer p {
+    color: #ccc;
+}
+
+.footer-left,
+.footer-middle,
+.footer-right {
+    flex: 1;
+    margin-right: 20px;
+}
+
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.footer-bottom p {
+    color: #ccc;
 }
 .card-img {
     width: auto;
