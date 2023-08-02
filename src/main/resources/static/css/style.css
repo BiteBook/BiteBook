@@ -59,6 +59,10 @@ body { background: linear-gradient(175deg , #fff5ec, #eedbc5, rgb(255, 213, 182)
     color: #ccc;
 }
 
+.card-img-top{
+    height: 200px;
+    width: auto;
+}
 .footer-left,
 .footer-middle,
 .footer-right {
@@ -75,7 +79,26 @@ body { background: linear-gradient(175deg , #fff5ec, #eedbc5, rgb(255, 213, 182)
 .footer-bottom p {
     color: #ccc;
 }
+.form-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
 
+.form-container input[type="text"],
+.form-container input[type="checkbox"],
+.form-container input[type="submit"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.form-container label {
+    color: #333;
+    margin-right: 5px;
+}
 
 h1{
     text-align: center;

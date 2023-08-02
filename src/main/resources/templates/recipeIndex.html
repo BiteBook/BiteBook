@@ -4,39 +4,49 @@
     <title>Recipe Index</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/style.css">
+
+
 </head>
 <body>
 <div th:replace="~{partials/navbar :: navbar}"></div>
 
+<br>
 <h1>Recipe Index</h1>
-<form th:action="@{/recipes/search}">
-    Filter: <input type="text" name="keyword" id="keyword" size="50" th:value="${keyword}" required />
-    &nbsp;
+<form th:action="@{/recipes/search}" class="form-container">
+    <label for="keyword">Filter:</label>
+    <input type="text" name="keyword" id="keyword" size="50" th:value="${keyword}" required />
     <input type="checkbox" id="dietaryFilter" name="dietaryFilter" />
     <label for="dietaryFilter">Apply dietary and allergy filter</label>
-    &nbsp;
-    <input type="submit" value="Search" />
-    &nbsp;
-<!--    <input type="button" value="Clear" id="btnClear" onclick="clearSearch()" />-->
+
 </form>
 
 
-<!-- loop through and display each recipe -->
 
-<ul>
-    <th:block th:each="recipe : ${recipes}">
-        <li>
-            <a th:href="@{/recipes/{id}(id=${recipe.recipeid})}" th:text="${recipe.title}"></a>
-        </li>
-    </th:block>
-</ul>
+<!-- loop through and display each recipe -->
+<section id="recipeList">
+    <div class="container">
+        <div class="row">
+            <div th:each="recipe : ${recipes}" th:if="${recipe != null}" class="col-md-3">
+                <div class="card">
+                    <img th:if="${recipe.photo != null}" th:src="${recipe.photo}" class="card-img-top" alt="Recipe Name">
+                    <img th:unless="${recipe.photo}" th:src="@{/img/img.png}" class="card-img-top" alt="Default Thumbnail">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${recipe.title}">Recipe Name</h5>
+                        <p class="card-text" th:text="'Cook time: ' + ${recipe.time} + ' mins'">Cook time: 45 mins</p>
+                        <a th:href="@{/recipes/{id}(id=${recipe.recipeid})}" class="btn btn-primary">View Recipe</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<br>
+
+
 
 <div th:replace="partials/footer :: footer"></div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
-<script type="text/javascript">
-    function clearSearch() {
-        window.location = "[[@{/}]]";
-    }
-</script>
+
 </body>
 </html>
