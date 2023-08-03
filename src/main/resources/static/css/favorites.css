@@ -1,3 +1,180 @@
+
+/** {*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+/*}*/
+
+/*body {*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    min-height: 100vh;*/
+/*    background: linear-gradient(175deg, #fff5ec, #eedbc5, rgb(255, 213, 182) 15%, #ffa562);*/
+/*}*/
+
+/*.content-wrapper {*/
+/*    flex-grow: 1;*/
+/*}*/
+
+
+
+/*.hero-image {*/
+/*    position: relative;*/
+/*    width: 100%;*/
+/*    height: 250px; !* Adjust the height as per your design *!*/
+/*    overflow: hidden;*/
+/*}*/
+
+/*.hero-image img {*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*    object-fit: cover; !* Ensure the image covers the entire container *!*/
+/*    object-position: center; !* Center the image within the container *!*/
+/*}*/
+
+/*.title-container {*/
+/*    position: absolute;*/
+/*    top: 50%;*/
+/*    left: 50%;*/
+/*    transform: translate(-50%, -50%);*/
+/*    text-align: center;*/
+/*    width: 100%;*/
+/*}*/
+
+/*.title-container h1 {*/
+/*    font-size: 44px; !* Adjust the font size as per your design *!*/
+/*    color: black; !* Change the color of the title text *!*/
+/*    background-color: rgba(234, 137, 96, 0.7); !* Use rgba with the desired background color and opacity *!*/
+/*    padding: 10px 20px; !* Add some padding to the title text for better visibility *!*/
+/*    border-radius: 8px; !* Add border-radius for a rounded background *!*/
+/*}*/
+
+
+/*table {*/
+/*    width: 100%;*/
+/*    border-collapse: collapse;*/
+/*}*/
+
+/*th, td {*/
+/*    padding: 8px;*/
+/*    text-align: left;*/
+/*}*/
+
+/*!* Define the width for each column *!*/
+/*.recipe-name {*/
+/*    width: 60%; !* You can adjust the width as per your design *!*/
+/*}*/
+
+/*.creator {*/
+/*    width: 40%; !* You can adjust the width as per your design *!*/
+/*}*/
+/*a {*/
+/*    color: black; !* Set the color for regular links *!*/
+/*    text-decoration: none; !* Remove underlines from links *!*/
+/*    transition: color 0.3s; !* Add a smooth color transition on hover *!*/
+/*}*/
+
+/*a:hover {*/
+/*    color: #FF5838; !* Change the link color on hover *!*/
+/*}*/
+
+/*td{*/
+/*    background-color: rgba(234, 137, 96, 0.7);*/
+/*    font-size: 34px;*/
+/*    font-weight: bold;*/
+
+/*}*/
+
+
+/*.garlic-image {*/
+/*    background-image: url('../img/Backgrounds/garlic.png');*/
+/*    background-size: contain;*/
+/*    background-repeat: no-repeat;*/
+/*    position: absolute;*/
+/*    top: 180px; !* Adjust the top position to avoid overlap *!*/
+/*    left: 50px; !* Adjust the left position to avoid overlap *!*/
+/*    width: 400px; !* Adjust the width to fit the layout *!*/
+/*    height: 480px; !* Adjust the height to fit the layout *!*/
+/*    transform: rotate(65deg);*/
+/*    z-index: -1;*/
+/*}*/
+
+/*.mango-image {*/
+/*    background-image: url('../img/Backgrounds/mango.png');*/
+/*    background-size: contain;*/
+/*    background-repeat: no-repeat;*/
+/*    position: absolute;*/
+/*    top: 480px; !* Adjust the top position to avoid overlap *!*/
+/*    left: -50px; !* Adjust the left position to avoid overlap *!*/
+/*    width: 400px; !* Adjust the width to fit the layout *!*/
+/*    height: 480px; !* Adjust the height to fit the layout *!*/
+/*    transform: rotate(65deg);*/
+/*    z-index: -1;*/
+/*}*/
+
+/*.Pot-image {*/
+/*    background-image: url('../img/Backgrounds/Pot.png');*/
+/*    background-size: contain;*/
+/*    background-repeat: no-repeat;*/
+/*    position: absolute;*/
+/*    top: 780px; !* Adjust the top position to avoid overlap *!*/
+/*    right: 50px; !* Adjust the right position to avoid overlap *!*/
+/*    width: 400px; !* Adjust the width to fit the layout *!*/
+/*    height: 480px; !* Adjust the height to fit the layout *!*/
+/*    transform: rotate(65deg);*/
+/*    z-index: -1;*/
+/*}*/
+
+/*.RollingPin-image {*/
+/*    background-image: url('../img/Backgrounds/RollingPin.png');*/
+/*    background-size: contain;*/
+/*    background-repeat: no-repeat;*/
+/*    position: absolute;*/
+/*    top: 1080px; !* Adjust the top position to avoid overlap *!*/
+/*    left: -50px; !* Adjust the left position to avoid overlap *!*/
+/*    width: 400px; !* Adjust the width to fit the layout *!*/
+/*    height: 480px; !* Adjust the height to fit the layout *!*/
+/*    transform: rotate(65deg);*/
+/*    z-index: -1;*/
+/*}*/
+
+.footer {
+    background-color: #333;
+    color: #fff;
+    padding: 30px 0;
+    flex-shrink: 0;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer h3 {
+    color: #fff;
+}
+
+.footer p {
+    color: #ccc;
+}
+
+.footer-left,
+.footer-middle,
+.footer-right {
+    flex: 1;
+    margin-right: 20px;
+}
+
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.footer-bottom p {
+    color: #ccc;
+
 html{
     height: 100%;
 }
@@ -8,21 +185,18 @@ body{
     background: no-repeat;
     background-attachment: fixed;
     background: linear-gradient(175deg , #fff5ec, #eedbc5, rgb(255, 213, 182), #ffa562);
-}
-
 
 .hero-image {
     position: relative;
     width: 100%;
-    height: 250px; /* Adjust the height as per your design */
+    height: 250px;
     overflow: hidden;
 }
 
 .hero-image img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Ensure the image covers the entire container */
-    object-position: center; /* Center the image within the container */
+    object-fit: cover;
 }
 
 .title-container {
@@ -35,102 +209,38 @@ body{
 }
 
 .title-container h1 {
-    font-size: 44px; /* Adjust the font size as per your design */
-    color: black; /* Change the color of the title text */
-    background-color: rgba(234, 137, 96, 0.7); /* Use rgba with the desired background color and opacity */
-    padding: 10px 20px; /* Add some padding to the title text for better visibility */
-    border-radius: 8px; /* Add border-radius for a rounded background */
-}
-
-/* Add CSS to spread out the columns in the table */
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-th, td {
-    padding: 8px;
-    text-align: left;
-}
-
-/* Define the width for each column */
-.recipe-name {
-    width: 60%; /* You can adjust the width as per your design */
-}
-
-.creator {
-    width: 40%; /* You can adjust the width as per your design */
-}
-a {
-    color: black; /* Set the color for regular links */
-    text-decoration: none; /* Remove underlines from links */
-    transition: color 0.3s; /* Add a smooth color transition on hover */
-}
-
-a:hover {
-    color: #FF5838; /* Change the link color on hover */
-}
-
-td{
+    font-size: 44px;
+    color: black;
     background-color: rgba(234, 137, 96, 0.7);
-    font-size: 34px;
+    padding: 10px 20px;
+    border-radius: 8px;
+}
+.content-wrapper {
+    flex: 1 0 auto;
+}
+.favorite-recipe {
+    background-color: rgba(239, 239, 239, 0.47);
+    padding: 10px;
+    margin: 5px 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.recipe-name, .creator {
+    font-size: 20px;
     font-weight: bold;
-
+    color: black;
+    text-decoration: none;
+    transition: color 0.3s;
 }
-
-
-.garlic-image {
-    background-image: url('../img/Backgrounds/garlic.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    position: absolute;
-    top: 180px; /* Adjust the top position to avoid overlap */
-    left: 50px; /* Adjust the left position to avoid overlap */
-    width: 400px; /* Adjust the width to fit the layout */
-    height: 480px; /* Adjust the height to fit the layout */
-    transform: rotate(65deg);
-    z-index: -1;
+a{
+    color: black;
+    text-decoration: none;
+    transition: color 0.3s;
 }
-
-.mango-image {
-    background-image: url('../img/Backgrounds/mango.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    position: absolute;
-    top: 480px; /* Adjust the top position to avoid overlap */
-    left: -50px; /* Adjust the left position to avoid overlap */
-    width: 400px; /* Adjust the width to fit the layout */
-    height: 480px; /* Adjust the height to fit the layout */
-    transform: rotate(65deg);
-    z-index: -1;
+.recipe-name:hover, .creator:hover {
+    color: #FF5838;
 }
-
-.Pot-image {
-    background-image: url('../img/Backgrounds/Pot.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    position: absolute;
-    top: 780px; /* Adjust the top position to avoid overlap */
-    right: 50px; /* Adjust the right position to avoid overlap */
-    width: 400px; /* Adjust the width to fit the layout */
-    height: 480px; /* Adjust the height to fit the layout */
-    transform: rotate(65deg);
-    z-index: -1;
-}
-
-.RollingPin-image {
-    background-image: url('../img/Backgrounds/RollingPin.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    position: absolute;
-    top: 1080px; /* Adjust the top position to avoid overlap */
-    left: -50px; /* Adjust the left position to avoid overlap */
-    width: 400px; /* Adjust the width to fit the layout */
-    height: 480px; /* Adjust the height to fit the layout */
-    transform: rotate(65deg);
-    z-index: -1;
-}
-
 
 .col{
     padding-top: 10px;
@@ -139,3 +249,4 @@ td{
     max-height: 100px;
     width: auto;
 }
+
