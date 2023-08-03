@@ -246,18 +246,27 @@ public class RecipeController {
     }
 
     @GetMapping("/users/{userId}/favorites")
-    public String showFavorites(@PathVariable Long userId, Model model) {
-        Optional<User> userOptional = userRepository.findById(userId);
-        if (userOptional.isPresent()) {
-            User user = userOptional.get();
-            List<UserFavorite> favoriteRecipes = userFavoriteRepository.findByUser(user);
-            model.addAttribute("title", "Favorites");
+    public String showFavorites(@PathVariable Long userId, Model model, Principal principal) {
+        Optional<User> profileUserOptional = userDao.findById(userId);
+        if (profileUserOptional.isPresent()) {
+            User profileUser = profileUserOptional.get();
+            model.addAttribute("profileUser", profileUser);
+
+            User currentUser = null;
+            if (principal != null) {
+                currentUser = userDao.findByUsername(principal.getName());
+            }
+            model.addAttribute("currentUser", currentUser);
+
+            List<UserFavorite> favoriteRecipes = userFavoriteRepository.findByUser(profileUser);
             model.addAttribute("favoriteRecipes", favoriteRecipes);
+            model.addAttribute("title", "Favorites");
             return "users/savedFavorites";
         } else {
             return "redirect:/404";
         }
     }
+
 
     @PostMapping("/recipes/{id}/favorite")
     public String addToFavorites(@PathVariable Long id, Principal principal) {
