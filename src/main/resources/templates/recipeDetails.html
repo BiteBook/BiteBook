@@ -20,9 +20,9 @@
         <h1 th:text="${recipes.title}"></h1>
     </div>
 </div>
-    <br>
-    <h3>Created by: <a th:href="@{'/users/' + ${recipes.user.id}}"> <span th:text="${recipes.user.username}"></span></a></h3>
-    <br>
+<br>
+<h3>Created by: <a th:href="@{'/users/' + ${recipes.user.id}}"> <span th:text="${recipes.user.username}"></span></a></h3>
+<br>
 <div class="container text-center">
     <div class="row">
         <div class="col-4">
@@ -118,7 +118,7 @@
     </div>
     <div class="row">
         <div class="col">
-            <div class="card mt-3 mb-2">
+            <div class="card mt-2 mb-2">
                 <div class="card-body">
                     <h3 class="card-title">Instructions :</h3>
                     <p class="card-text text-center" th:text="${recipes.instructions}"></p>
@@ -139,21 +139,19 @@
         <button type="button" class="custom-button" data-toggle="modal" data-target="#editRecipeModal">Edit Recipe</button>
     </div>
 
-
-<!-- Save Recipe form -->
-<div class="container text-end mb-4 mt-3">
-    <form th:action="@{'/recipes/' + ${recipes.recipeid} + '/favorite'}" method="post">
-        <button type="submit" class="custom-button">Save Recipe</button>
-    </form>
-</div>
-
-<!-- Meal Planner form -->
-<div class="container text-end">
-    <form th:action="@{/mealplanner/add}" method="post">
-        <input type="hidden" th:value="${recipes.recipeid}" name="recipeId"/>
-        <input type="date" name="date" class="custom-button"/>
-        <input type="submit" value="Add to Meal Planner" class="custom-button"/>
-    </form>
+    <!-- Buttons on the Right -->
+    <div class="right-buttons">
+        <!-- Save Recipe button -->
+        <form th:action="@{'/recipes/' + ${recipes.recipeid} + '/favorite'}" method="post">
+            <button type="submit" class="custom-button">Save Recipe</button>
+        </form>
+        <!-- Meal Planner form -->
+        <form th:action="@{/mealplanner/add}" method="post">
+            <input type="hidden" th:value="${recipes.recipeid}" name="recipeId"/>
+            <input type="date" name="date" class="custom-button"/>
+            <input type="submit" value="Add to Meal Planner" class="custom-button"/>
+        </form>
+    </div>
 </div>
 
 
