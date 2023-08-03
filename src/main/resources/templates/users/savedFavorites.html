@@ -11,6 +11,10 @@
 </head>
 <body>
 <div th:replace="partials/navbar :: navbar"></div>
+<div class="garlic-image"></div>
+<div class="mango-image"></div>
+<div class="Pot-image"></div>
+<div class="RollingPin-image"></div>
 <div class="hero-image">
     <img src="/img/img_4.png" alt="Hero Image">
     <div class="title-container">
@@ -18,16 +22,26 @@
     </div>
 </div>
 
-<table>
-    <tr>
-        <th class="recipe-name">Recipe Name</th>
-        <th class="creator">Creator</th>
-    </tr>
-    <tr th:each="favoriteRecipe : ${favoriteRecipes}">
-        <td><a th:href="@{'/recipes/' + ${favoriteRecipe.recipeId}}" th:text="${favoriteRecipe.recipeName}"></a></td>
-        <td><a th:href="@{'/users/' + ${favoriteRecipe.creator.id}}" th:text="${favoriteRecipe.creator.username}"></a></td>
-    </tr>
-</table>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <table class="table">
+                <tr>
+                    <th class="recipe-name">Recipe Name</th>
+                    <th class="creator">Creator</th>
+                </tr>
+                <tr th:each="favoriteRecipe : ${favoriteRecipes}">
+                    <td><a th:href="@{'/recipes/' + ${favoriteRecipe.recipeId}}" th:text="${favoriteRecipe.recipeName}"></a></td>
+                    <td><a th:href="@{'/users/' + ${favoriteRecipe.creator.id}}" th:text="${favoriteRecipe.creator.username}"></a></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
 </body>
