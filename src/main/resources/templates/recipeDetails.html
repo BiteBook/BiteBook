@@ -120,41 +120,35 @@
         </div>
     </div>
 </div>
+<!-- Button Container - Only show if the user is logged in -->
+<div th:if="${currentUser != null}" class="button-container">
+    <!-- Buttons on the Left - Only show if the current user is the creator of the recipe -->
+    <div th:if="${currentUser.username == recipes.user.username}" class="left-buttons">
+        <!-- Only show the delete button if the current user is the creator of the recipe -->
+        <form th:action="@{/recipes/{id}(id=${recipes.recipeid})}" th:method="delete">
+            <button type="submit" class="custom-button">Delete</button>
+        </form>
+        <!-- Only show the edit button if the current user is the creator of the recipe -->
+        <button type="button" class="custom-button" data-toggle="modal" data-target="#editRecipeModal">Edit Recipe</button>
+    </div>
 
-<!-- Save Recipe form -->
-<div class="container text-end mb-4 mt-2">
-    <form th:action="@{'/recipes/' + ${recipes.recipeid} + '/favorite'}" method="post">
-        <button type="submit" class="custom-button">Save Recipe</button>
-    </form>
+    <!-- Buttons on the Right -->
+    <div class="right-buttons">
+        <!-- Save Recipe button -->
+        <form th:action="@{'/recipes/' + ${recipes.recipeid} + '/favorite'}" method="post">
+            <button type="submit" class="custom-button">Save Recipe</button>
+        </form>
+        <!-- Meal Planner form -->
+        <form th:action="@{/mealplanner/add}" method="post">
+            <input type="hidden" th:value="${recipes.recipeid}" name="recipeId"/>
+            <input type="date" name="date" class="custom-button"/>
+            <input type="submit" value="Add to Meal Planner" class="custom-button"/>
+        </form>
+    </div>
 </div>
 
-<!-- Meal Planner form -->
-<div class="container text-end">
-    <form th:action="@{/mealplanner/add}" method="post">
-        <input type="hidden" th:value="${recipes.recipeid}" name="recipeId"/>
-        <input type="date" name="date" class="custom-button"/>
-        <input type="submit" value="Add to Meal Planner" class="custom-button"/>
-    </form>
-</div>
 
 
-
-
-    <!-- Add more fields as needed -->
-<!-- Only show the delete button if the current user is the creator of the recipe -->
-<div th:if="${currentUser != null}">
-    <form th:if="${currentUser.username == recipes.user.username}" action="#"
-          th:action="@{/recipes/{id}(id=${recipes.recipeid})}" th:method="delete">
-        <input type="submit" value="Delete">
-    </form>
-</div>
-
-<!-- Only show the edit button if the current user is the creator of the recipe -->
-<div th:if="${currentUser != null}">
-    <button th:if="${currentUser.username == recipes.user.username}" type="button" class="btn btn-primary"
-            data-toggle="modal" data-target="#editRecipeModal">Edit Recipe
-    </button>
-</div>
 <div class="comments-section">
     <h3>Like this recipe? Tell us how it turned out!</h3>
     <div class="text-center mb-4 ">
@@ -182,12 +176,6 @@
 
 </div>
 </div>
-
-
-
-
-<!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ratingModal">-->
-
 
 <!-- Bootstrap Modal for Reviewing Recipe -->
 <div class="modal fade" id="ratingModal" tabindex="-1" role="dialog" aria-labelledby="ratingModalLabel"
@@ -338,12 +326,6 @@
 <div class="BellPepper-image"></div>
 <div class="carrot-image"></div>
 <div class="Colander-image"></div>
-<!--<div class="cucumber-image"></div>-->
-<!--<div class="garlic-image"></div>-->
-<!--<div class="mango-image"></div>-->
-<!--<div class="Pot-image"></div>-->
-<!--<div class="RollingPin-image"></div>-->
-
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>

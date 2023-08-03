@@ -253,18 +253,39 @@ p{
 }
 /* Custom button styles */
 .custom-button {
-
     padding: 10px;
     background-color: #EA8960;
     color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    margin: 5px; /* Add some spacing between the buttons */
 }
 
 .custom-button:hover {
     background-color: #ff5838;
 }
+
+/* Button Container styles */
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px; /* Adjust the spacing as needed */
+}
+
+/* Styles for the buttons on the left */
+.left-buttons {
+    display: flex;
+    justify-content: flex-start;
+}
+
+/* Styles for the buttons on the right */
+.right-buttons {
+    display: flex;
+    justify-content: flex-end;
+}
+
 
 .recipe-card {
     border: 1px solid #ccc;
