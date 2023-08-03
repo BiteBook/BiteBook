@@ -49,10 +49,16 @@
                                 <li th:text="${dietStyle.name}"></li>
                             </ul>
                         </div>
+                        <!-- Time -->
+                        <div class="time">
+                            <h3>Cooking Time:</h3>
+                            <p th:text="${recipes.time + ' minutes'}"></p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
         <div class="col-4">
             <!-- Nutrition Facts Card -->
             <div class="card recipe-card">
