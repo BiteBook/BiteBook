@@ -31,4 +31,7 @@ public interface RecipeRepository extends JpaRepository<Recipe, Long> {
             "OR p.time LIKE :keyword " +
             "OR p.region LIKE :keyword)")
     List<Recipe> searchWithoutFilter(@Param("keyword") String keyword);
+
+
 }
+

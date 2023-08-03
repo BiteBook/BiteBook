@@ -4,7 +4,7 @@ body { background: linear-gradient(175deg , #fff5ec, #eedbc5, rgb(255, 213, 182)
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
 :root {
-    --primary-color: #ea8960; /* Default primary color - blue */
+    --primary-color: #ff5838; /* Default primary color - blue */
     --hover-color: #ff5838;   /* Hover color - darker shade of blue */
 }
 

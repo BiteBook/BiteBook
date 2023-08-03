@@ -88,11 +88,17 @@ public class PostController {
         }
 
         List<Post> userPosts = postDao.findByCreatorOrderByCreatedDateDesc(user);
-        List<Post> firstThreePosts = userPosts.subList(0,2);
+        List<Post> firstThreePosts;
+        if (userPosts.size() >= 3) {
+            firstThreePosts = userPosts.subList(0, 3);
+        } else {
+            firstThreePosts = userPosts;
+        }
         model.addAttribute("userPosts", firstThreePosts);
         model.addAttribute("title", "User Posts");
         return "users/userPosts";
     }
+
 
     @DeleteMapping("/{id}/delete")
     public String deletePost(@PathVariable Long id) {
