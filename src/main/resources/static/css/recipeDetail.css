@@ -266,6 +266,18 @@ p{
 .custom-button:hover {
     background-color: #ff5838;
 }
+.transparent-card {
+    background-color: transparent;
+    border: none;
+}
+
+.hidden-card-body {
+    background-color: transparent;
+    border: none;
+}
+.no-box-shadow {
+    box-shadow: none;
+}
 
 /* Button Container styles */
 .button-container {
@@ -368,18 +380,6 @@ p{
     z-index: -1; /* Set a lower z-index to move it behind other elements */
 }
 
-.carrot-image {
-    background-image: url('../img/Backgrounds/carrot.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    position: absolute;
-    top: 300px; /* Adjust the top position */
-    right: -120px; /* Adjust the right position */
-    width: 500px;
-    height: 600px;
-    transform: rotate(65deg); /* Rotate 65 degrees */
-    z-index: -1; /* Set a lower z-index to move it behind other elements */
-}
 
 .Colander-image {
     background-image: url('../img/Backgrounds/Colander.png');
