@@ -36,14 +36,14 @@
                     <!-- Allergens and Diet Styles Section -->
                     <div class="allergens-diet-styles">
                         <!-- Allergens -->
-                        <div class="allergens">
+                        <div class="allergens" th:if="${recipeAllergens.size() > 0}">
                             <h3>Allergens:</h3>
                             <ul th:each="allergen : ${recipeAllergens}">
                                 <li th:text="${allergen.name}"></li>
                             </ul>
                         </div>
                         <!-- Diet Styles -->
-                        <div class="diet-styles">
+                        <div class="diet-styles" th:if="${recipeDietStyles.size() > 0}">
                             <h3>Diet Styles:</h3>
                             <ul th:each="dietStyle : ${recipeDietStyles}">
                                 <li th:text="${dietStyle.name}"></li>
@@ -58,6 +58,7 @@
                 </div>
             </div>
         </div>
+
 
         <div class="col-4">
             <!-- Nutrition Facts Card -->
