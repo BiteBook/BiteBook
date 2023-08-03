@@ -1,6 +1,5 @@
 package com.codeup.bitebook.models;
 
-import com.codeup.bitebook.models.NutritionInfo;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,6 +14,7 @@ public class EdamamService {
 
     @Value("${edamam.key}")
     private String edamamKey;
+
     private final RestTemplate restTemplate;
     public double totalCalories = 0;
     public double totalProtein = 0;

@@ -1,19 +1,12 @@
 package com.codeup.bitebook.models;
 import jakarta.validation.constraints.*;
-import org.springframework.validation.BindingResult;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import java.util.Collection;
 import java.util.Collections;
-
-
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.util.List;
 
 @NoArgsConstructor

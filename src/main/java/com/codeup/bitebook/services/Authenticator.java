@@ -2,7 +2,7 @@ package com.codeup.bitebook.services;
 
 import com.codeup.bitebook.models.User;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Service;
+
 public class Authenticator {
     public static User getLoggedInUser() {
         User loggedInUser = new User();

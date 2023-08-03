@@ -1,13 +1,11 @@
 package com.codeup.bitebook.controllers;
 
 import com.codeup.bitebook.models.Post;
-import com.codeup.bitebook.models.Recipe;
 import com.codeup.bitebook.models.User;
 import com.codeup.bitebook.repositories.PostRepository;
 import com.codeup.bitebook.repositories.UserRepository;
 import com.codeup.bitebook.services.Authenticator;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,7 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;

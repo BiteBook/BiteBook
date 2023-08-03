@@ -1,7 +1,6 @@
 package com.codeup.bitebook.controllers;
 import com.codeup.bitebook.models.*;
 import com.codeup.bitebook.repositories.*;
-import com.codeup.bitebook.services.Authenticator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -10,12 +9,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.io.IOException;
 import java.util.*;
 import java.security.Principal;
 import java.util.List;
-import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class RecipeController {

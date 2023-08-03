@@ -1,7 +1,5 @@
 package com.codeup.bitebook.repositories;
 
-import com.codeup.bitebook.models.User;
-import com.codeup.bitebook.models.User;
 import com.codeup.bitebook.models.UserFavorite;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
