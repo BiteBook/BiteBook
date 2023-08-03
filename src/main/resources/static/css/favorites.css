@@ -127,3 +127,7 @@ td{
 .col{
     padding-top: 10px;
 }
+.footer-img{
+    max-height: 100px;
+    width: auto;
+}

@@ -270,3 +270,7 @@ a[href*="/recipes/new"]:hover, a[href*="/users/"]:hover, a[href*="/profile/perso
 .card-link:hover {
     color: #ff5838;
 }
+.footer-img{
+    max-height: 100px;
+    width: auto;
+}
