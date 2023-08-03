@@ -4,11 +4,14 @@ import com.codeup.bitebook.repositories.*;
 import com.codeup.bitebook.services.Authenticator;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 import java.util.stream.Collectors;
 import java.security.Principal;
 import java.util.Arrays;
@@ -93,38 +96,39 @@ public class UserController {
 
     @GetMapping("/profile")
     public String showProfile(@RequestParam(required = false) String username, Principal principal, Model model) {
-        if (principal == null) {
-            return "redirect:/login";
-        }
-        User loggedInUser = userDao.findByUsername(principal.getName());
         User user;
         if (username == null || username.isEmpty()) {
-            user = loggedInUser;
+            if (principal == null) {
+                return "redirect:/login"; // Redirect to login if no username and no logged-in user
+            }
+            user = userDao.findByUsername(principal.getName());
         } else {
             user = userDao.findByUsername(username);
         }
 
-        model.addAttribute("user", loggedInUser);
+        // Fetch meal planners for the user whose profile is being viewed
+        List<MealPlanner> mealPlanners = mealPlannerRepository.findByUser(user);
+        List<SimpleMealPlanner> simpleMealPlanners = mealPlanners.stream()
+                .map(SimpleMealPlanner::new)
+                .collect(Collectors.toList());
+        model.addAttribute("mealPlanners", simpleMealPlanners);
 
+        model.addAttribute("user", user);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserWithRoles currentUser = (UserWithRoles) authentication.getPrincipal();
 
-        model.addAttribute("currentUser", currentUser);
 
-        List<Post> userPosts = postDao.findByCreatorOrderByCreatedDateDesc(loggedInUser);
+
+
+        model.addAttribute("currentUser", currentUser);
+        List<Post> userPosts = postDao.findByCreatorOrderByCreatedDateDesc(user);
         if (userPosts.size() > 3) {
             userPosts = userPosts.subList(0, 3);
         }
         model.addAttribute("userPosts", userPosts);
 
-        List<UserFavorite> favoriteRecipes = userFavoriteRepository.findByUser(loggedInUser);
-        model.addAttribute("favoriteRecipes", favoriteRecipes);
-
-        List<MealPlanner> mealPlanners = mealPlannerRepository.findByUser(loggedInUser);
-        List<SimpleMealPlanner> simpleMealPlanners = mealPlanners.stream()
-                .map(SimpleMealPlanner::new)
-                .collect(Collectors.toList());
-        model.addAttribute("mealPlanners", simpleMealPlanners);
+//        List<UserFavorite> favoriteRecipes = userFavoriteRepository.findByUser(user);
+//        model.addAttribute("favoriteRecipes", favoriteRecipes);
 
         List<String> allAllergies = Arrays.asList("Peanuts", "Tree nuts", "Milk", "Egg", "Wheat", "Soy", "Fish", "Shellfish", "Other");
         model.addAttribute("allAllergies", allAllergies);
@@ -137,6 +141,7 @@ public class UserController {
         model.addAttribute("selectedPage", "profile");
         return "users/profile";
     }
+
 
 
 
@@ -239,6 +244,9 @@ public class UserController {
             User user = userOptional.get();
             model.addAttribute("user", user);
             List<Post> userPosts = postDao.findByCreatorOrderByCreatedDateDesc(user);
+            if (userPosts.size() > 3) {
+                userPosts = userPosts.subList(0, 3);
+            }
             model.addAttribute("userPosts", userPosts);
             if (principal != null) {
                 User loggedInUser = userDao.findByUsername(principal.getName());
@@ -249,8 +257,8 @@ public class UserController {
         } else {
             return "redirect:/404";
         }
-
     }
+
     @GetMapping("/api/username")
     @ResponseBody
     public String currentUserName(Principal principal) {
