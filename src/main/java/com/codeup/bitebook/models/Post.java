@@ -36,9 +36,9 @@ public class Post {
         this.creator = creator;
     }
 
-    public LocalDateTime getCreatedDate() {
-        return createdDate;
-    }
+//    public LocalDateTime getCreatedDate() {
+//        return createdDate;
+//    }
 
     public void setCreatedDate(LocalDateTime createdDate) {
         this.createdDate = createdDate;

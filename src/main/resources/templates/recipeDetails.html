@@ -111,7 +111,7 @@
     </div>
     <div class="row">
         <div class="col">
-            <div class="card mt-2 mb-2">
+            <div class="card mt-3 mb-2">
                 <div class="card-body">
                     <h3 class="card-title">Instructions :</h3>
                     <p class="card-text text-center" th:text="${recipes.instructions}"></p>
@@ -122,7 +122,7 @@
 </div>
 
 <!-- Save Recipe form -->
-<div class="container text-end mb-4 mt-2">
+<div class="container text-end mb-4 mt-3">
     <form th:action="@{'/recipes/' + ${recipes.recipeid} + '/favorite'}" method="post">
         <button type="submit" class="custom-button">Save Recipe</button>
     </form>

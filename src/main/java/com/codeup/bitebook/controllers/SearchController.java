@@ -3,19 +3,16 @@ package com.codeup.bitebook.controllers;
 import com.codeup.bitebook.models.Recipe;
 import com.codeup.bitebook.models.User;
 import com.codeup.bitebook.models.UserWithRoles;
-import com.codeup.bitebook.repositories.RecipeRepository;
 import com.codeup.bitebook.repositories.UserRepository;
 import com.codeup.bitebook.services.RecipeServiceAgain;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.codeup.bitebook.models.DietStyle;
 import com.codeup.bitebook.models.Allergen;
-
 import java.util.List;
 import java.util.stream.Collectors;
 

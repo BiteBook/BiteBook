@@ -5,8 +5,6 @@ import com.codeup.bitebook.models.User;
 import com.codeup.bitebook.repositories.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
