@@ -7,21 +7,16 @@ h2 {
     font-size: 1.4rem;
 }
 
-@media (min-width: 50em) {
-    h2 {
-        font-size: 1.8rem;
-    }
-}
+/*@media (min-width: 50em) {*/
+/*    h2 {*/
+/*        font-size: 1.8rem;*/
+/*    }*/
+/*}*/
 
 .card {
-    display: flex;
-    flex-wrap: wrap;
     background: hsl(18, 77%, 65%);
-    max-width: 50rem;
-    width: 100%;
     box-shadow: 0.65rem 0.65rem 0 hsl(12, 100%, 65%);
     border-radius: 0.8rem;
-    overflow: hidden;
     border: 0.5rem solid;
 }
 
@@ -31,7 +26,7 @@ h2 {
     padding: 0.5rem 1rem;
     text-decoration: none;
     background: hsl(18, 77%, 65%);
-    border-radius: 0.6rem;
+    border-radius: 0.8rem;
     font-weight: 700;
     border: 0.35rem solid;
 }

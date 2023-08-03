@@ -1,3 +1,4 @@
+
 /** {*/
 /*    margin: 0;*/
 /*    padding: 0;*/
@@ -173,14 +174,17 @@
 
 .footer-bottom p {
     color: #ccc;
+
+html{
+    height: 100%;
 }
 
-body {
-    display: flex;
-    flex-direction: column;
-    background: linear-gradient(175deg, #fff5ec, #eedbc5, rgb(255, 213, 182) 15%, #ffa562);
-    min-height: 100vh;
-}
+body{
+    height: 100%;
+    margin: 0;
+    background: no-repeat;
+    background-attachment: fixed;
+    background: linear-gradient(175deg , #fff5ec, #eedbc5, rgb(255, 213, 182), #ffa562);
 
 .hero-image {
     position: relative;
@@ -237,3 +241,12 @@ a{
 .recipe-name:hover, .creator:hover {
     color: #FF5838;
 }
+
+.col{
+    padding-top: 10px;
+}
+.footer-img{
+    max-height: 100px;
+    width: auto;
+}
+
