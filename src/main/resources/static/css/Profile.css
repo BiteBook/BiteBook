@@ -146,6 +146,20 @@ a[href*="/recipes/new"]:hover, a[href*="/users/"]:hover, a[href*="/profile/perso
     margin-top: 10em;
     margin-left: 4em;
 }
+
+.content-sections.no-calendar {
+    grid-template-columns: 1fr; /* Change this to suit your needs */
+}
+
+.content-sections .full-width {
+    grid-column: 1 / span 2; /* Span across both columns */
+}
+.card.no-calendar {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    width: 650px;
+    height: 400px;
+}
+
 .post-exp{
     margin-top: 1em;
 }

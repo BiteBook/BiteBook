@@ -33,21 +33,30 @@
                     <span th:each="allergy : ${user.allergyList}" th:text="${allergy.name} + ', '"></span>
                 </p>
             </div>
-            <div class="right-section">
-                <div class="buttons-grid">
+            <div class="buttons-grid">
+                <!-- Create Recipe button for the current user -->
+                <div th:if="${currentUser?.username == user.username}">
+                    <a th:href="@{/recipes/new}">Create Recipe</a>
+                </div>
+                <!-- Center button -->
+                <a th:href="@{/users/{userId}/favorites(userId=${user.id})}">Favorites</a>
+                <!-- Rightmost button -->
+                <a th:href="@{/users/{userId}/profile/personal-recipes(userId=${user.id})}">Personal Recipes</a>
+                <!-- Hide edit buttons if not the current user -->
+                <div th:if="${currentUser?.username == user.username}">
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editUsernameModal">
                         Edit Username
                     </button>
+                </div>
+                <div th:if="${currentUser?.username == user.username}">
                     <button type="button" class="btn btn-primary" data-toggle="modal"
                             data-target="#editPreferencesModal">Edit Preferences
                     </button>
+                </div>
+                <div th:if="${currentUser?.username == user.username}">
                     <button type="button" class="btn btn-primary" data-toggle="modal"
                             data-target="#changePasswordModal">Change Password
                     </button>
-                    <a th:href="@{/recipes/new}" th:if="${currentUser?.username == user.username}">Create Recipe</a>
-                    <a th:href="@{/users/{userId}/favorites(userId=${user.id})}"
-                       th:if="${currentUser != null}">Favorites</a>
-                    <a th:href="@{/users/{userId}/profile/personal-recipes(userId=${user.id})}">Personal Recipes</a>
                 </div>
             </div>
             <div class="bottom-section">
@@ -70,27 +79,30 @@
             </div>
         </div>
     </div>
-    <div class="content-sections">
-        <div class="blog-posts">
-            <div th:if="${currentUser?.username == user.username}">
-                <h3>Past Adventures</h3>
-                <div class="blog-content" th:if="${userPosts}">
-                    <div th:each="post : ${userPosts}" class="card ms-3 ps-3 pb-2 pt-2">
-                        <div class="blog-content">
-                            <h4 th:text="${post.title}" class="card-title"></h4>
-                            <p th:text="${#strings.abbreviate(post.body,200)}"
-                               class="card-text text-center"></p>
-                            <a th:href="@{/posts/{id}(id=${post.id})}" class="card-link">Read More</a>
-                        </div>
+
+    <div class="content-sections" th:classappend="${currentUser?.username != user.username} ? 'no-calendar' : ''">
+        <div class="blog-posts" th:class="${currentUser?.username != user.username} ? 'full-width' : ''">
+        <h3 th:if="${currentUser?.username == user.username}">Past Adventures</h3>
+            <h3 th:if="${currentUser?.username != user.username}">Here's what <span th:text="${user.username}"></span>
+                has to say!</h3>
+            <div class="blog-content" th:if="${userPosts}">
+                <div th:each="post : ${userPosts}" class="card ms-3 ps-3 pb-2 pt-2">
+                    <div class="blog-content">
+                        <h4 th:text="${post.title}" class="card-title"></h4>
+                        <p th:text="${#strings.abbreviate(post.body,200)}" class="card-text text-center"></p>
+                        <a th:href="@{/posts/{id}(id=${post.id})}" class="card-link">Read More</a>
                     </div>
-                    <div class="view-post-history">
-                        <a th:href="@{/users/{userId}/posts(userId=${user.id})}" class="btn btn-primary">View Post
-                            History</a>
-                    </div>
+                </div>
+                <div th:if="${#lists.size(userPosts) < 3}" class="blog-message">
+                    <p th:text="${user.username} + ' doesn\'t like to bloviate'"></p>
+                </div>
+                <div class="view-post-history">
+                    <a th:href="@{/users/{userId}/posts(userId=${user.id})}" class="btn btn-primary">View Post
+                        History</a>
                 </div>
             </div>
         </div>
-        <div class="calendar">
+        <div th:if="${currentUser?.username == user.username}" class="calendar">
             <h3>A Look at Future Fun</h3>
             <div class="container">
                 <div id="calendar" class="d-flex flex-wrap"></div>
@@ -108,23 +120,9 @@
             </div>
             <div class="post-exp" th:if="${currentUser?.username == user.username}">
                 <h3>Want to share a recent culinary experience?</h3>
-                <div class="nav-item">
-                    <a th:classappend="${selectedPage == 'posts-create'} ? 'active' : ''" class="btn btn-primary"
-                       href="/posts/create" role="button" style="padding-right: 0.5rem; padding-left: 0.5rem;">Create
-                        Blog
-                        Post</a>
-                </div>
+                <a th:href="@{/posts/new}">Create Post</a>
             </div>
         </div>
-    </div>
-</div>
-<div th:if="${currentUser?.username != user.username}">
-    <h3>Here's what <span th:text="${user.username}"></span> has to say!</h3>
-    <div th:if="${userPosts}">
-        <div th:each="post : ${userPosts}">
-            <h4 th:text="${post.title}"></h4>
-            <p th:text="${#strings.abbreviate(post.body,200)}"></p>
-            <a th:href="@{/posts/{id}(id=${post.id})}">Read More</a>
         </div>
     </div>
 </div>
