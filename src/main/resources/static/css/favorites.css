@@ -1,5 +1,13 @@
+html{
+    height: 100%;
+}
+
 body{
- background: linear-gradient(175deg , #fff5ec, #eedbc5, rgb(255, 213, 182) 60%, #ffa562);
+    height: 100%;
+    margin: 0;
+    background: no-repeat;
+    background-attachment: fixed;
+    background: linear-gradient(175deg , #fff5ec, #eedbc5, rgb(255, 213, 182), #ffa562);
 }
 
 
