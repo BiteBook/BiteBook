@@ -36,23 +36,30 @@
                     <!-- Allergens and Diet Styles Section -->
                     <div class="allergens-diet-styles">
                         <!-- Allergens -->
-                        <div class="allergens">
+                        <div class="allergens" th:if="${recipeAllergens.size() > 0}">
                             <h3>Allergens:</h3>
                             <ul th:each="allergen : ${recipeAllergens}">
                                 <li th:text="${allergen.name}"></li>
                             </ul>
                         </div>
                         <!-- Diet Styles -->
-                        <div class="diet-styles">
+                        <div class="diet-styles" th:if="${recipeDietStyles.size() > 0}">
                             <h3>Diet Styles:</h3>
                             <ul th:each="dietStyle : ${recipeDietStyles}">
                                 <li th:text="${dietStyle.name}"></li>
                             </ul>
                         </div>
+                        <!-- Time -->
+                        <div class="time">
+                            <h3>Cooking Time:</h3>
+                            <p th:text="${recipes.time + ' minutes'}"></p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
+
         <div class="col-4">
             <!-- Nutrition Facts Card -->
             <div class="card recipe-card">
@@ -120,6 +127,18 @@
         </div>
     </div>
 </div>
+<!-- Button Container - Only show if the user is logged in -->
+<div th:if="${currentUser != null}" class="button-container">
+    <!-- Buttons on the Left - Only show if the current user is the creator of the recipe -->
+    <div th:if="${currentUser.username == recipes.user.username}" class="left-buttons">
+        <!-- Only show the delete button if the current user is the creator of the recipe -->
+        <form th:action="@{/recipes/{id}(id=${recipes.recipeid})}" th:method="delete">
+            <button type="submit" class="custom-button">Delete</button>
+        </form>
+        <!-- Only show the edit button if the current user is the creator of the recipe -->
+        <button type="button" class="custom-button" data-toggle="modal" data-target="#editRecipeModal">Edit Recipe</button>
+    </div>
+
 
 <!-- Save Recipe form -->
 <div class="container text-end mb-4 mt-3">
@@ -139,22 +158,6 @@
 
 
 
-
-    <!-- Add more fields as needed -->
-<!-- Only show the delete button if the current user is the creator of the recipe -->
-<div th:if="${currentUser != null}">
-    <form th:if="${currentUser.username == recipes.user.username}" action="#"
-          th:action="@{/recipes/{id}(id=${recipes.recipeid})}" th:method="delete">
-        <input type="submit" value="Delete">
-    </form>
-</div>
-
-<!-- Only show the edit button if the current user is the creator of the recipe -->
-<div th:if="${currentUser != null}">
-    <button th:if="${currentUser.username == recipes.user.username}" type="button" class="btn btn-primary"
-            data-toggle="modal" data-target="#editRecipeModal">Edit Recipe
-    </button>
-</div>
 <div class="comments-section">
     <h3>Like this recipe? Tell us how it turned out!</h3>
     <div class="text-center mb-4 ">
@@ -182,12 +185,6 @@
 
 </div>
 </div>
-
-
-
-
-<!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ratingModal">-->
-
 
 <!-- Bootstrap Modal for Reviewing Recipe -->
 <div class="modal fade" id="ratingModal" tabindex="-1" role="dialog" aria-labelledby="ratingModalLabel"
@@ -338,12 +335,6 @@
 <div class="BellPepper-image"></div>
 <div class="carrot-image"></div>
 <div class="Colander-image"></div>
-<!--<div class="cucumber-image"></div>-->
-<!--<div class="garlic-image"></div>-->
-<!--<div class="mango-image"></div>-->
-<!--<div class="Pot-image"></div>-->
-<!--<div class="RollingPin-image"></div>-->
-
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>

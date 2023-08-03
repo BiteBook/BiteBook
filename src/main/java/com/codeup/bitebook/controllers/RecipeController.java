@@ -124,15 +124,15 @@ public class RecipeController {
     }
 
     @PostMapping("/recipes/new")
-    public String createRecipe(@ModelAttribute Recipe recipe, @RequestParam("photo") String photoUrl, @RequestParam(required = false) List<Long> dietStyleIds, @RequestParam List<Long> allergenIds, Authentication authentication)
-    {
+    public String createRecipe(@ModelAttribute Recipe recipe, @RequestParam(name = "photo", required = false) String photoUrl, @RequestParam(required = false) List<Long> dietStyleIds, @RequestParam List<Long> allergenIds, Authentication authentication) {
+
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         User currentUser = userRepository.findByUsername(userDetails.getUsername());
         recipe.setUser(currentUser);
-        if (photoUrl != null) {
-            recipe.setPhoto(photoUrl);
+        if (photoUrl == null || photoUrl.trim().isEmpty()) {
+            recipe.setPhoto("../img/img.png");
         } else {
-            recipe.setPhoto("https://t4.ftcdn.net/jpg/02/51/95/53/360_F_251955356_FAQH0U1y1TZw3ZcdPGybwUkH90a3VAhb.jpg");
+            recipe.setPhoto(photoUrl);
         }
         recipe.setDietStyles(dietStyleRepository.findAllById(dietStyleIds));
         recipe.setAllergens(allergenRepository.findAllById(allergenIds));
