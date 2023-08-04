@@ -208,7 +208,6 @@ p{
 /* Custom CSS for the comments section */
 .comments-section {
     margin-top: 50px;
-    border-top: 1px solid #ccc;
     padding-top: 30px;
 }
 
@@ -236,7 +235,6 @@ p{
 
 .comments-section {
     margin-top: 50px;
-    border-top: 1px solid #ccc;
     padding-top: 30px;
     position: relative; /* Add this to make positioning of user info and comment/rating container relative */
 }
