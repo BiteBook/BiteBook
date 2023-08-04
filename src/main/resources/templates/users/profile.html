@@ -14,7 +14,8 @@
 </head>
 
 <body>
-<div class="shroom-image"></div>
+<div class="shroom-image" th:classappend="${currentUser?.username != user.username} ? 'no-calendar' : ''"></div>
+
 <div class="pot-image"></div>
 <div class="veggie-image"></div>
 <div class="content">
@@ -23,38 +24,43 @@
         <div class="card-body">
             <div class="left-section">
                 <h5 class="card-title" th:text="${user.username} ?: 'No username'"></h5>
-                <h6 class="card-subtitle mb-2 text-muted">Dietary Preferences:</h6>
+                <h6 class="card-subtitle mb-2 text-muted">Dietary Preference:</h6>
                 <p class="card-text">
                 <span th:each="diet, iterStat : ${user.dietaryPreferences}"
                       th:text="${diet.name} + (iterStat.last ? '' : ', ')"></span>
                 </p>
                 <h6 class="card-subtitle mb-2 text-muted">Allergies:</h6>
                 <p class="card-text">
-                    <span th:each="allergy : ${user.allergyList}" th:text="${allergy.name} + ', '"></span>
+    <span th:each="allergy, iterStat : ${user.allergyList}">
+        <span th:text="${allergy.name}"></span><th:block th:if="${!iterStat.last}">, </th:block>
+    </span>
                 </p>
+
             </div>
             <div class="buttons-grid">
                 <!-- Create Recipe button for the current user -->
                 <div th:if="${currentUser?.username == user.username}">
-                    <a th:href="@{/recipes/new}">Create Recipe</a>
+                    <a class="box-buttons" th:href="@{/recipes/new}">Create Recipe</a>
                 </div>
                 <!-- Center button -->
-                <a th:href="@{/users/{userId}/favorites(userId=${user.id})}">Favorites</a>
+                <a class="box-buttons" th:href="@{/users/{userId}/favorites(userId=${user.id})}">Favorites</a>
                 <!-- Rightmost button -->
-                <a th:href="@{/users/{userId}/profile/personal-recipes(userId=${user.id})}">Personal Recipes</a>
+                <a class="box-buttons" th:href="@{/users/{userId}/profile/personal-recipes(userId=${user.id})}">Personal
+                    Recipes</a>
                 <!-- Hide edit buttons if not the current user -->
                 <div th:if="${currentUser?.username == user.username}">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editUsernameModal">
+                    <button type="button" class="btn btn-primary box-buttons" data-toggle="modal"
+                            data-target="#editUsernameModal">
                         Edit Username
                     </button>
                 </div>
                 <div th:if="${currentUser?.username == user.username}">
-                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                    <button type="button" class="btn btn-primary box-buttons" data-toggle="modal"
                             data-target="#editPreferencesModal">Edit Preferences
                     </button>
                 </div>
                 <div th:if="${currentUser?.username == user.username}">
-                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                    <button type="button" class="btn btn-primary box-buttons" data-toggle="modal"
                             data-target="#changePasswordModal">Change Password
                     </button>
                 </div>
@@ -62,30 +68,20 @@
             <div class="bottom-section">
                 <div class="about-me">
                     <h6>About Me:</h6>
-                    <p>How far away hydrogen atoms laws of physics cosmos galaxies Flatland? Intelligent beings cosmic
-                        ocean
-                        courage of our questions citizens of distant epochs rich in heavy atoms Sea of Tranquility?
-                        Another
-                        world as a patch of light invent the universe intelligent beings courage of our questions as a
-                        patch
-                        of light. Network of wormholes vanquish the impossible vastness is bearable only through love
-                        from
-                        which we spring two ghostly white figures in coveralls and helmets are softly dancing citizens
-                        of
-                        distant epochs and billions upon billions upon billions upon billions upon billions upon
-                        billions
-                        upon billions.</p>
+                    <p th:if="${user.bio != null}" th:text="${user.bio}"></p>
+                    <p th:if="${user.bio == null}"><span th:text="${user.username}"></span> is a mystery</p>
                 </div>
             </div>
+
         </div>
     </div>
 
     <div class="content-sections" th:classappend="${currentUser?.username != user.username} ? 'no-calendar' : ''">
         <div class="blog-posts" th:class="${currentUser?.username != user.username} ? 'full-width' : ''">
-        <h3 th:if="${currentUser?.username == user.username}">Past Adventures</h3>
+            <h3 th:if="${currentUser?.username == user.username}">Past Adventures</h3>
             <h3 th:if="${currentUser?.username != user.username}">Here's what <span th:text="${user.username}"></span>
                 has to say!</h3>
-            <div class="blog-content" th:if="${userPosts}">
+            <div class="blog-content-card" th:if="${userPosts}">
                 <div th:each="post : ${userPosts}" class="card ms-3 ps-3 pb-2 pt-2">
                     <div class="blog-content">
                         <h4 th:text="${post.title}" class="card-title"></h4>
@@ -100,6 +96,7 @@
                     <a th:href="@{/users/{userId}/posts(userId=${user.id})}" class="btn btn-primary">View Post
                         History</a>
                 </div>
+
             </div>
         </div>
         <div th:if="${currentUser?.username == user.username}" class="calendar">
@@ -119,118 +116,122 @@
                 </ul>
             </div>
             <div class="post-exp" th:if="${currentUser?.username == user.username}">
-                <h3>Want to share a recent culinary experience?</h3>
-                <a th:href="@{/posts/new}">Create Post</a>
+                <h3 class="pprompt">Want to share a recent culinary experience?</h3>
+                <a th:href="@{/posts/new}" class="btn btn-primary">Create Post</a>
             </div>
-        </div>
         </div>
     </div>
-</div>
 
-<div th:if="${param.error}">
-    <div th:if="${param.error[0] == 'username'}" class="alert alert-danger">Username is already taken</div>
-    <div th:if="${param.error[0] == 'password'}" class="alert alert-danger">Current password is incorrect</div>
-</div>
 
-<!-- The Edit Diet Modal -->
-<div class="modal" id="editPreferencesModal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Edit Preferences</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <div class="modal-body">
-                <form th:action="@{/profile/edit}" method="POST" th:object="${user}">
-                    <div class="form-group">
-                        <label for="dietaryPreferences">Dietary Preferences:</label>
-                        <select id="dietaryPreferences" th:field="*{dietaryPreferences}" class="form-control">
-                            <option th:each="diet : ${allDietStyles}" th:value="${diet.id}"
-                                    th:text="${diet.name}"></option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="allergyList">Allergies:</label>
-                        <div id="allergyList">
-                            <div th:each="allergen, stat : ${allAllergens}" class="form-check">
-                                <input class="form-check-input" type="checkbox" th:value="${allergen.id}"
-                                       th:id="${'allergyList[' + stat.index + ']'}"
-                                       th:field="*{allergyList[__${stat.index}__]}">
-                                <label class="form-check-label" th:for="${'allergyList[' + stat.index + ']'}"
-                                       th:text="${allergen.name}"></label>
+    <div th:if="${param.error}">
+        <div th:if="${param.error[0] == 'username'}" class="alert alert-danger">Username is already taken</div>
+        <div th:if="${param.error[0] == 'password'}" class="alert alert-danger">Current password is incorrect</div>
+    </div>
+
+    <!-- The Edit Diet Modal -->
+    <div class="modal" id="editPreferencesModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Edit Preferences</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form th:action="@{/profile/edit}" method="POST" th:object="${user}">
+                        <div class="form-group">
+                            <label for="dietaryPreferences">Dietary Preferences:</label>
+                            <select id="dietaryPreferences" th:field="*{dietaryPreferences}" class="form-control">
+                                <option th:each="diet : ${allDietStyles}" th:value="${diet.id}"
+                                        th:text="${diet.name}"></option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="allergyList">Allergies:</label>
+                            <div id="allergyList">
+                                <div th:each="allergen, stat : ${allAllergens}" class="form-check">
+                                    <input class="form-check-input" type="checkbox" th:value="${allergen.id}"
+                                           th:id="${'allergyList[' + stat.index + ']'}"
+                                           th:field="*{allergyList[__${stat.index}__]}">
+                                    <label class="form-check-label" th:for="${'allergyList[' + stat.index + ']'}"
+                                           th:text="${allergen.name}"></label>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="otherAllergies">Other Allergies:</label>
-                        <input type="text" id="otherAllergies" th:field="*{otherAllergies}" class="form-control"/>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
-                </form>
+                        <div class="form-group">
+                            <label for="otherAllergies">Other Allergies:</label>
+                            <input type="text" id="otherAllergies" th:field="*{otherAllergies}" class="form-control"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="bio">Bio:</label>
+                            <textarea id="bio" th:field="*{bio}" class="form-control"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+    </div>
+
+
+    <!-- Username Modal -->
+    <div class="modal" id="editUsernameModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Edit Username</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form th:action="@{/profile/edit-username}" method="POST" th:object="${user}">
+                        <div class="form-group">
+                            <label for="username">Username:</label>
+                            <input type="text" id="username" th:field="*{username}" class="form-control"/>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Update Username</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Password Modal  -->
+    <div class="modal" id="changePasswordModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Change Password</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form th:action="@{/profile/change-password}" method="POST">
+                        <div class="form-group">
+                            <label for="currentPassword">Current Password:</label>
+                            <input type="password" id="currentPassword" name="currentPassword" class="form-control"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="newPassword">New Password:</label>
+                            <input type="password" id="newPassword" name="newPassword" class="form-control"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirm New Password:</label>
+                            <input type="password" id="confirmPassword" name="confirmPassword" class="form-control"/>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Change Password</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
     </div>
 </div>
-
-
-<!-- Username Modal -->
-<div class="modal" id="editUsernameModal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Edit Username</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <div class="modal-body">
-                <form th:action="@{/profile/edit-username}" method="POST" th:object="${user}">
-                    <div class="form-group">
-                        <label for="username">Username:</label>
-                        <input type="text" id="username" th:field="*{username}" class="form-control"/>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Update Username</button>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Password Modal  -->
-<div class="modal" id="changePasswordModal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Change Password</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <div class="modal-body">
-                <form th:action="@{/profile/change-password}" method="POST">
-                    <div class="form-group">
-                        <label for="currentPassword">Current Password:</label>
-                        <input type="password" id="currentPassword" name="currentPassword" class="form-control"/>
-                    </div>
-                    <div class="form-group">
-                        <label for="newPassword">New Password:</label>
-                        <input type="password" id="newPassword" name="newPassword" class="form-control"/>
-                    </div>
-                    <div class="form-group">
-                        <label for="confirmPassword">Confirm New Password:</label>
-                        <input type="password" id="confirmPassword" name="confirmPassword" class="form-control"/>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Change Password</button>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 <div th:replace="~{partials/footer :: footer}"></div>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -244,6 +245,6 @@
 </script>
 
 <script src="/javascript/Profile.js"></script>
-</div>
+
 </body>
 </html>

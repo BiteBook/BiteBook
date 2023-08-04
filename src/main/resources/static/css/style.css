@@ -1,5 +1,15 @@
 
-body { background: linear-gradient(175deg , #fff5ec, #eedbc5, rgb(255, 213, 182) 15%, #ffa562); }
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: linear-gradient(175deg, #fff5ec, #eedbc5, rgb(255, 213, 182) 15%, #ffa562);
+}
+
+.content-wrapper {
+    flex-grow: 1;
+}
+
 .navbar, .card {
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
@@ -41,7 +51,7 @@ body { background: linear-gradient(175deg , #fff5ec, #eedbc5, rgb(255, 213, 182)
 .footer {
     background-color: #333;
     color: #fff;
-    padding: 30px 0;
+    padding: 0;
 }
 
 .footer-content {
@@ -59,23 +69,19 @@ body { background: linear-gradient(175deg , #fff5ec, #eedbc5, rgb(255, 213, 182)
     color: #ccc;
 }
 
-.footer-left,
-.footer-middle,
-.footer-right {
-    flex: 1;
-    margin-right: 20px;
-}
-
-
+/*.footer-left,*/
+/*.footer-middle,*/
+/*.footer-right {*/
+/*    flex: 0;*/
+/*    margin-right: 10px;*/
+/*}*/
 .footer-bottom {
     text-align: center;
-    margin-top: 20px;
+    margin-top: 10px;
 }
-
 .footer-bottom p {
     color: #ccc;
 }
-
 
 h1{
     text-align: center;
@@ -183,3 +189,7 @@ h2 {
     justify-content: center;
 }
 
+.footer-img{
+    max-height: 100px;
+    width: auto;
+}

@@ -1,44 +1,50 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="en">
 <head>
-    <title th:text="${title}">Title</title>
     <link rel="icon" type="image/png" href="/img/img.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="/css/favorites.css">
+
+<title th:text="${title}">Title</title>
 </head>
 <body>
+<div class="eggplant-image"></div>
+<div class="lettuce-image"></div>
 <div th:replace="partials/navbar :: navbar"></div>
-<div class="hero-image">
-    <img src="/img/img_4.png" alt="Hero Image">
-    <div class="title-container">
-        <h1> My Favorites</h1>
-    </div>
-</div>
 
-<div class="container">
-    <div class="row">
-        <div class="col">
-            <table class="table">
-                <tr>
-                    <th class="recipe-name">Recipe Name</th>
-                    <th class="creator">Creator</th>
-                </tr>
-                <tr th:each="favoriteRecipe : ${favoriteRecipes}">
-                    <td><a th:href="@{'/recipes/' + ${favoriteRecipe.recipeId}}" th:text="${favoriteRecipe.recipeName}"></a></td>
-                    <td><a th:href="@{'/users/' + ${favoriteRecipe.creator.id}}" th:text="${favoriteRecipe.creator.username}"></a></td>
-                </tr>
-            </table>
+<div class="content-wrapper">
+    <div class="content">
+        <div class="hero-image">
+            <img src="/img/img_4.png" alt="Hero Image">
+            <div class="title-container">
+                <h1 th:if="${currentUser?.username == profileUser.username}">My Favorites</h1>
+                <h1 th:if="${currentUser?.username != profileUser.username}"><span
+                        th:text="${profileUser.username}"></span>'s Favorites</h1>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div th:each="favoriteRecipe : ${favoriteRecipes}" class="favorite-recipe">
+                        <div class="recipe-name">
+                            <a th:href="@{'/recipes/' + ${favoriteRecipe.recipeId}}"
+                               th:text="${favoriteRecipe.recipeName}"></a>
+                        </div>
+                        <div class="creator">
+                            <a th:href="@{'/users/' + ${favoriteRecipe.creator.id}}"
+                               th:text="${favoriteRecipe.creator.username}"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-
-
-
 <div th:replace="~{partials/footer :: footer}"></div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
-
+<script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+        crossorigin="anonymous"></script>
 </body>
 </html>

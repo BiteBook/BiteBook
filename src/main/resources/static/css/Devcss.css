@@ -71,11 +71,10 @@ html{
 
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr);
-    gap: 20px;
-    align-items: stretch;
+    grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+    gap: 1.5rem;
 }
+
 .card-body{
     background-color: rgba(110, 110, 110, 0.19);
     box-shadow: 0 4px 8px 0 rgba(196, 196, 196, 0.2);

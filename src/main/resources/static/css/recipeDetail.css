@@ -1,3 +1,7 @@
+body{
+    overflow-x: hidden;
+}
+
 .hero-image {
     position: relative;
     width: 100%;
@@ -111,19 +115,28 @@ body {
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    background: linear-gradient(175deg, #fff5ec, #eedbc5, rgb(255, 213, 182) 15%, #ffa562);
+    background: linear-gradient(175deg, rgba(255, 245, 236, 0.91), rgba(238, 219, 197, 0.91), rgba(255, 213, 182, 0.91) 15%, rgba(255, 165, 98, 0.91));
 }
 
 h3{
     text-align: center;
 }
+h3 a {
+    color: black;
+    transition: color 0.3s ease;
+}
 
+h3 a:hover {
+    color: red;
+}
 p{
     font-family:"Times New Roman";
     font-size: large;
 }
 
-
+.card.my-2, .card.mt-2.mb-2 {
+    background-color: rgba(255, 255, 255, 0.91);
+}
 
 /* Custom CSS to move the checkboxes to the right */
 .checkbox-container {
@@ -340,38 +353,52 @@ p{
     padding: 10px;
 }
 
-.shroom-image {
-    background-image: url('../img/Backgrounds/Shroom.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    position: absolute;
-    bottom: 0; /* Adjust the bottom position */
-    right: 0; /* Adjust the right position */
-    width: 500px;
-    height: 500px;
-    z-index: -1; /* Set a lower z-index to move it behind other elements */
-}
+/*.shroom-image {*/
+/*    background-image: url('../img/Backgrounds/Shroom.png');*/
+/*    background-size: contain;*/
+/*    background-repeat: no-repeat;*/
+/*    position: absolute;*/
+/*    bottom: 0; !* Adjust the bottom position *!*/
+/*    right: 0; !* Adjust the right position *!*/
+/*    width: 500px;*/
+/*    height: 500px;*/
+/*    z-index: -1; !* Set a lower z-index to move it behind other elements *!*/
+/*}*/
 
-.veggie-image {
-    background-image: url('../img/Backgrounds/Veggie.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    position: absolute; /* Fixed position */
-    top: 100px; /* Adjust the top position */
-    left: -170px; /* Adjust the left position */
-    width: 500px;
-    height: 600px;
-    transform: rotate(65deg); /* Rotate 45 degrees */
-    z-index: -1; /* Set a lower z-index to move it behind other elements */
-}
+/*.veggie-image {*/
+/*    background-image: url('../img/Backgrounds/Veggie.png');*/
+/*    background-size: contain;*/
+/*    background-repeat: no-repeat;*/
+/*    position: absolute; !* Fixed position *!*/
+/*    top: 100px; !* Adjust the top position *!*/
+/*    left: -170px; !* Adjust the left position *!*/
+/*    width: 500px;*/
+/*    height: 600px;*/
+/*    transform: rotate(65deg); !* Rotate 45 degrees *!*/
+/*    z-index: -1; !* Set a lower z-index to move it behind other elements *!*/
+/*}*/
 
 .BellPepper-image {
     background-image: url('../img/Backgrounds/BellPepper.png');
     background-size: contain;
     background-repeat: no-repeat;
     position: absolute;
-    bottom: 200px; /* Adjust the bottom position */
-    left: -50px; /* Adjust the left position */
+    top: 1100px; /* Adjust the bottom position */
+    left: 30px; /* Adjust the left position */
+    width: 400px;
+    height: 400px;
+    transform: rotate(65deg); /* Rotate 65 degrees */
+    z-index: -1; /* Set a lower z-index to move it behind other elements */
+}
+
+
+.carrot-image {
+    background-image: url('../img/Backgrounds/carrot.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 800px; /* Adjust the top position */
+    right: 50px; /* Adjust the right position */
     width: 500px;
     height: 600px;
     transform: rotate(65deg); /* Rotate 65 degrees */
@@ -384,11 +411,11 @@ p{
     background-size: contain;
     background-repeat: no-repeat;
     position: absolute;
-    top: 600px; /* Adjust the top position */
-    left: 200px; /* Adjust the left position */
+    top: 450px; /* Adjust the top position */
+    left: 0px; /* Adjust the left position */
     width: 500px;
     height: 600px;
-    transform: rotate(65deg); /* Rotate 65 degrees */
+    transform: rotate(55deg); /* Rotate 65 degrees */
     z-index: -1; /* Set a lower z-index to move it behind other elements */
 }
 
@@ -397,8 +424,8 @@ p{
     background-size: contain;
     background-repeat: no-repeat;
     position: absolute; /* Fixed position */
-    top: 900px; /* Adjust the top position */
-    left: -200px; /* Adjust the left position */
+    top: 1600px; /* Adjust the top position */
+    right: 200px; /* Adjust the left position */
     width: 500px;
     height: 600px;
     transform: rotate(65deg); /* Rotate 45 degrees */
@@ -442,3 +469,4 @@ p{
 .footer-bottom p {
     color: #ccc;
 }
+
