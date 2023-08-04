@@ -11,8 +11,10 @@
 </head>
 <body>
 <div th:replace="partials/navbar :: navbar"></div>
+<div class="content-wrapper">
 <div class="veggie-image"></div>
 <div class="hero-image">
+
 <!--  <img src="/img/Backgrounds/ffffff.png" alt="Hero Image">-->
   <div class="title-container">
     <div class="title-container">
@@ -29,10 +31,10 @@
     <a th:href="@{'/recipes/' + ${recipe.id}}" th:text="${recipe.title}"></a>
   </li>
 </ul>
+</div>
 <div th:replace="~{partials/footer :: footer}"></div>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
 </body>
 </html>

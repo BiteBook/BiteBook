@@ -2,37 +2,45 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
-  <header th:insert="partials/header :: head"></header>
-  <title>Create Post</title>
+    <title>Create Post</title>
+    <link rel="icon" type="image/png" href="/img/img.png">
+    <link rel="stylesheet" href="/css/CreatePost.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap" rel="stylesheet">
 </head>
 
 <body>
-<nav th:replace="partials/navbar :: navbar">
+<nav th:replace="~{partials/navbar :: navbar}">
 </nav>
+<div class="mango-image"></div>
+<div class="content">
+    <div class="container-fluid">
+        <h1 th:text="${title}">insert title here</h1>
 
-<div class="container-fluid">
-  <h1 th:text="${title}">insert title here</h1>
+        <form class="mb-3" th:action="@{/posts/create}" th:method="post" th:object="${newPost}">
 
-  <form class="mb-3" th:action="@{/posts/create}" th:method="post" th:object="${newPost}">
+            <input type="hidden" name="postId" th:field="*{id}">
+            <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" name="title" class="form-control" id="title" th:field="*{title}"
+                       placeholder="Title goes here">
+            </div>
+            <div class="mb-3">
+                <label for="body" class="form-label">Body</label>
+                <textarea class="form-control post-body" name="body" id="body" th:field="*{body}" rows="3"
+                          placeholder="Body goes here"></textarea>
+            </div>
 
-    <input type="hidden" name="postId" th:field="*{id}">
-    <div class="mb-3">
-      <label for="title" class="form-label">Title</label>
-      <input type="text" name="title" class="form-control" id="title" th:field="*{title}" placeholder="Title goes here">
+            <button type="submit" class="btn btn-primary">Save Post</button>
+
+        </form>
     </div>
-    <div class="mb-3">
-      <label for="body" class="form-label">Body</label>
-      <textarea class="form-control" name="body" id="body" th:field="*{body}" rows="3" placeholder="Body goes here"></textarea>
-    </div>
-
-    <button type="submit" class="btn btn-primary">Save Post</button>
-
-  </form>
-
-  <footer th:replace="partials/footer :: footer">
-  </footer>
-
 </div>
+<footer th:replace="~{partials/footer :: footer}">
+</footer>
 
 
 </body>

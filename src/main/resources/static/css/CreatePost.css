@@ -1,0 +1,100 @@
+body {
+    background: linear-gradient(175deg, #fff5ec, #eedbc5, rgb(255, 213, 182) 15%, #ffa562);
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    display: flex; /* Add flex display */
+    flex-direction: column; /* Set flex direction */
+    min-height: 100vh; /* Set minimum height */
+}
+
+.content{
+    flex-grow: 1;
+}
+.create-post-container {
+    margin-top: 10em;
+}
+.post-body {
+    height: 200px; /* Adjust as needed */
+}
+
+.navbar, .card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    width: 100%;
+}
+
+.card {
+    width: 350px;
+    height: 400px;
+}
+
+:root {
+    --primary-color: #e7794c;
+    --hover-color: #ff5838;
+}
+
+.btn.btn-primary {
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn.btn-primary:hover {
+    background-color: var(--hover-color);
+}
+
+.footer {
+    flex-shrink: 0;
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#greeting {
+    margin-top: 2em;
+}
+
+.container {
+    width: 800px;
+}
+
+.mango-image {
+    background-image: url('../img/Backgrounds/mango.png');
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: contain;
+    top: 460px;
+    left: 240px;
+    width: 400px;
+    height: 500px;
+    z-index: -1;
+}
+
+.nav-item {
+    display: inline-block;
+}
+
+.btn.btn-primary {
+    display: block;
+    margin: 0 auto;
+}
+
+.card-link {
+    color: black;
+    transition: color 0.3s ease;
+}
+
+.card-link:hover {
+    color: #ff5838;
+}
+
+.footer-img {
+    max-height: 100px;
+    width: auto;
+}

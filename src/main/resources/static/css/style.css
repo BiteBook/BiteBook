@@ -24,11 +24,18 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     height: 20rem;
+    box-shadow: 0 10px 4px rgb(229, 115, 67);
+    border-radius: 20px;
 }
 
+.col-6{
+    border-radius: 30px;
+}
 .searchbar-sizing {
     width: 24rem;
     height: 3rem;
+    border-radius: 30px;
+
 }
 
 .btn.btn-primary {
@@ -47,6 +54,7 @@ body {
 .card {
     width: 300px;
     height: 400px;
+    background-color: rgba(255, 255, 255, 0.91);
 }
 .footer {
     background-color: #333;
@@ -192,4 +200,8 @@ h2 {
 .footer-img{
     max-height: 100px;
     width: auto;
+}
+#greeting{
+    font-size: 35px;
+    margin: 0;
 }

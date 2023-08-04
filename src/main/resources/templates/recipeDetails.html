@@ -132,7 +132,7 @@
         <!-- Center the button container -->
         <div class="col">
             <!-- Add the "no-box-shadow" class to the card to remove the box shadow -->
-            <div class="card mt-2 mb-2 transparent-card no-box-shadow">
+            <div id="bottom card" class="card mt-2 mb-2 transparent-card no-box-shadow">
                 <div class="card-body">
 
                     <!-- Button Container - Only show if the user is logged in -->
@@ -156,11 +156,12 @@
                                 <button type="submit" class="custom-button">Save Recipe</button>
                             </form>
                             <!-- Meal Planner form -->
-                            <form th:action="@{/mealplanner/add}" method="post">
+                            <form th:action="@{/mealplanner/add}" method="post" id="mealPlannerForm">
                                 <input type="hidden" th:value="${recipes.recipeid}" name="recipeId"/>
-                                <input type="date" name="date" class="custom-button"/>
-                                <input type="submit" value="Add to Meal Planner" class="custom-button"/>
+                                <input type="date" name="date" id="mealPlannerDate" class="custom-button"/>
+                                <input type="button" value="Add to Meal Planner" class="custom-button" onclick="checkDate()"/>
                             </form>
+
                         </div>
                     </div> <!-- End of button-container -->
                 </div>
@@ -339,7 +340,6 @@
         </div>
     </div>
 </div>
-<div class="cucumber-image"></div>
 <div class="veggie-image"></div>
 <div class="BellPepper-image"></div>
 <div class="carrot-image"></div>
@@ -349,6 +349,16 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+<script>
+    function checkDate() {
+        var dateInput = document.getElementById("mealPlannerDate").value;
+        if (dateInput === "") {
+            alert("Please select a date first!");
+        } else {
+            document.getElementById("mealPlannerForm").submit();
+        }
+    }
+</script>
 
 </body>
 </html>

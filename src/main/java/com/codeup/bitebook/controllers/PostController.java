@@ -113,6 +113,7 @@ public class PostController {
         return "redirect:/posts";
     }
 
+
     @PostMapping("/{id}/edit")
     public String editPost(@PathVariable Long id, @ModelAttribute Post post) {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
