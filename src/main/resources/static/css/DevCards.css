@@ -208,15 +208,18 @@
 }
 
 .card.black .additional {
-    background: linear-gradient(#000000, #434343);
+    background: linear-gradient(#03396c, #434343);
+
 }
 
 .card.black .additional .more-info h1 {
-    color: #333;
+    color: #ffffff;
+
 }
 
 .card.black .additional .coords {
-    color: #444;
+    color: #005b96;
+
 }
 
 .card.black .additional .stats {
