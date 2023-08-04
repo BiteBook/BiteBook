@@ -353,30 +353,6 @@ p{
     padding: 10px;
 }
 
-/*.shroom-image {*/
-/*    background-image: url('../img/Backgrounds/Shroom.png');*/
-/*    background-size: contain;*/
-/*    background-repeat: no-repeat;*/
-/*    position: absolute;*/
-/*    bottom: 0; !* Adjust the bottom position *!*/
-/*    right: 0; !* Adjust the right position *!*/
-/*    width: 500px;*/
-/*    height: 500px;*/
-/*    z-index: -1; !* Set a lower z-index to move it behind other elements *!*/
-/*}*/
-
-/*.veggie-image {*/
-/*    background-image: url('../img/Backgrounds/Veggie.png');*/
-/*    background-size: contain;*/
-/*    background-repeat: no-repeat;*/
-/*    position: absolute; !* Fixed position *!*/
-/*    top: 100px; !* Adjust the top position *!*/
-/*    left: -170px; !* Adjust the left position *!*/
-/*    width: 500px;*/
-/*    height: 600px;*/
-/*    transform: rotate(65deg); !* Rotate 45 degrees *!*/
-/*    z-index: -1; !* Set a lower z-index to move it behind other elements *!*/
-/*}*/
 
 .BellPepper-image {
     background-image: url('../img/Backgrounds/BellPepper.png');
