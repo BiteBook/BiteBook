@@ -36,11 +36,12 @@ h2 {
     justify-content: center;
     align-items: center;
     margin-bottom: 20px; /* Optional: Add some space at the bottom */
-}
+    border-radius: 30px;
 
+}
 .search-form {
     padding: 20px;
-    border-radius: 10px;
+    border-radius: 30px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     display: flex;
     align-items: center;
