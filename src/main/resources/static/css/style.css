@@ -193,3 +193,7 @@ h2 {
     max-height: 100px;
     width: auto;
 }
+#greeting{
+    font-size: 35px;
+    margin: 0;
+}
