@@ -134,6 +134,7 @@
             <!-- Add the "no-box-shadow" class to the card to remove the box shadow -->
             <div class="card mt-2 mb-2 transparent-card no-box-shadow">
                 <div class="card-body">
+
                     <!-- Button Container - Only show if the user is logged in -->
                     <div th:if="${currentUser != null}" class="button-container">
                         <!-- Buttons on the Left - Only show if the current user is the creator of the recipe -->
@@ -163,6 +164,7 @@
                         </div>
                     </div> <!-- End of button-container -->
                 </div>
+
             </div>
         </div>
     </div>

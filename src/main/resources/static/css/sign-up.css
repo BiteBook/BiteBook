@@ -65,3 +65,30 @@ h1 {
 .custom-button:hover {
     background-color: #0056B3;
 }
+
+
+.Rolling-pin-image {
+    background-image: url('../img/Backgrounds/RollingPin.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 100px;
+    left: 450px;
+    width: 501px;
+    height: 600px;
+    transform: rotate(65deg);
+    opacity: 0.2; /* Adjust the opacity as per your preference */
+}
+.Skillet-image {
+    background-image: url('../img/Backgrounds/Skillet.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 400px;
+    left: 20px;
+    width: 300px;
+    height: 300px;
+    transform: rotate(10deg);
+    opacity: 0.9; /* Adjust the opacity as per your preference */
+}
+

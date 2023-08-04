@@ -207,6 +207,7 @@ body {
 }
 
 .title-container h1 {
+
     font-size: 44px;
     color: black;
     background-color: rgba(234, 137, 96, 0.91);
@@ -321,4 +322,5 @@ body {
 }
 .col{
     padding-top: 10px;
+
 }

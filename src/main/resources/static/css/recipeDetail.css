@@ -64,9 +64,7 @@ body {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
-.navbar-brand{
-    font-family: 'Lumanosimo', cursive;
-}
+
 
 /* Custom CSS for the recipe image */
 .recipe-img {
@@ -279,6 +277,18 @@ p{
 .custom-button:hover {
     background-color: #ff5838;
 }
+.transparent-card {
+    background-color: transparent;
+    border: none;
+}
+
+.hidden-card-body {
+    background-color: transparent;
+    border: none;
+}
+.no-box-shadow {
+    box-shadow: none;
+}
 
 /* Button Container styles */
 .button-container {
@@ -381,6 +391,7 @@ p{
     z-index: -1; /* Set a lower z-index to move it behind other elements */
 }
 
+
 .carrot-image {
     background-image: url('../img/Backgrounds/carrot.png');
     background-size: contain;
@@ -393,6 +404,7 @@ p{
     transform: rotate(65deg); /* Rotate 65 degrees */
     z-index: -1; /* Set a lower z-index to move it behind other elements */
 }
+
 
 .Colander-image {
     background-image: url('../img/Backgrounds/Colander.png');
@@ -418,5 +430,43 @@ p{
     height: 600px;
     transform: rotate(65deg); /* Rotate 45 degrees */
     z-index: -1; /* Set a lower z-index to move it behind other elements */
+}
+
+.footer {
+    background-color: #333;
+    color: #fff;
+    padding: 30px 0;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer h3 {
+    color: #fff;
+}
+
+.footer p {
+    color: #ccc;
+}
+
+.footer-left,
+.footer-middle,
+.footer-right {
+    flex: 1;
+    margin-right: 20px;
+}
+
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.footer-bottom p {
+    color: #ccc;
 }
 
