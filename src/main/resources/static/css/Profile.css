@@ -158,7 +158,9 @@ a[href*="/recipes/new"]:hover, a[href*="/users/"]:hover, a[href*="/profile/perso
 }
 .content-sections.no-calendar .blog-content-card.no-calendar .card.ms-3.ps-3.pb-2.pt-2.no-calendar> {
     width: 700px;
-}body {
+}
+
+body {
      background: linear-gradient(175deg , #fff5ec, #eedbc5, rgb(255, 213, 182) 15%, #ffa562);
      margin: 0;
      padding: 0;
