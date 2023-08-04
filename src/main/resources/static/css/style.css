@@ -52,6 +52,7 @@ body {
 .card {
     width: 300px;
     height: 400px;
+    background-color: rgba(255, 255, 255, 0.91);
 }
 .footer {
     background-color: #333;
