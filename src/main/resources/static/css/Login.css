@@ -114,27 +114,3 @@ body {
     transform: rotate(13deg);
     z-index: 3;
 }
-.skillet-image {
-    background-image: url('../img/Backgrounds/skillet.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    position: absolute;
-    top: 275px;
-    right: 90px;
-    width: 600px;
-    height: 600px;
-    transform: rotate(350deg);
-    z-index: 2;
-}
-.Rolling-image {
-    background-image: url('../img/Backgrounds/RollingPin.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    position: absolute;
-    top: 10px;
-    Left: 400px;
-    width: 500px;
-    height: 400px;
-    transform: rotate(350deg);
-    z-index: 2;
-}
