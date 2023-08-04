@@ -1,3 +1,4 @@
+
 /** {*/
 /*    margin: 0;*/
 /*    padding: 0;*/
@@ -183,6 +184,12 @@ body {
     overflow-x: hidden;
 }
 
+
+html{
+    height: 100%;
+}
+
+
 .hero-image {
     position: relative;
     width: 100%;
@@ -238,6 +245,7 @@ a{
 .recipe-name:hover, .creator:hover {
     color: #FF5838;
 }
+
 .eggplant-image {
     background-image: url('../img/Backgrounds/Eggplant.png');
     background-size: contain;
@@ -262,5 +270,13 @@ a{
     height: 600px;
     transform: rotate(65deg); /* Rotate 45 degrees */
     z-index: -1; /* Set a lower z-index to move it behind other elements */
+}
+.col{
+    padding-top: 10px;
+}
+.footer-img{
+    max-height: 100px;
+    width: auto;
+>>>>>>> origin/html-work
 }
 

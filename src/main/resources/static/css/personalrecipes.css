@@ -285,6 +285,40 @@ a{
     right: -2px;
     width: 500px;
     height: 400px;
-    /*transform: rotate(350deg);*/
     z-index: -1;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+}
+a {
+    color: black; /* Set the color for regular links */
+    text-decoration: none; /* Remove underlines from links */
+    transition: color 0.3s; /* Add a smooth color transition on hover */
+}
+
+a:hover {
+    color: #FF5838; /* Change the link color on hover */
+}
+
+td{
+    background-color: rgba(234, 137, 96, 0.7);
+    font-size: 34px;
+    font-weight: bold;
+
+}
+body {
+    background: linear-gradient(175deg , #fff5ec, #eedbc5, rgb(255, 213, 182) 15%, #ffa562);
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+.col{
+    padding-top: 10px;
 }

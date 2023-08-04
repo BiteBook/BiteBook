@@ -608,3 +608,7 @@ h3{
 .card-link:hover {
     color: #ff5838;
 }
+.footer-img{
+    max-height: 100px;
+    width: auto;
+}
