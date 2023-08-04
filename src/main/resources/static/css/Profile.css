@@ -113,7 +113,9 @@ body {
     font-size: 1.1em;
     color: #ff5838;
 }
-
+.today a:hover {
+    color: white !important;
+}
 /* Style for the "Create Recipe", "Favorites", and "Personal Recipes" buttons */
 .box-buttons {
    display: inline-block;
@@ -364,6 +366,11 @@ a[href*="/recipes/new"]:hover, a[href*="/users/"]:hover, a[href*="/profile/perso
 .blog-posts{
     padding: 0;
 }
+.blog-message {
+    text-align: center; /* Center the text horizontally */
+    width: 100%; /* Make sure the div takes up the full width */
+}
+
 .blog-posts, .calendar {
     margin: 1.5em;
     display: flex;
@@ -548,7 +555,7 @@ h3{
     width: 600px;
     height: 700px;
     transform: rotate(60deg);
-    z-index: 1;
+    z-index: -1;
 }
 .pot-image {
     background-image: url('../img/Backgrounds/MeasuringSpoons.png');
