@@ -24,11 +24,16 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     height: 20rem;
+    box-shadow: 0 10px 4px rgb(229, 115, 67);
+    border-radius: 20px;
 }
+
 
 .searchbar-sizing {
     width: 24rem;
     height: 3rem;
+    border-radius: 30px;
+
 }
 
 .btn.btn-primary {
