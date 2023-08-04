@@ -5,3 +5,45 @@ body { background: linear-gradient(175deg , #fff5ec, #eedbc5, rgb(255, 213, 182)
 .navbar, .card {
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
+
+.deletebutton {
+    padding: 10px;
+    background-color: #EA8960;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px; /* Add some spacing between the buttons */
+}
+
+.deletebutton:hover {
+    background-color: #ff5838;
+}
+
+.close-button {
+    padding: 10px;
+    background-color: #EA8960;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px; /* Add some spacing between the buttons */
+}
+
+.close-button:hover {
+    background-color: #ff5838;
+}
+
+.save-button {
+    padding: 10px;
+    background-color: #EA8960;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px; /* Add some spacing between the buttons */
+}
+
+.save-button:hover {
+    background-color: #ff5838;
+}
