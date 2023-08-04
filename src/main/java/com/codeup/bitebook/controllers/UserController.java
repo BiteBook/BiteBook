@@ -10,6 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -57,7 +58,7 @@ public class UserController {
         model.addAttribute("loggedInUser", loggedInUser);
 
         model.addAttribute("user", new User());
-        List<String> allAllergies = Arrays.asList("Peanuts", "Tree nuts", "Milk", "Egg", "Wheat", "Soy", "Fish", "Shellfish", "Other");
+        List<String> allAllergies = Arrays.asList("Peanuts", "Tree nuts", "Milk", "Egg", "Wheat", "Soy", "Fish", "Shellfish", "Other", "None");
         model.addAttribute("allAllergies", allAllergies);
 
         // Add all diet styles and allergens to the model
@@ -69,7 +70,7 @@ public class UserController {
     }
 
     @PostMapping("/sign-up")
-    public String saveUser(@Valid @ModelAttribute User user, BindingResult bindingResult, Model model){
+    public String saveUser(@Valid @ModelAttribute User user, BindingResult bindingResult, Model model, @RequestParam(required = false) Boolean noAllergies) {
         if (userDao.findByUsername(user.getUsername()) != null) {
             bindingResult.rejectValue("username", "error.user", "Username is already taken");
         }
@@ -79,20 +80,30 @@ public class UserController {
             model.addAttribute("allAllergens", allergenRepository.findAll());
             return "users/sign-up";
         }
+        if (user.getDietaryPreferences() != null && user.getDietaryPreferences().contains("none")) {
+            user.setDietaryPreferences(null);
+        }
+        if (Boolean.TRUE.equals(noAllergies)) {
+            user.setAllergyList(null); // Clear the allergy list if "None" was selected
+        } else {
+            List<Allergen> allergens = allergenRepository.findAllById(user.getAllergyList().stream().map(Allergen::getId).collect(Collectors.toList()));
+            user.setAllergyList(allergens);
+        }
         String hash = passwordEncoder.encode(user.getPassword());
         user.setPassword(hash);
 
         // Convert the IDs submitted by the form into Allergen and DietStyle entities
-        List<Allergen> allergens = allergenRepository.findAllById(user.getAllergyList().stream().map(Allergen::getId).collect(Collectors.toList()));
-        user.setAllergyList(allergens);
-
         List<DietStyle> dietStyles = dietStyleRepository.findAllById(user.getDietaryPreferences().stream().map(DietStyle::getId).collect(Collectors.toList()));
         user.setDietaryPreferences(dietStyles);
         model.addAttribute("title", "Save User");
+        for (ObjectError error : bindingResult.getAllErrors()) {
+            System.out.println(error.getDefaultMessage());
+        }
 
         userDao.save(user);
         return "redirect:/login";
     }
+
 
 
     @GetMapping("/profile")
