@@ -28,7 +28,9 @@ body {
     border-radius: 20px;
 }
 
-
+.col-6{
+    border-radius: 30px;
+}
 .searchbar-sizing {
     width: 24rem;
     height: 3rem;
