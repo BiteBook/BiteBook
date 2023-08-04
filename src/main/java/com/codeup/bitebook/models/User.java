@@ -26,7 +26,8 @@ public class User implements UserDetails {
 
     @Column(nullable = false)
     private String email;
-
+    @Column(length = 2000)
+    private String bio;
     @Column(nullable = false)
     @NotBlank(message = "Password is mandatory")
     @Size(min = 8, message = "Password must be at least 8 characters long")

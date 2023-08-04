@@ -173,18 +173,22 @@
 }
 
 .footer-bottom p {
-    color: #ccc;
+    color: rgba(206, 205, 205, 0.9);
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(175deg, #fff5ec, #eedbc5, rgb(255, 213, 182) 15%, #ffa562);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
 
 html{
     height: 100%;
 }
 
-body{
-    height: 100%;
-    margin: 0;
-    background: no-repeat;
-    background-attachment: fixed;
-    background: linear-gradient(175deg , #fff5ec, #eedbc5, rgb(255, 213, 182), #ffa562);
 
 .hero-image {
     position: relative;
@@ -219,7 +223,7 @@ body{
     flex: 1 0 auto;
 }
 .favorite-recipe {
-    background-color: rgba(239, 239, 239, 0.47);
+    background-color: rgba(255, 245, 223, 0.91);
     padding: 10px;
     margin: 5px 0;
     display: flex;
@@ -242,11 +246,37 @@ a{
     color: #FF5838;
 }
 
+.eggplant-image {
+    background-image: url('../img/Backgrounds/Eggplant.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 750px; /* Adjust the top position */
+    left: 50px; /* Adjust the left position */
+    width: 400px;
+    height: 400px;
+    transform: rotate(242deg); /* Rotate 65 degrees */
+    z-index: -1; /* Set a lower z-index to move it behind other elements */
+}
+
+.lettuce-image {
+    background-image: url('../img/Backgrounds/Lettuce.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute; /* Fixed position */
+    top: 250px; /* Adjust the top position */
+    right: 50px; /* Adjust the left position */
+    width: 500px;
+    height: 600px;
+    transform: rotate(65deg); /* Rotate 45 degrees */
+    z-index: -1; /* Set a lower z-index to move it behind other elements */
+}
 .col{
     padding-top: 10px;
 }
 .footer-img{
     max-height: 100px;
     width: auto;
+>>>>>>> origin/html-work
 }
 

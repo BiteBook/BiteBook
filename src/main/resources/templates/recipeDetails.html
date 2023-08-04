@@ -70,7 +70,7 @@
                     <table class="table table-borderless">
                         <tr>
                             <td>Calories:</td>
-                            <td th:text="${recipes.calories}" ></td>
+                            <td th:text="${recipes.calories}"></td>
                         </tr>
                         <tr>
                             <td>Protein:</td>
@@ -127,35 +127,46 @@
         </div>
     </div>
 </div>
-<!-- Button Container - Only show if the user is logged in -->
-<div th:if="${currentUser != null}" class="button-container">
-    <!-- Buttons on the Left - Only show if the current user is the creator of the recipe -->
-    <div th:if="${currentUser.username == recipes.user.username}" class="left-buttons">
-        <!-- Only show the delete button if the current user is the creator of the recipe -->
-        <form th:action="@{/recipes/{id}(id=${recipes.recipeid})}" th:method="delete">
-            <button type="submit" class="custom-button">Delete</button>
-        </form>
-        <!-- Only show the edit button if the current user is the creator of the recipe -->
-        <button type="button" class="custom-button" data-toggle="modal" data-target="#editRecipeModal">Edit Recipe</button>
+<div class="container">
+    <div class="row justify-content-center">
+        <!-- Center the button container -->
+        <div class="col">
+            <!-- Add the "no-box-shadow" class to the card to remove the box shadow -->
+            <div class="card mt-2 mb-2 transparent-card no-box-shadow">
+                <div class="card-body">
+                    <!-- Button Container - Only show if the user is logged in -->
+                    <div th:if="${currentUser != null}" class="button-container">
+                        <!-- Buttons on the Left - Only show if the current user is the creator of the recipe -->
+                        <div th:if="${currentUser.username == recipes.user.username}" class="left-buttons">
+                            <!-- Only show the delete button if the current user is the creator of the recipe -->
+                            <form th:action="@{/recipes/{id}(id=${recipes.recipeid})}" th:method="delete">
+                                <button type="submit" class="custom-button">Delete</button>
+                            </form>
+                            <!-- Only show the edit button if the current user is the creator of the recipe -->
+                            <button type="button" class="custom-button" data-toggle="modal"
+                                    data-target="#editRecipeModal">Edit Recipe
+                            </button>
+                        </div>
+
+                        <!-- Buttons on the Right -->
+                        <div class="right-buttons">
+                            <!-- Save Recipe button -->
+                            <form th:action="@{'/recipes/' + ${recipes.recipeid} + '/favorite'}" method="post">
+                                <button type="submit" class="custom-button">Save Recipe</button>
+                            </form>
+                            <!-- Meal Planner form -->
+                            <form th:action="@{/mealplanner/add}" method="post">
+                                <input type="hidden" th:value="${recipes.recipeid}" name="recipeId"/>
+                                <input type="date" name="date" class="custom-button"/>
+                                <input type="submit" value="Add to Meal Planner" class="custom-button"/>
+                            </form>
+                        </div>
+                    </div> <!-- End of button-container -->
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-
-    <!-- Buttons on the Right -->
-    <div class="right-buttons">
-        <!-- Save Recipe button -->
-        <form th:action="@{'/recipes/' + ${recipes.recipeid} + '/favorite'}" method="post">
-            <button type="submit" class="custom-button">Save Recipe</button>
-        </form>
-        <!-- Meal Planner form -->
-        <form th:action="@{/mealplanner/add}" method="post">
-            <input type="hidden" th:value="${recipes.recipeid}" name="recipeId"/>
-            <input type="date" name="date" class="custom-button"/>
-            <input type="submit" value="Add to Meal Planner" class="custom-button"/>
-        </form>
-    </div>
-</div>
-
-
 
 <div class="comments-section">
     <h3>Like this recipe? Tell us how it turned out!</h3>
@@ -174,17 +185,15 @@
                         </div>
                         <div class="comment-info">
                             <p th:text="${comment.comment}"></p>
-                            <a th:href="@{'/users/' + ${comment.user.id}}" th:text="${comment.user.username}" class="comment-user"></a>
+                            <a th:href="@{'/users/' + ${comment.user.id}}" th:text="${comment.user.username}"
+                               class="comment-user"></a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 </div>
-
-
 <!-- Bootstrap Modal for Reviewing Recipe -->
 <div class="modal fade" id="ratingModal" tabindex="-1" role="dialog" aria-labelledby="ratingModalLabel"
      aria-hidden="true">
@@ -324,19 +333,20 @@
                     <input type="hidden" th:field="*{sodium}">
                     <button type="submit" class="btn btn-primary">Save Changes</button>
                 </form>
-
             </div>
         </div>
     </div>
 </div>
-<div class="shroom-image"></div>
+<div class="cucumber-image"></div>
 <div class="veggie-image"></div>
 <div class="BellPepper-image"></div>
 <div class="carrot-image"></div>
 <div class="Colander-image"></div>
-
+<div th:replace="~{partials/footer :: footer}"></div>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
 </body>
 </html>
