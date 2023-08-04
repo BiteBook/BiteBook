@@ -139,7 +139,6 @@
 .footer {
     background-color: #333;
     color: #fff;
-    padding: 30px 0;
     flex-shrink: 0;
 }
 
@@ -181,6 +180,7 @@ body {
     background: linear-gradient(175deg, #fff5ec, #eedbc5, rgb(255, 213, 182) 15%, #ffa562);
     min-height: 100vh;
     overflow-x: hidden;
+    /*justify-content: space-between;*/
 }
 
 .hero-image {
@@ -258,12 +258,13 @@ a{
     background-size: contain;
     background-repeat: no-repeat;
     position: absolute; /* Fixed position */
-    top: -210px; /* Adjust the top position */
+    top: -190px; /* Adjust the top position */
     right: 270px; /* Adjust the left position */
-    width: 900px;
-    height: 1400px;
+    width: 700px;
+    height: 1100px;
     transform: rotate(90deg); /* Rotate 45 degrees */
     z-index: 1; /* Set a lower z-index to move it behind other elements */
+    overflow: hidden;
 }
 .whisk-image {
     background-image: url('../img/Backgrounds/Whisk.png');
