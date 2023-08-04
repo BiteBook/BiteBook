@@ -103,10 +103,17 @@ public class UserController {
                 return "redirect:/login"; // Redirect to login if no username and no logged-in user
             }
             user = userDao.findByUsername(principal.getName());
+            if (user == null) {
+                // Handle the case when the user is not found
+                return "redirect:/404"; // Redirect to a custom error page
+            }
         } else {
             user = userDao.findByUsername(username);
+            if (user == null) {
+                // Handle the case when the user is not found
+                return "redirect:/404"; // Redirect to a custom error page
+            }
         }
-
         // Fetch meal planners for the user whose profile is being viewed
         List<MealPlanner> mealPlanners = mealPlannerRepository.findByUser(user);
         List<SimpleMealPlanner> simpleMealPlanners = mealPlanners.stream()
@@ -117,11 +124,8 @@ public class UserController {
         model.addAttribute("user", user);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserWithRoles currentUser = (UserWithRoles) authentication.getPrincipal();
-
-
-
-
         model.addAttribute("currentUser", currentUser);
+        model.addAttribute("profileUser", user);
         List<Post> userPosts = postDao.findByCreatorOrderByCreatedDateDesc(user);
         if (userPosts.size() > 3) {
             userPosts = userPosts.subList(0, 3);
@@ -160,6 +164,9 @@ public class UserController {
         if (user.getOtherAllergies() != null && !user.getOtherAllergies().isEmpty()) {
             loggedInUser.setOtherAllergies(user.getOtherAllergies());
         }
+        if (user.getBio() != null) {
+            loggedInUser.setBio(user.getBio());
+        }
 
         userDao.save(loggedInUser);
 
@@ -171,6 +178,10 @@ public class UserController {
         Optional<User> userOptional = userDao.findById(userId);
         if (userOptional.isPresent()) {
             User user = userOptional.get();
+            // Set currentUser as the logged-in user
+            User loggedInUser = userDao.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+            model.addAttribute("currentUser", loggedInUser);
+            model.addAttribute("profileUser", user); // Set profileUser as the user whose personal recipes are being viewed
             List<Recipe> personalRecipes = recipeRepository.findByUser(user);
             model.addAttribute("title", "Personal Recipes");
             model.addAttribute("personalRecipes", personalRecipes);

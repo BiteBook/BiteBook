@@ -1,0 +1,140 @@
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: linear-gradient(175deg, #fff5ec, #eedbc5, rgb(255, 213, 182) 15%, #ffa562);
+}
+
+.content-wrapper {
+    flex-grow: 1;
+}
+
+.navbar, .card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    z-index: 3;
+}
+:root {
+    --primary-color: #ff5838; /* Default primary color - blue */
+    --hover-color: #ff5838;   /* Hover color - darker shade of blue */
+}
+
+
+.btn.btn-primary:hover {
+    background-color: var(--hover-color);
+}
+.footer {
+    background-color: #333;
+    color: #fff;
+    padding: 0;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer h3 {
+    color: #fff;
+}
+
+.footer p {
+    color: #ccc;
+}
+
+/*.footer-left,*/
+/*.footer-middle,*/
+/*.footer-right {*/
+/*    flex: 0;*/
+/*    margin-right: 10px;*/
+/*}*/
+.footer-bottom {
+    text-align: center;
+    margin-top: 10px;
+}
+.footer-bottom p {
+    color: #ccc;
+}
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+    flex-grow: 1;
+}
+
+.login-form {
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+}
+
+.login-form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.login-form input[type="text"],
+.login-form input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+
+.login-form input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #ea8960;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.login-form input[type="submit"]:hover {
+    background-color: #ff5838;
+}
+
+.tomato-image {
+    background-image: url('../img/Backgrounds/tomato.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 587px;
+    left: 10px;
+    width: 300px;
+    height: 300px;
+    transform: rotate(13deg);
+    z-index: 3;
+}
+.skillet-image {
+    background-image: url('../img/Backgrounds/skillet.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 275px;
+    right: 90px;
+    width: 600px;
+    height: 600px;
+    transform: rotate(350deg);
+    z-index: 2;
+}
+.Rolling-image {
+    background-image: url('../img/Backgrounds/RollingPin.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 10px;
+    Left: 400px;
+    width: 500px;
+    height: 400px;
+    transform: rotate(350deg);
+    z-index: 2;
+}

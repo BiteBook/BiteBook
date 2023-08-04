@@ -3,7 +3,6 @@
 <head>
   <title th:text="${title}">Title</title>
   <link rel="icon" type="image/png" href="/img/img.png">
-  <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="/css/personalrecipes.css">
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
@@ -11,13 +10,21 @@
 </head>
 <body>
 <div th:replace="partials/navbar :: navbar"></div>
+<div class="veggie-image"></div>
 <div class="hero-image">
-  <img src="/img/img_5.png" alt="Hero Image">
+<!--  <img src="/img/Backgrounds/ffffff.png" alt="Hero Image">-->
   <div class="title-container">
-    <h1> My Personal Recipe's</h1>
+    <div class="title-container">
+      <h1 th:if="${currentUser?.username == profileUser?.username}">
+        My Personal Recipes
+      </h1>
+      <h1 th:if="${currentUser?.username != profileUser?.username}">
+        <span th:text="${profileUser?.username}"></span>'s Personal Recipes
+      </h1>
+    </div>
   </div>
 </div>
-  <li th:each="recipe : ${personalRecipes}">
+  <li th:each="recipe : ${personalRecipes}" class="favorite-recipe">
     <a th:href="@{'/recipes/' + ${recipe.id}}" th:text="${recipe.title}"></a>
   </li>
 </ul>

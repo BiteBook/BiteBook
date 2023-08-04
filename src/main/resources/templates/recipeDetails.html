@@ -20,9 +20,10 @@
         <h1 th:text="${recipes.title}"></h1>
     </div>
 </div>
-    <br>
-    <h3>Created by: <a th:href="@{'/users/' + ${recipes.user.id}}"> <span th:text="${recipes.user.username}"></span></a></h3>
-    <br>
+<br>
+<h3>Created by: <a th:href="@{'/users/' + ${recipes.user.id}}"> <span th:text="${recipes.user.username}"></span></a>
+</h3>
+<br>
 <div class="container text-center">
     <div class="row">
         <div class="col-4">
@@ -70,7 +71,7 @@
                     <table class="table table-borderless">
                         <tr>
                             <td>Calories:</td>
-                            <td th:text="${recipes.calories}" ></td>
+                            <td th:text="${recipes.calories}"></td>
                         </tr>
                         <tr>
                             <td>Protein:</td>
@@ -118,7 +119,7 @@
     </div>
     <div class="row">
         <div class="col">
-            <div class="card mt-3 mb-2">
+            <div class="card mt-2 mb-2">
                 <div class="card-body">
                     <h3 class="card-title">Instructions :</h3>
                     <p class="card-text text-center" th:text="${recipes.instructions}"></p>
@@ -127,63 +128,73 @@
         </div>
     </div>
 </div>
-<!-- Button Container - Only show if the user is logged in -->
-<div th:if="${currentUser != null}" class="button-container">
-    <!-- Buttons on the Left - Only show if the current user is the creator of the recipe -->
-    <div th:if="${currentUser.username == recipes.user.username}" class="left-buttons">
-        <!-- Only show the delete button if the current user is the creator of the recipe -->
-        <form th:action="@{/recipes/{id}(id=${recipes.recipeid})}" th:method="delete">
-            <button type="submit" class="custom-button">Delete</button>
-        </form>
-        <!-- Only show the edit button if the current user is the creator of the recipe -->
-        <button type="button" class="custom-button" data-toggle="modal" data-target="#editRecipeModal">Edit Recipe</button>
-    </div>
-
-
-<!-- Save Recipe form -->
-<div class="container text-end mb-4 mt-3">
-    <form th:action="@{'/recipes/' + ${recipes.recipeid} + '/favorite'}" method="post">
-        <button type="submit" class="custom-button">Save Recipe</button>
-    </form>
-</div>
-
-<!-- Meal Planner form -->
-<div class="container text-end">
-    <form th:action="@{/mealplanner/add}" method="post">
-        <input type="hidden" th:value="${recipes.recipeid}" name="recipeId"/>
-        <input type="date" name="date" class="custom-button"/>
-        <input type="submit" value="Add to Meal Planner" class="custom-button"/>
-    </form>
-</div>
-
-
-
-<div class="comments-section">
-    <h3>Like this recipe? Tell us how it turned out!</h3>
-    <div class="text-center mb-4 ">
-        <button type="button" class="custom-button mt-2" data-toggle="modal" data-target="#ratingModal">
-            Write your review!
-        </button>
-    </div>
-    <div class="container text-center">
-        <div class="row align-items-start">
-            <div class="col">
-                <div th:each="comment, commentStatus : ${comments}" class="comment-rating-container">
-                    <div class="review-card card px-4 py-2">
-                        <div class="gold-stars-container">
-                            <div class="gold-stars" th:attr="data-rating=${reviews[commentStatus.index].rating}"></div>
+<div class="container">
+    <div class="row justify-content-center">
+        <!-- Center the button container -->
+        <div class="col">
+            <!-- Add the "no-box-shadow" class to the card to remove the box shadow -->
+            <div class="card mt-2 mb-2 transparent-card no-box-shadow">
+                <div class="card-body">
+                    <!-- Button Container - Only show if the user is logged in -->
+                    <div th:if="${currentUser != null}" class="button-container">
+                        <!-- Buttons on the Left - Only show if the current user is the creator of the recipe -->
+                        <div th:if="${currentUser.username == recipes.user.username}" class="left-buttons">
+                            <!-- Only show the delete button if the current user is the creator of the recipe -->
+                            <form th:action="@{/recipes/{id}(id=${recipes.recipeid})}" th:method="delete">
+                                <button type="submit" class="custom-button">Delete</button>
+                            </form>
+                            <!-- Only show the edit button if the current user is the creator of the recipe -->
+                            <button type="button" class="custom-button" data-toggle="modal"
+                                    data-target="#editRecipeModal">Edit Recipe
+                            </button>
                         </div>
-                        <div class="comment-info">
-                            <p th:text="${comment.comment}"></p>
-                            <a th:href="@{'/users/' + ${comment.user.id}}" th:text="${comment.user.username}" class="comment-user"></a>
+
+                        <!-- Buttons on the Right -->
+                        <div class="right-buttons">
+                            <!-- Save Recipe button -->
+                            <form th:action="@{'/recipes/' + ${recipes.recipeid} + '/favorite'}" method="post">
+                                <button type="submit" class="custom-button">Save Recipe</button>
+                            </form>
+                            <!-- Meal Planner form -->
+                            <form th:action="@{/mealplanner/add}" method="post">
+                                <input type="hidden" th:value="${recipes.recipeid}" name="recipeId"/>
+                                <input type="date" name="date" class="custom-button"/>
+                                <input type="submit" value="Add to Meal Planner" class="custom-button"/>
+                            </form>
+                        </div>
+                    </div> <!-- End of button-container -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="comments-section">
+        <h3>Like this recipe? Tell us how it turned out!</h3>
+        <div class="text-center mb-4 ">
+            <button type="button" class="custom-button mt-2" data-toggle="modal" data-target="#ratingModal">
+                Write your review!
+            </button>
+        </div>
+        <div class="container text-center">
+            <div class="row align-items-start">
+                <div class="col">
+                    <div th:each="comment, commentStatus : ${comments}" class="comment-rating-container">
+                        <div class="review-card card px-4 py-2">
+                            <div class="gold-stars-container">
+                                <div class="gold-stars"
+                                     th:attr="data-rating=${reviews[commentStatus.index].rating}"></div>
+                            </div>
+                            <div class="comment-info">
+                                <p th:text="${comment.comment}"></p>
+                                <a th:href="@{'/users/' + ${comment.user.id}}" th:text="${comment.user.username}"
+                                   class="comment-user"></a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-</div>
+    </div>
 </div>
 
 <!-- Bootstrap Modal for Reviewing Recipe -->
@@ -330,14 +341,16 @@
         </div>
     </div>
 </div>
-<div class="shroom-image"></div>
+<div class="cucumber-image"></div>
 <div class="veggie-image"></div>
 <div class="BellPepper-image"></div>
 <div class="carrot-image"></div>
 <div class="Colander-image"></div>
-
+<div th:replace="~{partials/footer :: footer}"></div>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
 </body>
 </html>

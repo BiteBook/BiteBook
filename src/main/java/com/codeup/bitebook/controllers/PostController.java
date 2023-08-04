@@ -44,10 +44,14 @@ public class PostController {
         }
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        User currentUser = userRepository.findByUsername(userDetails.getUsername());
-        model.addAttribute("title", "Post Details");
-        model.addAttribute("currentUser", currentUser);
+        if (authentication.getPrincipal() instanceof UserDetails) {
+            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+            User currentUser = userRepository.findByUsername(userDetails.getUsername());
+            model.addAttribute("currentUser", currentUser);
+        } else {
+            // Handle the case where the user is not authenticated, if necessary
+        }
+
         model.addAttribute("post", optionalPost.get());
         return "/posts/show";
     }
