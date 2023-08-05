@@ -70,7 +70,7 @@ public class UserController {
     }
 
     @PostMapping("/sign-up")
-    public String saveUser(@Valid @ModelAttribute User user, BindingResult bindingResult, Model model, @RequestParam(required = false) Boolean noAllergies) {
+    public String saveUser(@Valid @ModelAttribute User user, BindingResult bindingResult, Model model) {
         if (userDao.findByUsername(user.getUsername()) != null) {
             bindingResult.rejectValue("username", "error.user", "Username is already taken");
         }
@@ -80,29 +80,25 @@ public class UserController {
             model.addAttribute("allAllergens", allergenRepository.findAll());
             return "users/sign-up";
         }
-        if (user.getDietaryPreferences() != null && user.getDietaryPreferences().contains("none")) {
-            user.setDietaryPreferences(null);
-        }
-        if (Boolean.TRUE.equals(noAllergies)) {
-            user.setAllergyList(null); // Clear the allergy list if "None" was selected
-        } else {
-            List<Allergen> allergens = allergenRepository.findAllById(user.getAllergyList().stream().map(Allergen::getId).collect(Collectors.toList()));
-            user.setAllergyList(allergens);
-        }
+
+        // No need to check for "none" or handle noAllergies
+
         String hash = passwordEncoder.encode(user.getPassword());
         user.setPassword(hash);
 
         // Convert the IDs submitted by the form into Allergen and DietStyle entities
         List<DietStyle> dietStyles = dietStyleRepository.findAllById(user.getDietaryPreferences().stream().map(DietStyle::getId).collect(Collectors.toList()));
         user.setDietaryPreferences(dietStyles);
+
+        List<Allergen> allergens = allergenRepository.findAllById(user.getAllergyList().stream().map(Allergen::getId).collect(Collectors.toList()));
+        user.setAllergyList(allergens);
+
         model.addAttribute("title", "Save User");
-        for (ObjectError error : bindingResult.getAllErrors()) {
-            System.out.println(error.getDefaultMessage());
-        }
 
         userDao.save(user);
         return "redirect:/login";
     }
+
 
 
 

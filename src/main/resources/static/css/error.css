@@ -1,0 +1,178 @@
+body {
+    background: linear-gradient(175deg , #fff5ec, #eedbc5, rgb(255, 213, 182) 15%, #ffa562);
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+.content-wrapper {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+
+}
+.content {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    flex: 1 0 auto;
+}
+
+.navbar {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    width: 100%;
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    width: 350px;
+    height: 400px;
+}
+
+:root {
+    --primary-color: #e7794c;
+    --hover-color: #ff5838;
+}
+
+.btn.btn-primary {
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn.btn-primary:hover {
+    background-color: var(--hover-color);
+}
+.footer {
+    flex-shrink: 0; /* This will prevent the footer from shrinking */
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+#greeting {
+    margin-top: 2em;
+}
+
+body {
+    background: linear-gradient(175deg , #fff5ec, #eedbc5, rgb(255, 213, 182) 15%, #ffa562);
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+
+}
+
+
+.footer {
+    flex-shrink: 0; /* This will prevent the footer from shrinking */
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.calendar-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+#greeting {
+    margin-top: 2em;
+}
+
+#calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-auto-rows: 250px;
+    grid-gap: 0;
+    padding: .5em;
+    width: 90%;
+    max-width: 1200px;
+}
+
+.container{
+    width: 800px;
+}
+
+.day {
+    border: 1px solid #212121;
+    padding: .5em;
+    text-align: left;
+    vertical-align: top;
+    background-color: rgba(224, 224, 224, 0.29);
+    overflow: auto;
+    min-width: 150px;
+    max-width: 150px;
+    min-height: 150px;
+}
+
+.today {
+    background-color: #ff5838;
+    color: #fff;
+}
+
+.day a {
+    font-family: 'Gloria Hallelujah', cursive;
+    text-decoration: none;
+    color: #333;
+}
+
+.day a:hover {
+    font-size: 1.1em;
+    color: #ff5838;
+}
+
+.footer-img{
+    max-height: 100px;
+    width: auto;
+}
+.milk {
+    background-image: url('../img/milk.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: -1em;
+    left: 4em;
+    width: 600px;
+    height: 600px;
+    /*transform: rotate(13deg);*/
+    z-index: 0;
+}
+.error-container {
+    text-align: center; /* Center the text */
+    position: relative; /* Set the position context for the milk div */
+    min-height: 50em;
+}
+.milk-link {
+    /*display: inline-block; !* Make the link an inline element *!*/
+    /*position: relative; !* Set the position context for the milk and button *!*/
+    text-decoration: none; /* Remove the default link underline */
+}
+.btn.btn-primary {
+     background-color: rgb(255, 88, 56);
+     color: rgba(0, 0, 0, 0.73);
+    padding: 10px 20px 10px 40px;
+     border: none;
+     top: 20em;
+     right: 7.5em;
+     border-radius: 5px;
+     cursor: pointer;
+     display: inline-block; /* Make the button an inline element so it centers */
+     position: relative; /* Set the position context for the z-index */
+     z-index: -1; /* Place the button above the milk */
+    transform: skewX(13deg) skewY(-15deg);
+    width: 17em;
+    text-align: left;
+    box-shadow: 2px 2px 2px rgba(98, 14, 0, 0.49);
+}
