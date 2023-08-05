@@ -3,10 +3,7 @@ body {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
-
 }
-
-
 .content {
     display: flex;
     justify-content: center;
@@ -17,24 +14,19 @@ body {
     min-height: 100vh;
     flex: 1 0 auto;
 }
-
-
 .navbar {
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     width: 100%;
 }
-
 .card {
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     width: 350px;
     height: 400px;
 }
-
 :root {
     --primary-color: #e7794c;
     --hover-color: #ff5838;
 }
-
 .btn.btn-primary {
     background-color: var(--primary-color);
     color: #fff;
@@ -42,8 +34,9 @@ body {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    display: block;
+    margin: 0 auto;
 }
-
 .btn.btn-primary:hover {
     background-color: var(--hover-color);
 }
@@ -52,17 +45,6 @@ body {
     height: 400px;
     margin-top: 2em;
 }
-
-.footer {
-    flex-shrink: 0; /* This will prevent the footer from shrinking */
-    background-color: #333;
-    color: #fff;
-    padding: 10px 0;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-}
-
 .calendar-container {
     display: flex;
     justify-content: center;
@@ -71,7 +53,6 @@ body {
 #greeting {
     margin-top: 2em;
 }
-
 #calendar {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
@@ -81,11 +62,9 @@ body {
     width: 90%;
     max-width: 1200px;
 }
-
 .container{
     width: 800px;
 }
-
 .day {
     border: 1px solid #212121;
     padding: .5em;
@@ -97,7 +76,6 @@ body {
     max-width: 150px;
     min-height: 150px;
 }
-
 .today {
     background-color: #ff5838;
     color: #fff;
@@ -129,12 +107,10 @@ body {
     transition: background-color 0.3s ease;
     text-align: center;
 }
-
 a[href*="/recipes/new"]:hover, a[href*="/users/"]:hover, a[href*="/profile/personal-recipes"]:hover {
     background-color: var(--hover-color);
     text-align: center;
 }
-
 .card.ms-3 {
     margin: 1em;
     padding: 0;
@@ -155,165 +131,9 @@ a[href*="/recipes/new"]:hover, a[href*="/users/"]:hover, a[href*="/profile/perso
 .content-sections .full-width {
     grid-column: 1 / span 2;
 }
-.content-sections.full-width.no-calendar{
-    width: 700px;
-}
 .content-sections.no-calendar .blog-content-card.no-calendar .card.ms-3.ps-3.pb-2.pt-2.no-calendar> {
     width: 700px;
 }
-
-body {
-     background: linear-gradient(175deg , #fff5ec, #eedbc5, rgb(255, 213, 182) 15%, #ffa562);
-     margin: 0;
-     padding: 0;
-     overflow-x: hidden;
-
- }
-
-
-.content {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-    width: 100%;
-    min-height: 100vh;
-    flex: 1 0 auto;
-}
-
-
-.navbar {
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    width: 100%;
-}
-
-.card {
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    width: 350px;
-    height: 400px;
-}
-
-:root {
-    --primary-color: #e7794c;
-    --hover-color: #ff5838;
-}
-
-.btn.btn-primary {
-    background-color: var(--primary-color);
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.btn.btn-primary:hover {
-    background-color: var(--hover-color);
-}
-.profile-card {
-    width: 50%;
-    height: 400px;
-    margin-top: 2em;
-}
-
-.footer {
-    flex-shrink: 0; /* This will prevent the footer from shrinking */
-    background-color: #333;
-    color: #fff;
-    padding: 10px 0;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-}
-
-.calendar-container {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-#greeting {
-    margin-top: 2em;
-}
-
-#calendar {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    grid-auto-rows: 250px;
-    grid-gap: 0;
-    padding: .5em;
-    width: 90%;
-    max-width: 1200px;
-}
-
-.container{
-    width: 800px;
-}
-
-.day {
-    border: 1px solid #212121;
-    padding: .5em;
-    text-align: left;
-    vertical-align: top;
-    background-color: rgba(224, 224, 224, 0.29);
-    overflow: auto;
-    min-width: 150px;
-    max-width: 150px;
-    min-height: 150px;
-}
-
-.today {
-    background-color: #ff5838;
-    color: #fff;
-}
-
-.day a {
-    font-family: 'Gloria Hallelujah', cursive;
-    text-decoration: none;
-    color: #333;
-}
-
-.day a:hover {
-    font-size: 1.1em;
-    color: #ff5838;
-}
-
-/* Style for the "Create Recipe", "Favorites", and "Personal Recipes" buttons */
-.box-buttons {
-    display: inline-block;
-    background-color: var(--primary-color);
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    text-decoration: none;
-    transition: background-color 0.3s ease;
-    text-align: center;
-}
-
-a[href*="/recipes/new"]:hover, a[href*="/users/"]:hover, a[href*="/profile/personal-recipes"]:hover {
-    background-color: var(--hover-color);
-    text-align: center;
-}
-
-.card.ms-3 {
-    margin: 1em;
-    padding: 0;
-}
-.content-sections {
-    display: grid;
-    grid-template-columns: 1fr 4fr;
-    gap: 1em;
-    margin-top: 6em;
-    margin-left: 4em;
-}
-
-.content-sections.no-calendar {
-    grid-template-columns: 1fr;
-    width: 80%;
-}
-
 .content-sections .full-width {
     grid-column: 1 / span 2;
 }
@@ -328,23 +148,19 @@ a[href*="/recipes/new"]:hover, a[href*="/users/"]:hover, a[href*="/profile/perso
 .content-sections.no-calendar .card.ms-3.blog-content{
     width: 90%;
 }
-
 .no-calendar .blog-content-card {
     display: flex;
     flex-direction: row; /* Aligns the cards horizontally */
     flex-wrap: wrap; /* Allows the cards to wrap to the next row */
     justify-content: center; /* Centers the cards horizontally */
 }
-
 .no-calendar .card.ms-3.ps-3.pb-2.pt-2 {
     width: 30%; /* Adjust the width as needed */
     margin: 1em; /* Adds some spacing between the cards */
 }
-
 .no-calendar .card-text{
     width: 100%;
 }
-
 .post-exp {
     display: flex;
     flex-direction: column;
@@ -357,14 +173,10 @@ a[href*="/recipes/new"]:hover, a[href*="/users/"]:hover, a[href*="/profile/perso
 .pprompt{
     margin-right: -8em;
 }
-/*.post-exp.btn-primary{*/
-/*    padding-right: 20em;*/
-/*}*/
 .blog-content{
     max-width: 350px;
     margin-bottom: 1em;
 }
-
 .blog-posts{
     padding: 0;
 }
@@ -372,7 +184,6 @@ a[href*="/recipes/new"]:hover, a[href*="/users/"]:hover, a[href*="/profile/perso
     text-align: center; /* Center the text horizontally */
     width: 100%; /* Make sure the div takes up the full width */
 }
-
 .blog-posts, .calendar {
     margin: 1.5em;
     display: flex;
@@ -458,18 +269,15 @@ h3{
 .nav-item {
     display: inline-block;
 }
-.btn.btn-primary {
-    display: block;
-    margin: 0 auto;
-}
-.footer {
-    background-color: #333;
-    color: #fff;
-    padding: 10px 0;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-}
+
+/*.footer {*/
+/*    background-color: #333;*/
+/*    color: #fff;*/
+/*    padding: 10px 0;*/
+/*    display: flex;*/
+/*    justify-content: space-around;*/
+/*    align-items: center;*/
+/*}*/
 .view-post-history {
     display: flex;
     justify-content: center;
@@ -486,52 +294,6 @@ h3{
     color: #ff5838;
 }
 
-
-
-.post-exp {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    flex-wrap: wrap;
-    margin-top: 1em;
-    width: 34em;
-    margin-right: 15em;
-}
-.pprompt{
-    margin-right: -8em;
-}
-/*.post-exp.btn-primary{*/
-/*    padding-right: 20em;*/
-/*}*/
-.blog-content{
-    max-width: 350px;
-    margin-bottom: 1em;
-}
-
-.blog-posts{
-    padding: 0;
-}
-.blog-posts, .calendar {
-    margin: 1.5em;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-.blog-posts h3 {
-    text-align: center;
-    margin-right: -4em;
-}
-h3{
-    text-align: center;
-}
-.calendar h3{
-    text-align: center;
-    margin-left: -8em;
-}
-.card.profile-card {
-    position: relative;
-    z-index: 2;
-}
 
 .shroom-image {
     background-image: url('../img/Backgrounds/Shroom.png');
@@ -571,12 +333,6 @@ h3{
     transform: rotate(100deg);
     z-index: -1;
 }
-.profile-card .card-body {
-    display: grid;
-    grid-template-rows: 1fr 1fr;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 10px;
-}
 
 .profile-card .bottom-section {
     grid-column: 1 / span 2;
@@ -590,18 +346,14 @@ h3{
 .nav-item {
     display: inline-block;
 }
-.btn.btn-primary {
-    display: block;
-    margin: 0 auto;
-}
-.footer {
-    background-color: #333;
-    color: #fff;
-    padding: 10px 0;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-}
+/*.footer {*/
+/*    background-color: #333;*/
+/*    color: #fff;*/
+/*    padding: 10px 0;*/
+/*    display: flex;*/
+/*    justify-content: space-around;*/
+/*    align-items: center;*/
+/*}*/
 .view-post-history {
     display: flex;
     justify-content: center;
@@ -617,7 +369,19 @@ h3{
 .card-link:hover {
     color: #ff5838;
 }
-.footer-img{
-    max-height: 100px;
-    width: auto;
-}
+/*.footer-img{*/
+/*    max-height: 100px;*/
+/*    width: auto;*/
+/*}*/
+
+
+
+/*.footer {*/
+/*    flex-shrink: 0; !* This will prevent the footer from shrinking *!*/
+/*    background-color: #333;*/
+/*    color: #fff;*/
+/*    padding: 10px 0;*/
+/*    display: flex;*/
+/*    justify-content: space-around;*/
+/*    align-items: center;*/
+/*}*/
