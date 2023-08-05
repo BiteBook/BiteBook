@@ -29,42 +29,9 @@ html{
 }
 
 .footer {
-    background-color: #333;
-    color: #fff;
-    padding: 30px 0;
+flex-shrink: 0;
 }
 
-.footer-content {
-    display: flex;
-    justify-content: space-between;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.footer h3 {
-    color: #fff;
-}
-
-.footer p {
-    color: #ccc;
-}
-
-.footer-left,
-.footer-middle,
-.footer-right {
-    flex: 1;
-    margin-right: 20px;
-}
-
-
-.footer-bottom {
-    text-align: center;
-    margin-top: 20px;
-}
-
-.footer-bottom p {
-    color: #ccc;
-}
 .card-img {
     width: auto;
 }
@@ -107,4 +74,7 @@ html{
 .grid-item:nth-child(5) {
     grid-column: 3;
     grid-row: 3;
+}
+.fa-brands.fa-linkedin{
+    font-size: 40px;
 }
