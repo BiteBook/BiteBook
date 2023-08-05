@@ -33,9 +33,23 @@ public class SearchController {
         if ("on".equals(dietaryFilter)) {
             UserWithRoles userWithRoles = (UserWithRoles) authentication.getPrincipal();
             User currentUser = userRepository.findByUsername(userWithRoles.getUsername());
-            List<Long> dietStyleIds = currentUser.getDietaryPreferences().stream().map(DietStyle::getId).collect(Collectors.toList());
-            List<Long> allergenIds = currentUser.getAllergyList().stream().map(Allergen::getId).collect(Collectors.toList());
-            listRecipes = service.listAllWithFilter(keyword, dietStyleIds, allergenIds, currentUser);
+
+            List<Long> dietStyleIds = currentUser.getDietaryPreferences().stream()
+                    .filter(dietStyle -> dietStyle.getId() != 11) // Ignore "None" option
+                    .map(DietStyle::getId)
+                    .collect(Collectors.toList());
+
+            List<Long> allergenIds = currentUser.getAllergyList().stream()
+                    .filter(allergen -> allergen.getId() != 10) // Ignore "None" option
+                    .map(Allergen::getId)
+                    .collect(Collectors.toList());
+
+            // If both lists are empty, don't apply the filter
+            if (dietStyleIds.isEmpty() && allergenIds.isEmpty()) {
+                listRecipes = service.listAll(keyword, null, null);
+            } else {
+                listRecipes = service.listAllWithFilter(keyword, dietStyleIds, allergenIds, currentUser);
+            }
         } else {
             listRecipes = service.listAll(keyword, null, null);
         }
@@ -45,4 +59,5 @@ public class SearchController {
 
         return "recipeIndex";
     }
+
 }
