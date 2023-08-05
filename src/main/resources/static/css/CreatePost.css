@@ -48,12 +48,6 @@ body {
 
 .footer {
     flex-shrink: 0;
-    background-color: #333;
-    color: #fff;
-    padding: 10px 0;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
 }
 
 #greeting {
@@ -92,9 +86,4 @@ body {
 
 .card-link:hover {
     color: #ff5838;
-}
-
-.footer-img {
-    max-height: 100px;
-    width: auto;
 }

@@ -56,40 +56,6 @@ body {
     height: 400px;
     background-color: rgba(255, 255, 255, 0.91);
 }
-.footer {
-    background-color: #333;
-    color: #fff;
-    padding: 0;
-}
-
-.footer-content {
-    display: flex;
-    justify-content: space-between;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.footer h3 {
-    color: #fff;
-}
-
-.footer p {
-    color: #ccc;
-}
-
-/*.footer-left,*/
-/*.footer-middle,*/
-/*.footer-right {*/
-/*    flex: 0;*/
-/*    margin-right: 10px;*/
-/*}*/
-.footer-bottom {
-    text-align: center;
-    margin-top: 10px;
-}
-.footer-bottom p {
-    color: #ccc;
-}
 
 h1{
     text-align: center;
@@ -134,25 +100,17 @@ h2 {
     border-radius: 5px;
 }
 
-/*.gold-stars-container {
-/*        color: transparent; !* Set the color of the stars container to transparent *!*/
-/*display: inline-block;*/
-/*vertical-align: middle;*/
-/*margin-left: 10px;*/
-/*position: relative; !* Set the position to relative to contain the stars *!*/
-/*}*/
-
 .gold-stars-container::before {
-    content: "\f005 \f005 \f005 \f005 \f005"; /* Unicode for five gold stars (Font Awesome) */
-    font-family: "Font Awesome 5 Free"; /* Set the Font Awesome font family */
-    color: gold; /* Set the color of the stars to gold */
-    font-size: 20px; /* Adjust the size of the stars as needed */
-    position: absolute; /* Position the stars absolutely within the container */
-    top: 0; /* Position the stars at the top of the container */
-    left: 0; /* Position the stars at the left of the container */
+    content: "\f005 \f005 \f005 \f005 \f005";
+    font-family: "Font Awesome 5 Free";
+    color: gold;
+    font-size: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
-/* Optional: Add some spacing between the stars and the rating value */
+
 .gold-stars-container {
     margin-right: 5px;
 }
@@ -172,16 +130,6 @@ h2 {
     background-color: #ff5838;
 }
 
-
-/*.search-form {*/
-/*    padding: 20px;*/
-/*    border-radius: 10px;*/
-/*    display: flex;*/
-/*    align-items: center;*/
-/*    justify-content: flex-end; !* Add this line to move the form to the right *!*/
-/*    margin-right: 20px; !* Add margin-right to control the spacing on the right *!*/
-/*}*/
-
 .search-form input {
     text-align: center;
     font-size: 24px;
@@ -197,10 +145,6 @@ h2 {
     justify-content: center;
 }
 
-.footer-img{
-    max-height: 100px;
-    width: auto;
-}
 #greeting{
     font-size: 35px;
     margin: 0;
