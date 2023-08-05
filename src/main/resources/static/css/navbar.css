@@ -1,0 +1,10 @@
+.nav-link:not(.disabled) {
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+}
+.navbar-nav .nav-item .btn {
+    padding: .5rem 0;
+}
+.btn.logout-button{
+    margin: 0;
+}
