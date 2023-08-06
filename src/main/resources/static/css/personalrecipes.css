@@ -86,13 +86,13 @@ a{
     background-image: url('../img/Backgrounds/Veggie.png');
     background-size: contain;
     background-repeat: no-repeat;
-    position: absolute; /* Fixed position */
-    top: -190px; /* Adjust the top position */
-    right: 270px; /* Adjust the left position */
+    position: absolute;
+    top: 100px;
+    right: 90px;
     width: 700px;
-    height: 1100px;
-    transform: rotate(90deg); /* Rotate 45 degrees */
-    z-index: 1; /* Set a lower z-index to move it behind other elements */
+    height: 750px;
+    transform: rotate(70deg);
+    z-index: 1;
     overflow: hidden;
 }
 .whisk-image {
@@ -100,8 +100,8 @@ a{
     background-size: contain;
     background-repeat: no-repeat;
     position: absolute;
-    top: 195px;
-    right: 5px;
+    bottom: 395px;
+    right: 0px;
     width: 300px;
     height: 300px;
     transform: rotate(40deg);
@@ -112,7 +112,7 @@ a{
     background-size: contain;
     background-repeat: no-repeat;
     position: absolute;
-    top: 400px;
+    bottom: 50px;
     right: -2px;
     width: 500px;
     height: 400px;

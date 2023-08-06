@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="/css/footer.css">
 </head>
 <body>
-
+<main>
 
 <br>
 <h1>Recipe Index</h1>
@@ -31,8 +31,10 @@
         <div class="row">
             <div th:each="recipe : ${recipes}" th:if="${recipe != null}" class="col">
                 <div class="card d-flex justify-content-evenly mt-2 mb-4">
-                    <img th:if="${recipe.photo != null}" th:src="${recipe.photo}" class="card-img-top" alt="Recipe Name">
-<!--                    <img th:if="${recipe.photo == null}" th:src="@{../../resources/static/img/img.png}" class="card-img-top" alt="Default Thumbnail">-->
+                    <div class="img-parent">
+                        <img th:if="${recipe.photo != null}" th:src="${recipe.photo}" class="card-img-top background-img" alt="Recipe Name">
+                        <img th:if="${recipe.photo != null}" th:src="${recipe.photo}" class="card-img-top front-img" alt="Recipe Name">
+                    </div>
                     <div class="card-body">
                         <h5 class="card-title" th:text="${recipe.title}">Recipe Name</h5>
                         <p class="card-text" th:text="'Cook time: ' + ${recipe.time} + ' mins'">Cook time: 45 mins</p>
@@ -47,7 +49,7 @@
 <br>
 
 
-
+</main>
 <footer th:replace="~{partials/footer :: footer}"></footer>
 
 <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>

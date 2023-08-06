@@ -4,6 +4,12 @@ body {
     padding: 0;
     overflow-x: hidden;
 }
+
+:root {
+    --primary-color: #e7794c;
+    --hover-color: #ff5838;
+}
+
 .content {
     display: flex;
     justify-content: center;
@@ -14,18 +20,19 @@ body {
     min-height: 100vh;
     flex: 1 0 auto;
 }
-.navbar {
+
+.navbar, .card {
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     width: 100%;
 }
+
 .card {
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    width: 350px;
     height: 400px;
 }
-:root {
-    --primary-color: #e7794c;
-    --hover-color: #ff5838;
+.card-body{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Adjust as needed */
+    grid-gap: 1em;
 }
 .btn.btn-primary {
     background-color: var(--primary-color);
@@ -37,22 +44,27 @@ body {
     display: block;
     margin: 0 auto;
 }
+
 .btn.btn-primary:hover {
     background-color: var(--hover-color);
 }
+
 .profile-card {
     width: 50%;
     height: 400px;
     margin-top: 2em;
 }
+
 .calendar-container {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
 }
+
 #greeting {
     margin-top: 2em;
 }
+
 #calendar {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
@@ -62,9 +74,11 @@ body {
     width: 90%;
     max-width: 1200px;
 }
+
 .container{
     width: 800px;
 }
+
 .day {
     border: 1px solid #212121;
     padding: .5em;
@@ -76,6 +90,7 @@ body {
     max-width: 150px;
     min-height: 150px;
 }
+
 .today {
     background-color: #ff5838;
     color: #fff;
@@ -91,12 +106,15 @@ body {
     font-size: 1.1em;
     color: #ff5838;
 }
+
 .today a:hover {
     color: white !important;
 }
-/* Style for the "Create Recipe", "Favorites", and "Personal Recipes" buttons */
+
 .box-buttons {
-   display: inline-block;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
     background-color: var(--primary-color);
     color: #fff;
     padding: 10px 20px;
@@ -107,14 +125,17 @@ body {
     transition: background-color 0.3s ease;
     text-align: center;
 }
+
 a[href*="/recipes/new"]:hover, a[href*="/users/"]:hover, a[href*="/profile/personal-recipes"]:hover {
     background-color: var(--hover-color);
     text-align: center;
 }
+
 .card.ms-3 {
     margin: 1em;
     padding: 0;
 }
+
 .content-sections {
     display: grid;
     grid-template-columns: 1fr 4fr;
@@ -131,36 +152,34 @@ a[href*="/recipes/new"]:hover, a[href*="/users/"]:hover, a[href*="/profile/perso
 .content-sections .full-width {
     grid-column: 1 / span 2;
 }
-.content-sections.no-calendar .blog-content-card.no-calendar .card.ms-3.ps-3.pb-2.pt-2.no-calendar> {
-    width: 700px;
-}
-.content-sections .full-width {
-    grid-column: 1 / span 2;
-}
-.content-sections.full-width.no-calendar{
-    width: 90%;
-}
+
 .content-sections.no-calendar .card.ms-3 {
     margin: 1em 0 0;
     padding: 0;
     width: 98%;
 }
+
 .content-sections.no-calendar .card.ms-3.blog-content{
     width: 90%;
 }
+
 .no-calendar .blog-content-card {
     display: flex;
     flex-direction: row; /* Aligns the cards horizontally */
     flex-wrap: wrap; /* Allows the cards to wrap to the next row */
     justify-content: center; /* Centers the cards horizontally */
+    width: 100%;
 }
+
 .no-calendar .card.ms-3.ps-3.pb-2.pt-2 {
-    width: 30%; /* Adjust the width as needed */
-    margin: 1em; /* Adds some spacing between the cards */
+    width: 25%; /* Adjust the width as needed */
+    margin: .5em; /* Adds some spacing between the cards */
 }
+
 .no-calendar .card-text{
     width: 100%;
 }
+
 .post-exp {
     display: flex;
     flex-direction: column;
@@ -170,37 +189,49 @@ a[href*="/recipes/new"]:hover, a[href*="/users/"]:hover, a[href*="/profile/perso
     width: 34em;
     margin-right: 15em;
 }
+
 .pprompt{
-    margin-right: -8em;
+    margin-right: -9em;
 }
+
 .blog-content{
     max-width: 350px;
     margin-bottom: 1em;
 }
-.blog-posts{
+
+.blog-posts {
     padding: 0;
+    /*display: flex;*/
+    /*flex-direction: column;*/
+    /*align-items: center;*/
+    /*width: 100%; !* Increase this if the cards are wrapping to the next line *!*/
 }
+
+
 .blog-message {
     text-align: center; /* Center the text horizontally */
     width: 100%; /* Make sure the div takes up the full width */
 }
+
 .blog-posts, .calendar {
     margin: 1.5em;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-.blog-posts h3 {
+
+.blog-posts h3{
     text-align: center;
     margin-right: -4em;
+}
+.calendar h3 {
+    text-align: center;
+    margin-left: -10em;
 }
 h3{
     text-align: center;
 }
-.calendar h3{
-    text-align: center;
-    margin-left: -8em;
-}
+
 .card.profile-card {
     position: relative;
     z-index: 2;
@@ -218,6 +249,7 @@ h3{
     transform: rotate(10deg);
     z-index: 1;
 }
+
 .shroom-image.no-calendar {
     background-image: url('../img/Backgrounds/Shroom.png');
     top: 840px;
@@ -236,8 +268,9 @@ h3{
     width: 600px;
     height: 700px;
     transform: rotate(60deg);
-    z-index: 1;
+    z-index: -1;
 }
+
 .pot-image {
     background-image: url('../img/Backgrounds/MeasuringSpoons.png');
     background-size: contain;
@@ -245,27 +278,23 @@ h3{
     position: absolute;
     top: 140px;
     right: 150px;
-    width: 200px;
-    height: 100px;
+    width: 300px;
+    height: 300px;
     transform: rotate(100deg);
     z-index: -1;
-}
-.profile-card .card-body {
-    display: grid;
-    grid-template-rows: 1fr 1fr;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 10px;
 }
 
 .profile-card .bottom-section {
     grid-column: 1 / span 2;
 }
+
 .profile-card .buttons-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, 1fr);
     gap: 10px;
 }
+
 .nav-item {
     display: inline-block;
 }
@@ -275,75 +304,7 @@ h3{
     justify-content: center;
     width: 350px;
     margin: 1em auto;
-}
-
-.card-link {
-    color: black;
-    transition: color 0.3s ease;
-}
-
-.card-link:hover {
-    color: #ff5838;
-}
-
-
-.shroom-image {
-    background-image: url('../img/Backgrounds/Shroom.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    position: absolute;
-    top: 930px;
-    right: 2px;
-    width: 500px;
-    height: 500px;
-    transform: rotate(10deg);
-    z-index: 1;
-}
-
-
-.veggie-image {
-    background-image: url('../img/Backgrounds/Veggie.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    position: absolute;
-    top: 180px;
-    left: -240px;
-    width: 600px;
-    height: 700px;
-    transform: rotate(60deg);
-    z-index: -1;
-}
-.pot-image {
-    background-image: url('../img/Backgrounds/MeasuringSpoons.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    position: absolute;
-    top: 40px;
-    right: 50px;
-    width: 500px;
-    height: 400px;
-    transform: rotate(100deg);
-    z-index: -1;
-}
-
-.profile-card .bottom-section {
-    grid-column: 1 / span 2;
-}
-.profile-card .buttons-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    gap: 10px;
-}
-.nav-item {
-    display: inline-block;
-}
-
-.view-post-history {
-    display: flex;
-    justify-content: center;
-    width: 350px;
-    margin: 1em auto;
+    /*align-self: flex-end;*/
 }
 
 .card-link {

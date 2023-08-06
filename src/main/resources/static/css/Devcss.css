@@ -1,6 +1,7 @@
 body {
     background-size: 100% 100%;
     background: linear-gradient(175deg, #fff5ec, #eedbc5, rgb(255, 213, 182) 15%, #ffa562) no-repeat fixed;
+    overflow-x: hidden;
 }
 html{
     height: 100%;
@@ -38,43 +39,126 @@ flex-shrink: 0;
 
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: .5rem;
+    margin-left: -4em;
+    margin-right: auto;
 }
 
 .card-body{
     background-color: rgba(110, 110, 110, 0.19);
     box-shadow: 0 4px 8px 0 rgba(196, 196, 196, 0.2);
 }
-.grid-item{
-    max-height: 350px;
-    box-shadow: 0 4px 8px 0 rgba(94, 94, 94, 0.2);
-}
-
-.grid-item:nth-child(1) {
+#card1 {
     grid-column: 1;
     grid-row: 1;
 }
-
-.grid-item:nth-child(2) {
+#AB{
+    grid-column: 2;
+    grid-row: 1;
+}
+#card2 {
     grid-column: 3;
     grid-row: 1;
 }
 
-.grid-item:nth-child(3) {
+#card3 {
     grid-column: 2;
     grid-row: 2;
 }
 
-.grid-item:nth-child(4) {
+#card4 {
     grid-column: 1;
     grid-row: 3;
 }
 
-.grid-item:nth-child(5) {
+#card5 {
     grid-column: 3;
     grid-row: 3;
 }
-.fa-brands.fa-linkedin{
-    font-size: 40px;
+/*.fa-brands.fa-linkedin{*/
+/*    font-size: 40px;*/
+/*}*/
+@font-face {
+    font-family: 'ElvishFont';
+    src: url('../fonts/SINDCAP1.ttf');
+}
+
+@font-face {
+    font-family: 'EnglishFont';
+    src: url('../fonts/AnironcBold-PKwr.ttf');
+}
+.quote {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.quote .elvish,
+.quote .english {
+    position: absolute;
+    top: 15px;
+    left: 0;
+}
+
+
+.quote .elvish {
+    font-family: 'ElvishFont';
+    font-size: 10px;
+    opacity: 1;
+    transition: opacity 4.5s;
+    transition-delay: .5s;
+}
+
+.quote .english {
+    font-family: 'EnglishFont';
+    font-size: 10px;
+    opacity: 0;
+    transition: opacity 4.5s;
+    transition-delay: .7s;
+}
+.Tolkien{
+    font-size: 10px;
+    position: absolute;
+    margin-top: 13px;
+    margin-left: 145px;
+    font-family: 'EnglishFont';
+}
+.background-image-1 {
+    background-image: url('../img/Backgrounds/Mouse.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    bottom: -10px;
+    right: -100px;
+    width: 200px;
+    height: 200px;
+    /*transform: rotate(13deg);*/
+    z-index: -1;
+}
+
+.background-image-2 {
+    background-image: url('../img/Backgrounds/coffee-cup.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    bottom: 380px;
+    left: 10px;
+    width: 90px;
+    height: 90px;
+    transform: rotate(346deg);
+    z-index: -1;
+}
+
+.background-image-3 {
+    background-image: url('../img/Backgrounds/browser-window-PhotoRoom.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 30px;
+    left: 510px;
+    width: 500px;
+    height: 500px;
+    transform: rotate(13deg);
+    z-index: -1;
 }

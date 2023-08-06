@@ -17,11 +17,12 @@
     height: 250px;
     background-color: #fff;
     background: linear-gradient(#f8f8f8, #fff);
-    box-shadow: 0 8px 16px -8px rgba(0,0,0,0.4);
-    border-radius: 6px;
+    box-shadow: 0 18px 26px -8px rgba(0,0,0,0.4);
+    border-radius: 8px;
     overflow: hidden;
     position: relative;
-    margin: 1.5rem;
+    margin: .5rem;
+    transition: transform 0.5s, box-shadow 0.5s;
 }
 
 .card h1 {
@@ -33,9 +34,18 @@
     width: 150px;
     height: 100%;
     background: linear-gradient(#13490d, #198007);
-    transition: width 0.4s;
+    transition: width 0.8s;
     overflow: hidden;
     z-index: 2;
+}
+.card.hover .additional {
+    width: 100%;
+    border-radius: 0 5px 5px 0;
+}
+.card.hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px -8px rgba(0,0,0,0.6);
+
 }
 
 .card.green .additional {
@@ -53,6 +63,11 @@
     height: 100%;
     position: relative;
     float: left;
+}
+#card3 .additional .more-info h1 {
+    background: -webkit-linear-gradient(#eee, rgba(248, 255, 248, 0.73));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .card .additional .user-card::after {
@@ -125,7 +140,7 @@
     left: 1rem;
     right: 1rem;
     top: auto;
-    color: #fff;
+    color: rgb(255, 255, 255);
 }
 
 .card.green .additional .stats {
@@ -241,4 +256,8 @@
 .user-card .profile-pic img {
     width: 100%;
     height: auto;
+}
+.card-icon {
+    margin-top: 10px;
+    font-size: 20px; /* Adjust as needed */
 }
