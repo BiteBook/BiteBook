@@ -5,11 +5,11 @@ body {
     overflow-x: hidden;
 }
 
+
 :root {
     --primary-color: #e7794c;
     --hover-color: #ff5838;
 }
-
 .content {
     display: flex;
     justify-content: center;
@@ -29,11 +29,13 @@ body {
 .card {
     height: 400px;
 }
+
 .card-body{
     display: grid;
     grid-template-columns: repeat(2, 1fr); /* Adjust as needed */
     grid-gap: 1em;
-}
+
+
 .btn.btn-primary {
     background-color: var(--primary-color);
     color: #fff;
@@ -153,6 +155,18 @@ a[href*="/recipes/new"]:hover, a[href*="/users/"]:hover, a[href*="/profile/perso
     grid-column: 1 / span 2;
 }
 
+.content-sections.no-calendar .blog-content-card.no-calendar .card.ms-3.ps-3.pb-2.pt-2.no-calendar> {
+    width: 700px;
+}
+
+.content-sections .full-width {
+    grid-column: 1 / span 2;
+}
+
+.content-sections.full-width.no-calendar{
+    width: 90%;
+}
+
 .content-sections.no-calendar .card.ms-3 {
     margin: 1em 0 0;
     padding: 0;
@@ -199,18 +213,13 @@ a[href*="/recipes/new"]:hover, a[href*="/users/"]:hover, a[href*="/profile/perso
     margin-bottom: 1em;
 }
 
+
 .blog-posts {
     padding: 0;
-    /*display: flex;*/
-    /*flex-direction: column;*/
-    /*align-items: center;*/
-    /*width: 100%; !* Increase this if the cards are wrapping to the next line *!*/
 }
-
-
 .blog-message {
-    text-align: center; /* Center the text horizontally */
-    width: 100%; /* Make sure the div takes up the full width */
+    text-align: center; 
+    width: 100%; 
 }
 
 .blog-posts, .calendar {
@@ -231,6 +240,7 @@ a[href*="/recipes/new"]:hover, a[href*="/users/"]:hover, a[href*="/profile/perso
 h3{
     text-align: center;
 }
+
 
 .card.profile-card {
     position: relative;
@@ -270,6 +280,7 @@ h3{
     transform: rotate(60deg);
     z-index: -1;
 }
+
 
 .pot-image {
     background-image: url('../img/Backgrounds/MeasuringSpoons.png');
