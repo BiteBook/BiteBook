@@ -45,8 +45,11 @@
         <div class="col-md-3">
             <div class="card-show">
                 <div class="card">
-                    <img th:if="${recipe.photo != null}" th:src="${recipe.photo}" class="card-img-top" alt="Recipe Name">
-                    <div class="card-body">
+                    <div class="img-parent">
+                        <img th:if="${recipe.photo != null}" th:src="${recipe.photo}" class="card-img-top background-img" alt="Recipe Name">
+                        <img th:if="${recipe.photo != null}" th:src="${recipe.photo}" class="card-img-top front-img" alt="Recipe Name">
+                    </div>
+                        <div class="card-body">
                         <h5 class="card-title" th:text="${recipe.title}">Recipe Name</h5>
                         <p class="card-text" th:text="'Cook time: ' + ${recipe.time} + ' mins'">Cook time: 45 mins</p>
                         <a th:href="@{/recipes/{id}(id=${recipe.recipeid})}" class="btn btn-primary">View Recipe</a>
@@ -64,7 +67,10 @@
         <div class="col-md-3">
             <div class="card-show">
             <div class="card">
-                <img th:if="${recipe.photo != null}" th:src="${recipe.photo}" class="card-img-top" alt="Recipe Name">
+                <div class="img-parent">
+                    <img th:if="${recipe.photo != null}" th:src="${recipe.photo}" class="card-img-top background-img" alt="Recipe Name">
+                    <img th:if="${recipe.photo != null}" th:src="${recipe.photo}" class="card-img-top front-img" alt="Recipe Name">
+                </div>
                 <div class="card-body">
                     <h5 class="card-title" th:text="${recipe.title}">Recipe Name</h5>
                     <p class="card-text" th:text="'Cook time: ' + ${recipe.time} + ' mins'">Cook time: 45 mins</p>
