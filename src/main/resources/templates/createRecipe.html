@@ -17,18 +17,35 @@
 <div class="container">
     <form action="#" th:action="@{/recipes/new}" th:object="${recipe}" method="post" enctype="multipart/form-data" onsubmit="console.log(document.getElementById('fileupload').value);">
         <h3 class="mt-4 text-center">Create your Recipe!</h3>
-        <div class="row mt-4">
+        <div class="row mt-4 mb-0">
+            <h2>Title:</h2>
+        </div>
+        <div class="row">
             <input type="text" th:field="*{title}" placeholder="Title" class="col">
         </div>
-        <div class="row mt-4">
+        <div class="row mt-4 mb-0">
+            <h2>Instructions:</h2>
+        </div>
+        <div class="row">
             <textarea th:field="*{instructions}" placeholder="Instructions" class="col"></textarea>
         </div>
-        <div class="row mt-4">
+        <div class="row mt-4 mb-0">
+            <h2 class="col mb-0">Ingredients:</h2>
+            <h2 class="col mb-0">Tools:</h2>
+        </div>
+        <div class="row">
             <textarea th:field="*{ingredients}" id="ingredientList" placeholder="Ingredients example: 2 eggs, 1 cup milk"
                       class="col"></textarea>
             <textarea th:field="*{tools}" placeholder="Tools" class="col"></textarea>
         </div>
-        <div class="row mt-4">
+        <div class="row mt-4 mb-0">
+            <h2 class="col">Difficulty:</h2>
+            <h2 class="col">Hours:</h2>
+            <h2 class="col">Minutes:</h2>
+            <h2 class="col">Region:</h2>
+            <h2 class="col">Add Image:</h2>
+        </div>
+        <div class="row">
             <input type="text" th:field="*{difficulty}" placeholder="Difficulty" class="col">
             <input type="number" th:field="*{hours}" placeholder="Hours" class="col">
             <input type="number" th:field="*{minutes}" placeholder="Minutes" class="col">
@@ -79,6 +96,7 @@
 
     </form>
 </div>
+<br>
 <footer th:replace="~{partials/footer :: footer}"></footer>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
