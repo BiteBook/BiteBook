@@ -24,36 +24,58 @@
         <form th:action="@{/sign-up}" method="POST" th:object="${user}">
             <div class="form-group">
                 <label for="username">Username</label>
-                <input id="username" class="form-control" th:field="*{username}" />
+                <input id="username" class="form-control" th:field="*{username}" placeholder="Usernames are special, make yours unique!" />
                 <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="text-danger">Username Error</span>
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
-                <input id="email" class="form-control" th:field="*{email}" />
+                <input id="email" class="form-control" th:field="*{email}" placeholder="example@email.com" />
                 <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-danger">Password Error</span>
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input id="password" type="password" class="form-control" th:field="*{password}" />
+                <input id="password" type="password" class="form-control" th:field="*{password}" placeholder="Must be at least 8 characters" />
             </div>
             <div class="form-group">
                 <label for="dietaryPreferences">Dietary Preferences</label>
                 <select id="dietaryPreferences" class="form-control" th:field="*{dietaryPreferences}">
+                    <option value="" disabled selected>Select your dietary preference</option>
                     <option th:each="dietStyle : ${allDietStyles}" th:value="${dietStyle.id}" th:text="${dietStyle.name}"></option>
                 </select>
 
             </div>
-            <div class="form-group ">
-                <label>Allergens</label>
-                <div class="row justify-content-between">
-                    <!-- Use Thymeleaf's "th:each" to iterate through "allAllergens" and "allergen" -->
-                    <div th:each="allergen : ${allAllergens}" class="col-4">
-                        <div class="form-check">
+            <label>Allergens</label>
+            <div class="checkbox-container">
+            <div class="form-group">
+
+                <div class="row">
+                    <!-- First column with 3 checkboxes -->
+                    <div class="col-4">
+                        <div th:each="allergen, iterStat : ${allAllergens}" th:if="${iterStat.count <= 3}" class="form-check">
+                            <input type="checkbox" th:id="${'allergy-' + allergen.id}" th:value="${allergen.id}" th:field="*{allergyList}" class="form-check-input" />
+                            <label th:for="${'allergy-' + allergen.id}" class="form-check-label" th:text="${allergen.name}"></label>
+                        </div>
+                    </div>
+                    <!-- Second column with 4 checkboxes -->
+                    <div class="col-4">
+                        <div th:each="allergen, iterStat : ${allAllergens}" th:if="${iterStat.count > 3 && iterStat.count <= 7}" class="form-check">
+                            <input type="checkbox" th:id="${'allergy-' + allergen.id}" th:value="${allergen.id}" th:field="*{allergyList}" class="form-check-input" />
+                            <label th:for="${'allergy-' + allergen.id}" class="form-check-label" th:text="${allergen.name}"></label>
+                        </div>
+                        <!-- Ghost checkbox for the last checkbox in the third column -->
+                        <div class="form-check" th:if="${#lists.size(allAllergens) == 10}">
+                            <!-- Empty div to simulate a checkbox -->
+                        </div>
+                    </div>
+                    <!-- Third column with 3 checkboxes -->
+                    <div class="col-4">
+                        <div th:each="allergen, iterStat : ${allAllergens}" th:if="${iterStat.count > 7}" class="form-check">
                             <input type="checkbox" th:id="${'allergy-' + allergen.id}" th:value="${allergen.id}" th:field="*{allergyList}" class="form-check-input" />
                             <label th:for="${'allergy-' + allergen.id}" class="form-check-label" th:text="${allergen.name}"></label>
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
             <div th:if="${message}" class="alert alert-danger" role="alert">
                 <span th:text="${message}"></span>

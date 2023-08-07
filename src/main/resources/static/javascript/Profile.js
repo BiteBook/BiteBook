@@ -2,6 +2,9 @@ var calendar = document.getElementById('calendar');
 var date = new Date();
 
 for (var i = 0; i < 14; i++) {
+    var localDate = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
+    var isoDate = localDate.toISOString().split('T')[0];
+
     var day = document.createElement('div');
     day.className = 'day';
     var dayOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][date.getDay()];
@@ -14,9 +17,8 @@ for (var i = 0; i < 14; i++) {
 
     // Find the meal plan for this day
     var mealPlan = mealPlanners.find(function(mealPlanner) {
-        return mealPlanner.dateString === date.toISOString().split('T')[0];
+        return mealPlanner.dateString === isoDate;
     });
-
 
     if (mealPlan) {
         // If a meal plan exists for this day, add it to the day div
@@ -29,13 +31,15 @@ for (var i = 0; i < 14; i++) {
         day.appendChild(br2); // Append the second break element to the day div
         day.appendChild(meal);
     }
-
-
+    console.log(mealPlanners);
 
     calendar.appendChild(day);
-    date.setDate(date.getDate() + 1)
+    date.setDate(date.getDate() + 1) // Move to the next day
+}
 
-    var greetings = [
+
+
+var greetings = [
         "What's cookin', good lookin'?",
         "What's shakin', bacon?",
         "How's it sizzlin'?",
@@ -52,4 +56,4 @@ for (var i = 0; i < 14; i++) {
 // Display the greeting
     document.getElementById('greeting').innerText = randomGreeting;
 
-}
+
