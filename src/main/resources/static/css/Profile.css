@@ -3,8 +3,11 @@ body {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
+    min-height: 100vh;
 }
-
+main{
+    min-height: 99vh;
+}
 
 :root {
     --primary-color: #e7794c;
@@ -30,11 +33,11 @@ body {
     height: 400px;
 }
 
-.card-body{
+.card-body {
     display: grid;
     grid-template-columns: repeat(2, 1fr); /* Adjust as needed */
     grid-gap: 1em;
-
+}
 
 .btn.btn-primary {
     background-color: var(--primary-color);
@@ -218,8 +221,8 @@ a[href*="/recipes/new"]:hover, a[href*="/users/"]:hover, a[href*="/profile/perso
     padding: 0;
 }
 .blog-message {
-    text-align: center; 
-    width: 100%; 
+    text-align: center;
+    width: 100%;
 }
 
 .blog-posts, .calendar {
@@ -257,7 +260,7 @@ h3{
     width: 500px;
     height: 500px;
     transform: rotate(10deg);
-    z-index: 1;
+    z-index: -1;
 }
 
 .shroom-image.no-calendar {
