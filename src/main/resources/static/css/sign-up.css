@@ -29,9 +29,9 @@ h1 {
 
 /* Custom CSS to move the checkboxes to the right */
 .checkbox-container {
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-start;
+    /*display: flex;*/
+    /*align-items: flex-start;*/
+    margin-left: 7em;
 }
 
 .form-check {

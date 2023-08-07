@@ -71,8 +71,8 @@ a{
     background-size: contain;
     background-repeat: no-repeat;
     position: absolute;
-    top: 750px; /* Adjust the top position */
-    left: 50px; /* Adjust the left position */
+    bottom: 250px;
+    left: 50px;
     width: 400px;
     height: 400px;
     transform: rotate(242deg); /* Rotate 65 degrees */
@@ -90,4 +90,8 @@ a{
     height: 600px;
     transform: rotate(65deg); /* Rotate 45 degrees */
     z-index: -1; /* Set a lower z-index to move it behind other elements */
+}
+main {
+    min-height: 80vh;
+    flex: 1 0 auto;
 }
