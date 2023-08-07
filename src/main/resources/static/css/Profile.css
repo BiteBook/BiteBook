@@ -30,10 +30,11 @@ body {
     height: 400px;
 }
 
-.card-body{
+.card-body {
     display: grid;
     grid-template-columns: repeat(2, 1fr); /* Adjust as needed */
     grid-gap: 1em;
+}
 
 
 .btn.btn-primary {
