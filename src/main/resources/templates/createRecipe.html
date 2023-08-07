@@ -66,8 +66,8 @@
                     <div class="row">
                         <div th:each="dietStyle : ${allDietStyles}" class="col-6">
                             <div class="form-check">
-                                <input type="checkbox" th:id="${'dietStyle-' + dietStyle.id}" th:value="${dietStyle.id}" class="form-check-input" />
-                                <label th:for="${'dietStyle-' + dietStyle.id}" class="form-check-label" th:text="${dietStyle.name}"></label>
+                                <input type="checkbox" id="dietStyles" name="dietStyleIds" th:value="${dietStyle.id}" class="form-check-input" />
+                                <label for="dietStyles" class="form-check-label" th:text="${dietStyle.name}"></label>
                             </div>
                         </div>
                     </div>
@@ -79,8 +79,8 @@
                     <div class="row">
                         <div th:each="allergen : ${allAllergens}" class="col-6">
                             <div class="form-check">
-                                <input type="checkbox" th:id="${'allergy-' + allergen.id}" th:value="${allergen.id}" class="form-check-input" />
-                                <label th:for="${'allergy-' + allergen.id}" class="form-check-label" th:text="${allergen.name}"></label>
+                                <input type="checkbox" id="allergens" name="allergenIds" th:value="${allergen.id}" class="form-check-input" />
+                                <label for="allergens" class="form-check-label" th:text="${allergen.name}"></label>
                             </div>
                         </div>
                     </div>
