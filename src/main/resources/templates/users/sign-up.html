@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8" />
-  <title th:text="${title}">Title</title>
-  <link rel="icon" type="image/png" href="/img/img.png">
-  <link rel="stylesheet" href="/css/style.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-  <link rel="stylesheet" href="/css/sign-up.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <script src="https://kit.fontawesome.com/d7c23920df.js" crossorigin="anonymous"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Lugrasimo&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/footer.css">
+    <meta charset="UTF-8" />
+    <title th:text="${title}">Title</title>
+    <link rel="icon" type="image/png" href="/img/img.png">
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/sign-up.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="https://kit.fontawesome.com/d7c23920df.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lugrasimo&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/footer.css">
 
 </head>
 <body>
@@ -19,54 +19,50 @@
 <!--<div class="Skillet-image"></div>-->
 <div th:replace="~{partials/navbar :: navbar}"></div>
 <div class="container-fluid d-flex justify-content-center align-items-center vh-100">
-  <div class="col-lg-6">
-    <h1 class="text-center">Create an account</h1>
-    <form th:action="@{/sign-up}" method="POST" th:object="${user}">
-      <div class="form-group">
-        <label for="username">Username</label>
-        <input id="username" class="form-control" th:field="*{username}" />
-        <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="text-danger">Username Error</span>
-      </div>
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input id="email" class="form-control" th:field="*{email}" />
-        <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-danger">Password Error</span>
-      </div>
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input id="password" type="password" class="form-control" th:field="*{password}" />
-      </div>
-      <div class="form-group">
-        <label for="dietaryPreferences">Dietary Preferences</label>
-        <select id="dietaryPreferences" class="form-control" th:field="*{dietaryPreferences}">
-          <option th:each="dietStyle : ${allDietStyles}" th:value="${dietStyle.id}" th:text="${dietStyle.name}"></option>
-        </select>
-
-      </div>
-      <div class="form-group ">
-        <label>Allergens</label>
-        <div class="row justify-content-between">
-          <!-- Use Thymeleaf's "th:each" to iterate through "allAllergens" and "allergen" -->
-          <div th:each="allergen : ${allAllergens}" class="col-4">
-            <div class="form-check">
-              <input type="checkbox" th:id="${'allergy-' + allergen.id}" th:value="${allergen.id}" th:field="*{allergyList}" class="form-check-input" />
-              <label th:for="${'allergy-' + allergen.id}" class="form-check-label" th:text="${allergen.name}"></label>
+    <div class="col-lg-6">
+        <h1 class="text-center">Create an account</h1>
+        <form th:action="@{/sign-up}" method="POST" th:object="${user}">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input id="username" class="form-control" th:field="*{username}" />
+                <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="text-danger">Username Error</span>
             </div>
-          </div>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="otherAllergies">If you selected "Other", please specify:</label>
-        <input id="otherAllergies" class="form-control" th:field="*{otherAllergies}" />
-      </div>
-      <div th:if="${message}" class="alert alert-danger" role="alert">
-        <span th:text="${message}"></span>
-      </div>
-      <div class="d-flex justify-content-center">
-        <input value="Sign me up!" type="submit" class=" custom-button "/>
-      </div>
-    </form>
-  </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input id="email" class="form-control" th:field="*{email}" />
+                <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-danger">Password Error</span>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input id="password" type="password" class="form-control" th:field="*{password}" />
+            </div>
+            <div class="form-group">
+                <label for="dietaryPreferences">Dietary Preferences</label>
+                <select id="dietaryPreferences" class="form-control" th:field="*{dietaryPreferences}">
+                    <option th:each="dietStyle : ${allDietStyles}" th:value="${dietStyle.id}" th:text="${dietStyle.name}"></option>
+                </select>
+
+            </div>
+            <div class="form-group ">
+                <label>Allergens</label>
+                <div class="row justify-content-between">
+                    <!-- Use Thymeleaf's "th:each" to iterate through "allAllergens" and "allergen" -->
+                    <div th:each="allergen : ${allAllergens}" class="col-4">
+                        <div class="form-check">
+                            <input type="checkbox" th:id="${'allergy-' + allergen.id}" th:value="${allergen.id}" th:field="*{allergyList}" class="form-check-input" />
+                            <label th:for="${'allergy-' + allergen.id}" class="form-check-label" th:text="${allergen.name}"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div th:if="${message}" class="alert alert-danger" role="alert">
+                <span th:text="${message}"></span>
+            </div>
+            <div class="d-flex justify-content-center">
+                <input value="Sign me up!" type="submit" class=" custom-button "/>
+            </div>
+        </form>
+    </div>
 </div>
 
 

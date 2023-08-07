@@ -16,7 +16,7 @@
 <br>
 <h1>Recipe Index</h1>
 <form th:action="@{/recipes/search}" class="form-container d-flex justify-content-center row">
-    <input type="text" name="keyword" id="keyword" size="50" class="col-6 mx-4" th:value="${keyword}" required />
+    <input type="text" name="keyword" id="keyword" size="50" class="col-6 mx-4" placeholder="Search for a recipe" th:value="${keyword}" required />
     <div class="col-6">
         <input type="checkbox" id="dietaryFilter" name="dietaryFilter"/>
         <label for="dietaryFilter">Apply dietary and allergy filter</label>
