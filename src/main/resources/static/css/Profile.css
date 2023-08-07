@@ -256,8 +256,8 @@ h3{
     background-size: contain;
     background-repeat: no-repeat;
     position: absolute;
-    top: 930px;
-    right: 2px;
+    bottom: -240px;
+    right: 12px;
     width: 500px;
     height: 500px;
     transform: rotate(10deg);
@@ -266,7 +266,7 @@ h3{
 
 .shroom-image.no-calendar {
     background-image: url('../img/Backgrounds/Shroom.png');
-    top: 840px;
+    bottom: 840px;
     right: 200px;
     height: 300px;
     z-index: -2;
