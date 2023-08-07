@@ -39,6 +39,7 @@ main{
     grid-gap: 1em;
 }
 
+
 .btn.btn-primary {
     background-color: var(--primary-color);
     color: #fff;
