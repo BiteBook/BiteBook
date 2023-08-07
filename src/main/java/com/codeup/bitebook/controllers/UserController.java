@@ -229,12 +229,16 @@ public class UserController {
 
         loggedInUser = userDao.findByUsername(user.getUsername());
 
-        Authentication newAuth = new UsernamePasswordAuthenticationToken(loggedInUser, null, loggedInUser.getAuthorities());
+        // Convert the loggedInUser to UserWithRoles before creating the Authentication object
+        UserWithRoles userWithRoles = new UserWithRoles(loggedInUser);
+
+        Authentication newAuth = new UsernamePasswordAuthenticationToken(userWithRoles, null, userWithRoles.getAuthorities());
 
         SecurityContextHolder.getContext().setAuthentication(newAuth);
 
         return "redirect:/profile";
     }
+
 
     @PostMapping("/profile/change-password")
     public String changePassword(@RequestParam String currentPassword, @RequestParam String newPassword, Principal principal) {
