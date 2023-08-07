@@ -7,9 +7,6 @@ body {
 .content-wrapper{
     flex-grow: 1;
 }
-.footer {
-    flex-shrink: 0;
-}
 .flour-image {
     background-image: url('../img/Backgrounds/Flour.png');
     background-size: contain;
@@ -21,4 +18,7 @@ body {
     height: 300px;
     transform: rotate(13deg);
     z-index: 3;
+}
+.footer {
+    flex-shrink: 0;
 }

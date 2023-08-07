@@ -154,3 +154,7 @@ body {
     padding-top: 10px;
 
 }
+.card-link-set{
+    color: blue;
+    text-decoration: underline;
+}
